@@ -130,6 +130,8 @@ th{font:600 16px/1.2 var(--head);background:var(--bg)}
 tr.grp td{font:600 15px/1.2 var(--head);color:var(--accent-ink);background:var(--bg);padding-top:12px}
 td.sym{color:var(--frame);width:64px}
 .small{font-size:13px;color:var(--muted)}
+.search{width:100%;font:inherit;color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:6px;padding:10px 12px;margin-bottom:4px}
+.gloss[hidden],dl div[hidden]{display:none}
 dl{margin:0}
 dl div{padding:10px 0;border-bottom:1px solid var(--line)}
 dt{font:600 19px/1.2 var(--head)}
@@ -248,6 +250,9 @@ const DECKS=[
  {id:'sym',name:'Größenzeichen',s:'XX'},
  {id:'stab',name:'Stabsabteilungen',s:'III'},
  {id:'beh',name:'Behörden & Begriffe',s:'I'},
+ {id:'abk',name:'Abkürzungen im Dienst',s:'●●'},
+ {id:'vs',name:'Geheimschutz',s:'XXXX'},
+ {id:'dig',name:'Führung & Digitalisierung',s:'Ø'},
  {id:'eti',name:'Anrede & Praxis',s:'●'}
 ];
 const CARDS=[];
@@ -390,13 +395,22 @@ function insignia(key,W=60){
       else if(e==='silver') s+=`<rect x="7" y="${wing?80.5:89}" width="46" height="3.2" fill="#dfe3e6"/>`;
       else if(e==='star'){const cx=30,cy=spec.includes('bar')?46:(spec.includes('c1')&&spec.includes('closed')?42:40),r=6,pts=[];for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r*0.42:r;pts.push((cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1))}s+=`<polygon points="${pts.join(' ')}" fill="${ink}"/>`}
       else if(e==='bar') s+=`<rect x="6.5" y="86" width="47" height="4" fill="${ink}"/>`;
-      else if(e==='w'){ // Eichenlaub: zwei Zweige im Bogen
+      else if(e==='w'){ // Eichenlaub: zwei offene Zweige mit gelappten Blättern, unten gebunden
+        const leaf='M0 0 C-1.2 -.6 -2.6 -1 -2.3 -2.4 C-3.4 -2.9 -3.3 -4.4 -2.2 -4.8 C-3 -5.8 -2.4 -7.2 -1.3 -7.2 C-1.4 -8.6 -.6 -9.6 0 -9.8 C.6 -9.6 1.4 -8.6 1.3 -7.2 C2.4 -7.2 3 -5.8 2.2 -4.8 C3.3 -4.4 3.4 -2.9 2.3 -2.4 C2.6 -1 1.2 -.6 0 0 Z';
+        const cx=30,cy=72,r=12.5,f=v=>v.toFixed(2);
         for(const side of [-1,1]){
-          s+=`<path d="M30 84 A14 14 0 0 ${side<0?1:0} ${30+side*13} 62" fill="none" stroke="${ink}" stroke-width="2"/>`;
-          for(let i=0;i<6;i++){const a=(90+side*(18+i*24))*Math.PI/180;const x=30+14*Math.cos(a),y=70+14*Math.sin(a);
-            const rot=(a*180/Math.PI)+90;
-            s+=`<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="2.4" ry="5" transform="rotate(${(rot+side*35).toFixed(0)} ${x.toFixed(1)} ${y.toFixed(1)})" fill="${ink}"/>`}
+          const pt=(d,rr=r)=>{const a=(90+side*d)*Math.PI/180;return [cx+rr*Math.cos(a),cy+rr*Math.sin(a),a]};
+          const [x0,y0]=pt(6),[x1,y1]=pt(128);
+          s+=`<path d="M${f(x0)} ${f(y0)} A${r} ${r} 0 0 ${side<0?1:0} ${f(x1)} ${f(y1)}" fill="none" stroke="${ink}" stroke-width="1.2" stroke-linecap="round"/>`;
+          [[16,1],[38,-1],[58,1],[80,-1],[100,1],[124,0]].forEach(([d,o])=>{ // o: Blatt nach außen (1), innen (-1), Spitze (0)
+            const [x,y,a]=pt(d,r+o*.8);const tx=-side*Math.sin(a),ty=side*Math.cos(a); // Wuchsrichtung entlang des Zweigs
+            const rot=Math.atan2(tx,-ty)*180/Math.PI+o*side*-22;
+            s+=`<path d="${leaf}" transform="translate(${f(x)} ${f(y)}) rotate(${f(rot)}) scale(.95)" fill="${ink}" stroke="${board}" stroke-width=".45"/>`;
+          });
+          const [ax,ay]=pt(28,r-3.4); // Eichel
+          s+=`<ellipse cx="${f(ax)}" cy="${f(ay)}" rx="1.4" ry="2" transform="rotate(${-side*35} ${f(ax)} ${f(ay)})" fill="${ink}"/>`;
         }
+        s+=`<path d="M27 83.6 Q30 86.4 33 83.6 M27 86.6 Q30 83.8 33 86.6" fill="none" stroke="${ink}" stroke-width="1.5" stroke-linecap="round"/>`;
       }
     });
     const pip=(x,y)=>`<path d="M${x} ${y-4.5} L${x+4.5} ${y} L${x} ${y+4.5} L${x-4.5} ${y} Z" fill="${ink}"/>`;
@@ -404,7 +418,17 @@ function insignia(key,W=60){
     if(pm){const hasW=spec.includes('w');const base=hasW?70:72;
       if(pm==='p4s'){s+=pip(30,base-24)+pip(30,base-12)+pip(24.5,base)+pip(35.5,base)}
       else{const n=+pm[1];for(let i=0;i<n;i++) s+=pip(30,base-i*12)}}
-    if(wing) s+=`<path d="M8 85 Q19 84 30 89 Q41 84 52 85 Q48 90 41 90 Q35 90 30 93 Q25 90 19 90 Q12 90 8 85 Z" fill="${ink}"/>`;
+    if(wing){ // Schwinge: zwei ausgebreitete Flügel aus gestaffelten Schwungfedern
+      const f=v=>v.toFixed(2);
+      const feather=(rx,ry,tx,ty,w)=>{const dx=tx-rx,dy=ty-ry,L=Math.hypot(dx,dy),nx=-dy/L*w,ny=dx/L*w,mx=rx+dx*.55,my=ry+dy*.55;
+        return `M${f(rx)} ${f(ry)} Q${f(mx-nx)} ${f(my-ny)} ${f(tx)} ${f(ty)} Q${f(mx+nx*.7)} ${f(my+ny*.7)} ${f(rx)} ${f(ry)} Z`};
+      for(const side of [-1,1]){
+        const X=x=>30+side*x;
+        for(let i=4;i>=0;i--) s+=`<path d="${feather(X(1.5),86.4+i*.9,X(23.5-i*4.2),79.4+i*2.3,2.7)}" fill="${ink}" stroke="${board}" stroke-width=".5" stroke-linejoin="round"/>`;
+        s+=`<path d="M${X(.5)} 84.8 Q${X(6)} 82.6 ${X(11)} 82.8 Q${X(7)} 86.4 ${X(.5)} 89 Z" fill="${ink}"/>`;
+      }
+      s+=`<ellipse cx="30" cy="87" rx="2" ry="3" fill="${ink}"/>`;
+    }
   }
   return `<svg width="${W}" height="${W*100/60}" viewBox="0 0 60 100" role="img" aria-label="Dienstgradabzeichen">${s}</svg>`;
 }
@@ -414,6 +438,115 @@ function insignia(key,W=60){
   add('abz','abz-'+t,'Welcher Dienstgrad ist das? ('+lbl+')',n,ANW[n]||null,{ins:t+':'+n});
   add('abz','abzrev-'+t,'Welches Abzeichen gehört zu: '+n+' ('+lbl+')',t+':'+n,ANW[n]||null);
 }));
+
+/* ---------- Abkürzungen und Fachbegriffe (neue Karten nur hinten anhängen, IDs sind positionsbasiert) ---------- */
+const GLOSS=[
+ {id:'alltag',t:'Dienstalltag',deck:'abk',items:[
+  ['AGA','Allgemeine Grundausbildung','Die ersten Wochen jeder militärischen Ausbildung, u. a. Formaldienst, Waffen- und Schießausbildung, Erste Hilfe und Gefechtsdienst.'],
+  ['KzH','Krank zu Hause','Vom Truppenarzt angeordnete Genesung zu Hause statt in der Kaserne.'],
+  ['DZE','Dienstzeitende','Ende der Verpflichtungs- oder Wehrdienstzeit.'],
+  ['UvD','Unteroffizier vom Dienst','Sorgt außerhalb der Dienstzeit für Ordnung im Bereich der Einheit, meist für 24 Stunden.'],
+  ['GvD','Gefreiter vom Dienst','Unterstützt den UvD.'],
+  ['OvWa','Offizier vom Wachdienst','Führt die Wache einer Kaserne.'],
+  ['KpChef','Kompaniechef'],
+  ['KpFw','Kompaniefeldwebel','Umgangssprachlich „Spieß“, rechte Hand des Kompaniechefs für den Innendienst.'],
+  ['Kdr','Kommandeur','Führer eines Verbands ab Bataillon.'],
+  ['DiszVorg','Disziplinarvorgesetzter','Vorgesetzter mit Disziplinarbefugnis nach der Wehrdisziplinarordnung, unterste Stufe ist der Kompaniechef.'],
+  ['SaZ','Soldat auf Zeit','Dienst für eine festgelegte Zeit, z. B. SaZ 12 für zwölf Jahre.'],
+  ['BS','Berufssoldat','Dienst bis zur gesetzlichen Altersgrenze.'],
+  ['FWDL','Freiwillig Wehrdienstleistender'],
+  ['RDL','Reservistendienstleistender','Reservist, der eine Übung oder einen anderen Reservistendienst leistet.'],
+  ['TrÜbPl','Truppenübungsplatz'],
+  ['BwK','Bundeswehrkrankenhaus'],
+  ['ZDv','Zentrale Dienstvorschrift','Für die gesamte Bundeswehr verbindliche Vorschrift.'],
+  ['StOÄ','Standortältester','Regelt standortbezogene Angelegenheiten für alle Dienststellen eines Standorts.']
+ ]},
+ {id:'dgk',t:'Dienstgrade kurz',deck:'abk',items:[
+  ['Gefr','Gefreiter'],['OGefr','Obergefreiter'],['HptGefr','Hauptgefreiter'],['OStGefr','Oberstabsgefreiter'],
+  ['Uffz','Unteroffizier'],['StUffz','Stabsunteroffizier'],['Fw','Feldwebel'],['OFw','Oberfeldwebel'],['HptFw','Hauptfeldwebel'],['StFw','Stabsfeldwebel'],['OStFw','Oberstabsfeldwebel'],
+  ['Lt','Leutnant'],['OLt','Oberleutnant'],['Hptm','Hauptmann'],['StHptm','Stabshauptmann'],['Maj','Major'],['OTL','Oberstleutnant'],['O','Oberst'],
+  ['BrigGen','Brigadegeneral'],['GenMaj','Generalmajor'],['GenLt','Generalleutnant'],
+  ['KptLt','Kapitänleutnant'],['KKpt','Korvettenkapitän'],['FKpt','Fregattenkapitän'],['KzS','Kapitän zur See']
+ ]},
+ {id:'vs',t:'Geheimschutz',deck:'vs',items:[
+  ['VS','Verschlusssache','Im öffentlichen Interesse geheimhaltungsbedürftige Tatsachen, Gegenstände oder Erkenntnisse, unabhängig von ihrer Form (§ 4 SÜG).'],
+  ['VS-NfD','VS – Nur für den Dienstgebrauch','Niedrigster der vier Geheimhaltungsgrade. Keine Sicherheitsüberprüfung nötig. NATO-Entsprechung: NATO RESTRICTED.'],
+  ['VS-V','VS – Vertraulich','Zugang erfordert eine einfache Sicherheitsüberprüfung (Ü1). NATO-Entsprechung: NATO CONFIDENTIAL.'],
+  ['VSA','Verschlusssachenanweisung','Verwaltungsvorschrift zum materiellen Geheimschutz: Kennzeichnung, Aufbewahrung, Weitergabe und Vernichtung von VS.'],
+  ['SÜ','Sicherheitsüberprüfung','Prüft, ob bei einer Person Sicherheitsrisiken vorliegen, bevor sie Zugang zu VS erhält. Grundsatz: mit Zustimmung der betroffenen Person.'],
+  ['SÜG','Sicherheitsüberprüfungsgesetz','Regelt die Sicherheitsüberprüfung und den Geheimschutz des Bundes, auch in Unternehmen.'],
+  ['Ü1','Einfache Sicherheitsüberprüfung','Für Zugang zu VS-VERTRAULICH.'],
+  ['Ü2','Erweiterte Sicherheitsüberprüfung','Für Zugang zu GEHEIM oder zu einer hohen Zahl von VS-VERTRAULICH.'],
+  ['Ü3','Erweiterte Sicherheitsüberprüfung mit Sicherheitsermittlungen','Für Zugang zu STRENG GEHEIM oder zu einer hohen Zahl von GEHEIM.'],
+  ['GHB','Geheimschutzhandbuch','Handbuch für den Geheimschutz in der Wirtschaft, herausgegeben vom Bundesministerium für Wirtschaft und Energie.']
+ ]},
+ {id:'fue',t:'Führung & Operationen',deck:'dig',items:[
+  ['C2','Command and Control','Führung: Befehlen und Steuern von Kräften.'],
+  ['C3','Consultation, Command and Control','So in der NATO, etwa in der C3-Taxonomie, die Fähigkeiten, Dienste und Systeme für Führung und Kommunikation strukturiert. Außerhalb der NATO oft auch Command, Control, Communications.'],
+  ['C4I','Command, Control, Communications, Computers and Intelligence'],
+  ['C4ISR','Command, Control, Communications, Computers, Intelligence, Surveillance and Reconnaissance','Führungs- und Aufklärungssysteme als Gesamtheit.'],
+  ['ISR','Intelligence, Surveillance and Reconnaissance','Nachrichtengewinnung, Überwachung und Aufklärung.'],
+  ['MDO','Multi-Domain Operations','Koordiniertes Wirken über alle Dimensionen: Land, Luft, See, Weltraum sowie Cyber- und Informationsraum.'],
+  ['EMSO','Electromagnetic Spectrum Operations','Militärische Operationen im elektromagnetischen Spektrum, schließen die Elektronische Kampfführung ein.'],
+  ['EloKa','Elektronische Kampfführung','Englisch EW (Electronic Warfare): Aufklären, Stören und Schützen im elektromagnetischen Spektrum.'],
+  ['D-LBO','Digitalisierung landbasierter Operationen','Vorhaben der Bundeswehr zur durchgängigen digitalen Führungsfähigkeit der Landstreitkräfte.']
+ ]},
+ {id:'it',t:'IT & Architektur',deck:'dig',items:[
+  ['Core','Große Rechenzentren der Bundeswehr','Zentrale, stationäre IT-Ebene.'],
+  ['Fog','IT-Systeme der obersten taktischen Ebene','Zum Beispiel digitale Gefechtsstände oder andere Führungsmittel.'],
+  ['Edge','IT-Plattformen einzelner Waffensysteme','Zum Beispiel die IT an Bord einer Fregatte.'],
+  ['pCloudBw','Private Cloud der Bundeswehr'],
+  ['cATO','Continuous Authorization to Operate','Laufende statt einmaliger Betriebszulassung für Software, durch ständige Überwachung der Sicherheit. Stammt aus dem US-Verteidigungsministerium.'],
+  ['SDD','Software Defined Defence','Entkoppelt Hardware und Software, damit neue Fähigkeiten per Software-Update kommen können.'],
+  ['MOSA','Modular Open Systems Approach','Strategie des US-Verteidigungsministeriums für modulare Systeme mit offenen Standards und Schnittstellen.'],
+  ['SOSA','Sensor Open Systems Architecture','Technischer Standard mit gemeinsamen Schnittstellen für Sensorik, Hardware wie Software.'],
+  ['FACE','Future Airborne Capability Environment','Referenzarchitektur für Avionik-Software auf Luftplattformen.'],
+  ['NGVA','NATO Generic Vehicle Architecture','Standard für modulare, interoperable Landfahrzeuge (STANAG 4754).'],
+  ['STANAG','Standardization Agreement','NATO-Standardisierungsabkommen für gemeinsame Verfahren und technische Standards.']
+ ]},
+ {id:'ind',t:'Rüstung & Verbände',deck:'beh',items:[
+  ['SVI','Sicherheits- und Verteidigungsindustrie'],
+  ['FCAS','Future Combat Air System','Europäisches Luftkampfsystem der nächsten Generation.'],
+  ['MGCS','Main Ground Combat System','Deutsch-französisches Landkampfsystem der nächsten Generation.'],
+  ['BDSV','Bundesverband der Deutschen Sicherheits- und Verteidigungsindustrie'],
+  ['BDLI','Bundesverband der Deutschen Luft- und Raumfahrtindustrie'],
+  ['DWT','Deutsche Gesellschaft für Wehrtechnik'],
+  ['FKH','Förderkreis Deutsches Heer'],
+  ['DMI','Deutsches Maritimes Institut'],
+  ['NIAG','NATO Industrial Advisory Group','Beratungsgremium der NATO mit Vertretern der Industrie der Mitgliedstaaten.']
+ ]}
+];
+GLOSS.forEach(g=>g.items.forEach(([k,v,n])=>add(g.deck,'g-'+g.id,(g.id==='dgk'?'Dienstgrad-Abkürzung: ':['Core','Fog','Edge'].includes(k)?'IT-Ebene: ':'Abkürzung: ')+k,v,n)));
+[
+ ['abk','alltag2','Was bedeutet es, wenn jemand „KzH“ hat?','Krank zu Hause, vom Truppenarzt angeordnet',null,['Kurz zum Heimaturlaub','Kein zusätzlicher Heimweg','Kommandiert zur Hauptstadt']],
+ ['abk','alltag2','Wer unterstützt den UvD?','GvD',null,['OvWa','KpFw','StOÄ']],
+ ['abk','alltag2','Umgangssprachlicher Name für den Kompaniefeldwebel','Spieß',null,['Chef','Hauptmann','Kamerad']],
+ ['abk','alltag2','So steht ein Oberstleutnant namens Müller im Schriftverkehr','OTL Müller','Dienstgrad-Abkürzung vor dem Namen.',['OL Müller','ObstLt Müller','O Müller']],
+ ['vs','vsgrad','Niedrigster deutscher Geheimhaltungsgrad','VS – Nur für den Dienstgebrauch',null,['VS – Vertraulich','GEHEIM','STRENG GEHEIM']],
+ ['vs','vsgrad','Höchster deutscher Geheimhaltungsgrad','STRENG GEHEIM',null,['GEHEIM','VS – Vertraulich','COSMIC']],
+ ['vs','vsgrad','Wie viele Geheimhaltungsgrade kennt das SÜG?','Vier','VS-NfD, VS-VERTRAULICH, GEHEIM, STRENG GEHEIM.',['Drei','Fünf','Zwei']],
+ ['vs','vsgrad','Welcher Geheimhaltungsgrad liegt direkt über VS-VERTRAULICH?','GEHEIM',null,['STRENG GEHEIM','VS – Nur für den Dienstgebrauch','NATO RESTRICTED']],
+ ['vs','vsue','Welche Sicherheitsüberprüfung braucht der Zugang zu VS-NfD?','Keine','Wer mit VS-NfD arbeitet, wird über den Umgang belehrt bzw. verpflichtet, eine SÜ ist nicht nötig.',['Ü1','Ü2','Ü3']],
+ ['vs','vsue','Welche Sicherheitsüberprüfung braucht der Zugang zu VS-VERTRAULICH?','Ü1',null,['Keine','Ü2','Ü3']],
+ ['vs','vsue','Welche Sicherheitsüberprüfung braucht der Zugang zu GEHEIM?','Ü2','Bei Zugang zu sehr vielen GEHEIM-Unterlagen auch Ü3.',['Ü1','Ü3','Keine']],
+ ['vs','vsue','Welche Sicherheitsüberprüfung braucht der Zugang zu STRENG GEHEIM?','Ü3',null,['Ü2','Ü1','Keine']],
+ ['vs','vsnato','NATO-Entsprechung von VS-NfD','NATO RESTRICTED'],
+ ['vs','vsnato','NATO-Entsprechung von VS-VERTRAULICH','NATO CONFIDENTIAL'],
+ ['vs','vsnato','NATO-Entsprechung von GEHEIM','NATO SECRET'],
+ ['vs','vsnato','NATO-Entsprechung von STRENG GEHEIM','COSMIC TOP SECRET'],
+ ['vs','vsprax','Wer wirkt bei Sicherheitsüberprüfungen im Geschäftsbereich des BMVg mit?','MAD','Sonst ist es in der Regel das Bundesamt für Verfassungsschutz.',['BAAINBw','BAPersBw','BWI']],
+ ['vs','vsprax','Grundsatz: Von einer VS darf nur Kenntnis erhalten, wer …','sie für seine Aufgabe kennen muss','„Kenntnis nur, wenn nötig“ (Need-to-know). Eine SÜ allein berechtigt noch nicht.',['eine Sicherheitsüberprüfung hat','Offizier ist','im selben Gebäude arbeitet']],
+ ['vs','vsprax','Was braucht ein Unternehmen für Aufträge mit eingestuften Inhalten ab VS-VERTRAULICH?','Sicherheitsbescheid','Erteilt vom Bundesministerium für Wirtschaft und Energie, Grundlage ist das Geheimschutzhandbuch.',['Gewerbeschein','ISO-27001-Zertifikat','Unbedenklichkeitsbescheinigung des MAD']],
+ ['dig','begr','Was ist mit „Wirksystem“ gemeint?','Waffensystem','Im Fachjargon „wirken“ oder „einwirken“ für den Einsatz von Waffen, z. B. schießen.',['Führungssystem','Sensorsystem','Logistiksystem']],
+ ['dig','begr','Was bedeutet „wirken“ im militärischen Fachjargon?','Waffen einsetzen, z. B. schießen',null,['Befehle erteilen','Aufklären','Versorgen']],
+ ['dig','begr','Welche IT-Ebene gehört zu einer Fregatte?','Edge',null,['Core','Fog','pCloudBw']],
+ ['dig','begr','Welche IT-Ebene bilden digitale Gefechtsstände?','Fog',null,['Core','Edge','pCloudBw']],
+ ['dig','begr','Welche IT-Ebene bilden die großen Rechenzentren?','Core',null,['Fog','Edge','D-LBO']],
+ ['dig','begr','Welche Dimensionen verbindet MDO?','Land, Luft, See, Weltraum sowie Cyber- und Informationsraum',null,['Nur Land und Luft','Heer, Luftwaffe und Marine','Aufklärung und Wirkung']],
+ ['dig','begr','Was kommt bei C4ISR gegenüber C4I hinzu?','Surveillance und Reconnaissance','Überwachung und Aufklärung. Intelligence steckt schon in C4I.',['Cyber und Space','Consultation','Computers']],
+ ['beh','proj','Deutsch-französisches Landkampfsystem der nächsten Generation','MGCS',null,['FCAS','NGVA','D-LBO']],
+ ['beh','proj','Europäisches Luftkampfsystem der nächsten Generation','FCAS',null,['MGCS','FACE','SOSA']]
+].forEach(([d,k,q,a,n,x])=>add(d,k,q,a,n,x));
 /* ---------- Symbole ---------- */
 function marker(m){
   const parts=[];let w=0;const sp=4;
@@ -486,11 +619,42 @@ const LESSONS=[
    <li><strong>ZDigBw</strong><span>Dem Kommando CIR unterstellt, Bedarfsträger für das Teilportfolio Cyber/IT.</span></li>
    <li><strong>CIHBw</strong><span>Cyber Innovation Hub, seit 2020 Abteilung der BWI. Testet neue Lösungen mit Nutzern aus der Truppe und übergibt Erfolgreiches an das ZDigBw zur Einführung.</span></li>
    <li><strong>BMWE</strong><span>Das Bundesministerium für Wirtschaft und Energie ist nach § 25 SÜG für den Geheimschutz in Unternehmen zuständig, also für den Sicherheitsbescheid, den eine Firma für eingestufte Aufträge braucht.</span></li>
-  </ol>`},
+  </ol>
+  <p>Auf der anderen Seite steht die Sicherheits- und Verteidigungsindustrie (SVI). Große europäische Vorhaben sind etwa FCAS, das Luftkampfsystem der nächsten Generation, und MGCS, das deutsch-französische Landkampfsystem. Die Industrie organisiert sich in Verbänden wie BDSV und BDLI. Gesellschaften wie DWT, Förderkreis Deutsches Heer (FKH) oder Deutsches Maritimes Institut (DMI) bringen Streitkräfte, Verwaltung, Politik und Industrie ins Gespräch. In der NATO berät die NIAG aus Sicht der Industrie.</p>`},
  {id:'anrede',t:'Anrede und Umgang',d:'Anrede nach Dienstgrad, Generale und Sanitätsdienst',deck:'eti',b:()=>`
   <p>Angesprochen wird mit Herr oder Frau und dem Dienstgrad, gegebenenfalls mit Nachnamen: „Herr Oberstleutnant“, „Frau Hauptmann Müller“. Dienstgrade bleiben grammatisch männlich, eine „Hauptfrau“ gibt es nicht.</p>
   <p>Alle Generale werden mit „Herr General“ bzw. „Frau General“ angesprochen, auch Brigadegeneral, Generalmajor und Generalleutnant. Der Plural lautet in der Bundeswehr Generale. Ranghöchster Soldat ist der Generalinspekteur der Bundeswehr.</p>
-  <p>Sanitätsoffiziere tragen eigene Dienstgrade, vom Stabsarzt (Ebene Hauptmann) bis zum Generaloberstabsarzt (Ebene Generalleutnant), und den Äskulapstab am Abzeichen.</p>`}
+  <p>Sanitätsoffiziere tragen eigene Dienstgrade, vom Stabsarzt (Ebene Hauptmann) bis zum Generaloberstabsarzt (Ebene Generalleutnant), und den Äskulapstab am Abzeichen.</p>`},
+ {id:'kuerzel',t:'Abkürzungen im Dienstalltag',d:'Von AGA bis DZE, dazu Dienstgrade in Kurzform',deck:'abk',b:()=>`
+  <p>Die Bundeswehr kürzt fast alles ab. Wer die häufigsten Kürzel kennt, versteht Dienstpläne, Befehle und Gespräche deutlich besser. Eine Auswahl:</p>
+  <ol class="ladder">${GLOSS[0].items.filter(([k])=>['AGA','KzH','DZE','UvD','GvD','KpFw','SaZ','BS','FWDL','RDL'].includes(k)).map(([k,v])=>`<li><strong>${esc(k)}</strong><span>${esc(v)}</span></li>`).join('')}</ol>
+  <p>Auch Dienstgrade werden abgekürzt, im Schriftverkehr steht die Abkürzung vor dem Namen, etwa „OTL Müller“ oder „Hptm Schmidt“. Die Kürzel folgen meist den Bausteinen: O für Ober, St für Stabs, Hpt für Haupt. So wird aus Oberstabsfeldwebel OStFw. Ausnahmen sind OTL für Oberstleutnant und O für Oberst.</p>
+  <div class="callout">KzH ist keine Krankmeldung im zivilen Sinn. Soldatinnen und Soldaten werden truppenärztlich versorgt, und der Truppenarzt entscheidet, ob jemand zu Hause gesund werden darf.</div>`},
+ {id:'geheimschutz',t:'Geheimschutz: VS und SÜ',d:'Geheimhaltungsgrade, Sicherheitsüberprüfung und VSA',deck:'vs',b:()=>`
+  <p>Informationen, die im öffentlichen Interesse geheim bleiben müssen, sind Verschlusssachen (VS). Das Sicherheitsüberprüfungsgesetz (SÜG) kennt vier Geheimhaltungsgrade. Je höher der Grad, desto gründlicher die Sicherheitsüberprüfung (SÜ), die Voraussetzung für den Zugang ist:</p>
+  <ol class="ladder">
+   <li><strong>VS – Nur für den Dienstgebrauch</strong><span>Keine SÜ, aber Belehrung über den Umgang. NATO RESTRICTED.</span></li>
+   <li><strong>VS – Vertraulich</strong><span>Ü1, einfache SÜ. NATO CONFIDENTIAL.</span></li>
+   <li><strong>GEHEIM</strong><span>Ü2, erweiterte SÜ. NATO SECRET.</span></li>
+   <li><strong>STRENG GEHEIM</strong><span>Ü3, erweiterte SÜ mit Sicherheitsermittlungen. COSMIC TOP SECRET.</span></li>
+  </ol>
+  <p>Wer sehr viele Unterlagen eines Grades bearbeitet, braucht die nächsthöhere Überprüfung: bei vielen VS-VERTRAULICH eine Ü2, bei vielen GEHEIM eine Ü3. Im Geschäftsbereich des BMVg wirkt der MAD an der Überprüfung mit, sonst meist das Bundesamt für Verfassungsschutz.</p>
+  <p>Wie mit VS praktisch umzugehen ist, also Kennzeichnung, Aufbewahrung, Weitergabe und Vernichtung, regelt die Verschlusssachenanweisung (VSA). Für Unternehmen gilt das Geheimschutzhandbuch (GHB) des Bundesministeriums für Wirtschaft und Energie, ab VS-VERTRAULICH braucht eine Firma einen Sicherheitsbescheid.</p>
+  <div class="callout">Eine SÜ berechtigt nicht automatisch zum Lesen. Es gilt „Kenntnis nur, wenn nötig“: Zugang erhält nur, wer die VS für die eigene Aufgabe braucht.</div>`},
+ {id:'digital',t:'Führung digital: von C2 bis MDO',d:'C4ISR, Multi-Domain, Core, Fog, Edge und offene Architekturen',deck:'dig',b:()=>`
+  <p>Viele Begriffe der militärischen Digitalisierung stammen aus NATO und US-Streitkräften und werden auch im Deutschen auf Englisch verwendet. Die C-Kürzel bauen aufeinander auf:</p>
+  <ol class="ladder">
+   <li><strong>C2</strong><span>Command and Control, also Führung.</span></li>
+   <li><strong>C3</strong><span>In der NATO Consultation, Command and Control. Die NATO-C3-Taxonomie ordnet danach Fähigkeiten, Dienste und Systeme.</span></li>
+   <li><strong>C4I</strong><span>Dazu Communications, Computers und Intelligence.</span></li>
+   <li><strong>C4ISR</strong><span>Dazu Surveillance und Reconnaissance: Führung und Aufklärung als Gesamtsystem.</span></li>
+  </ol>
+  <p>Multi-Domain Operations (MDO) meint das koordinierte Vorgehen über alle Dimensionen: Land, Luft, See, Weltraum sowie Cyber- und Informationsraum. Dazu gehört das elektromagnetische Spektrum, in dem EMSO stattfinden, darunter die Elektronische Kampfführung (EloKa). Im Jargon heißen Waffensysteme oft Wirksysteme, und „wirken“ steht für den Waffeneinsatz.</p>
+  <h3>Core, Fog, Edge</h3>
+  <p>Die IT der Bundeswehr wird in Ebenen beschrieben. Core sind die großen Rechenzentren, darunter die private Cloud der Bundeswehr (pCloudBw). Fog sind die IT-Systeme der obersten taktischen Ebene, etwa digitale Gefechtsstände. Edge ist die IT einzelner Waffensysteme, etwa an Bord einer Fregatte. Für die Landstreitkräfte steht das Vorhaben D-LBO, Digitalisierung landbasierter Operationen.</p>
+  <h3>Offene Architekturen</h3>
+  <p>Damit Systeme verschiedener Hersteller zusammenpassen und sich modernisieren lassen, setzen Streitkräfte auf offene Standards. MOSA ist der übergreifende Ansatz des US-Verteidigungsministeriums, SOSA standardisiert Sensorik, FACE die Avionik-Software, NGVA (STANAG 4754) Landfahrzeuge. Software Defined Defence (SDD) entkoppelt Software von Hardware, sodass neue Fähigkeiten per Update kommen können. cATO ersetzt die einmalige Betriebszulassung durch eine laufende.</p>
+  <div class="callout">Die Kürzel sind nicht immer einheitlich: C3 heißt in der NATO Consultation, Command and Control, anderswo Command, Control, Communications. Im Zweifel nachfragen, welche Lesart gemeint ist.</div>`}
 ];
 
 /* ---------- Speicher ---------- */
@@ -502,7 +666,7 @@ const boxOf=c=>store.box[c.id]||0;
 const setBox=(c,b)=>{store.box[c.id]=Math.max(0,Math.min(4,b));save()};
 
 /* ---------- Zustand ---------- */
-let lesson=null, mode='basics', deck='all', refTab='dg', last=null, cur=null, revealed=false, quiz=null;
+let glossQ='', lesson=null, mode='basics', deck='all', refTab='dg', last=null, cur=null, revealed=false, quiz=null;
 const pool=()=>deck==='all'?CARDS:CARDS.filter(c=>c.deck===deck);
 const deckName=id=>(DECKS.find(d=>d.id===id)||{}).name;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -591,7 +755,7 @@ function renderQuiz(){
      ${done?`<div class="actions"><button class="btn primary" data-act="next">${quiz.i+1<quiz.qs.length?'Nächste Frage':'Ergebnis zeigen'}</button></div>`:''}`;
 }
 function renderRef(){
-  const tabs=[['dg','Dienstgrade'],['abz','Abzeichen'],['gl','Gliederung'],['stab','Stäbe'],['beh','Behörden']];
+  const tabs=[['dg','Dienstgrade'],['abz','Abzeichen'],['gl','Gliederung'],['stab','Stäbe'],['beh','Begriffe']];
   let h=`<div class="seg" role="group" aria-label="Nachschlagen">${tabs.map(([k,n])=>`<button data-ref="${k}" aria-pressed="${refTab===k}">${n}</button>`).join('')}</div>`;
   if(refTab==='dg'){
     let rows='',g='';
@@ -617,7 +781,9 @@ function renderRef(){
     h+=`<dl>${STAB.map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
     <p class="small">Präfixe: ${PRE.map(([k,v])=>`${k} ${esc(v)}`).join('; ')}. Die Nummer bleibt gleich, der Buchstabe zeigt Ebene oder Teilstreitkraft: Ein Bataillon hat typischerweise S1 bis S6 (S3 dort inkl. Ausbildung), J1 bis J9 voll ausgeprägt gibt es in streitkräftegemeinsamen Stäben.</p>`;
   } else {
-    h+=`<dl>${BEH.map(([k,v,n])=>`<div><dt>${k}</dt><dd>${esc(v)}${n?'<br>'+esc(n):''}</dd></div>`).join('')}</dl>`;
+    const dl=(t,items)=>`<section class="gloss"><h3 class="lg">${esc(t)}</h3><dl>${items.map(([k,v,n])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}${n?'<br>'+esc(n):''}</dd></div>`).join('')}</dl></section>`;
+    h+=`<input type="search" id="gq" class="search" placeholder="Abkürzung oder Begriff suchen" aria-label="Begriffe durchsuchen" value="${esc(glossQ)}">
+    ${dl('Behörden & Dienststellen',BEH)}${GLOSS.map(g=>dl(g.t,g.items)).join('')}<p class="small" id="gnone" hidden>Nichts gefunden.</p>`;
   }
   return h;
 }
@@ -631,7 +797,7 @@ function renderBasics(){
       ${nx?`<button class="btn ghost" data-lesson="${nx.id}">Weiter: ${esc(nx.t)}</button>`:''}</div></div>`;
   }
   const n=LESSONS.filter(l=>store.read[l.id]).length;
-  return `<p class="intro">Acht kurze Lektionen vermitteln das Grundwissen. Danach festigen Lernkarten und Quiz das Gelernte. ${n} von ${LESSONS.length} gelesen.</p>
+  return `<p class="intro">${LESSONS.length} kurze Lektionen vermitteln das Grundwissen. Danach festigen Lernkarten und Quiz das Gelernte. ${n} von ${LESSONS.length} gelesen.</p>
    <ol class="lessons">${LESSONS.map((l,i)=>`<li><button data-lesson="${l.id}"><span class="num${store.read[l.id]?' done':''}" aria-label="${store.read[l.id]?'gelesen':'ungelesen'}">${i+1}</span>
    <span><span class="lt">${esc(l.t)}</span><span class="ld">${esc(l.d)}</span></span></button></li>`).join('')}</ol>`;
 }
@@ -641,9 +807,9 @@ function renderHelp(){
   <h2>Kein Angebot der Bundeswehr</h2>
   <p>AGAdemy ist ein privates Projekt. Es ist kein Angebot, keine Veröffentlichung und keine offizielle Anwendung der Bundeswehr, des Bundesministeriums der Verteidigung oder einer anderen Dienststelle und steht mit ihnen in keiner Verbindung. Alle Inhalte beruhen auf öffentlich zugänglichen Quellen und können Fehler enthalten. Verbindlich sind allein die offiziellen Quellen. Fehler gefunden? Gern als <a href="https://github.com/FlorianWilhelm/agademy/issues">Issue auf GitHub</a> melden.</p>
   <h2>Wofür die App da ist</h2>
-  <p>Grundwissen über die Bundeswehr: Dienstgrade und Abzeichen, Gliederung, Stabsabteilungen, Behörden und die Anrede. Insgesamt ${n} Karten in ${DECKS.length} Themen.</p>
+  <p>Grundwissen über die Bundeswehr: Dienstgrade und Abzeichen, Gliederung, Stabsabteilungen, Behörden, Anrede, Abkürzungen, Geheimschutz und die Begriffe der militärischen Digitalisierung. Insgesamt ${n} Karten in ${DECKS.length} Themen.</p>
   <h2>Grundlagen</h2>
-  <p>Acht Lektionen vermitteln das Wissen in sinnvoller Reihenfolge, mit Beispielen und Abzeichen. Am Ende jeder Lektion führt „Lernkarten dazu üben“ direkt zum passenden Thema. Gelesene Lektionen sind markiert.</p>
+  <p>${LESSONS.length} Lektionen vermitteln das Wissen in sinnvoller Reihenfolge, mit Beispielen und Abzeichen. Am Ende jeder Lektion führt „Lernkarten dazu üben“ direkt zum passenden Thema. Gelesene Lektionen sind markiert.</p>
   <h2>Thema wählen</h2>
   <p>Oben bei Lernkarten und Quiz steht das aktuelle Thema. Antippen öffnet die Liste aller Themen mit ihrem Lernstand. „Alle Themen“ mischt alles.</p>
   <h2>Lernkarten</h2>
@@ -652,9 +818,9 @@ function renderHelp(){
   <h2>Quiz</h2>
   <p>Zehn Fragen mit je vier Antworten aus dem gewählten Thema. Bei Abzeichen-Fragen sind die Antworten Bilder. Richtige Antworten schieben die Karte ein Fach weiter, falsche zurück in Fach 1, Quiz und Lernkarten teilen sich also denselben Lernstand.</p>
   <h2>Nachschlagen</h2>
-  <p>Übersichten zum schnellen Nachsehen: Dienstgradleiter mit Marine-Entsprechung und NATO-Rangcode, alle Abzeichen, Gliederung mit NATO-Größenzeichen, Stabsabteilungen und Behörden.</p>
+  <p>Übersichten zum schnellen Nachsehen: Dienstgradleiter mit Marine-Entsprechung und NATO-Rangcode, alle Abzeichen, Gliederung mit NATO-Größenzeichen, Stabsabteilungen und ein durchsuchbares Verzeichnis aller Abkürzungen.</p>
   <h2>Wie belastbar die Inhalte sind</h2>
-  <p>Dienstgrade, Gliederung und Behördenangaben stammen von bundeswehr.de, Abzeichen und Dienstgradbezeichnungen aus der Anordnung des Bundespräsidenten über die Dienstgradbezeichnungen und die Uniform (2021), Disziplinarbefugnis aus der Wehrdisziplinarordnung, Geheimschutz aus dem SÜG. NATO-Rangcodes folgen STANAG 2116, Größenzeichen NATO APP-6 in deutscher Lesart. Abzeichen von Luftwaffe und Marine sind nach der Übersicht der Bundeswehr vereinfacht nachgezeichnet, das Heer ist daraus abgeleitet. Stärkeangaben sind Größenordnungen, Führungsdienstgrade typische Besetzungen. Stand Oktober 2026.</p>
+  <p>Dienstgrade, Gliederung und Behördenangaben stammen von bundeswehr.de, Abzeichen und Dienstgradbezeichnungen aus der Anordnung des Bundespräsidenten über die Dienstgradbezeichnungen und die Uniform (2021), Disziplinarbefugnis aus der Wehrdisziplinarordnung, Geheimschutz aus dem SÜG und der VSA, Architekturbegriffe u. a. nach Fraunhofer IESE. NATO-Rangcodes folgen STANAG 2116, Größenzeichen NATO APP-6 in deutscher Lesart. Abzeichen von Luftwaffe und Marine sind nach der Übersicht der Bundeswehr vereinfacht nachgezeichnet, das Heer ist daraus abgeleitet. Stärkeangaben sind Größenordnungen, Führungsdienstgrade typische Besetzungen. Stand Oktober 2026.</p>
   <h2>Lernstand</h2>
   <p>Der Lernstand wird nur in diesem Browser gespeichert. Auf einem anderen Gerät beginnen Sie neu, und das Löschen der Browserdaten setzt ihn zurück.</p>
   <button class="btn ghost" id="reset" style="flex:none;padding:10px 14px;font-size:16px">Lernstand zurücksetzen</button>
@@ -667,7 +833,16 @@ function render(){
   document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-current',b.dataset.mode===mode?'page':'false'));
   const v=document.getElementById('view');
   v.innerHTML=mode==='basics'?renderBasics():mode==='learn'?renderLearn():mode==='quiz'?renderQuiz():mode==='ref'?renderRef():renderHelp();
+  if(mode==='ref'&&refTab==='beh') filterGloss();
 }
+function filterGloss(){
+  const q=glossQ.trim().toLowerCase();let any=false;
+  document.querySelectorAll('.gloss').forEach(sec=>{let n=0;
+    sec.querySelectorAll('dl div').forEach(d=>{const m=!q||d.textContent.toLowerCase().includes(q);d.hidden=!m;if(m)n++});
+    sec.hidden=!n;if(n)any=true});
+  const e=document.getElementById('gnone');if(e) e.hidden=any;
+}
+document.addEventListener('input',e=>{if(e.target.id==='gq'){glossQ=e.target.value;filterGloss()}});
 
 /* ---------- Ereignisse ---------- */
 document.addEventListener('click',e=>{
