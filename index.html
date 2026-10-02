@@ -509,7 +509,9 @@ const GLOSS=[
   ['NGVA','NATO Generic Vehicle Architecture','Standard für modulare, interoperable Landfahrzeuge (STANAG 4754).'],
   ['STANAG','Standardization Agreement','NATO-Standardisierungsabkommen für gemeinsame Verfahren und technische Standards.']
  ]},
- {id:'ind',t:'Rüstung & Verbände',deck:'beh',items:[
+ {id:'ind',t:'Partner, Rüstung & Verbände',deck:'beh',items:[
+  ['BOS','Behörden und Organisationen mit Sicherheitsaufgaben','Z. B. Polizei, Feuerwehr, Rettungsdienst, THW und Katastrophenschutz. Die Bundeswehr unterstützt sie etwa in der Amts- und Katastrophenhilfe.'],
+  ['BDBOS','Bundesanstalt für den Digitalfunk der Behörden und Organisationen mit Sicherheitsaufgaben','Betreibt den bundesweiten BOS-Digitalfunk.'],
   ['SVI','Sicherheits- und Verteidigungsindustrie'],
   ['FCAS','Future Combat Air System','Europäisches Luftkampfsystem der nächsten Generation.'],
   ['MGCS','Main Ground Combat System','Deutsch-französisches Landkampfsystem der nächsten Generation.'],
@@ -580,7 +582,8 @@ const LESSONS=[
  {id:'aufbau',t:'Aufbau der Bundeswehr',d:'Streitkräfte, Teilstreitkräfte und die zivile Verwaltung',deck:'beh',b:()=>`
   <p>Kern der Bundeswehr sind die Streitkräfte mit vier Teilstreitkräften: Heer, Luftwaffe, Marine und, als jüngste, Cyber- und Informationsraum (CIR). Jede Teilstreitkraft hat eigene Bezeichnungen für ihre Ebenen und eigene Uniformen. Dazu kommen der Unterstützungsbereich unter dem Unterstützungskommando und das Operative Führungskommando, das seit Oktober 2024 alle Einsätze im In- und Ausland plant und führt.</p>
   <p>Neben den Streitkräften steht die zivile Bundeswehrverwaltung. Dazu gehören die großen Bundesämter, etwa für Ausrüstung (BAAINBw), Personal (BAPersBw) oder Infrastruktur (BAIUDBw). Das BAAINBw ist eine zivile Bundesoberbehörde mit rund 10.000 zivilen und 1.800 militärischen Beschäftigten.</p>
-  <div class="callout">In der zivilen Bundeswehrverwaltung arbeiten überwiegend Beamtinnen, Beamte und Tarifbeschäftigte. Für sie gelten Amtsbezeichnungen statt Dienstgrade.</div>`},
+  <div class="callout">In der zivilen Bundeswehrverwaltung arbeiten überwiegend Beamtinnen, Beamte und Tarifbeschäftigte. Für sie gelten Amtsbezeichnungen statt Dienstgrade.</div>
+  <p>Im Inland arbeitet die Bundeswehr in der Amts- und Katastrophenhilfe mit den Behörden und Organisationen mit Sicherheitsaufgaben (BOS) zusammen, etwa Polizei, Feuerwehr und THW.</p>`},
  {id:'dienstgrade',t:'Dienstgrade verstehen',d:'Laufbahnen, Dienstgradgruppen und NATO-Rangcodes',deck:'dg',b:()=>`
   <p>Es gibt drei Laufbahngruppen: Mannschaften, Unteroffiziere und Offiziere. Sie gliedern sich in sieben Dienstgradgruppen mit zusammen 26 Dienstgraden:</p>
   <ol class="ladder">${Object.values(G).map(g=>`<li><strong>${esc(g)}</strong><span>${RANKS.filter(r=>r.g===g).map(r=>esc(r.k||r.h)).join(', ')}</span></li>`).join('')}</ol>
