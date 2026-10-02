@@ -380,54 +380,58 @@ function insignia(key,W=60){
     code.slice().reverse().forEach(c=>{y-=hgt[c];s+=`<rect x="6" y="${y}" width="48" height="${hgt[c]}" fill="${ink}"/>`;y-=2.5});
   } else {
     s+=`<path d="M9 6 H51 L54 94 H6 Z" fill="${board}"/>`;
-    const stripe=(y,th)=>`<path d="M17 ${y+8} L43 ${y-4} L43 ${y-4+th} L17 ${y+8+th} Z" fill="${ink}"/>`;
+    const chevTop=wing?64:68;
+    const Y0=68; // unterster Schrägstreifen, weitere kommen oben dazu
+    const stripe=(y,th)=>{y-=wing?2:0;return `<path d="M17 ${y+8} L43 ${y-4} L43 ${y-4+th} L17 ${y+8+th} Z" fill="${ink}"/>`}; // Luftwaffe: Platz für die Schwinge
     spec.forEach(e=>{
       let m;
-      if((m=e.match(/^s(\d)$/))){const n=+m[1];for(let i=0;i<n;i++) s+=stripe(64-i*6+(n-1)*3,3.4)}
-      else if(e==='k') s+=stripe(56,11);
-      else if(e==='sk'){s+=stripe(46,3.4);s+=stripe(58,10)}
+      if((m=e.match(/^s(\d)$/))){const n=+m[1],gap=i=>i*6+(i>2?4.5:0);for(let i=0;i<n;i++) s+=stripe(Y0-gap(i),3.4)} // ab dem 4. Streifen mit Abstand
+      else if(e==='k') s+=stripe(Y0+3.4-11,11);
+      else if(e==='sk'){s+=stripe(Y0+3.4-22,3.4);s+=stripe(Y0+3.4-10,10)}
       else if(e==='open'||e==='closed'){
-        s+=`<path d="M15 ${wing?84:88} V30 A15 15 0 0 1 45 30 V${wing?84:88}" fill="none" stroke="${ink}" stroke-width="5"/>`;
-        if(e==='closed') s+=`<path d="M12.5 ${wing?82:86} H47.5" stroke="${ink}" stroke-width="5"/>`;
+        s+=`<path d="M14.5 ${wing?84:88} V30 A15.5 15.5 0 0 1 45.5 30 V${wing?84:88}" fill="none" stroke="${ink}" stroke-width="6"/>`;
+        if(e==='closed') s+=`<path d="M11.5 ${wing?81.5:85.5} H48.5" stroke="${ink}" stroke-width="6"/>`;
       }
-      else if((m=e.match(/^c(\d)$/))){const n=+m[1];for(let i=0;i<n;i++){const y=72-i*7;s+=`<path d="M21 ${y+7} L30 ${y} L39 ${y+7}" fill="none" stroke="${ink}" stroke-width="3.6"/>`}}
-      else if(e==='loop'){const n=+((spec.find(x=>/^c\d$/.test(x))||'c1').slice(1));const y=72-(n-1)*7-10;s+=`<path d="M30 ${y-7} L35 ${y} L30 ${y+5} L25 ${y} Z" fill="none" stroke="${ink}" stroke-width="2.6"/>`}
+      else if((m=e.match(/^c(\d)$/))){const n=+m[1];for(let i=0;i<n;i++){const y=chevTop-i*7.4;s+=`<path d="M18.5 ${y+9} L30 ${y} L41.5 ${y+9} V${y+13.6} L30 ${y+4.6} L18.5 ${y+13.6} Z" fill="${ink}"/>`}}
+      else if(e==='loop'){const n=+((spec.find(x=>/^c\d$/.test(x))||'c1').slice(1));const b=chevTop-(n-1)*7.4+1.4,c=b-9.2;
+        s+=`<path d="M30 ${b} L39 ${c} L30 ${c-9.2} L21 ${c} Z M30 ${c+3} L33 ${c} L30 ${c-3} L27 ${c} Z" fill="${ink}" fill-rule="evenodd"/>`}
       else if(e==='silver') s+=`<rect x="7" y="${wing?80.5:89}" width="46" height="3.2" fill="#dfe3e6"/>`;
       else if(e==='star'){const cx=30,cy=spec.includes('bar')?46:(spec.includes('c1')&&spec.includes('closed')?42:40),r=6,pts=[];for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r*0.42:r;pts.push((cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1))}s+=`<polygon points="${pts.join(' ')}" fill="${ink}"/>`}
       else if(e==='bar') s+=`<rect x="6.5" y="86" width="47" height="4" fill="${ink}"/>`;
-      else if(e==='w'){ // Eichenlaub: zwei offene Zweige mit gelappten Blättern, unten gebunden
-        const leaf='M0 0 C-1.2 -.6 -2.6 -1 -2.3 -2.4 C-3.4 -2.9 -3.3 -4.4 -2.2 -4.8 C-3 -5.8 -2.4 -7.2 -1.3 -7.2 C-1.4 -8.6 -.6 -9.6 0 -9.8 C.6 -9.6 1.4 -8.6 1.3 -7.2 C2.4 -7.2 3 -5.8 2.2 -4.8 C3.3 -4.4 3.4 -2.9 2.3 -2.4 C2.6 -1 1.2 -.6 0 0 Z';
-        const cx=30,cy=72,r=12.5,f=v=>v.toFixed(2);
+      else if(e==='w'){ // Eichenlaub: zwei sichelförmige Wedel aus schmalen, gelappten Blättern, unten spitz zusammenlaufend
+        const leaf='M0 0 C-.8 -.6 -1.4 -1.6 -1.1 -2.6 C-1.8 -3 -1.8 -4 -1.2 -4.4 C-1.7 -5 -1.4 -6 -.8 -6.2 C-.8 -7.2 -.3 -7.8 0 -8 C.3 -7.8 .8 -7.2 .8 -6.2 C1.4 -6 1.7 -5 1.2 -4.4 C1.8 -4 1.8 -3 1.1 -2.6 C1.4 -1.6 .8 -.6 0 0 Z';
+        const f=v=>v.toFixed(2),P=[[.8,88],[9,85.5],[20.5,79.5],[15.5,64.5]]; // Bézier-Stützpunkte des Zweigs (x nach außen)
+        const bz=(u,k)=>{const v=1-u;return v*v*v*P[0][k]+3*v*v*u*P[1][k]+3*v*u*u*P[2][k]+u*u*u*P[3][k]};
+        const db=(u,k)=>{const v=1-u;return 3*v*v*(P[1][k]-P[0][k])+6*v*u*(P[2][k]-P[1][k])+3*u*u*(P[3][k]-P[2][k])};
+        let g='';
         for(const side of [-1,1]){
-          const pt=(d,rr=r)=>{const a=(90+side*d)*Math.PI/180;return [cx+rr*Math.cos(a),cy+rr*Math.sin(a),a]};
-          const [x0,y0]=pt(6),[x1,y1]=pt(128);
-          s+=`<path d="M${f(x0)} ${f(y0)} A${r} ${r} 0 0 ${side<0?1:0} ${f(x1)} ${f(y1)}" fill="none" stroke="${ink}" stroke-width="1.2" stroke-linecap="round"/>`;
-          [[16,1],[38,-1],[58,1],[80,-1],[100,1],[124,0]].forEach(([d,o])=>{ // o: Blatt nach außen (1), innen (-1), Spitze (0)
-            const [x,y,a]=pt(d,r+o*.8);const tx=-side*Math.sin(a),ty=side*Math.cos(a); // Wuchsrichtung entlang des Zweigs
-            const rot=Math.atan2(tx,-ty)*180/Math.PI+o*side*-22;
-            s+=`<path d="${leaf}" transform="translate(${f(x)} ${f(y)}) rotate(${f(rot)}) scale(.95)" fill="${ink}" stroke="${board}" stroke-width=".45"/>`;
-          });
-          const [ax,ay]=pt(28,r-3.4); // Eichel
-          s+=`<ellipse cx="${f(ax)}" cy="${f(ay)}" rx="1.4" ry="2" transform="rotate(${-side*35} ${f(ax)} ${f(ay)})" fill="${ink}"/>`;
+          const X=x=>30+side*x,put=(u,ang,sc)=>{const rot=Math.atan2(side*db(u,0),-db(u,1))*180/Math.PI+side*ang;
+            g+=`<path d="${leaf}" transform="translate(${f(X(bz(u,0)))} ${f(bz(u,1))}) rotate(${f(rot)}) scale(${f(sc)})" fill="${ink}" stroke="${board}" stroke-width=".35"/>`};
+          g+=`<path d="M${f(X(P[0][0]))} ${P[0][1]} C${f(X(P[1][0]))} ${P[1][1]} ${f(X(P[2][0]))} ${P[2][1]} ${f(X(P[3][0]))} ${P[3][1]}" fill="none" stroke="${ink}" stroke-width="1.2" stroke-linecap="round"/>`;
+          for(let i=0;i<9;i++){const u=.05+i*.105,w=Math.sin(Math.PI*(.25+u*.7)); // Wedel in der Mitte am breitesten
+            put(u,-40,.6+.75*w); // außen
+            put(Math.min(u+.04,1),32,.5+.5*w); // innen
+          }
+          put(1,0,.95); // Spitze
         }
-        s+=`<path d="M27 83.6 Q30 86.4 33 83.6 M27 86.6 Q30 83.8 33 86.6" fill="none" stroke="${ink}" stroke-width="1.5" stroke-linecap="round"/>`;
+        s+=wing?`<g transform="translate(0 -4.5) translate(30 88) scale(.92) translate(-30 -88)">${g}</g>`:g; // Luftwaffe: über der Schwinge
       }
     });
-    const pip=(x,y)=>`<path d="M${x} ${y-4.5} L${x+4.5} ${y} L${x} ${y+4.5} L${x-4.5} ${y} Z" fill="${ink}"/>`;
+    const pip=(x,y)=>{const p=[];for(let i=0;i<32;i++){const a=i*Math.PI/16-Math.PI/2,r=i%2?2.3:(i%8===0?6.3:i%4===0?5.2:4);p.push((x+r*Math.cos(a)).toFixed(2)+','+(y+r*Math.sin(a)).toFixed(2))}
+      return `<polygon points="${p.join(' ')}" fill="${ink}"/>`}; // Stern mit Strahlen
     const pm=spec.find(x=>/^p\d/.test(x));
-    if(pm){const hasW=spec.includes('w');const base=hasW?70:72;
-      if(pm==='p4s'){s+=pip(30,base-24)+pip(30,base-12)+pip(24.5,base)+pip(35.5,base)}
-      else{const n=+pm[1];for(let i=0;i<n;i++) s+=pip(30,base-i*12)}}
-    if(wing){ // Schwinge: zwei ausgebreitete Flügel aus gestaffelten Schwungfedern
+    if(pm){const hasW=spec.includes('w');const base=hasW?(wing?72.5:76):(wing?73.5:74);
+      if(pm==='p4s'){s+=pip(30,base-25)+pip(30,base-12.5)+pip(23.5,base)+pip(36.5,base)}
+      else{const n=+pm[1];for(let i=0;i<n;i++) s+=pip(30,base-i*12.5)}}
+    if(wing){ // Schwinge: breites, flaches Federband mit spitzen Enden, oben in der Mitte gekerbt, unten spitz
       const f=v=>v.toFixed(2);
-      const feather=(rx,ry,tx,ty,w)=>{const dx=tx-rx,dy=ty-ry,L=Math.hypot(dx,dy),nx=-dy/L*w,ny=dx/L*w,mx=rx+dx*.55,my=ry+dy*.55;
-        return `M${f(rx)} ${f(ry)} Q${f(mx-nx)} ${f(my-ny)} ${f(tx)} ${f(ty)} Q${f(mx+nx*.7)} ${f(my+ny*.7)} ${f(rx)} ${f(ry)} Z`};
       for(const side of [-1,1]){
-        const X=x=>30+side*x;
-        for(let i=4;i>=0;i--) s+=`<path d="${feather(X(1.5),86.4+i*.9,X(23.5-i*4.2),79.4+i*2.3,2.7)}" fill="${ink}" stroke="${board}" stroke-width=".5" stroke-linejoin="round"/>`;
-        s+=`<path d="M${X(.5)} 84.8 Q${X(6)} 82.6 ${X(11)} 82.8 Q${X(7)} 86.4 ${X(.5)} 89 Z" fill="${ink}"/>`;
+        const X=x=>f(30+side*x);let low='';
+        for(let i=1;i<=6;i++){const a=i/6,b=(i-.5)/6; // Federspitzen an der Unterkante
+          low+=` L${X(22.8-b*19.3)} ${f(87.2+b*3.8+.8)} L${X(22.8-a*19.3)} ${f(87.2+a*3.8)}`}
+        s+=`<path d="M${X(0)} 86.8 L${X(1.6)} 85.4 L${X(22.2)} 84.9 Q${X(23.8)} 85.4 ${X(22.8)} 87.2${low} L${X(0)} 92.8 Z" fill="${ink}"/>`;
+        s+=`<path d="M${X(2.5)} 87 L${X(20.5)} 86.4 M${X(3)} 88.6 L${X(16)} 88" fill="none" stroke="${board}" stroke-width=".45" stroke-linecap="round"/>`;
       }
-      s+=`<ellipse cx="30" cy="87" rx="2" ry="3" fill="${ink}"/>`;
     }
   }
   return `<svg width="${W}" height="${W*100/60}" viewBox="0 0 60 100" role="img" aria-label="Dienstgradabzeichen">${s}</svg>`;
