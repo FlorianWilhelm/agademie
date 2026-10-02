@@ -168,6 +168,7 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
   .ans{animation:show .18s ease-out}
   @keyframes show{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 }
+#view [id]{scroll-margin-top:16px}
 </style>
 </head>
 <body>
@@ -768,8 +769,8 @@ function renderRef(){
     h+=`<div class="scroll"><table><thead><tr><th>Heer, Luftwaffe</th><th>Marine</th><th>NATO</th></tr></thead><tbody>${rows}</tbody></table></div>
     <p class="small">Sanitätsoffiziere: ${SAN.map(([e,s])=>`${s} (wie ${e})`).join(', ')}.</p>`;
   } else if(refTab==='abz'){
-    for(const [t,lbl] of [['heer','Heer (Feldanzug)'],['lw','Luftwaffe (Feldanzug)'],['mar','Marine']]){
-      h+=`<h2>${lbl}</h2>`;
+    for(const [t,lbl,id] of [['heer','Heer (Feldanzug)','heer'],['lw','Luftwaffe (Feldanzug)','luftwaffe'],['mar','Marine','marine']]){
+      h+=`<h2 id="${id}">${lbl}</h2>`;
       for(const [lg,subs] of INSGRP){
         h+=`<h3 class="lg">${lg}</h3>`;
         for(const [g,a,b] of subs) h+=`${g!==lg?`<h4 class="dgg">${esc(g)}</h4>`:''}<div class="insgrid">${INS[t].slice(a,b).map(([n])=>`<figure>${insignia(t+':'+n,52)}<figcaption>${esc(n)}</figcaption></figure>`).join('')}</div>`;
@@ -785,9 +786,9 @@ function renderRef(){
     h+=`<dl>${STAB.map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
     <p class="small">Präfixe: ${PRE.map(([k,v])=>`${k} ${esc(v)}`).join('; ')}. Die Nummer bleibt gleich, der Buchstabe zeigt Ebene oder Teilstreitkraft: Ein Bataillon hat typischerweise S1 bis S6 (S3 dort inkl. Ausbildung), J1 bis J9 voll ausgeprägt gibt es in streitkräftegemeinsamen Stäben.</p>`;
   } else {
-    const dl=(t,items)=>`<section class="gloss"><h3 class="lg">${esc(t)}</h3><dl>${items.map(([k,v,n])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}${n?'<br>'+esc(n):''}</dd></div>`).join('')}</dl></section>`;
+    const dl=(id,t,items)=>`<section class="gloss" id="${id}"><h3 class="lg">${esc(t)}</h3><dl>${items.map(([k,v,n])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}${n?'<br>'+esc(n):''}</dd></div>`).join('')}</dl></section>`;
     h+=`<input type="search" id="gq" class="search" placeholder="Abkürzung oder Begriff suchen" aria-label="Begriffe durchsuchen" value="${esc(glossQ)}">
-    ${dl('Behörden & Dienststellen',BEH)}${GLOSS.map(g=>dl(g.t,g.items)).join('')}<p class="small" id="gnone" hidden>Nichts gefunden.</p>`;
+    ${dl('behoerden','Behörden & Dienststellen',BEH)}${GLOSS.map(g=>dl(g.id,g.t,g.items)).join('')}<p class="small" id="gnone" hidden>Nichts gefunden.</p>`;
   }
   return h;
 }
@@ -838,6 +839,8 @@ function render(){
   const v=document.getElementById('view');
   v.innerHTML=mode==='basics'?renderBasics():mode==='learn'?renderLearn():mode==='quiz'?renderQuiz():mode==='ref'?renderRef():renderHelp();
   if(mode==='ref'&&refTab==='beh') filterGloss();
+  const sub=lesson&&mode==='basics'?LESSONS.find(l=>l.id===lesson).t:mode==='ref'?v.querySelector('[aria-pressed="true"]').textContent:{basics:'Grundlagen',learn:'Lernkarten',quiz:'Quiz',help:'Hilfe'}[mode];
+  document.title=sub+' · AGAdemy';
 }
 function filterGloss(){
   const q=glossQ.trim().toLowerCase();let any=false;
@@ -846,18 +849,50 @@ function filterGloss(){
     sec.hidden=!n;if(n)any=true});
   const e=document.getElementById('gnone');if(e) e.hidden=any;
 }
-document.addEventListener('input',e=>{if(e.target.id==='gq'){glossQ=e.target.value;filterGloss()}});
+document.addEventListener('input',e=>{if(e.target.id==='gq'){glossQ=e.target.value;filterGloss();history.replaceState(null,'',hashOf())}});
+
+/* ---------- Links ---------- */
+// Die URL bestimmt die Ansicht: #/bereich/unterseite/abschnitt?q=suche
+const MODES={grundlagen:'basics',lernkarten:'learn',quiz:'quiz',nachschlagen:'ref',hilfe:'help'};
+const REFS={dienstgrade:'dg',abzeichen:'abz',gliederung:'gl',staebe:'stab',begriffe:'beh'};
+const TOPICS={dienstgrade:'dg',abzeichen:'abz',marine:'mar',gliederung:'gl',groessenzeichen:'sym',staebe:'stab',behoerden:'beh',abkuerzungen:'abk',geheimschutz:'vs',digitalisierung:'dig',anrede:'eti'};
+const slug=(map,v)=>Object.keys(map).find(k=>map[k]===v);
+const topicHash=(m,d)=>'#/'+slug(MODES,m)+(d==='all'?'':'/'+slug(TOPICS,d));
+function hashOf(m=mode,sec){
+  let h='#/'+slug(MODES,m);
+  if(m==='basics'&&lesson) h+='/'+lesson;
+  if(m==='learn'||m==='quiz') return topicHash(m,deck);
+  if(m==='ref'){h+='/'+slug(REFS,refTab)+(sec?'/'+sec:'');if(refTab==='beh'&&glossQ.trim()) h+='?q='+encodeURIComponent(glossQ.trim())}
+  return h;
+}
+function go(h){if(location.hash===h) route();else location.hash=h}
+function route(){
+  const [path,qs]=location.hash.replace(/^#\/?/,'').split('?');
+  const [m,a,b]=path.split('/').map(x=>{try{return decodeURIComponent(x)}catch(e){return x}});
+  const nm=MODES[m]||'basics';
+  if(nm==='quiz'&&mode!=='quiz'&&quiz&&quiz.i>=quiz.qs.length) quiz=null;
+  mode=nm;
+  lesson=mode==='basics'&&LESSONS.some(l=>l.id===a)?a:null;
+  if(mode==='learn'||mode==='quiz'){const d=TOPICS[a]||'all';if(d!==deck){deck=d;cur=null;quiz=null}}
+  if(mode==='ref'){refTab=REFS[a]||'dg';glossQ=new URLSearchParams(qs||'').get('q')||''}
+  render();
+  const el=mode==='ref'&&b?document.querySelector('#view [id="'+CSS.escape(b)+'"]'):null;
+  const h=hashOf(mode,el&&b);
+  if(location.hash!==h) history.replaceState(null,'',h); // ungültige oder unvollständige Links korrigieren
+  el?el.scrollIntoView():window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',route);
 
 /* ---------- Ereignisse ---------- */
 document.addEventListener('click',e=>{
   const t=e.target.closest('button');if(!t) return;
-  if(t.dataset.mode){if(t.dataset.mode==='basics'&&mode==='basics')lesson=null;mode=t.dataset.mode;if(mode==='quiz'&&quiz&&quiz.i>=quiz.qs.length)quiz=null;render();window.scrollTo(0,0);return}
-  if(t.dataset.lesson!==undefined){lesson=t.dataset.lesson||null;render();window.scrollTo(0,0);return}
-  if(t.dataset.practice){deck=t.dataset.practice;mode='learn';cur=null;quiz=null;render();window.scrollTo(0,0);return}
+  if(t.dataset.mode){const m=t.dataset.mode;if(m==='basics')lesson=null;if(m==='quiz'&&mode==='quiz'&&quiz&&quiz.i>=quiz.qs.length)quiz=null;go(hashOf(m));return}
+  if(t.dataset.lesson!==undefined){go('#/grundlagen'+(t.dataset.lesson?'/'+t.dataset.lesson:''));return}
+  if(t.dataset.practice){go(topicHash('learn',t.dataset.practice));return}
   if(t.id==='topicBtn'){openSheet();return}
   if(t.dataset.close){closeSheet();return}
-  if(t.dataset.deck){deck=t.dataset.deck;cur=null;quiz=null;closeSheet();render();return}
-  if(t.dataset.ref){refTab=t.dataset.ref;render();return}
+  if(t.dataset.deck){closeSheet();if(t.dataset.deck===deck){cur=null;quiz=null}go(topicHash(mode,t.dataset.deck));return}
+  if(t.dataset.ref){go('#/nachschlagen/'+slug(REFS,t.dataset.ref));return}
   if(t.dataset.opt!==undefined){const q=quiz.qs[quiz.i];q.chosen=+t.dataset.opt;const ok=q.opts[q.chosen]===q.c.a;
     if(ok){quiz.score++;setBox(q.c,boxOf(q.c)+1)}else setBox(q.c,0);render();return}
   const a=t.dataset.act;
@@ -873,7 +908,7 @@ document.addEventListener('keydown',e=>{
   if(e.code==='Space'&&!revealed){e.preventDefault();revealed=true;render()}
   else if(revealed&&(e.key==='1'||e.key==='2')){setBox(cur,e.key==='2'?boxOf(cur)+1:0);last=cur;cur=null;render()}
 });
-render();
+route();
 </script>
 </body>
 </html>
