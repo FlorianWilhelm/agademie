@@ -781,7 +781,6 @@ function renderRef(){
         for(const [g,a,b] of subs) h+=`${g!==lg?`<h4 class="dgg">${esc(g)}</h4>`:''}<div class="insgrid">${INS[t].slice(a,b).map(([n])=>`<figure>${insignia(t+':'+n,52)}<figcaption>${esc(n)}</figcaption></figure>`).join('')}</div>`;
       }
     }
-    h+=`<p class="small">Luftwaffe und Marine nachgezeichnet nach der Bundeswehr-Übersicht, vereinfacht. Heer abgeleitet: dieselben Muster ohne Schwinge, die Schwinge kennzeichnet die Luftwaffe. Sanitätsoffiziere tragen zusätzlich den Äskulapstab.</p>`;
   } else if(refTab==='gl'){
     h+=`<div class="scroll"><table><thead><tr><th></th><th>Heer</th><th>Stärke</th><th>Luftwaffe</th><th>Marine</th><th>Führung (typisch)</th></tr></thead><tbody>
     ${GL.map(r=>`<tr><td class="sym">${unitSym(r.s,44)}</td><td><strong>${esc(r.e)}</strong></td><td>${esc(r.n)}</td><td>${esc(r.lw)}</td><td>${esc(r.mar)}</td><td>${esc(r.f)}</td></tr>`).join('')}
