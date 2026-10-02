@@ -12,6 +12,8 @@
 <link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="manifest" href="icons/site.webmanifest">
+<meta name="apple-mobile-web-app-title" content="AGAdemy">
+<meta name="mobile-web-app-capable" content="yes">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AGAdemy">
 <meta property="og:url" content="https://florianwilhelm.info/agademy/">
@@ -809,6 +811,10 @@ function renderBasics(){
    <ol class="lessons">${LESSONS.map((l,i)=>`<li><button data-lesson="${l.id}"><span class="num${store.read[l.id]?' done':''}" aria-label="${store.read[l.id]?'gelesen':'ungelesen'}">${i+1}</span>
    <span><span class="lt">${esc(l.t)}</span><span class="ld">${esc(l.d)}</span></span></button></li>`).join('')}</ol>`;
 }
+let installEvt=null;
+const standalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvt=e;if(mode==='help') render()});
+addEventListener('appinstalled',()=>{installEvt=null;if(mode==='help') render()});
 function renderHelp(){
   const n=CARDS.length;
   return `<div class="help">
@@ -829,8 +835,14 @@ function renderHelp(){
   <p>Übersichten zum schnellen Nachsehen: Dienstgradleiter mit Marine-Entsprechung und NATO-Rangcode, alle Abzeichen, Gliederung mit NATO-Größenzeichen, Stabsabteilungen und ein durchsuchbares Verzeichnis aller Abkürzungen.</p>
   <h2>Wie belastbar die Inhalte sind</h2>
   <p>Dienstgrade, Gliederung und Behördenangaben stammen von bundeswehr.de, Abzeichen und Dienstgradbezeichnungen aus der Anordnung des Bundespräsidenten über die Dienstgradbezeichnungen und die Uniform (2021), Disziplinarbefugnis aus der Wehrdisziplinarordnung, Geheimschutz aus dem SÜG und der VSA, Architekturbegriffe u. a. nach Fraunhofer IESE. NATO-Rangcodes folgen STANAG 2116, Größenzeichen NATO APP-6 in deutscher Lesart. Abzeichen von Luftwaffe und Marine sind nach der Übersicht der Bundeswehr vereinfacht nachgezeichnet, das Heer ist daraus abgeleitet. Stärkeangaben sind Größenordnungen, Führungsdienstgrade typische Besetzungen. Stand Oktober 2026.</p>
+  <h2 id="app">Als App installieren</h2>
+  ${standalone()?'<p>AGAdemy läuft gerade als App. Nach dem ersten Öffnen funktioniert sie auch ohne Internet.</p>':`<p>AGAdemy lässt sich wie eine App auf den Startbildschirm legen. Sie öffnet sich dann ohne Browserleiste und funktioniert nach dem ersten Öffnen auch ohne Internet.</p>
+  ${installEvt?'<button class="btn" id="install" style="flex:none;padding:10px 14px;font-size:16px;margin-bottom:10px">Jetzt installieren</button>':''}
+  <p><strong>iPhone und iPad:</strong> In Safari unten (bzw. oben) auf das Teilen-Symbol tippen, dann „Zum Home-Bildschirm“ und „Hinzufügen“.</p>
+  <p><strong>Android:</strong> In Chrome oben rechts auf das Menü ⋮ tippen, dann „App installieren“ oder „Zum Startbildschirm hinzufügen“.</p>
+  <p><strong>Rechner:</strong> In Chrome oder Edge auf das Installieren-Symbol rechts in der Adressleiste klicken. In Safari auf dem Mac: Menü „Ablage“, dann „Zum Dock hinzufügen“.</p>`}
   <h2>Lernstand</h2>
-  <p>Der Lernstand wird nur in diesem Browser gespeichert. Auf einem anderen Gerät beginnen Sie neu, und das Löschen der Browserdaten setzt ihn zurück.</p>
+  <p>Der Lernstand wird nur auf diesem Gerät gespeichert. Auf einem anderen Gerät beginnen Sie neu, und das Löschen der Browserdaten setzt ihn zurück. Auf iPhone und iPad hat die installierte App einen eigenen Lernstand, getrennt von Safari.</p>
   <button class="btn ghost" id="reset" style="flex:none;padding:10px 14px;font-size:16px">Lernstand zurücksetzen</button>
   <h2>Lizenz</h2>
   <p>Code unter MIT, Inhalte unter CC BY 4.0. Quelltext auf <a href="https://github.com/FlorianWilhelm/agademy">GitHub</a>.</p>
@@ -903,6 +915,7 @@ document.addEventListener('click',e=>{
   else if(a==='ok'||a==='again'){setBox(cur,a==='ok'?boxOf(cur)+1:0);last=cur;cur=null;render()}
   else if(a==='next'){quiz.i++;render()}
   else if(a==='newquiz'){quiz=null;render()}
+  if(t.id==='install'&&installEvt){installEvt.prompt();installEvt.userChoice.finally(()=>{installEvt=null;render()});return}
   if(t.id==='reset'&&confirm('Lernstand für alle Karten zurücksetzen?')){store={box:{},read:{}};save();cur=null;quiz=null;render()}
 });
 document.getElementById('sheet').addEventListener('click',e=>{if(e.target.id==='sheet') closeSheet()});
@@ -912,6 +925,7 @@ document.addEventListener('keydown',e=>{
   else if(revealed&&(e.key==='1'||e.key==='2')){setBox(cur,e.key==='2'?boxOf(cur)+1:0);last=cur;cur=null;render()}
 });
 route();
+if('serviceWorker' in navigator) addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 </script>
 </body>
 </html>

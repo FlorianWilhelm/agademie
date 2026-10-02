@@ -28,6 +28,8 @@ NATO STANAG 2116, NATO APP-6). Fehler gefunden? Gern ein Issue aufmachen.
 ## Technik
 
 Eine einzelne statische `index.html`, ausgeliefert über GitHub Pages.
+Ein Service Worker (`sw.js`) und das Manifest (`icons/site.webmanifest`) machen
+daraus eine installierbare PWA, die nach dem ersten Aufruf auch offline läuft.
 Die Seite ist per `<meta name="robots" content="noindex">` von der Indizierung
 durch Suchmaschinen ausgenommen.
 

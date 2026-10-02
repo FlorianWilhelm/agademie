@@ -1,13 +1,20 @@
 {
-  "name": "AGAdemy",
+  "id": "../",
+  "name": "AGAdemy: Die AGA für Zivis",
   "short_name": "AGAdemy",
+  "description": "Bundeswehr-Grundwissen spielerisch lernen. Privates Projekt, kein Angebot der Bundeswehr.",
+  "lang": "de",
+  "dir": "ltr",
   "start_url": "../",
   "scope": "../",
   "display": "standalone",
+  "orientation": "any",
+  "categories": ["education"],
   "background_color": "#0f1c33",
   "theme_color": "#0f1c33",
   "icons": [
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
   ]
 }
