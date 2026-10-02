@@ -6,7 +6,7 @@ AGA steht für Allgemeine Grundausbildung. AGAdemy ist die zivile Variante:
 für alle, die mit der Bundeswehr zusammenarbeiten wollen und verstehen möchten,
 wie sie tickt.
 
-> **Hinweis:** Privates Lernprojekt. **Kein Angebot der Bundeswehr oder des BMVg**
+> **Hinweis:** Privates Projekt. **Kein Angebot der Bundeswehr oder des BMVg**
 > und mit diesen in keiner Verbindung. Verbindlich sind allein die offiziellen Quellen.
 
 ## Inhalte
