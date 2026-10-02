@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AGAdemy</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
+<meta name="description" content="Privates Lernprojekt: Bundeswehr-Grundwissen für Zivilisten. Kein Angebot der Bundeswehr oder des BMVg.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef2f5; --surface:#ffffff; --ink:#0f1c33; --muted:#51627a; --line:#c4cfdb;
+  --accent:#2fd6d0; --accent-ink:#0a6f6b; --warn:#f2c21b; --bad:#c2410c; --frame:#0f1c33;
+  --head:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Source Sans 3","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1a2e; --surface:#152640; --ink:#e7edf4; --muted:#9aabc2; --line:#2b4266;
+    --accent-ink:#2fd6d0; --frame:#cfe0f0; --bad:#fb8a5a;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1a2e; --surface:#152640; --ink:#e7edf4; --muted:#9aabc2; --line:#2b4266;
+  --accent-ink:#2fd6d0; --frame:#cfe0f0; --bad:#fb8a5a;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.5 var(--body);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.app{max-width:640px;margin:0 auto;padding:0 16px 96px;min-height:100%}
+header.top{display:flex;align-items:center;gap:14px;padding:22px 0 14px}
+header.top svg{flex:none}
+h1{font:700 clamp(24px,6.5vw,30px)/1.05 var(--head);margin:0;letter-spacing:.01em}
+header.top p{margin:4px 0 0;color:var(--muted);font-size:15px}
+.topic{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:8px;padding:10px 14px;margin:4px 0 18px}
+.topic[hidden]{display:none}
+.topic .t{flex:1;min-width:0}
+.topic .k{display:block;font-size:13px;color:var(--muted)}
+.topic .n{display:block;font:600 21px/1.15 var(--head)}
+.topic .chev{flex:none;width:22px;height:22px;color:var(--muted)}
+.bar{height:5px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--accent)}
+dialog{border:0;padding:0;background:var(--surface);color:var(--ink);width:min(560px,100%);max-height:85vh;border-radius:14px 14px 0 0;margin:auto auto 0;box-shadow:0 -8px 40px rgba(0,0,0,.35)}
+@media (min-width:700px){dialog{border-radius:12px;margin:auto}}
+dialog::backdrop{background:rgba(8,16,30,.55)}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px 8px}
+.sheet-head h2{margin:0}
+.sheet-head button{border:0;background:none;font-size:15px;color:var(--accent-ink);font-weight:600;padding:6px}
+.tlist{list-style:none;margin:0;padding:0 8px 18px}
+.tlist button{display:block;width:100%;text-align:left;border:0;background:none;border-radius:8px;padding:11px 12px}
+.tlist button[aria-current="true"]{background:var(--bg);box-shadow:inset 4px 0 0 var(--accent)}
+.tlist .row{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.tlist .nm{font:600 19px/1.2 var(--head)}
+.tlist .ct{font-size:13px;color:var(--muted);white-space:nowrap}
+.fig{display:flex;justify-content:center;margin-top:16px}
+.help h2{margin-top:24px}
+.help h2:first-child{margin-top:0}
+.help p{margin:0 0 10px;max-width:62ch}
+.chip{flex:none;border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;font-size:15px;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+/* Karte als taktisches Zeichen: Rahmen plus Größenzeichen darüber */
+.card{background:var(--surface);border:2px solid var(--line);border-radius:10px;min-height:240px;padding:26px 22px;display:flex;flex-direction:column;justify-content:center}
+.card .deckname{font-size:14px;color:var(--muted);margin:0 0 10px}
+.q{font:600 27px/1.15 var(--head);margin:0}
+.ans{margin-top:20px;padding-top:18px;border-top:1.5px dashed var(--line)}
+.ans .a{font:700 25px/1.15 var(--head);color:var(--accent-ink);margin:0}
+.note{color:var(--muted);font-size:15px;margin:8px 0 0}
+.ans svg{display:block;margin-top:8px;color:var(--frame)}
+.actions{display:flex;gap:10px;margin-top:16px}
+.btn{flex:1;border:0;border-radius:6px;padding:14px 12px;font:600 19px/1 var(--head);letter-spacing:.02em}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.ok{background:var(--accent);color:#06302e}
+.btn.again{background:var(--warn);color:#2b2200}
+.btn.ghost{background:transparent;border:1.5px solid var(--line)}
+.boxes{display:flex;gap:4px;margin-top:22px}
+.boxes div{flex:1;text-align:center;font-size:12px;color:var(--muted);line-height:1.2}
+.boxes b{display:block;font:600 18px/1.1 var(--head);color:var(--ink)}
+.boxes span{display:block;height:6px;border-radius:3px;background:var(--line);margin-bottom:4px}
+.boxes span.f{background:var(--accent)}
+.hint{font-size:13px;color:var(--muted);margin-top:10px}
+.opts{display:grid;gap:8px;margin-top:16px}
+.opt{text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:6px;padding:12px 14px;font-size:17px;display:flex;align-items:center;gap:12px}
+.opt.right{border-color:var(--accent);box-shadow:inset 6px 0 0 var(--accent)}
+.opt.wrong{border-color:var(--bad);box-shadow:inset 6px 0 0 var(--bad)}
+.opt:disabled{cursor:default}
+.opts.img{grid-template-columns:repeat(4,1fr)}
+.opts.img .opt{justify-content:center;padding:10px 4px}
+.insgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:12px 8px;margin-bottom:22px}
+.insgrid figure{margin:0;text-align:center;font-size:13px;line-height:1.25}
+.insgrid svg{display:block;margin:0 auto 4px}
+h2{font:600 22px/1.2 var(--head);margin:6px 0 10px}
+.score{font:700 64px/1 var(--head);margin:0}
+.seg{display:flex;border:1.5px solid var(--line);border-radius:6px;overflow:hidden;margin-bottom:16px}
+.seg button{flex:1;border:0;background:var(--surface);padding:9px 4px;font-size:15px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.scroll{overflow-x:auto;border:1.5px solid var(--line);border-radius:6px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:520px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 16px/1.2 var(--head);background:var(--bg)}
+tr.grp td{font:600 15px/1.2 var(--head);color:var(--accent-ink);background:var(--bg);padding-top:12px}
+td.sym{color:var(--frame);width:64px}
+.small{font-size:13px;color:var(--muted)}
+dl{margin:0}
+dl div{padding:10px 0;border-bottom:1px solid var(--line)}
+dt{font:600 19px/1.2 var(--head)}
+dd{margin:2px 0 0;color:var(--muted)}
+.helpbtn{flex:none;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);display:grid;place-items:center;color:var(--muted)}
+.helpbtn[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+.lessons{list-style:none;margin:0;padding:0;counter-reset:l}
+.lessons li+li{margin-top:8px}
+.lessons button{width:100%;text-align:left;display:flex;gap:14px;align-items:center;background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:12px 14px}
+.lessons .num{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:600 17px/1 var(--head);background:var(--bg);color:var(--muted)}
+.lessons .num.done{background:var(--accent);color:#06302e}
+.lessons .lt{display:block;font:600 20px/1.2 var(--head)}
+.lessons .ld{display:block;font-size:14px;color:var(--muted)}
+.intro{color:var(--muted);margin:0 0 16px}
+.lesson h2{font:700 30px/1.1 var(--head);margin:6px 0 14px}
+.lesson h3{font:600 20px/1.2 var(--head);margin:22px 0 4px}
+.lesson p{margin:0 0 12px;max-width:62ch}
+.back{border:0;background:none;color:var(--accent-ink);font-weight:600;padding:4px 0;font-size:15px}
+.callout{background:var(--surface);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 14px;margin:16px 0;font-size:16px}
+.ladder{list-style:none;margin:8px 0 14px;padding:0;border:1.5px solid var(--line);border-radius:8px;background:var(--surface)}
+.ladder li{display:flex;gap:12px;padding:8px 12px;border-bottom:1px solid var(--line);font-size:15px}
+.ladder li:last-child{border-bottom:0}
+.ladder strong{flex:0 0 38%;font:600 17px/1.25 var(--head)}
+.ladder span{color:var(--muted)}
+.figs{display:flex;flex-wrap:wrap;gap:12px 10px;margin:10px 0 6px}
+.figs figure{margin:0;width:62px;text-align:center;font-size:12px;line-height:1.2;color:var(--muted);hyphens:manual;-webkit-hyphens:manual}
+.figs svg{display:block;margin:0 auto 4px}
+.lesson .actions{margin-top:22px;flex-direction:column}
+nav.tabbar{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1.5px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px)}
+nav.tabbar div{display:flex;max-width:640px;width:100%}
+nav.tabbar button{flex:1;border:0;background:none;padding:14px 2px;font:600 17px/1 var(--head);color:var(--muted)}
+nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0 var(--accent)}
+@media (prefers-reduced-motion: no-preference){
+  .ans{animation:show .18s ease-out}
+  @keyframes show{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div style="flex:1"><h1>AGAdemy</h1><p>Die AGA für Zivis: Bundeswehr-Grundwissen</p></div>
+    <button class="helpbtn" data-mode="help" aria-label="Hilfe"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.2 9.3a2.9 2.9 0 1 1 4.3 2.5c-.9.5-1.5 1.1-1.5 2.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17.3" r="1.2" fill="currentColor"/></svg></button>
+  </header>
+  <button class="topic" id="topicBtn" aria-haspopup="dialog"></button>
+  <main id="view"></main>
+</div>
+<dialog id="sheet" aria-labelledby="sheetTitle"><div class="sheet-head"><h2 id="sheetTitle">Thema wählen</h2><button data-close="1">Schließen</button></div><ul class="tlist" id="tlist"></ul></dialog>
+<nav class="tabbar" aria-label="Bereich"><div>
+  <button data-mode="basics">Grundlagen</button>
+  <button data-mode="learn">Lernkarten</button>
+  <button data-mode="quiz">Quiz</button>
+  <button data-mode="ref">Nachschlagen</button>
+</div></nav>
+
+<script>
+/* ---------- Daten ---------- */
+const G={M:'Mannschaften',UoP:'Unteroffiziere ohne Portepee',UmP:'Unteroffiziere mit Portepee',L:'Leutnante',H:'Hauptleute',S:'Stabsoffiziere',Gen:'Generale'};
+const RANKS=[
+ {h:'Niedrigster Dienstgrad (z. B. Schütze, Jäger, Flieger)',k:'Niedrigster Dienstgrad',m:'Matrose',n:'OR-1',g:G.M,note:'Bezeichnung hängt von der Verwendung ab. Beförderung zum Gefreiten nach bestandener Grundausbildung (drei Monate).'},
+ {h:'Gefreiter',m:'Gefreiter',n:'OR-2',g:G.M},
+ {h:'Obergefreiter',m:'Obergefreiter',n:'OR-3',g:G.M},
+ {h:'Hauptgefreiter',m:'Hauptgefreiter',n:'OR-3',g:G.M},
+ {h:'Stabsgefreiter',m:'Stabsgefreiter',n:'OR-4',g:G.M},
+ {h:'Oberstabsgefreiter',m:'Oberstabsgefreiter',n:'OR-4',g:G.M},
+ {h:'Korporal',m:'Korporal',n:'OR-4',g:G.M,note:'Seit Dezember 2021, für besonders leistungsstarke Oberstabsgefreite.'},
+ {h:'Stabskorporal',m:'Stabskorporal',n:'OR-4',g:G.M,note:'Höchster Mannschaftsdienstgrad, seit Dezember 2021.'},
+ {h:'Unteroffizier',m:'Maat',n:'OR-5',g:G.UoP},
+ {h:'Stabsunteroffizier',m:'Obermaat',n:'OR-5',g:G.UoP},
+ {h:'Feldwebel',m:'Bootsmann',n:'OR-6',g:G.UmP},
+ {h:'Oberfeldwebel',m:'Oberbootsmann',n:'OR-6',g:G.UmP},
+ {h:'Hauptfeldwebel',m:'Hauptbootsmann',n:'OR-7',g:G.UmP,note:'Manche Übersichten nennen OR-7 bis OR-8.'},
+ {h:'Stabsfeldwebel',m:'Stabsbootsmann',n:'OR-8',g:G.UmP},
+ {h:'Oberstabsfeldwebel',m:'Oberstabsbootsmann',n:'OR-9',g:G.UmP},
+ {h:'Leutnant',m:'Leutnant zur See',n:'OF-1',g:G.L},
+ {h:'Oberleutnant',m:'Oberleutnant zur See',n:'OF-1',g:G.L},
+ {h:'Hauptmann',m:'Kapitänleutnant',n:'OF-2',g:G.H},
+ {h:'Stabshauptmann',m:'Stabskapitänleutnant',n:'OF-2',g:G.H,note:'Nur für Offiziere des militärfachlichen Dienstes, dort Enddienstgrad.'},
+ {h:'Major',m:'Korvettenkapitän',n:'OF-3',g:G.S},
+ {h:'Oberstleutnant',m:'Fregattenkapitän',n:'OF-4',g:G.S},
+ {h:'Oberst',m:'Kapitän zur See',n:'OF-5',g:G.S},
+ {h:'Brigadegeneral',m:'Flottillenadmiral',n:'OF-6',g:G.Gen,note:'Ein Stern. Angesprochen wird mit „Herr/Frau General“.'},
+ {h:'Generalmajor',m:'Konteradmiral',n:'OF-7',g:G.Gen,note:'Zwei Sterne.'},
+ {h:'Generalleutnant',m:'Vizeadmiral',n:'OF-8',g:G.Gen,note:'Drei Sterne.'},
+ {h:'General',m:'Admiral',n:'OF-9',g:G.Gen,note:'Vier Sterne, z. B. der Generalinspekteur der Bundeswehr.'}
+];
+const SAN=[['Hauptmann','Stabsarzt'],['Major','Oberstabsarzt'],['Oberstleutnant','Oberfeldarzt'],['Oberst','Oberstarzt'],['Brigadegeneral','Generalarzt'],['Generalmajor','Generalstabsarzt'],['Generalleutnant','Generaloberstabsarzt']];
+const SYMS=[
+ {m:'Ø',l:'Team oder Besatzung (ohne feste deutsche Entsprechung)'},
+ {m:'●',l:'Trupp (Squad)'},
+ {m:'●●',l:'Gruppe (Section)'},
+ {m:'●●●',l:'Zug (Platoon)'},
+ {m:'I',l:'Kompanie, Batterie, Staffel'},
+ {m:'II',l:'Bataillon'},
+ {m:'III',l:'Regiment'},
+ {m:'X',l:'Brigade'},
+ {m:'XX',l:'Division'},
+ {m:'XXX',l:'Korps'},
+ {m:'XXXX',l:'Armee'}
+];
+const GL=[
+ {e:'Trupp',n:'ab 2 Personen',lw:'Trupp',mar:'',s:'●',f:'Truppführer'},
+ {e:'Gruppe',n:'ca. 4 bis 15',lw:'Gruppe',mar:'Teilabschnitt',s:'●●',f:'Gruppenführer, meist Unteroffizier oder Feldwebel'},
+ {e:'Zug',n:'bis ca. 40',lw:'Zug',mar:'Hauptabschnitt',s:'●●●',f:'Zugführer, meist Leutnant oder Oberleutnant, auch erfahrener Feldwebel'},
+ {e:'Kompanie, Batterie',n:'ca. 60 bis 150',lw:'Staffel (fliegend), Kompanie (Boden)',mar:'Boot',s:'I',f:'Kompaniechef, meist Hauptmann, auch Major'},
+ {e:'Bataillon',n:'bis 1.200',lw:'Gruppe',mar:'Schiff (Fregatte 120 bis 200)',s:'II',f:'Kommandeur, meist Oberstleutnant'},
+ {e:'Regiment',n:'2 bis 4 Bataillone',lw:'Geschwader',mar:'Geschwader',s:'III',f:'Kommandeur, meist Oberst'},
+ {e:'Brigade',n:'ca. 4.600 bis 6.000',lw:'',mar:'Einsatzflottille',s:'X',f:'Kommandeur, Dienstposten für Brigadegeneral, bei Übernahme oft noch Oberst'},
+ {e:'Division',n:'ca. 19.000 bis über 23.000',lw:'',mar:'',s:'XX',f:'Kommandeur, meist Generalmajor'}
+];
+const DECKS=[
+ {id:'dg',name:'Dienstgrade',s:'X'},
+ {id:'abz',name:'Abzeichen',s:'XXX'},
+ {id:'mar',name:'Marine & Sanität',s:'II'},
+ {id:'gl',name:'Gliederung',s:'●●●'},
+ {id:'sym',name:'Größenzeichen',s:'XX'},
+ {id:'stab',name:'Stabsabteilungen',s:'III'},
+ {id:'beh',name:'Behörden & Begriffe',s:'I'},
+ {id:'eti',name:'Anrede & Praxis',s:'●'}
+];
+const CARDS=[];
+const add=(deck,kind,q,a,note,extra)=>CARDS.push({id:deck+'-'+CARDS.length,deck,kind,q,a,note,extra});
+RANKS.forEach((r,i)=>{
+  const nm=r.k||r.h;
+  add('dg','nato','NATO-Rangcode: '+nm,r.n,r.note);
+  add('dg','grp','Dienstgradgruppe: '+nm,r.g);
+  if(i<RANKS.length-1) add('dg','next','Nächsthöherer Dienstgrad nach '+nm,RANKS[i+1].k||RANKS[i+1].h);
+  if(r.m!==r.h && i>0) add('mar','mar','Marine-Entsprechung: '+r.h,r.m,r.note);
+});
+add('mar','mar','Marine-Entsprechung: Niedrigster Dienstgrad','Matrose','Die Mannschaftsdienstgrade ab Gefreiter heißen in der Marine gleich.');
+SAN.forEach(([e,s])=>add('mar','san','Sanitätsoffizier auf der Ebene '+e,s));
+add('mar','san','Höchster Dienstgrad der Sanitätsoffiziere','Generaloberstabsarzt','Marine: Admiraloberstabsarzt. Entspricht drei Sternen, es gibt keinen Vier-Sterne-Sanitätsdienstgrad.');
+
+const GLc=[
+ ['ebene','Kleinster Zusammenschluss, ab zwei Personen','Trupp'],
+ ['ebene','Ca. 4 bis 15 Personen, z. B. eine Panzerbesatzung','Gruppe'],
+ ['ebene','Mehrere Gruppen, bis ca. 40 Personen','Zug','Panzergrenadierzug: vier Schützenpanzer mit je neun Personen, also 36.'],
+ ['ebene','Ca. 60 bis 150 Personen, geführt vom Kompaniechef','Kompanie'],
+ ['ebene','Bis zu 1.200 Personen, kleinster taktischer Verband','Bataillon','Beispiel Jägerbataillon: Stabs- und Versorgungskompanie, drei Jägerkompanien, eine schwere Jägerkompanie.'],
+ ['ebene','Zwei bis vier Bataillone, im Heer nur noch vereinzelt','Regiment'],
+ ['ebene','Mehrere Bataillone, je nach Brigade rund 4.600 bis 6.000 Personen','Brigade','Die Bundeswehr nennt für die Panzergrenadierbrigade 41 ca. 5.600, an anderer Stelle 4.600; die Panzergrenadierbrigade 37 hat rund 6.000. Zahlen nur als Größenordnung nutzen.'],
+ ['ebene','Großverband aus mehreren Brigaden, rund 19.000 bis über 23.000 Personen','Division','Nur im Heer. Marine und Luftwaffe haben diese Ebene nicht.'],
+ ['tsk','Kompanie-Ebene bei der Artillerie','Batterie'],
+ ['tsk','Kompanie-Ebene bei Heeresfliegern und fliegenden Teilen der Luftwaffe','Staffel'],
+ ['tsk','Kompanie-Ebene der Marine bei seegehenden Einheiten','Boot','Die komplette Besatzung eines Bootes, z. B. Korvette oder Minenjagdboot.'],
+ ['tsk','Bataillons-Ebene in der Luftwaffe','Gruppe','Geführt vom Gruppenkommandeur, rund 1.000 Personen.'],
+ ['tsk','Bataillons-Ebene in der Marine','Schiff','Z. B. Fregatte mit 120 bis 200 Personen Besatzung.'],
+ ['tsk','Regiments-Ebene bei Luftwaffe und Marine','Geschwader'],
+ ['tsk','Brigade-Ebene in der Marine','Einsatzflottille'],
+ ['tsk','So heißt die Gruppe in der Marine','Teilabschnitt'],
+ ['tsk','So heißt der Zug in der Marine','Hauptabschnitt'],
+ ['begr','Sammelbegriff für Trupp, Gruppe und Zug','Teileinheit'],
+ ['begr','Sammelbegriff für Kompanie, Batterie und Staffel','Einheit'],
+ ['begr','Sammelbegriff ab Bataillon','Verband'],
+ ['begr','Sammelbegriff ab Brigade','Großverband'],
+ ['fue','Typischer Dienstgrad eines Gruppenführers','Unteroffizier oder Feldwebel'],
+ ['fue','Typischer Dienstgrad eines Zugführers','Leutnant oder Oberleutnant','Auch erfahrene Feldwebel führen Züge.'],
+ ['fue','Typischer Dienstgrad eines Kompaniechefs','Hauptmann','Auch Major ist möglich.'],
+ ['fue','Typischer Dienstgrad des Kompaniefeldwebels („Spieß“)','Hauptfeldwebel bis Oberstabsfeldwebel'],
+ ['fue','Typischer Dienstgrad eines Bataillonskommandeurs','Oberstleutnant'],
+ ['fue','Typischer Dienstgrad eines Brigadekommandeurs','Brigadegeneral','Häufig übernehmen Oberste die Brigade und werden später befördert.'],
+ ['fue','Typischer Dienstgrad eines Divisionskommandeurs','Generalmajor']
+];
+GLc.forEach(c=>add('gl',c[0],c[1],c[2],c[3]));
+SYMS.forEach(s=>add('sym','sym','Welche Ebene zeigt dieses Größenzeichen?',s.l,null,{sym:s.m}));
+SYMS.slice(1).forEach(s=>add('sym','symrev','Größenzeichen für: '+s.l,s.m));
+
+const STAB=[
+ ['J1','Personal'],['J2','Militärisches Nachrichtenwesen'],['J3','Laufende Operationen'],['J4','Logistik'],
+ ['J5','Planung künftiger Operationen'],['J6','Führungsunterstützung (Kommunikation und IT)'],['J7','Ausbildung und Übungen'],
+ ['J8','Haushalt und Finanzen'],['J9','Zivil-militärische Zusammenarbeit (CIMIC)']
+];
+STAB.forEach(([k,v])=>add('stab','jx','Stabsabteilung '+k,v));
+STAB.forEach(([k,v])=>add('stab','jrev','Welche Abteilung ist zuständig für: '+v,k));
+const PRE=[['J','Streitkräftegemeinsam (Joint)'],['G','Heer, höhere Führungsebenen'],['A','Luftwaffe (Air)'],['N','Marine (Naval)'],['S','Bataillonsebene (Stabsabteilung)']];
+PRE.forEach(([k,v])=>add('stab','pre','Präfix '+k+' vor der Abteilungsnummer',v));
+add('stab','praxis','Welche Stabsabteilungen hat ein Bataillon typischerweise?','S1 bis S6','Die Nummern bedeuten dasselbe wie bei J und G, nur der Buchstabe zeigt die Ebene. S7 bis S9 sind auf Bataillonsebene unüblich.',['S1 bis S9','J1 bis J9','G1 bis G4']);
+add('stab','praxis','Wofür ist die S3 im Bataillon neben Operationen zuständig?','Ausbildung','Auf höheren Ebenen gibt es dafür eine eigene Abteilung 7.',['Personal','Haushalt','CIMIC']);
+add('stab','praxis','Vergibt eine Stabsabteilung wie G6 Aufträge?','Nein, Stäbe sind Bedarfsträger','Vergabe läuft über BAAINBw, BWI oder einen Generalunternehmer.',['Ja, bis zur EU-Schwelle','Ja, über eigene Rahmenverträge','Nur mit Zustimmung des BMVg']);
+
+const BEH=[
+ ['BMVg','Bundesministerium der Verteidigung'],
+ ['BAAINBw','Bundesamt für Ausrüstung, Informationstechnik und Nutzung der Bundeswehr','Zivile Bundesoberbehörde in Koblenz und Lahnstein mit rund 10.000 zivilen und 1.800 militärischen Beschäftigten. Bedarfsdecker der Streitkräfte.'],
+ ['BWI','BWI GmbH, IT-Systemhaus der Bundeswehr','Hundertprozentige Bundesgesellschaft.'],
+ ['CIHBw','Cyber Innovation Hub der Bundeswehr','Seit 2020 als Abteilung in der BWI GmbH verankert, arbeitet mit Startups und Intrapreneuren.'],
+ ['CIR','Cyber- und Informationsraum','Vierte und jüngste Teilstreitkraft neben Heer, Luftwaffe und Marine.'],
+ ['KdoCIR','Kommando Cyber- und Informationsraum'],
+ ['ZDigBw','Zentrum Digitalisierung der Bundeswehr und Fähigkeitsentwicklung Cyber- und Informationsraum','Dem KdoCIR unterstellt. Bedarfsträger für das Teilportfolio Cyber/IT, aufgestellt 2022 u. a. aus dem Zentrum für Softwarekompetenz.'],
+ ['ZCSBw','Zentrum für Cyber-Sicherheit der Bundeswehr','In Euskirchen, zentrale Dienststelle für den Schutz der IT-Systeme und IT-Services der Bundeswehr.'],
+ ['OpFüKdoBw','Operatives Führungskommando der Bundeswehr','Seit Oktober 2024, plant und führt alle Einsätze und Operationen im In- und Ausland.'],
+ ['BAPersBw','Bundesamt für das Personalmanagement der Bundeswehr'],
+ ['BAIUDBw','Bundesamt für Infrastruktur, Umweltschutz und Dienstleistungen der Bundeswehr'],
+ ['MAD','Militärischer Abschirmdienst'],
+ ['CPM','Customer Product Management','Beschaffungsverfahren der Bundeswehr, das Produkte und Dienstleistungen über ihren gesamten Lebenszyklus betrachtet.'],
+ ['StAN','Stärke- und Ausstattungsnachweisung','Legt Personal und Material einer Einheit planmäßig fest.'],
+ ['TSK','Teilstreitkraft']
+];
+BEH.forEach(([k,v,n])=>add('beh','abk','Abkürzung: '+k,v,n));
+[
+ ['Bedarfsdecker für Wehrmaterial und IT','BAAINBw'],
+ ['Bedarfsträger für das Teilportfolio Cyber/IT','ZDigBw'],
+ ['Bundeseigener IT-Dienstleister mit eigener Vergabe-Roadmap','BWI'],
+ ['Innovationseinheit, die mit Startups arbeitet','CIHBw'],
+ ['Zuständig für den Geheimschutz in Unternehmen (Bund)','Bundesministerium für Wirtschaft und Energie','Nach § 25 SÜG. Bei Aufträgen eines Bundeslandes ist das jeweilige Landeswirtschaftsministerium zuständig.'],
+ ['Plant und führt alle Einsätze und Operationen im In- und Ausland','OpFüKdoBw']
+].forEach(([q,a,n])=>add('beh','rolle',q,a,n));
+add('beh','rolle','Wie viele Teilstreitkräfte hat die Bundeswehr?','Vier','Heer, Luftwaffe, Marine und Cyber- und Informationsraum.',['Drei','Fünf','Sechs']);
+
+[
+ ['Anrede einer Soldatin im Dienstgrad Hauptmann','Frau Hauptmann','Dienstgrade bleiben grammatisch maskulin, „Frau“ wird vorangestellt.',['Frau Hauptfrau','Frau Kameradin','Hauptmännin']],
+ ['Anrede eines Brigadegenerals','Herr General','Alle Generale werden so angesprochen, ebenso Generalmajor und Generalleutnant.',['Herr Brigadier','Herr Brigadegeneral Major','Herr Stern']],
+ ['Plural von General in der Bundeswehr','Generale','Die Bundeswehr verwendet „Generale“ (Dienstgradgruppe Generale).',['Generäle','Generals','Generalen']],
+ ['Wie viele Dienstgrade gibt es in der Bundeswehr?','26','In sieben Dienstgradgruppen, mit 82 Dienstgradbezeichnungen.',['18','32','41']],
+ ['Ranghöchster Soldat der Bundeswehr','Generalinspekteur der Bundeswehr','Dienstgrad General bzw. Admiral.',['Inspekteur des Heeres','Befehlshaber OpFüKdoBw','Verteidigungsminister']],
+ ['Woran erkennt man Luftwaffenangehörige auf der Schulterklappe am Feldanzug?','Schwingen',null,['Anker','Äskulapstab','Eichenlaub']],
+ ['Woran erkennt man Sanitätsoffiziere am Dienstgradabzeichen?','Äskulapstab',null,['Schwingen','Anker','Kreuz']],
+ ['Wer hat die unterste Stufe der Disziplinarbefugnis?','Kompaniechef','Nach § 28 Wehrdisziplinarordnung, darüber folgt der Bataillonskommandeur.',['Gruppenführer','Zugführer','Spieß']]
+].forEach(([q,a,n,x])=>add('eti','eti',q,a,n,x));
+
+/* ---------- Dienstgradabzeichen (nachgezeichnet nach Vorlage) ---------- */
+const INS={
+ lw:[['Flieger',[]],['Gefreiter',['s1']],['Obergefreiter',['s2']],['Hauptgefreiter',['s3']],['Stabsgefreiter',['s4']],['Oberstabsgefreiter',['s5']],['Korporal',['k']],['Stabskorporal',['sk']],
+  ['Unteroffizier',['open']],['Fahnenjunker',['open','silver']],['Stabsunteroffizier',['closed']],['Feldwebel',['closed','c1']],['Fähnrich',['closed','c1','silver']],['Oberfeldwebel',['closed','c2']],['Hauptfeldwebel',['closed','c1','loop']],['Oberfähnrich',['closed','c1','loop','silver']],['Stabsfeldwebel',['closed','c2','loop']],['Oberstabsfeldwebel',['closed','c3','loop']],
+  ['Leutnant',['p1']],['Oberleutnant',['p2']],['Hauptmann',['p3']],['Stabshauptmann',['p4s']],['Major',['w','p1']],['Oberstleutnant',['w','p2']],['Oberst',['w','p3']],
+  ['Brigadegeneral',['gold','w','p1']],['Generalmajor',['gold','w','p2']],['Generalleutnant',['gold','w','p3']],['General',['gold','w','p4']]],
+ mar:[['Matrose',[]],['Gefreiter',['s1']],['Obergefreiter',['s2']],['Hauptgefreiter',['s3']],['Stabsgefreiter',['s4']],['Oberstabsgefreiter',['s5']],['Korporal',['k']],['Stabskorporal',['sk']],
+  ['Maat',['open']],['Seekadett',['open','star']],['Obermaat',['closed']],['Bootsmann',['closed','c1']],['Fähnrich zur See',['closed','c1','star']],['Oberbootsmann',['closed','c2']],['Hauptbootsmann',['closed','c1','loop']],['Oberfähnrich zur See',['star','bar']],['Stabsbootsmann',['closed','c2','loop']],['Oberstabsbootsmann',['closed','c3','loop']],
+  ['Leutnant zur See',['sl:M']],['Oberleutnant zur See',['sl:MM']],['Kapitänleutnant',['sl:MTM']],['Stabskapitänleutnant',['sl:MTTM']],['Korvettenkapitän',['sl:MMM']],['Fregattenkapitän',['sl:MTMM']],['Kapitän zur See',['sl:MMMM']],
+  ['Flottillenadmiral',['sl:TB']],['Konteradmiral',['sl:MB']],['Vizeadmiral',['sl:MMB']],['Admiral',['sl:MMMB']]]
+};
+INS.heer=INS.lw.map(([n,sp],i)=>[i===0?'Schütze':n,sp]);
+const ANW={'Schütze':'Bezeichnung hängt von der Verwendung ab, z. B. auch Jäger, Grenadier oder Funker.','Fahnenjunker':'Offizieranwärter auf Ebene Unteroffizier (silberner Querstreifen).','Fähnrich':'Offizieranwärter auf Ebene Feldwebel.','Oberfähnrich':'Offizieranwärter auf Ebene Hauptfeldwebel.','Seekadett':'Offizieranwärter der Marine auf Ebene Maat.','Fähnrich zur See':'Offizieranwärter der Marine auf Ebene Bootsmann.','Oberfähnrich zur See':'Offizieranwärter der Marine auf Ebene Hauptbootsmann.'};
+function insignia(key,W=60){
+  const [t,name]=key.split(':');const spec=(INS[t].find(r=>r[0]===name)||[,[]])[1];
+  const lw=t!=='mar', wing=t==='lw', gold=spec.includes('gold');
+  const board=lw?'#6e8160':'#0d2c4d', ink=lw?(gold?'#e8b915':'#141a14'):'#f2c21b';
+  let s='';
+  const sl=spec.find(x=>x.startsWith('sl:'));
+  if(sl){ // Marine-Offiziere: Ärmelstreifen
+    s+=`<rect x="6" y="6" width="48" height="88" fill="${board}"/>`;
+    const code=sl.slice(3).split('');const hgt={M:7,T:3,B:15};let y=92;
+    code.slice().reverse().forEach(c=>{y-=hgt[c];s+=`<rect x="6" y="${y}" width="48" height="${hgt[c]}" fill="${ink}"/>`;y-=2.5});
+  } else {
+    s+=`<path d="M9 6 H51 L54 94 H6 Z" fill="${board}"/>`;
+    const stripe=(y,th)=>`<path d="M17 ${y+8} L43 ${y-4} L43 ${y-4+th} L17 ${y+8+th} Z" fill="${ink}"/>`;
+    spec.forEach(e=>{
+      let m;
+      if((m=e.match(/^s(\d)$/))){const n=+m[1];for(let i=0;i<n;i++) s+=stripe(64-i*6+(n-1)*3,3.4)}
+      else if(e==='k') s+=stripe(56,11);
+      else if(e==='sk'){s+=stripe(46,3.4);s+=stripe(58,10)}
+      else if(e==='open'||e==='closed'){
+        s+=`<path d="M15 ${wing?84:88} V30 A15 15 0 0 1 45 30 V${wing?84:88}" fill="none" stroke="${ink}" stroke-width="5"/>`;
+        if(e==='closed') s+=`<path d="M12.5 ${wing?82:86} H47.5" stroke="${ink}" stroke-width="5"/>`;
+      }
+      else if((m=e.match(/^c(\d)$/))){const n=+m[1];for(let i=0;i<n;i++){const y=72-i*7;s+=`<path d="M21 ${y+7} L30 ${y} L39 ${y+7}" fill="none" stroke="${ink}" stroke-width="3.6"/>`}}
+      else if(e==='loop'){const n=+((spec.find(x=>/^c\d$/.test(x))||'c1').slice(1));const y=72-(n-1)*7-10;s+=`<path d="M30 ${y-7} L35 ${y} L30 ${y+5} L25 ${y} Z" fill="none" stroke="${ink}" stroke-width="2.6"/>`}
+      else if(e==='silver') s+=`<rect x="7" y="${wing?80.5:89}" width="46" height="3.2" fill="#dfe3e6"/>`;
+      else if(e==='star'){const cx=30,cy=spec.includes('bar')?46:(spec.includes('c1')&&spec.includes('closed')?42:40),r=6,pts=[];for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r*0.42:r;pts.push((cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1))}s+=`<polygon points="${pts.join(' ')}" fill="${ink}"/>`}
+      else if(e==='bar') s+=`<rect x="6.5" y="86" width="47" height="4" fill="${ink}"/>`;
+      else if(e==='w'){ // Eichenlaub: zwei Zweige im Bogen
+        for(const side of [-1,1]){
+          s+=`<path d="M30 84 A14 14 0 0 ${side<0?1:0} ${30+side*13} 62" fill="none" stroke="${ink}" stroke-width="2"/>`;
+          for(let i=0;i<6;i++){const a=(90+side*(18+i*24))*Math.PI/180;const x=30+14*Math.cos(a),y=70+14*Math.sin(a);
+            const rot=(a*180/Math.PI)+90;
+            s+=`<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="2.4" ry="5" transform="rotate(${(rot+side*35).toFixed(0)} ${x.toFixed(1)} ${y.toFixed(1)})" fill="${ink}"/>`}
+        }
+      }
+    });
+    const pip=(x,y)=>`<path d="M${x} ${y-4.5} L${x+4.5} ${y} L${x} ${y+4.5} L${x-4.5} ${y} Z" fill="${ink}"/>`;
+    const pm=spec.find(x=>/^p\d/.test(x));
+    if(pm){const hasW=spec.includes('w');const base=hasW?70:72;
+      if(pm==='p4s'){s+=pip(30,base-24)+pip(30,base-12)+pip(24.5,base)+pip(35.5,base)}
+      else{const n=+pm[1];for(let i=0;i<n;i++) s+=pip(30,base-i*12)}}
+    if(wing) s+=`<path d="M8 85 Q19 84 30 89 Q41 84 52 85 Q48 90 41 90 Q35 90 30 93 Q25 90 19 90 Q12 90 8 85 Z" fill="${ink}"/>`;
+  }
+  return `<svg width="${W}" height="${W*100/60}" viewBox="0 0 60 100" role="img" aria-label="Dienstgradabzeichen">${s}</svg>`;
+}
+
+['heer','lw','mar'].forEach(t=>INS[t].forEach(([n])=>{
+  const lbl={heer:'Heer',lw:'Luftwaffe',mar:'Marine'}[t];
+  add('abz','abz-'+t,'Welcher Dienstgrad ist das? ('+lbl+')',n,ANW[n]||null,{ins:t+':'+n});
+  add('abz','abzrev-'+t,'Welches Abzeichen gehört zu: '+n+' ('+lbl+')',t+':'+n,ANW[n]||null);
+}));
+/* ---------- Symbole ---------- */
+function marker(m){
+  const parts=[];let w=0;const sp=4;
+  const push=(svg,width)=>{parts.push([svg,width]);w+=width+sp};
+  if(m==='Ø') push(x=>`<circle cx="${x+6}" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="${x+1}" y1="13" x2="${x+11}" y2="1" stroke="currentColor" stroke-width="2"/>`,12);
+  else if(/^●+$/.test(m)) [...m].forEach(()=>push(x=>`<circle cx="${x+5}" cy="7" r="4.5" fill="currentColor"/>`,10));
+  else if(/^I+$/.test(m)) [...m].forEach(()=>push(x=>`<line x1="${x+1.5}" y1="1" x2="${x+1.5}" y2="13" stroke="currentColor" stroke-width="2.6"/>`,3));
+  else if(/^X+$/.test(m)) [...m].forEach(()=>push(x=>`<path d="M${x+1} 1 L${x+11} 13 M${x+11} 1 L${x+1} 13" stroke="currentColor" stroke-width="2.4"/>`,12));
+  w-=sp;let x=0,inner='';parts.forEach(([f,pw])=>{inner+=f(x);x+=pw+sp});
+  return {inner,w};
+}
+function sizeMark(m,h=22){const {inner,w}=marker(m);return `<svg width="${w*h/14}" height="${h}" viewBox="0 0 ${w} 14" aria-hidden="true">${inner}</svg>`}
+function unitSym(m,W=60){
+  const {inner,w}=marker(m);const off=(W-w)/2;
+  const shifted=inner.replace(/(cx|x1|x2)="([\d.]+)"/g,(_,a,v)=>`${a}="${+v+off}"`).replace(/M([\d.]+) /g,(_,v)=>`M${+v+off} `).replace(/L([\d.]+) /g,(_,v)=>`L${+v+off} `);
+  return `<svg width="${W}" height="${W*0.9}" viewBox="0 0 ${W} ${W*0.9}" role="img" aria-label="Größenzeichen ${m}">
+   <g>${shifted}</g>
+   <rect x="2" y="18" width="${W-4}" height="${W*0.9-20}" fill="none" stroke="currentColor" stroke-width="2.5"/>
+   <path d="M2 18 L${W-2} ${W*0.9-2} M${W-2} 18 L2 ${W*0.9-2}" stroke="currentColor" stroke-width="1.6"/></svg>`;
+}
+
+/* ---------- Grundlagen (Lektionen) ---------- */
+const figs=(items,W=46)=>`<div class="figs">${items.map(([k,c])=>`<figure>${insignia(k,W)}<figcaption>${esc(c)}</figcaption></figure>`).join('')}</div>`;
+const syms=items=>`<div class="figs">${items.map(([m,c])=>`<figure style="color:var(--frame)">${unitSym(m,52)}<figcaption>${esc(c)}</figcaption></figure>`).join('')}</div>`;
+const LESSONS=[
+ {id:'aufbau',t:'Aufbau der Bundeswehr',d:'Streitkräfte, Teilstreitkräfte und die zivile Verwaltung',deck:'beh',b:()=>`
+  <p>Kern der Bundeswehr sind die Streitkräfte mit vier Teilstreitkräften: Heer, Luftwaffe, Marine und, als jüngste, Cyber- und Informationsraum (CIR). Jede Teilstreitkraft hat eigene Bezeichnungen für ihre Ebenen und eigene Uniformen. Dazu kommen der Unterstützungsbereich unter dem Unterstützungskommando und das Operative Führungskommando, das seit Oktober 2024 alle Einsätze im In- und Ausland plant und führt.</p>
+  <p>Neben den Streitkräften steht die zivile Bundeswehrverwaltung. Dazu gehören die großen Bundesämter, etwa für Ausrüstung (BAAINBw), Personal (BAPersBw) oder Infrastruktur (BAIUDBw). Das BAAINBw ist eine zivile Bundesoberbehörde mit rund 10.000 zivilen und 1.800 militärischen Beschäftigten.</p>
+  <div class="callout">Für Gespräche wichtig: Wer im BAAINBw sitzt, ist oft Beamtin oder Beamter, nicht Soldat. Dort gelten Amtsbezeichnungen statt Dienstgrade. Uniform oder Zivil verrät Ihnen, in welcher Welt Ihr Gegenüber arbeitet.</div>`},
+ {id:'dienstgrade',t:'Dienstgrade verstehen',d:'Laufbahnen, Dienstgradgruppen und NATO-Rangcodes',deck:'dg',b:()=>`
+  <p>Es gibt drei Laufbahngruppen: Mannschaften, Unteroffiziere und Offiziere. Sie gliedern sich in sieben Dienstgradgruppen mit zusammen 26 Dienstgraden:</p>
+  <ol class="ladder">${Object.values(G).map(g=>`<li><strong>${esc(g)}</strong><span>${RANKS.filter(r=>r.g===g).map(r=>esc(r.k||r.h)).join(', ')}</span></li>`).join('')}</ol>
+  <p>„Portepee“ trennt einfache Unteroffiziere von den Feldwebeldienstgraden. Feldwebel sind meist Spezialisten oder erfahrene Führer und tragen viel Verantwortung im Alltag einer Einheit.</p>
+  <p>Für internationale Zusammenarbeit gibt es die NATO-Rangcodes: OR-1 bis OR-9 für Mannschaften und Unteroffiziere, OF-1 bis OF-9 für Offiziere. Ein OF-4 ist in jeder NATO-Armee vergleichbar, in der Bundeswehr entspricht ihm der Oberstleutnant, in der Marine der Fregattenkapitän.</p>
+  <div class="callout">Die Marine hat für fast alle Dienstgrade ab Unteroffizier eigene Namen: aus dem Feldwebel wird der Bootsmann, aus dem Major der Korvettenkapitän. Die Rangfolge ist identisch.</div>`},
+ {id:'abzeichen',t:'Abzeichen lesen',d:'Das System hinter Streifen, Bögen, Rauten und Eichenlaub',deck:'abz',b:()=>`
+  <p>Man muss nicht 26 Bilder auswendig lernen. Die Abzeichen folgen einer Logik, in Heer und Luftwaffe gleich, die Luftwaffe trägt zusätzlich die Schwinge.</p>
+  <h3>Mannschaften: Schrägstreifen</h3>
+  <p>Je mehr Streifen, desto höher. Korporal und Stabskorporal tragen einen breiten Balken.</p>
+  ${figs([['heer:Gefreiter','Gefreiter'],['heer:Hauptgefreiter','Haupt­gefreiter'],['heer:Oberstabsgefreiter','Ober­stabs­gefreiter'],['heer:Korporal','Korporal']])}
+  <h3>Unteroffiziere: der Bogen (Tresse)</h3>
+  <p>Offener Bogen: Unteroffizier. Geschlossener Bogen: ab Stabsunteroffizier. Winkel im Bogen: Feldwebeldienstgrade. Eine kleine Raute über dem Winkel kommt ab Hauptfeldwebel dazu.</p>
+  ${figs([['heer:Unteroffizier','Unter­offizier'],['heer:Stabsunteroffizier','Stabs­unter­offizier'],['heer:Feldwebel','Feldwebel'],['heer:Hauptfeldwebel','Haupt­feld­webel'],['heer:Oberstabsfeldwebel','Ober­stabs­feld­webel']])}
+  <h3>Offiziere: Sterne, dann Eichenlaub, dann Gold</h3>
+  <p>Leutnante und Hauptleute zählen Sterne (eins bis drei, Stabshauptmann vier). Stabsoffiziere tragen zusätzlich Eichenlaub und zählen wieder von eins. Generale tragen goldenes Eichenlaub mit ein bis vier goldenen Sternen. Am Kampfanzug werden silberne Abzeichen schwarz oder weiß getragen, goldene bleiben golden.</p>
+  ${figs([['heer:Leutnant','Leutnant'],['heer:Hauptmann','Haupt­mann'],['heer:Major','Major'],['heer:Oberst','Oberst'],['heer:Brigadegeneral','Brigade­general']])}
+  <h3>Marine-Offiziere: Ärmelstreifen</h3>
+  <p>Gezählt werden die mittleren Streifen: einer beim Leutnant zur See, vier beim Kapitän zur See. Ein dünner Zusatzstreifen markiert die Zwischenstufe. Admirale erkennt man am breiten Streifen unten.</p>
+  ${figs([['mar:Leutnant zur See','Leutnant z. S.'],['mar:Kapitänleutnant','Kapitän­leutnant'],['mar:Korvettenkapitän','Korvetten­kapitän'],['mar:Kapitän zur See','Kapitän z. S.'],['mar:Konteradmiral','Konter­admiral']])}
+  <div class="callout">Ein silberner Querstreifen kennzeichnet Offizieranwärter, etwa den Fahnenjunker. Sie stehen auf der Ebene eines Unteroffiziers oder Feldwebels, sind aber auf dem Weg zum Offizier.</div>`},
+ {id:'gliederung',t:'Vom Trupp zur Division',d:'Ebenen, Größen und wer sie führt',deck:'gl',b:()=>`
+  <p>Die Bundeswehr ist in Ebenen gegliedert, die jeweils mehrere Elemente der Ebene darunter bündeln. Ab der Kompanie wächst die Größe nicht mehr gleichmäßig, weil Fahrzeuge, Waffensysteme und Unterstützungspersonal den Umfang bestimmen.</p>
+  <ol class="ladder">${GL.map(r=>`<li><strong>${esc(r.e)}</strong><span>${esc(r.n)}. ${esc(r.f)}.</span></li>`).join('')}</ol>
+  <p>Die vier Sammelbegriffe tauchen ständig auf: Teileinheit (Trupp bis Zug), Einheit (Kompanie, Batterie, Staffel), Verband (ab Bataillon) und Großverband (ab Brigade).</p>
+  <p>Auch die Führungsbezeichnung verrät die Ebene: Teileinheiten haben einen Führer (Gruppenführer, Zugführer), die Kompanie hat einen Chef, ab dem Bataillon führt ein Kommandeur. Der Kompaniechef hat nach der Wehrdisziplinarordnung die unterste Stufe der Disziplinarbefugnis.</p>
+  <div class="callout">Luftwaffe und Marine benennen dieselben Ebenen anders. Die Kompanie heißt in der Luftwaffe Staffel, in der Marine entspricht ihr die Besatzung eines Bootes. Ein Geschwader steht auf Regimentsebene. Die Tabelle unter Nachschlagen zeigt alle Entsprechungen.</div>`},
+ {id:'zeichen',t:'NATO-Größenzeichen',d:'Taktische Zeichen auf Lagekarten lesen',deck:'sym',b:()=>`
+  <p>Auf Lagekarten und in Lagebildern stehen Truppenteile als taktische Zeichen nach dem NATO-Standard APP-6. Der Rahmen zeigt die Art (das Kreuz steht für Infanterie), das Zeichen darüber die Größe.</p>
+  ${syms([['●','Trupp'],['●●','Gruppe'],['●●●','Zug'],['I','Kompanie'],['II','Bataillon'],['III','Regiment'],['X','Brigade'],['XX','Division']])}
+  <p>Die Logik: Punkte für Teileinheiten, senkrechte Striche von der Kompanie bis zum Regiment, Kreuze ab der Brigade. Darüber folgen Korps (XXX) und Armee (XXXX). Die Zuordnung von Trupp und Gruppe zu einem und zwei Punkten folgt der deutschen Lesart; APP-6 kennt darunter noch Team oder Besatzung (Ø).</p>
+  <div class="callout">Wer Lagebild- oder Führungssoftware baut, begegnet diesen Zeichen sofort. Sie sind standardisiert, und Abweichungen fallen Nutzern aus der Truppe als erstes auf.</div>`},
+ {id:'staebe',t:'Stäbe und Stabsabteilungen',d:'Wer im Stab wofür zuständig ist',deck:'stab',b:()=>`
+  <p>Ein Kommandeur führt, sein Stab bereitet Entscheidungen vor und setzt sie um. Der Stab ist in nummerierte Abteilungen gegliedert. Die Nummer bedeutet überall dasselbe:</p>
+  <ol class="ladder">${STAB.map(([k,v])=>`<li><strong>${k.slice(1)}</strong><span>${esc(v)}</span></li>`).join('')}</ol>
+  <p>Der Buchstabe davor zeigt die Ebene oder den Stabstyp: S im Bataillon, G auf höheren Ebenen des Heeres, A für die Luftwaffe, N für die Marine, J in streitkräftegemeinsamen Stäben. Ein Bataillon hat typischerweise nur S1 bis S6, dort umfasst die S3 auch die Ausbildung.</p>
+  <div class="callout">Für IT-Anbieter ist die Abteilung 6 (Führungsunterstützung) oft fachlich der erste Ansprechpartner. Aber: Stäbe sind Bedarfsträger. Aufträge vergeben sie nicht, das läuft über BAAINBw, BWI oder einen Generalunternehmer.</div>`},
+ {id:'beschaffung',t:'Wer braucht, wer beschafft',d:'Bedarfsträger, Bedarfsdecker und die wichtigsten Stellen',deck:'beh',b:()=>`
+  <p>Die Bundeswehr trennt zwei Rollen. Der Bedarfsträger formuliert, was gebraucht wird. Der Bedarfsdecker beschafft es. Das zentrale Verfahren heißt Customer Product Management (CPM) und betrachtet ein Produkt über den gesamten Lebenszyklus.</p>
+  <ol class="ladder">
+   <li><strong>BAAINBw</strong><span>Zivile Bundesoberbehörde in Koblenz, Bedarfsdecker der Streitkräfte. Größere Vorhaben laufen über CPM, betriebsbedingte Bedarfe über den Einkauf der Bundeswehr.</span></li>
+   <li><strong>BWI</strong><span>IT-Systemhaus der Bundeswehr, hundertprozentige Bundesgesellschaft. Vergibt selbst und veröffentlicht eine Vergabe-Roadmap.</span></li>
+   <li><strong>ZDigBw</strong><span>Dem Kommando CIR unterstellt, Bedarfsträger für das Teilportfolio Cyber/IT und erklärter Treiber der Digitalisierung.</span></li>
+   <li><strong>CIHBw</strong><span>Cyber Innovation Hub, seit 2020 Abteilung der BWI. Testet neue Lösungen mit Nutzern aus der Truppe und übergibt Erfolgreiches an das ZDigBw zur Einführung.</span></li>
+   <li><strong>BMWE</strong><span>Das Bundesministerium für Wirtschaft und Energie ist nach § 25 SÜG für den Geheimschutz in Unternehmen zuständig, also für den Sicherheitsbescheid, den eine Firma für eingestufte Aufträge braucht.</span></li>
+  </ol>
+  <div class="callout">Erfahrungswert aus der Praxis, keine Vorschrift: Mit Truppe und Stäben spricht man über Bedarf und Nutzen, mit Beschaffungsstellen und Generalunternehmern über Verfahren und Verträge.</div>`},
+ {id:'anrede',t:'Anrede und Umgang',d:'Was im ersten Gespräch sitzen sollte',deck:'eti',b:()=>`
+  <p>Angesprochen wird mit Herr oder Frau und dem Dienstgrad, gegebenenfalls mit Nachnamen: „Herr Oberstleutnant“, „Frau Hauptmann Müller“. Dienstgrade bleiben grammatisch männlich, eine „Hauptfrau“ gibt es nicht.</p>
+  <p>Alle Generale werden mit „Herr General“ bzw. „Frau General“ angesprochen, auch Brigadegeneral, Generalmajor und Generalleutnant. Der Plural lautet in der Bundeswehr Generale. Ranghöchster Soldat ist der Generalinspekteur der Bundeswehr.</p>
+  <p>Sanitätsoffiziere tragen eigene Dienstgrade, vom Stabsarzt (Ebene Hauptmann) bis zum Generaloberstabsarzt (Ebene Generalleutnant), und den Äskulapstab am Abzeichen.</p>
+  <div class="callout">Unsicher beim Dienstgrad? Dann einfach nachfragen oder auf die Visitenkarte schauen, dort steht er fast immer. Ein richtig verwendeter Dienstgrad wird bemerkt.</div>`}
+];
+
+/* ---------- Speicher ---------- */
+const KEY='agademy:v1';
+let store={box:{},read:{}};
+try{const s=localStorage.getItem(KEY);if(s) store=JSON.parse(s)||store;if(!store.box) store.box={};if(!store.read) store.read={}}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}};
+const boxOf=c=>store.box[c.id]||0;
+const setBox=(c,b)=>{store.box[c.id]=Math.max(0,Math.min(4,b));save()};
+
+/* ---------- Zustand ---------- */
+let lesson=null, mode='basics', deck='all', refTab='dg', last=null, cur=null, revealed=false, quiz=null;
+const pool=()=>deck==='all'?CARDS:CARDS.filter(c=>c.deck===deck);
+const deckName=id=>(DECKS.find(d=>d.id===id)||{}).name;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+
+function pick(){
+  const p=pool().filter(c=>c!==last);
+  const ws=p.map(c=>Math.pow(2,4-boxOf(c)));let r=Math.random()*ws.reduce((a,b)=>a+b,0);
+  for(let i=0;i<p.length;i++){r-=ws[i];if(r<=0) return p[i]}
+  return p[0];
+}
+function distractors(c,n=3){
+  let alts=c.extra&&Array.isArray(c.extra)?c.extra.slice():[];
+  const same=[...new Set(CARDS.filter(x=>x.kind===c.kind&&x.a!==c.a).map(x=>x.a))];
+  alts=[...new Set([...alts,...shuffle(same)])].filter(a=>a!==c.a);
+  if(c.extra&&Array.isArray(c.extra)) return c.extra.slice(0,n);
+  return alts.slice(0,n);
+}
+function answerHTML(c,a){
+  if(c.kind.startsWith('abzrev')) return insignia(a,44);
+  if(c.kind==='symrev') return `<span style="color:var(--frame)">${unitSym(a,48)}</span><span>${esc(a)}</span>`;
+  return esc(a);
+}
+function questionHTML(c){
+  let h=`<p class="q">${esc(c.q)}</p>`;
+  if(c.extra&&c.extra.ins) h+=`<div class="fig">${insignia(c.extra.ins,84)}</div>`;
+  if(c.kind==='sym') h+=`<div class="fig" style="color:var(--frame)">${unitSym(c.extra.sym,96)}</div>`;
+  return h;
+}
+
+/* ---------- Ansichten ---------- */
+const sure=cs=>cs.filter(c=>boxOf(c)>=3).length;
+function topicRows(){
+  return [{id:'all',name:'Alle Themen'},...DECKS].map(d=>{const cs=d.id==='all'?CARDS:CARDS.filter(c=>c.deck===d.id);const k=sure(cs);
+    return {id:d.id,name:d.name,n:cs.length,k,pct:Math.round(100*k/cs.length)}});
+}
+function renderDecks(){
+  const b=document.getElementById('topicBtn');
+  b.hidden=!(mode==='learn'||mode==='quiz');
+  const r=topicRows().find(x=>x.id===deck);
+  b.innerHTML=`<span class="t"><span class="k">Thema</span><span class="n">${esc(r.name)}</span>
+    <span class="k">${r.n} Karten, ${r.k} sicher</span><span class="bar"><i style="width:${r.pct}%"></i></span></span>
+    <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>`;
+  b.setAttribute('aria-label','Thema wählen, aktuell '+r.name);
+}
+function openSheet(){
+  document.getElementById('tlist').innerHTML=topicRows().map(r=>`<li><button data-deck="${r.id}" aria-current="${r.id===deck}">
+    <span class="row"><span class="nm">${esc(r.name)}</span><span class="ct">${r.k} von ${r.n} sicher</span></span>
+    <span class="bar"><i style="width:${r.pct}%"></i></span></button></li>`).join('');
+  const d=document.getElementById('sheet');
+  if(d.showModal) d.showModal(); else d.setAttribute('open','');
+}
+function closeSheet(){const d=document.getElementById('sheet');if(d.close) d.close(); else d.removeAttribute('open')}
+function boxesHTML(){
+  const p=pool();const counts=[0,0,0,0,0];p.forEach(c=>counts[boxOf(c)]++);
+  return `<div class="boxes" aria-label="Lernstand nach Fächern">${counts.map((n,i)=>`<div><span class="${n?'f':''}" style="opacity:${n?0.35+0.65*i/4:1}"></span><b>${n}</b>Fach ${i+1}</div>`).join('')}</div>`;
+}
+function renderLearn(){
+  if(!cur){cur=pick();revealed=false}
+  const c=cur;const d=DECKS.find(x=>x.id===c.deck);
+  const ans=revealed?`<div class="ans"><p class="a">${c.kind==='symrev'||c.kind.startsWith('abzrev')?'':esc(c.a)}</p>${c.kind.startsWith('abzrev')?`<div class="fig">${insignia(c.a,84)}</div>`:''}${c.kind==='symrev'?`<div class="fig" style="color:var(--frame)">${unitSym(c.a,72)}</div>`:''}${c.note?`<p class="note">${esc(c.note)}</p>`:''}</div>`:'';
+  const act=revealed?`<div class="actions"><button class="btn again" data-act="again">Nochmal</button><button class="btn ok" data-act="ok">Gewusst</button></div>`
+                    :`<div class="actions"><button class="btn primary" data-act="reveal">Antwort zeigen</button></div>`;
+  return `<div class="card"><p class="deckname">${esc(d.name)}, Fach ${boxOf(c)+1} von 5</p>${questionHTML(c)}${ans}</div>${act}${boxesHTML()}`;
+}
+function newQuiz(){
+  const qs=shuffle(pool()).slice(0,10).map(c=>({c,opts:shuffle([c.a,...distractors(c)]),chosen:null}));
+  quiz={qs,i:0,score:0};
+}
+function renderQuiz(){
+  if(!quiz) newQuiz();
+  if(quiz.i>=quiz.qs.length){
+    return `<div class="card">
+      <p class="deckname">Ergebnis</p><p class="score">${quiz.score} / ${quiz.qs.length}</p>
+      <p class="note">Falsch beantwortete Karten liegen jetzt wieder in Fach 1.</p></div>
+      <div class="actions"><button class="btn primary" data-act="newquiz">Neue Runde</button></div>`;
+  }
+  const q=quiz.qs[quiz.i];const done=q.chosen!==null;const d=DECKS.find(x=>x.id===q.c.deck);
+  const isImg=q.c.kind.startsWith('abzrev');
+  const opts=q.opts.map((o,k)=>{let cls='opt';if(done){if(o===q.c.a)cls+=' right';else if(k===q.chosen)cls+=' wrong'}
+    return `<button class="${cls}" data-opt="${k}" ${done?'disabled':''}>${answerHTML(q.c,o)}</button>`}).join('');
+  return `<div class="card">
+     <p class="deckname">Frage ${quiz.i+1} von ${quiz.qs.length}, ${esc(d.name)}</p>${questionHTML(q.c)}
+     ${done&&q.c.note?`<p class="note" style="margin-top:14px">${esc(q.c.note)}</p>`:''}</div>
+     <div class="opts${isImg?' img':''}">${opts}</div>
+     ${done?`<div class="actions"><button class="btn primary" data-act="next">${quiz.i+1<quiz.qs.length?'Nächste Frage':'Ergebnis zeigen'}</button></div>`:''}`;
+}
+function renderRef(){
+  const tabs=[['dg','Dienstgrade'],['abz','Abzeichen'],['gl','Gliederung'],['stab','Stäbe'],['beh','Behörden']];
+  let h=`<div class="seg" role="group" aria-label="Nachschlagen">${tabs.map(([k,n])=>`<button data-ref="${k}" aria-pressed="${refTab===k}">${n}</button>`).join('')}</div>`;
+  if(refTab==='dg'){
+    let rows='',g='';
+    RANKS.forEach(r=>{if(r.g!==g){g=r.g;rows+=`<tr class="grp"><td colspan="3">${esc(g)}</td></tr>`}
+      rows+=`<tr><td>${esc(r.h)}</td><td>${esc(r.m)}</td><td>${r.n}</td></tr>`});
+    h+=`<div class="scroll"><table><thead><tr><th>Heer, Luftwaffe</th><th>Marine</th><th>NATO</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <p class="small">Sanitätsoffiziere: ${SAN.map(([e,s])=>`${s} (wie ${e})`).join(', ')}.</p>`;
+  } else if(refTab==='abz'){
+    for(const [t,lbl] of [['heer','Heer (Feldanzug)'],['lw','Luftwaffe (Feldanzug)'],['mar','Marine']]){
+      h+=`<h2>${lbl}</h2><div class="insgrid">${INS[t].map(([n])=>`<figure>${insignia(t+':'+n,52)}<figcaption>${esc(n)}</figcaption></figure>`).join('')}</div>`;
+    }
+    h+=`<p class="small">Luftwaffe und Marine nachgezeichnet nach der Bundeswehr-Übersicht, vereinfacht. Heer abgeleitet: dieselben Muster ohne Schwinge, die Schwinge kennzeichnet die Luftwaffe. Sanitätsoffiziere tragen zusätzlich den Äskulapstab.</p>`;
+  } else if(refTab==='gl'){
+    h+=`<div class="scroll"><table><thead><tr><th></th><th>Heer</th><th>Stärke</th><th>Luftwaffe</th><th>Marine</th><th>Führung (typisch)</th></tr></thead><tbody>
+    ${GL.map(r=>`<tr><td class="sym">${unitSym(r.s,44)}</td><td><strong>${esc(r.e)}</strong></td><td>${esc(r.n)}</td><td>${esc(r.lw)}</td><td>${esc(r.mar)}</td><td>${esc(r.f)}</td></tr>`).join('')}
+    </tbody></table></div>
+    <p class="small">Teileinheit: Trupp bis Zug. Einheit: Kompanie, Batterie, Staffel. Verband: ab Bataillon. Großverband: ab Brigade. Darüber im NATO-Rahmen Korps (XXX) und Armee (XXXX).</p>`;
+  } else if(refTab==='stab'){
+    h+=`<dl>${STAB.map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
+    <p class="small">Präfixe: ${PRE.map(([k,v])=>`${k} ${esc(v)}`).join('; ')}. Die Nummer bleibt gleich, der Buchstabe zeigt Ebene oder Teilstreitkraft: Ein Bataillon hat typischerweise S1 bis S6 (S3 dort inkl. Ausbildung), J1 bis J9 voll ausgeprägt gibt es in streitkräftegemeinsamen Stäben. Stäbe sind Bedarfsträger, keine Vergabestellen.</p>`;
+  } else {
+    h+=`<dl>${BEH.map(([k,v,n])=>`<div><dt>${k}</dt><dd>${esc(v)}${n?'<br>'+esc(n):''}</dd></div>`).join('')}</dl>`;
+  }
+  return h;
+}
+function renderBasics(){
+  if(lesson){
+    const i=LESSONS.findIndex(l=>l.id===lesson);const L=LESSONS[i];store.read[L.id]=1;save();
+    const nx=LESSONS[i+1];
+    return `<div class="lesson"><button class="back" data-lesson="">Alle Lektionen</button>
+      <p class="small" style="margin:10px 0 0">Lektion ${i+1} von ${LESSONS.length}</p><h2>${esc(L.t)}</h2>${L.b()}
+      <div class="actions"><button class="btn ok" data-practice="${L.deck}">Lernkarten dazu üben</button>
+      ${nx?`<button class="btn ghost" data-lesson="${nx.id}">Weiter: ${esc(nx.t)}</button>`:''}</div></div>`;
+  }
+  const n=LESSONS.filter(l=>store.read[l.id]).length;
+  return `<p class="intro">Acht kurze Lektionen vermitteln das Grundwissen. Danach festigen Lernkarten und Quiz das Gelernte. ${n} von ${LESSONS.length} gelesen.</p>
+   <ol class="lessons">${LESSONS.map((l,i)=>`<li><button data-lesson="${l.id}"><span class="num${store.read[l.id]?' done':''}" aria-label="${store.read[l.id]?'gelesen':'ungelesen'}">${i+1}</span>
+   <span><span class="lt">${esc(l.t)}</span><span class="ld">${esc(l.d)}</span></span></button></li>`).join('')}</ol>`;
+}
+function renderHelp(){
+  const n=CARDS.length;
+  return `<div class="help">
+  <h2>Kein Angebot der Bundeswehr</h2>
+  <p>AGAdemy ist ein privates Lernprojekt. Es ist kein Angebot, keine Veröffentlichung und keine offizielle Anwendung der Bundeswehr, des Bundesministeriums der Verteidigung oder einer anderen Dienststelle und steht mit ihnen in keiner Verbindung. Alle Inhalte beruhen auf öffentlich zugänglichen Quellen und können Fehler enthalten. Verbindlich sind allein die offiziellen Quellen. Fehler gefunden? Gern als <a href="https://github.com/FlorianWilhelm/agademy/issues">Issue auf GitHub</a> melden.</p>
+  <h2>Wofür die App da ist</h2>
+  <p>Grundwissen über die Bundeswehr für Gespräche mit Soldatinnen, Soldaten und Dienststellen: Dienstgrade und Abzeichen, Gliederung, Stabsabteilungen, Behörden und die Anrede. Insgesamt ${n} Karten in ${DECKS.length} Themen.</p>
+  <h2>Grundlagen</h2>
+  <p>Acht Lektionen vermitteln das Wissen in sinnvoller Reihenfolge, mit Beispielen und Abzeichen. Am Ende jeder Lektion führt „Lernkarten dazu üben“ direkt zum passenden Thema. Gelesene Lektionen sind markiert.</p>
+  <h2>Thema wählen</h2>
+  <p>Oben bei Lernkarten und Quiz steht das aktuelle Thema. Antippen öffnet die Liste aller Themen mit ihrem Lernstand. „Alle Themen“ mischt alles.</p>
+  <h2>Lernkarten</h2>
+  <p>Frage lesen, selbst antworten, dann „Antwort zeigen“. Mit „Gewusst“ wandert die Karte ein Fach weiter, mit „Nochmal“ zurück in Fach 1. Es gibt fünf Fächer. Karten in niedrigen Fächern kommen häufiger dran, so üben Sie vor allem, was noch nicht sitzt. Ab Fach 4 zählt eine Karte als sicher.</p>
+  <p>Am Rechner geht es auch per Tastatur: Leertaste zeigt die Antwort, 1 für Nochmal, 2 für Gewusst.</p>
+  <h2>Quiz</h2>
+  <p>Zehn Fragen mit je vier Antworten aus dem gewählten Thema. Bei Abzeichen-Fragen sind die Antworten Bilder. Richtige Antworten schieben die Karte ein Fach weiter, falsche zurück in Fach 1, Quiz und Lernkarten teilen sich also denselben Lernstand.</p>
+  <h2>Nachschlagen</h2>
+  <p>Übersichten zum schnellen Nachsehen: Dienstgradleiter mit Marine-Entsprechung und NATO-Rangcode, alle Abzeichen, Gliederung mit NATO-Größenzeichen, Stabsabteilungen und Behörden.</p>
+  <h2>Wie belastbar die Inhalte sind</h2>
+  <p>Dienstgrade, Gliederung und Behördenangaben stammen von bundeswehr.de, Abzeichen und Dienstgradbezeichnungen aus der Anordnung des Bundespräsidenten über die Dienstgradbezeichnungen und die Uniform (2021), Disziplinarbefugnis aus der Wehrdisziplinarordnung, Geheimschutz aus dem SÜG. NATO-Rangcodes folgen STANAG 2116, Größenzeichen NATO APP-6 in deutscher Lesart. Abzeichen von Luftwaffe und Marine sind nach der Übersicht der Bundeswehr vereinfacht nachgezeichnet, das Heer ist daraus abgeleitet. Stärkeangaben sind Größenordnungen, Führungsdienstgrade typische Besetzungen. Stand Oktober 2026.</p>
+  <h2>Lernstand</h2>
+  <p>Der Lernstand wird nur in diesem Browser gespeichert. Auf einem anderen Gerät beginnen Sie neu, und das Löschen der Browserdaten setzt ihn zurück.</p>
+  <button class="btn ghost" id="reset" style="flex:none;padding:10px 14px;font-size:16px">Lernstand zurücksetzen</button>
+  <h2>Lizenz</h2>
+  <p>Code unter MIT, Inhalte unter CC BY 4.0. Quelltext auf <a href="https://github.com/FlorianWilhelm/agademy">GitHub</a>.</p>
+  </div>`;
+}
+function render(){
+  renderDecks();
+  document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-current',b.dataset.mode===mode?'page':'false'));
+  const v=document.getElementById('view');
+  v.innerHTML=mode==='basics'?renderBasics():mode==='learn'?renderLearn():mode==='quiz'?renderQuiz():mode==='ref'?renderRef():renderHelp();
+}
+
+/* ---------- Ereignisse ---------- */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('button');if(!t) return;
+  if(t.dataset.mode){if(t.dataset.mode==='basics'&&mode==='basics')lesson=null;mode=t.dataset.mode;if(mode==='quiz'&&quiz&&quiz.i>=quiz.qs.length)quiz=null;render();window.scrollTo(0,0);return}
+  if(t.dataset.lesson!==undefined){lesson=t.dataset.lesson||null;render();window.scrollTo(0,0);return}
+  if(t.dataset.practice){deck=t.dataset.practice;mode='learn';cur=null;quiz=null;render();window.scrollTo(0,0);return}
+  if(t.id==='topicBtn'){openSheet();return}
+  if(t.dataset.close){closeSheet();return}
+  if(t.dataset.deck){deck=t.dataset.deck;cur=null;quiz=null;closeSheet();render();return}
+  if(t.dataset.ref){refTab=t.dataset.ref;render();return}
+  if(t.dataset.opt!==undefined){const q=quiz.qs[quiz.i];q.chosen=+t.dataset.opt;const ok=q.opts[q.chosen]===q.c.a;
+    if(ok){quiz.score++;setBox(q.c,boxOf(q.c)+1)}else setBox(q.c,0);render();return}
+  const a=t.dataset.act;
+  if(a==='reveal'){revealed=true;render()}
+  else if(a==='ok'||a==='again'){setBox(cur,a==='ok'?boxOf(cur)+1:0);last=cur;cur=null;render()}
+  else if(a==='next'){quiz.i++;render()}
+  else if(a==='newquiz'){quiz=null;render()}
+  if(t.id==='reset'&&confirm('Lernstand für alle Karten zurücksetzen?')){store={box:{},read:{}};save();cur=null;quiz=null;render()}
+});
+document.getElementById('sheet').addEventListener('click',e=>{if(e.target.id==='sheet') closeSheet()});
+document.addEventListener('keydown',e=>{
+  if(mode!=='learn'||document.getElementById('sheet').open||e.target.closest('input,textarea')) return;
+  if(e.code==='Space'&&!revealed){e.preventDefault();revealed=true;render()}
+  else if(revealed&&(e.key==='1'||e.key==='2')){setBox(cur,e.key==='2'?boxOf(cur)+1:0);last=cur;cur=null;render()}
+});
+render();
+</script>
+</body>
+</html>
