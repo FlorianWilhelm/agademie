@@ -420,8 +420,10 @@ function insignia(key,W=60){
         s+=wing?`<g transform="translate(0 -4.5) translate(30 88) scale(.92) translate(-30 -88)">${g}</g>`:g; // Luftwaffe: über der Schwinge
       }
     });
-    const pip=(x,y)=>{const p=[];for(let i=0;i<32;i++){const a=i*Math.PI/16-Math.PI/2,r=i%2?2.3:(i%8===0?6.3:i%4===0?5.2:4);p.push((x+r*Math.cos(a)).toFixed(2)+','+(y+r*Math.sin(a)).toFixed(2))}
-      return `<polygon points="${p.join(' ')}" fill="${ink}"/>`}; // Stern mit Strahlen
+    const pip=(x,y)=>{const P=(a,r)=>(x+r*Math.cos(a)).toFixed(2)+','+(y+r*Math.sin(a)).toFixed(2);let p=[],hi='';
+      for(let i=0;i<8;i++){const a=i*Math.PI/4-Math.PI/2,R=i%2?4.7:6;p.push(P(a,R),P(a+Math.PI/8,3.1));
+        hi+=`<polygon points="${x},${y} ${P(a,R)} ${P(a+Math.PI/8,3.1)}" fill="#fff" fill-opacity=".22"/>`}
+      return `<polygon points="${p.join(' ')}" fill="${ink}"/>`+hi}; // achtzackiger Stern, facettiert
     const pm=spec.find(x=>/^p\d/.test(x));
     if(pm){const hasW=spec.includes('w');const base=hasW?(wing?72.5:76):(wing?73.5:74);
       if(pm==='p4s'){s+=pip(30,base-25)+pip(30,base-12.5)+pip(23.5,base)+pip(36.5,base)}
@@ -556,6 +558,56 @@ GLOSS.forEach(g=>g.items.forEach(([k,v,n])=>add(g.deck,'g-'+g.id,(g.id==='dgk'?'
  ['beh','proj','Deutsch-französisches Landkampfsystem der nächsten Generation','MGCS',null,['FCAS','NGVA','D-LBO']],
  ['beh','proj','Europäisches Luftkampfsystem der nächsten Generation','FCAS',null,['MGCS','FACE','SOSA']]
 ].forEach(([d,k,q,a,n,x])=>add(d,k,q,a,n,x));
+
+/* ---------- Waffen- und Barettfarben (BMVg, Bekleidung und Uniformen der Bundeswehr, Stand April 2026) ---------- */
+const WAFF=[ // Farbe, Farbwert, Truppengattung, Hinweis
+ ['Jägergrün','#1e8a3c','Infanterie','Jäger, Panzergrenadiere, Fallschirmjäger und Gebirgsjäger.'],
+ ['Rosa','#e6577f','Panzertruppe'],
+ ['Goldgelb','#f0a020','Heeresaufklärungstruppe'],
+ ['Hochrot','#d3202a','Artillerietruppe'],
+ ['Schwarz','#1b1b1b','Pioniertruppe'],
+ ['Hellgrau','#a7a9ab','Heeresfliegertruppe'],
+ ['Zitronengelb','#f4d03f','Fernmeldetruppe'],
+ ['Mittelblau','#1f4fa0','Heereslogistiktruppe'],
+ ['Dunkelblau','#1a2a5c','Sanitätstruppe'],
+ ['Bordeauxrot','#7b2342','ABC-Abwehrkräfte'],
+ ['Orange','#ee7a1c','Feldjägertruppe'],
+ ['Weiß','#ffffff','Militärmusikdienst'],
+ ['Korallenrot','#e0504a','Heeresflugabwehrtruppe','Aufgelöst. Ehemalige Angehörige tragen die Farbe bis zum Ausscheiden weiter.'],
+ ['Karmesinrot','#b42041','Offiziere im Generalstabsdienst']
+];
+const BARETT=[ // Farbe, Farbwert, Träger
+ ['Schwarz','#1b1b1b',['Panzertruppe','Heeresaufklärungstruppe']],
+ ['Jägergrün','#17804a',['Jägertruppe','Panzergrenadiertruppe','Wachbataillon']],
+ ['Bordeauxrot','#8a2846',['Fallschirmjägertruppe','Kommando Spezialkräfte','Heeresfliegertruppe']],
+ ['Korallenrot','#d4302c',['Artillerietruppe','Pioniertruppe','ABC-Abwehrkräfte','Feldjägertruppe','Fernmeldetruppe','Nachschubtruppe','Instandsetzungstruppe','Geoinformationsdienst','Operative Kommunikation']],
+ ['Kobaltblau','#1f4c7a',['Sanitätstruppe']],
+ ['Steingrau-oliv','#7d7461',['Heimatschutzkräfte']],
+ ['Marineblau','#1d2a4a',['Cyber- und Informationsraum','multinationale Verbände wie Eurokorps','Luftwaffe und Marine in einigen Verwendungen']],
+ ['UN-Blau','#3fa7e0',['Einsätze der Vereinten Nationen']]
+];
+const SWATCH=Object.fromEntries([...WAFF,...BARETT].map(([n,c])=>[n,c]));
+// Kragenspiegel: Grund in Waffenfarbe mit silberner Doppellitze; Generale: goldene Stickerei auf Hochrot
+function collar(c,W=30){
+  const gen=c==='gen',bg=gen?'#d3202a':c;
+  const inner=gen?`<path d="M15 6 V44 M15 14 L9 9 M15 14 L21 9 M15 22 L8 16 M15 22 L22 16 M15 30 L8 24 M15 30 L22 24 M15 38 L9 33 M15 38 L21 33" stroke="#e8b915" stroke-width="2.4" stroke-linecap="round" fill="none"/>`
+    :`<rect x="7.5" y="6" width="5" height="38" rx="1" fill="#dfe3e6"/><rect x="17.5" y="6" width="5" height="38" rx="1" fill="#dfe3e6"/>`;
+  return `<svg width="${W}" height="${W*5/3}" viewBox="0 0 30 50" aria-hidden="true"><rect x=".75" y=".75" width="28.5" height="48.5" rx="2" fill="${bg}" stroke="var(--line)" stroke-width="1.5"/>${inner}</svg>`;
+}
+const dot=c=>`<svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" style="flex:none"><circle cx="11" cy="11" r="10" fill="${c}" stroke="var(--line)" stroke-width="1.5"/></svg>`;
+WAFF.slice(0,12).forEach(([f,,t,n])=>add('abz','wf','Waffenfarbe der '+t,f,n));
+WAFF.slice(0,12).forEach(([f,,t])=>add('abz','wfrev','Welche Truppengattung hat die Waffenfarbe '+f+'?',t));
+add('abz','wf','Waffenfarbe der Offiziere im Generalstabsdienst','Karmesinrot');
+BARETT.slice(0,6).forEach(([f,,ts])=>ts.slice(0,3).forEach(t=>add('abz','bar','Barettfarbe: '+t,f)));
+[
+ ['abz','farbe','Wo zeigt das Heer am Feldanzug die Waffenfarbe?','Als Litze an den Schulterklappen','Ein etwa 4 mm schmales Band in Waffenfarbe.',['Am Kragen','Am Ärmelband','Gar nicht']],
+ ['abz','farbe','Wo zeigt das Heer am Dienstanzug die Waffenfarbe?','Kragenspiegel und Umrandung der Schulterklappen',null,['Nur am Barett','Ärmelstreifen','Namensschild']],
+ ['abz','farbe','Woran erkennt man Generale am Kragen?','Goldene Stickerei auf hochrotem Kragenspiegel',null,['Silberne Doppellitze auf Schwarz','Karmesinroter Kragenspiegel','Goldene Litze an der Schulterklappe']],
+ ['abz','farbe','Was zeigt am Barett die genaue Truppengattung?','Das Barettabzeichen','Die Barettfarbe fasst mehrere Truppengattungen zusammen.',['Die Barettfarbe','Die Litze','Der Kragenspiegel']],
+ ['abz','farbe','Welche Barettfarbe tragen Angehörige des Cyber- und Informationsraums?','Marineblau','Unabhängig von ihrer Truppengattung, mit dem Abzeichen CIR.',['Korallenrot','Kobaltblau','Schwarz']],
+ ['abz','farbe','Was tragen Gebirgsjäger statt des Baretts?','Bergmütze',null,['Schiffchen','Schirmmütze','Feldmütze']],
+ ['abz','farbe','Warum tragen Luftwaffe und Marine am Feldanzug keine bunten Litzen?','Sie haben keine Truppengattungen',null,['Weil sie Ärmelstreifen tragen','Aus Tarngründen','Weil sie keine Schulterklappen haben']]
+].forEach(([d,k,q,a,n,x])=>add(d,k,q,a,n,x));
 /* ---------- Symbole ---------- */
 function marker(m){
   const parts=[];let w=0;const sp=4;
@@ -607,6 +659,17 @@ const LESSONS=[
   <p>Gezählt werden die mittleren Streifen: einer beim Leutnant zur See, vier beim Kapitän zur See. Ein dünner Zusatzstreifen markiert die Zwischenstufe. Admirale erkennt man am breiten Streifen unten.</p>
   ${figs([['mar:Leutnant zur See','Leutnant z. S.'],['mar:Kapitänleutnant','Kapitän­leutnant'],['mar:Korvettenkapitän','Korvetten­kapitän'],['mar:Kapitän zur See','Kapitän z. S.'],['mar:Konteradmiral','Konter­admiral']])}
   <div class="callout">Ein silberner Querstreifen kennzeichnet Offizieranwärter, etwa den Fahnenjunker. Sie stehen auf der Ebene eines Unteroffiziers oder Feldwebels, sind aber auf dem Weg zum Offizier.</div>`},
+ {id:'farben',t:'Waffenfarbe und Barett',d:'Litze, Kragenspiegel und Barett verraten die Truppengattung',deck:'abz',b:()=>`
+  <p>Das Dienstgradabzeichen sagt, welchen Rang jemand hat. Wozu jemand gehört, zeigt im Heer die Farbe. Jede Truppengattung hat ihre eigene Waffenfarbe, die Tradition reicht bis 1915 zurück.</p>
+  <h3>Am Feldanzug: die Litze</h3>
+  <p>An den Schulterklappen des Feldanzugs sitzt eine etwa 4 mm schmale Schlaufe in Waffenfarbe, die Litze. Grün heißt Infanterie, Rosa Panzertruppe, Schwarz Pioniere. Die Dienstgradabzeichen selbst sind bei allen gleich.</p>
+  <h3>Am Dienstanzug: der Kragenspiegel</h3>
+  <p>Am grauen Dienstanzug erscheint dieselbe Farbe als Kragenspiegel mit silberner Doppellitze und als Umrandung der Schulterklappen. Zwei Ausnahmen fallen sofort auf: Generale tragen goldene Stickerei auf Hochrot, Offiziere im Generalstabsdienst einen karmesinroten Kragenspiegel.</p>
+  <div class="figs">${[...['Infanterie','Panzer','Aufklärer','Artillerie','Pioniere','Heeres­flieger','Fernmelder','Logistik','Sanität'].map((t,i)=>[WAFF[i][1],t]),['gen','Generale']].map(([c,t])=>`<figure>${collar(c,30)}<figcaption>${esc(t)}</figcaption></figure>`).join('')}</div>
+  <h3>Das Barett</h3>
+  <p>Die Barettfarbe fasst mehrere Truppengattungen zu Gruppen zusammen. Grün tragen Jäger und Panzergrenadiere, Schwarz Panzer und Aufklärer, Bordeauxrot Fallschirmjäger, KSK und Heeresflieger. Korallenrot steht für die meisten unterstützenden Truppen wie Artillerie, Pioniere und Fernmelder. Die genaue Truppengattung zeigt das Metallabzeichen am Barett.</p>
+  <p>Die Gebirgsjäger tragen statt des Baretts die Bergmütze. Wer zum Cyber- und Informationsraum gehört, trägt unabhängig von der Truppengattung ein marineblaues Barett.</p>
+  <div class="callout">Luftwaffe und Marine haben keine Truppengattungen und deshalb auch keine bunten Litzen. Die Luftwaffe trägt meist das blaue Schiffchen, die Marine hat am Dienstanzug keine Kragenspiegel. Alle Farben stehen unter Nachschlagen bei den Abzeichen.</div>`},
  {id:'gliederung',t:'Vom Trupp zur Division',d:'Ebenen, Größen und wer sie führt',deck:'gl',b:()=>`
   <p>Die Bundeswehr ist in Ebenen gegliedert, die jeweils mehrere Elemente der Ebene darunter bündeln. Ab der Kompanie wächst die Größe nicht mehr gleichmäßig, weil Fahrzeuge, Waffensysteme und Unterstützungspersonal den Umfang bestimmen.</p>
   <ol class="ladder">${GL.map(r=>`<li><strong>${esc(r.e)}</strong><span>${esc(r.n)}. ${esc(r.f)}.</span></li>`).join('')}</ol>
@@ -697,6 +760,7 @@ function distractors(c,n=3){
 }
 function answerHTML(c,a){
   if(c.kind.startsWith('abzrev')) return insignia(a,44);
+  if((c.kind==='wf'||c.kind==='bar')&&SWATCH[a]) return `${dot(SWATCH[a])}<span>${esc(a)}</span>`;
   if(c.kind==='symrev') return `<span style="color:var(--frame)">${unitSym(a,48)}</span><span>${esc(a)}</span>`;
   return esc(a);
 }
@@ -781,6 +845,16 @@ function renderRef(){
         for(const [g,a,b] of subs) h+=`${g!==lg?`<h4 class="dgg">${esc(g)}</h4>`:''}<div class="insgrid">${INS[t].slice(a,b).map(([n])=>`<figure>${insignia(t+':'+n,52)}<figcaption>${esc(n)}</figcaption></figure>`).join('')}</div>`;
       }
     }
+    h+=`<h2 id="waffenfarben">Waffenfarben (Heer)</h2>
+    <div class="scroll"><table><thead><tr><th></th><th>Waffenfarbe</th><th>Truppengattung</th></tr></thead><tbody>
+    ${[...WAFF.map(([f,c,t,n])=>[c,f,t,n]),['gen','Hochrot mit Gold','Generale']].map(([c,f,t,n])=>`<tr><td class="sym">${collar(c,24)}</td><td><strong>${esc(f)}</strong></td><td>${esc(t)}${n?`<br><span class="small">${esc(n)}</span>`:''}</td></tr>`).join('')}
+    </tbody></table></div>
+    <p class="small">Am Feldanzug als Litze an den Schulterklappen, am Dienstanzug als Kragenspiegel und Umrandung der Schulterklappen. Luftwaffe und Marine haben keine Waffenfarben.</p>
+    <h2 id="barett">Barettfarben</h2>
+    <div class="scroll"><table><thead><tr><th></th><th>Barett</th><th>Getragen von</th></tr></thead><tbody>
+    ${BARETT.map(([f,c,ts])=>`<tr><td class="sym">${dot(c)}</td><td><strong>${esc(f)}</strong></td><td>${ts.map(esc).join(', ')}</td></tr>`).join('')}
+    </tbody></table></div>
+    <p class="small">Das Barettabzeichen zeigt die genaue Truppengattung. Gebirgsjäger tragen die Bergmütze, der Militärmusikdienst trägt sein Abzeichen zu unterschiedlichen Barettfarben. Quelle: BMVg, Bekleidung und Uniformen der Bundeswehr (Stand April 2026).</p>`;
   } else if(refTab==='gl'){
     h+=`<div class="scroll"><table><thead><tr><th></th><th>Heer</th><th>Stärke</th><th>Luftwaffe</th><th>Marine</th><th>Führung (typisch)</th></tr></thead><tbody>
     ${GL.map(r=>`<tr><td class="sym">${unitSym(r.s,44)}</td><td><strong>${esc(r.e)}</strong></td><td>${esc(r.n)}</td><td>${esc(r.lw)}</td><td>${esc(r.mar)}</td><td>${esc(r.f)}</td></tr>`).join('')}
@@ -820,7 +894,7 @@ function renderHelp(){
   <h2>Kein Angebot der Bundeswehr</h2>
   <p>AGAdemy ist ein privates Projekt. Es ist kein Angebot, keine Veröffentlichung und keine offizielle Anwendung der Bundeswehr, des Bundesministeriums der Verteidigung oder einer anderen Dienststelle und steht mit ihnen in keiner Verbindung. Alle Inhalte beruhen auf öffentlich zugänglichen Quellen und können Fehler enthalten. Verbindlich sind allein die offiziellen Quellen. Fehler gefunden? Gern als <a href="https://github.com/FlorianWilhelm/agademy/issues">Issue auf GitHub</a> melden.</p>
   <h2>Wofür die App da ist</h2>
-  <p>Grundwissen über die Bundeswehr: Dienstgrade und Abzeichen, Gliederung, Stabsabteilungen, Behörden, Anrede, Abkürzungen, Geheimschutz und die Begriffe der militärischen Digitalisierung. Insgesamt ${n} Karten in ${DECKS.length} Themen.</p>
+  <p>Grundwissen über die Bundeswehr: Dienstgrade und Abzeichen, Waffen- und Barettfarben, Gliederung, Stabsabteilungen, Behörden, Anrede, Abkürzungen, Geheimschutz und die Begriffe der militärischen Digitalisierung. Insgesamt ${n} Karten in ${DECKS.length} Themen.</p>
   <h2>Grundlagen</h2>
   <p>${LESSONS.length} Lektionen vermitteln das Wissen in sinnvoller Reihenfolge, mit Beispielen und Abzeichen. Am Ende jeder Lektion führt „Lernkarten dazu üben“ direkt zum passenden Thema. Gelesene Lektionen sind markiert.</p>
   <h2>Thema wählen</h2>
@@ -833,7 +907,7 @@ function renderHelp(){
   <h2>Nachschlagen</h2>
   <p>Übersichten zum schnellen Nachsehen: Dienstgradleiter mit Marine-Entsprechung und NATO-Rangcode, alle Abzeichen, Gliederung mit NATO-Größenzeichen, Stabsabteilungen und ein durchsuchbares Verzeichnis aller Abkürzungen.</p>
   <h2>Wie belastbar die Inhalte sind</h2>
-  <p>Dienstgrade, Gliederung und Behördenangaben stammen von bundeswehr.de, Abzeichen und Dienstgradbezeichnungen aus der Anordnung des Bundespräsidenten über die Dienstgradbezeichnungen und die Uniform (2021), Disziplinarbefugnis aus der Wehrdisziplinarordnung, Geheimschutz aus dem SÜG und der VSA, Architekturbegriffe u. a. nach Fraunhofer IESE. NATO-Rangcodes folgen STANAG 2116, Größenzeichen NATO APP-6 in deutscher Lesart. Abzeichen von Luftwaffe und Marine sind nach der Übersicht der Bundeswehr vereinfacht nachgezeichnet, das Heer ist daraus abgeleitet. Stärkeangaben sind Größenordnungen, Führungsdienstgrade typische Besetzungen. Stand Oktober 2026.</p>
+  <p>Dienstgrade, Gliederung und Behördenangaben stammen von bundeswehr.de, Abzeichen und Dienstgradbezeichnungen aus der Anordnung des Bundespräsidenten über die Dienstgradbezeichnungen und die Uniform (2021), Waffen- und Barettfarben aus der BMVg-Broschüre „Bekleidung und Uniformen der Bundeswehr“ (April 2026), Disziplinarbefugnis aus der Wehrdisziplinarordnung, Geheimschutz aus dem SÜG und der VSA, Architekturbegriffe u. a. nach Fraunhofer IESE. NATO-Rangcodes folgen STANAG 2116, Größenzeichen NATO APP-6 in deutscher Lesart. Abzeichen von Luftwaffe und Marine sind nach der Übersicht der Bundeswehr vereinfacht nachgezeichnet, das Heer ist daraus abgeleitet. Stärkeangaben sind Größenordnungen, Führungsdienstgrade typische Besetzungen. Stand Oktober 2026.</p>
   <h2 id="app">Als App installieren</h2>
   ${standalone()?'<p>AGAdemy läuft gerade als App. Nach dem ersten Öffnen funktioniert sie auch ohne Internet.</p>':`<p>AGAdemy lässt sich wie eine App auf den Startbildschirm legen. Sie öffnet sich dann ohne Browserleiste und funktioniert nach dem ersten Öffnen auch ohne Internet.</p>
   ${installEvt?'<button class="btn" id="install" style="flex:none;padding:10px 14px;font-size:16px;margin-bottom:10px">Jetzt installieren</button>':''}

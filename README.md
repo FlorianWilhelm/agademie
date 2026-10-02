@@ -13,6 +13,7 @@ wie sie tickt.
 
 * Strukturen: BMVg, Teilstreitkräfte, Organisationsbereiche
 * Dienstgrade, Abzeichen und Anreden
+* Waffenfarben (Litze, Kragenspiegel) und Barettfarben
 * Gliederung vom Trupp zur Division, NATO-Größenzeichen
 * Stabsabteilungen (J1 bis J9)
 * Abkürzungen und Beschaffung: Bedarfsträger, BAAINBw, BWI
