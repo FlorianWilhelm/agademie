@@ -296,7 +296,6 @@ const PRE=[['J','Streitkräftegemeinsam (Joint)'],['G','Heer, höhere Führungse
 PRE.forEach(([k,v])=>add('stab','pre','Präfix '+k+' vor der Abteilungsnummer',v));
 add('stab','praxis','Welche Stabsabteilungen hat ein Bataillon typischerweise?','S1 bis S6','Die Nummern bedeuten dasselbe wie bei J und G, nur der Buchstabe zeigt die Ebene. S7 bis S9 sind auf Bataillonsebene unüblich.',['S1 bis S9','J1 bis J9','G1 bis G4']);
 add('stab','praxis','Wofür ist die S3 im Bataillon neben Operationen zuständig?','Ausbildung','Auf höheren Ebenen gibt es dafür eine eigene Abteilung 7.',['Personal','Haushalt','CIMIC']);
-add('stab','praxis','Vergibt eine Stabsabteilung wie G6 Aufträge?','Nein, Stäbe sind Bedarfsträger','Vergabe läuft über BAAINBw, BWI oder einen Generalunternehmer.',['Ja, bis zur EU-Schwelle','Ja, über eigene Rahmenverträge','Nur mit Zustimmung des BMVg']);
 
 const BEH=[
  ['BMVg','Bundesministerium der Verteidigung'],
@@ -319,7 +318,7 @@ BEH.forEach(([k,v,n])=>add('beh','abk','Abkürzung: '+k,v,n));
 [
  ['Bedarfsdecker für Wehrmaterial und IT','BAAINBw'],
  ['Bedarfsträger für das Teilportfolio Cyber/IT','ZDigBw'],
- ['Bundeseigener IT-Dienstleister mit eigener Vergabe-Roadmap','BWI'],
+ ['IT-Systemhaus der Bundeswehr in Bundesbesitz','BWI'],
  ['Innovationseinheit, die mit Startups arbeitet','CIHBw'],
  ['Zuständig für den Geheimschutz in Unternehmen (Bund)','Bundesministerium für Wirtschaft und Energie','Nach § 25 SÜG. Bei Aufträgen eines Bundeslandes ist das jeweilige Landeswirtschaftsministerium zuständig.'],
  ['Plant und führt alle Einsätze und Operationen im In- und Ausland','OpFüKdoBw']
@@ -429,7 +428,7 @@ const LESSONS=[
  {id:'aufbau',t:'Aufbau der Bundeswehr',d:'Streitkräfte, Teilstreitkräfte und die zivile Verwaltung',deck:'beh',b:()=>`
   <p>Kern der Bundeswehr sind die Streitkräfte mit vier Teilstreitkräften: Heer, Luftwaffe, Marine und, als jüngste, Cyber- und Informationsraum (CIR). Jede Teilstreitkraft hat eigene Bezeichnungen für ihre Ebenen und eigene Uniformen. Dazu kommen der Unterstützungsbereich unter dem Unterstützungskommando und das Operative Führungskommando, das seit Oktober 2024 alle Einsätze im In- und Ausland plant und führt.</p>
   <p>Neben den Streitkräften steht die zivile Bundeswehrverwaltung. Dazu gehören die großen Bundesämter, etwa für Ausrüstung (BAAINBw), Personal (BAPersBw) oder Infrastruktur (BAIUDBw). Das BAAINBw ist eine zivile Bundesoberbehörde mit rund 10.000 zivilen und 1.800 militärischen Beschäftigten.</p>
-  <div class="callout">Für Gespräche wichtig: Wer im BAAINBw sitzt, ist oft Beamtin oder Beamter, nicht Soldat. Dort gelten Amtsbezeichnungen statt Dienstgrade. Uniform oder Zivil verrät Ihnen, in welcher Welt Ihr Gegenüber arbeitet.</div>`},
+  <div class="callout">In der zivilen Bundeswehrverwaltung arbeiten überwiegend Beamtinnen, Beamte und Tarifbeschäftigte. Für sie gelten Amtsbezeichnungen statt Dienstgrade.</div>`},
  {id:'dienstgrade',t:'Dienstgrade verstehen',d:'Laufbahnen, Dienstgradgruppen und NATO-Rangcodes',deck:'dg',b:()=>`
   <p>Es gibt drei Laufbahngruppen: Mannschaften, Unteroffiziere und Offiziere. Sie gliedern sich in sieben Dienstgradgruppen mit zusammen 26 Dienstgraden:</p>
   <ol class="ladder">${Object.values(G).map(g=>`<li><strong>${esc(g)}</strong><span>${RANKS.filter(r=>r.g===g).map(r=>esc(r.k||r.h)).join(', ')}</span></li>`).join('')}</ol>
@@ -460,28 +459,24 @@ const LESSONS=[
  {id:'zeichen',t:'NATO-Größenzeichen',d:'Taktische Zeichen auf Lagekarten lesen',deck:'sym',b:()=>`
   <p>Auf Lagekarten und in Lagebildern stehen Truppenteile als taktische Zeichen nach dem NATO-Standard APP-6. Der Rahmen zeigt die Art (das Kreuz steht für Infanterie), das Zeichen darüber die Größe.</p>
   ${syms([['●','Trupp'],['●●','Gruppe'],['●●●','Zug'],['I','Kompanie'],['II','Bataillon'],['III','Regiment'],['X','Brigade'],['XX','Division']])}
-  <p>Die Logik: Punkte für Teileinheiten, senkrechte Striche von der Kompanie bis zum Regiment, Kreuze ab der Brigade. Darüber folgen Korps (XXX) und Armee (XXXX). Die Zuordnung von Trupp und Gruppe zu einem und zwei Punkten folgt der deutschen Lesart; APP-6 kennt darunter noch Team oder Besatzung (Ø).</p>
-  <div class="callout">Wer Lagebild- oder Führungssoftware baut, begegnet diesen Zeichen sofort. Sie sind standardisiert, und Abweichungen fallen Nutzern aus der Truppe als erstes auf.</div>`},
+  <p>Die Logik: Punkte für Teileinheiten, senkrechte Striche von der Kompanie bis zum Regiment, Kreuze ab der Brigade. Darüber folgen Korps (XXX) und Armee (XXXX). Die Zuordnung von Trupp und Gruppe zu einem und zwei Punkten folgt der deutschen Lesart; APP-6 kennt darunter noch Team oder Besatzung (Ø).</p>`},
  {id:'staebe',t:'Stäbe und Stabsabteilungen',d:'Wer im Stab wofür zuständig ist',deck:'stab',b:()=>`
   <p>Ein Kommandeur führt, sein Stab bereitet Entscheidungen vor und setzt sie um. Der Stab ist in nummerierte Abteilungen gegliedert. Die Nummer bedeutet überall dasselbe:</p>
   <ol class="ladder">${STAB.map(([k,v])=>`<li><strong>${k.slice(1)}</strong><span>${esc(v)}</span></li>`).join('')}</ol>
-  <p>Der Buchstabe davor zeigt die Ebene oder den Stabstyp: S im Bataillon, G auf höheren Ebenen des Heeres, A für die Luftwaffe, N für die Marine, J in streitkräftegemeinsamen Stäben. Ein Bataillon hat typischerweise nur S1 bis S6, dort umfasst die S3 auch die Ausbildung.</p>
-  <div class="callout">Für IT-Anbieter ist die Abteilung 6 (Führungsunterstützung) oft fachlich der erste Ansprechpartner. Aber: Stäbe sind Bedarfsträger. Aufträge vergeben sie nicht, das läuft über BAAINBw, BWI oder einen Generalunternehmer.</div>`},
+  <p>Der Buchstabe davor zeigt die Ebene oder den Stabstyp: S im Bataillon, G auf höheren Ebenen des Heeres, A für die Luftwaffe, N für die Marine, J in streitkräftegemeinsamen Stäben. Ein Bataillon hat typischerweise nur S1 bis S6, dort umfasst die S3 auch die Ausbildung.</p>`},
  {id:'beschaffung',t:'Wer braucht, wer beschafft',d:'Bedarfsträger, Bedarfsdecker und die wichtigsten Stellen',deck:'beh',b:()=>`
   <p>Die Bundeswehr trennt zwei Rollen. Der Bedarfsträger formuliert, was gebraucht wird. Der Bedarfsdecker beschafft es. Das zentrale Verfahren heißt Customer Product Management (CPM) und betrachtet ein Produkt über den gesamten Lebenszyklus.</p>
   <ol class="ladder">
    <li><strong>BAAINBw</strong><span>Zivile Bundesoberbehörde in Koblenz, Bedarfsdecker der Streitkräfte. Größere Vorhaben laufen über CPM, betriebsbedingte Bedarfe über den Einkauf der Bundeswehr.</span></li>
-   <li><strong>BWI</strong><span>IT-Systemhaus der Bundeswehr, hundertprozentige Bundesgesellschaft. Vergibt selbst und veröffentlicht eine Vergabe-Roadmap.</span></li>
-   <li><strong>ZDigBw</strong><span>Dem Kommando CIR unterstellt, Bedarfsträger für das Teilportfolio Cyber/IT und erklärter Treiber der Digitalisierung.</span></li>
+   <li><strong>BWI</strong><span>IT-Systemhaus der Bundeswehr, hundertprozentige Bundesgesellschaft. Betreibt und modernisiert die IT der Bundeswehr.</span></li>
+   <li><strong>ZDigBw</strong><span>Dem Kommando CIR unterstellt, Bedarfsträger für das Teilportfolio Cyber/IT.</span></li>
    <li><strong>CIHBw</strong><span>Cyber Innovation Hub, seit 2020 Abteilung der BWI. Testet neue Lösungen mit Nutzern aus der Truppe und übergibt Erfolgreiches an das ZDigBw zur Einführung.</span></li>
    <li><strong>BMWE</strong><span>Das Bundesministerium für Wirtschaft und Energie ist nach § 25 SÜG für den Geheimschutz in Unternehmen zuständig, also für den Sicherheitsbescheid, den eine Firma für eingestufte Aufträge braucht.</span></li>
-  </ol>
-  <div class="callout">Erfahrungswert aus der Praxis, keine Vorschrift: Mit Truppe und Stäben spricht man über Bedarf und Nutzen, mit Beschaffungsstellen und Generalunternehmern über Verfahren und Verträge.</div>`},
- {id:'anrede',t:'Anrede und Umgang',d:'Was im ersten Gespräch sitzen sollte',deck:'eti',b:()=>`
+  </ol>`},
+ {id:'anrede',t:'Anrede und Umgang',d:'Anrede nach Dienstgrad, Generale und Sanitätsdienst',deck:'eti',b:()=>`
   <p>Angesprochen wird mit Herr oder Frau und dem Dienstgrad, gegebenenfalls mit Nachnamen: „Herr Oberstleutnant“, „Frau Hauptmann Müller“. Dienstgrade bleiben grammatisch männlich, eine „Hauptfrau“ gibt es nicht.</p>
   <p>Alle Generale werden mit „Herr General“ bzw. „Frau General“ angesprochen, auch Brigadegeneral, Generalmajor und Generalleutnant. Der Plural lautet in der Bundeswehr Generale. Ranghöchster Soldat ist der Generalinspekteur der Bundeswehr.</p>
-  <p>Sanitätsoffiziere tragen eigene Dienstgrade, vom Stabsarzt (Ebene Hauptmann) bis zum Generaloberstabsarzt (Ebene Generalleutnant), und den Äskulapstab am Abzeichen.</p>
-  <div class="callout">Unsicher beim Dienstgrad? Dann einfach nachfragen oder auf die Visitenkarte schauen, dort steht er fast immer. Ein richtig verwendeter Dienstgrad wird bemerkt.</div>`}
+  <p>Sanitätsoffiziere tragen eigene Dienstgrade, vom Stabsarzt (Ebene Hauptmann) bis zum Generaloberstabsarzt (Ebene Generalleutnant), und den Äskulapstab am Abzeichen.</p>`}
 ];
 
 /* ---------- Speicher ---------- */
@@ -602,7 +597,7 @@ function renderRef(){
     <p class="small">Teileinheit: Trupp bis Zug. Einheit: Kompanie, Batterie, Staffel. Verband: ab Bataillon. Großverband: ab Brigade. Darüber im NATO-Rahmen Korps (XXX) und Armee (XXXX).</p>`;
   } else if(refTab==='stab'){
     h+=`<dl>${STAB.map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
-    <p class="small">Präfixe: ${PRE.map(([k,v])=>`${k} ${esc(v)}`).join('; ')}. Die Nummer bleibt gleich, der Buchstabe zeigt Ebene oder Teilstreitkraft: Ein Bataillon hat typischerweise S1 bis S6 (S3 dort inkl. Ausbildung), J1 bis J9 voll ausgeprägt gibt es in streitkräftegemeinsamen Stäben. Stäbe sind Bedarfsträger, keine Vergabestellen.</p>`;
+    <p class="small">Präfixe: ${PRE.map(([k,v])=>`${k} ${esc(v)}`).join('; ')}. Die Nummer bleibt gleich, der Buchstabe zeigt Ebene oder Teilstreitkraft: Ein Bataillon hat typischerweise S1 bis S6 (S3 dort inkl. Ausbildung), J1 bis J9 voll ausgeprägt gibt es in streitkräftegemeinsamen Stäben.</p>`;
   } else {
     h+=`<dl>${BEH.map(([k,v,n])=>`<div><dt>${k}</dt><dd>${esc(v)}${n?'<br>'+esc(n):''}</dd></div>`).join('')}</dl>`;
   }
@@ -628,7 +623,7 @@ function renderHelp(){
   <h2>Kein Angebot der Bundeswehr</h2>
   <p>AGAdemy ist ein privates Projekt. Es ist kein Angebot, keine Veröffentlichung und keine offizielle Anwendung der Bundeswehr, des Bundesministeriums der Verteidigung oder einer anderen Dienststelle und steht mit ihnen in keiner Verbindung. Alle Inhalte beruhen auf öffentlich zugänglichen Quellen und können Fehler enthalten. Verbindlich sind allein die offiziellen Quellen. Fehler gefunden? Gern als <a href="https://github.com/FlorianWilhelm/agademy/issues">Issue auf GitHub</a> melden.</p>
   <h2>Wofür die App da ist</h2>
-  <p>Grundwissen über die Bundeswehr für Gespräche mit Soldatinnen, Soldaten und Dienststellen: Dienstgrade und Abzeichen, Gliederung, Stabsabteilungen, Behörden und die Anrede. Insgesamt ${n} Karten in ${DECKS.length} Themen.</p>
+  <p>Grundwissen über die Bundeswehr: Dienstgrade und Abzeichen, Gliederung, Stabsabteilungen, Behörden und die Anrede. Insgesamt ${n} Karten in ${DECKS.length} Themen.</p>
   <h2>Grundlagen</h2>
   <p>Acht Lektionen vermitteln das Wissen in sinnvoller Reihenfolge, mit Beispielen und Abzeichen. Am Ende jeder Lektion führt „Lernkarten dazu üben“ direkt zum passenden Thema. Gelesene Lektionen sind markiert.</p>
   <h2>Thema wählen</h2>
