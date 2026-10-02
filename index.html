@@ -420,10 +420,10 @@ function insignia(key,W=60){
         s+=wing?`<g transform="translate(0 -4.5) translate(30 88) scale(.92) translate(-30 -88)">${g}</g>`:g; // Luftwaffe: über der Schwinge
       }
     });
-    const pip=(x,y)=>{const P=(a,r)=>(x+r*Math.cos(a)).toFixed(2)+','+(y+r*Math.sin(a)).toFixed(2);let p=[],hi='';
-      for(let i=0;i<8;i++){const a=i*Math.PI/4-Math.PI/2,R=i%2?4.7:6;p.push(P(a,R),P(a+Math.PI/8,3.1));
-        hi+=`<polygon points="${x},${y} ${P(a,R)} ${P(a+Math.PI/8,3.1)}" fill="#fff" fill-opacity=".22"/>`}
-      return `<polygon points="${p.join(' ')}" fill="${ink}"/>`+hi}; // achtzackiger Stern, facettiert
+    const pip=(x,y)=>{const R=5.9,P=(a,r)=>(x+r*Math.cos(a)).toFixed(2)+','+(y+r*Math.sin(a)).toFixed(2),d=a=>R/(Math.abs(Math.cos(a))+Math.abs(Math.sin(a)));
+      let p=[],hi='';for(let i=0;i<40;i++){const a=i*Math.PI/20-Math.PI/2;p.push(P(a,i%2?d(a)*.78:d(a)*(i%10===0?1:1.06)))}
+      for(let k=0;k<4;k++){const a=k*Math.PI/2-Math.PI/2;hi+=`<polygon points="${x},${y} ${P(a,R*.97)} ${P(a+Math.PI/4,R*.3)}" fill="#fff" fill-opacity=".25"/>`}
+      return `<polygon points="${p.join(' ')}" fill="${ink}"/>`+hi}; // Raute mit gezackten Kanten und Graten zu den vier Spitzen
     const pm=spec.find(x=>/^p\d/.test(x));
     if(pm){const hasW=spec.includes('w');const base=hasW?(wing?72.5:76):(wing?73.5:74);
       if(pm==='p4s'){s+=pip(30,base-25)+pip(30,base-12.5)+pip(23.5,base)+pip(36.5,base)}
