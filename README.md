@@ -11,12 +11,16 @@ wie sie tickt.
 
 ## Inhalte
 
-* Strukturen: BMVg, Teilstreitkräfte, Organisationsbereiche
+* Strukturen: BMVg, Teilstreitkräfte, Organisationsbereiche, Karrierecenter
+* Bundeswehr im Staat: Parlamentsarmee, Befehlsgewalt, Innere Führung, Wehrbeauftragte, Statusgruppen, Wehrdienst
+* Bündnis: NATO, Artikel 5, Brigade Litauen, Drehscheibe Deutschland, Heimatschutz, EU
 * Dienstgrade, Abzeichen und Anreden
 * Waffenfarben (Litze, Kragenspiegel) und Barettfarben
-* Gliederung vom Trupp zur Division, NATO-Größenzeichen
+* Gliederung vom Trupp zur Division, Großverbände, NATO-Größenzeichen
 * Stabsabteilungen (J1 bis J9)
-* Abkürzungen und Beschaffung: Bedarfsträger, BAAINBw, BWI
+* Abkürzungen, Buchstabieralphabet und Datum-Zeit-Gruppe
+* Beschaffung und Haushalt: Bedarfsträger, BAAINBw, BWI, Einzelplan 14, Sondervermögen
+* Anrede, Gelöbnis, Zeremonien und Auszeichnungen
 
 Lektionen, Lernkarten mit Karteikasten-System, Quiz und Nachschlagetabellen.
 Der Lernstand wird nur lokal im Browser gespeichert.
@@ -33,6 +37,12 @@ Ein Service Worker (`sw.js`) und das Manifest (`icons/site.webmanifest`) machen
 daraus eine installierbare PWA, die nach dem ersten Aufruf auch offline läuft.
 Die Seite ist per `<meta name="robots" content="noindex">` von der Indizierung
 durch Suchmaschinen ausgenommen.
+
+Änderungen kommen in [CHANGELOG.md](CHANGELOG.md) unter „Unveröffentlicht“.
+Neue Versionen erscheinen über `./release.sh 0.2`: Das Skript setzt Version und
+Datum (YYYY-MM-DD) in `index.html` und im Changelog, committet, legt den Tag `v0.2`
+an und pusht. Die Hilfe-Seite zeigt so immer die Version des aktuellen Tags und
+die letzten Einträge aus dem Changelog.
 
 ## Lizenz
 

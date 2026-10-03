@@ -85,6 +85,8 @@ dialog::backdrop{background:rgba(8,16,30,.55)}
 .help h2{margin-top:24px}
 .help h2:first-child{margin-top:0}
 .help p{margin:0 0 10px;max-width:62ch}
+.changes{margin:0 0 10px;padding-left:20px;font-size:15px;color:var(--muted)}
+.changes li{margin:2px 0}
 .chip{flex:none;border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;font-size:15px;white-space:nowrap}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 /* Karte als taktisches Zeichen: Rahmen plus Größenzeichen darüber */
@@ -170,7 +172,12 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
   .ans{animation:show .18s ease-out}
   @keyframes show{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 }
-#view [id]{scroll-margin-top:16px}
+#view [id]{scroll-margin-top:64px}
+/* Sprungleiste in Nachschlagen: bleibt beim Scrollen oben, markiert den aktuellen Abschnitt */
+.jump{position:sticky;top:0;z-index:2;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;background:var(--bg);margin:0 -16px 8px;padding:8px 16px;border-bottom:1.5px solid var(--line)}
+.jump .chip{color:var(--ink)}
+.jump .chip[aria-current="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.jump .chip[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -191,6 +198,8 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 </div></nav>
 
 <script>
+/* ---------- Version: setzt release.sh passend zum Git-Tag, nicht von Hand ändern ---------- */
+const VERSION='0.1', UPDATED='2026-10-03';
 /* ---------- Daten ---------- */
 const G={M:'Mannschaften',UoP:'Unteroffiziere ohne Portepee',UmP:'Unteroffiziere mit Portepee',L:'Leutnante',H:'Hauptleute',S:'Stabsoffiziere',Gen:'Generale'};
 const RANKS=[
@@ -254,6 +263,8 @@ const DECKS=[
  {id:'sym',name:'Größenzeichen',s:'XX'},
  {id:'stab',name:'Stabsabteilungen',s:'III'},
  {id:'beh',name:'Behörden & Begriffe',s:'I'},
+ {id:'staat',name:'Bundeswehr im Staat',s:'IIII'},
+ {id:'nato',name:'Bündnis & Heimatschutz',s:'XXXXX'},
  {id:'abk',name:'Abkürzungen im Dienst',s:'●●'},
  {id:'vs',name:'Geheimschutz',s:'XXXX'},
  {id:'dig',name:'Führung & Digitalisierung',s:'Ø'},
@@ -618,6 +629,109 @@ INS.san.forEach(([n])=>{ // hinten angehängt, damit die positionsbasierten Kart
   add('abz','abz-san','Welcher Dienstgrad ist das? (Sanitätsdienst)',n,null,{ins:'san:'+n});
   add('abz','abzrev-san','Welches Abzeichen gehört zu: '+n+' (Sanitätsdienst)','san:'+n);
 });
+
+/* ---------- Staat, Bündnis, Funk und Großverbände (hinten angehängt, damit die positionsbasierten Karten-IDs stabil bleiben) ---------- */
+const GLOSS2=[
+ {id:'staat',t:'Staat & Recht',deck:'staat',items:[
+  ['GG','Grundgesetz','Art. 87a regelt Aufstellung und Einsatz der Streitkräfte, Art. 65a die Befehls- und Kommandogewalt.'],
+  ['IBuK','Inhaber der Befehls- und Kommandogewalt','Im Frieden die Bundesministerin oder der Bundesminister der Verteidigung (Art. 65a GG), im Verteidigungsfall die Bundeskanzlerin oder der Bundeskanzler (Art. 115b GG).'],
+  ['GenInspBw','Generalinspekteur der Bundeswehr','Ranghöchster Soldat und militärischer Berater der Bundesregierung, aber kein Oberbefehlshaber.'],
+  ['ParlBG','Parlamentsbeteiligungsgesetz','Regelt seit 2005, wie der Bundestag bewaffneten Auslandseinsätzen zustimmt.'],
+  ['SG','Soldatengesetz','Rechte und Pflichten der Soldatinnen und Soldaten, z. B. Diensteid (§ 9) und Gehorsam (§ 11).'],
+  ['WBO','Wehrbeschwerdeordnung','Regelt die Beschwerde von Soldatinnen und Soldaten, die sich unrichtig behandelt fühlen.'],
+  ['WDO','Wehrdisziplinarordnung','Regelt Disziplinarmaßnahmen und wer sie verhängen darf.'],
+  ['WPflG','Wehrpflichtgesetz','Die Pflicht zum Grundwehrdienst ist seit dem 1. Juli 2011 ausgesetzt, nicht abgeschafft. Im Spannungs- und Verteidigungsfall gilt sie wieder.'],
+  ['WDModG','Wehrdienst-Modernisierungsgesetz','Seit 2026: Fragebogen für alle 18-Jährigen, für Männer verpflichtend. Ab Juli 2027 Musterung junger Männer. Der Dienst selbst bleibt freiwillig.'],
+  ['ZInFü','Zentrum Innere Führung','In Koblenz, lehrt und entwickelt die Innere Führung.'],
+  ['VdRBw','Verband der Reservisten der Deutschen Bundeswehr'],
+  ['Epl. 14','Einzelplan 14','Der Verteidigungshaushalt im Bundeshaushalt.']
+ ]},
+ {id:'nato',t:'NATO, EU & Heimatschutz',deck:'nato',items:[
+  ['NATO','North Atlantic Treaty Organization','Gegründet 1949, Deutschland ist seit 1955 Mitglied. Heute 32 Mitgliedstaaten.'],
+  ['NAC','North Atlantic Council (Nordatlantikrat)','Oberstes politisches Gremium der NATO in Brüssel, entscheidet im Konsens.'],
+  ['SACEUR','Supreme Allied Commander Europe','Oberster militärischer Befehlshaber der NATO in Europa, traditionell ein US-General oder -Admiral.'],
+  ['SHAPE','Supreme Headquarters Allied Powers Europe','Militärisches Hauptquartier des SACEUR in Mons, Belgien.'],
+  ['ACO','Allied Command Operations','Strategisches Kommando, das alle NATO-Operationen führt, mit Sitz bei SHAPE.'],
+  ['ACT','Allied Command Transformation','Strategisches Kommando für die Weiterentwicklung der NATO, in Norfolk (USA).'],
+  ['JFC','Joint Force Command','Operative NATO-Hauptquartiere in Brunssum, Neapel und Norfolk.'],
+  ['JSEC','Joint Support and Enabling Command','NATO-Kommando in Ulm, koordiniert Verlegung und Schutz von Truppen im rückwärtigen Raum Europas.'],
+  ['NFM','NATO Force Model','Streitkräftemodell seit 2023: Kräfte in drei Bereitschaftsstufen (Tiers), fest eingeplant für die Verteidigungspläne.'],
+  ['eFP','enhanced Forward Presence','Multinationale Gefechtsverbände an der NATO-Ostflanke seit 2017. Den Verband in Litauen führt Deutschland.'],
+  ['HNS','Host Nation Support','Unterstützung verbündeter Truppen durch das Gastland, z. B. mit Unterkunft, Verpflegung, Betankung und Transport.'],
+  ['OPLAN DEU','Operationsplan Deutschland','Eingestufter Plan für die Verteidigung Deutschlands und die „Drehscheibe Deutschland“, koordiniert vom OpFüKdoBw.'],
+  ['GSVP','Gemeinsame Sicherheits- und Verteidigungspolitik der EU','Beistandsklausel in Art. 42 Abs. 7 EU-Vertrag.'],
+  ['HSchDiv','Heimatschutzdivision','Seit 2025 vierte Division des Heeres, Stab in Berlin. Führt die Heimatschutzregimenter aus Reservisten und aktiven Soldaten.'],
+  ['LKdo','Landeskommando','Eines je Bundesland, Bindeglied zwischen Bundeswehr und Landesbehörden, etwa bei der Katastrophenhilfe.'],
+  ['KRITIS','Kritische Infrastruktur','Z. B. Energie, Wasser, Verkehr und Kommunikation. Ihr Schutz ist eine Kernaufgabe im Heimatschutz.']
+ ]},
+ {id:'zeit',t:'Datum und Uhrzeit',deck:'abk',items:[
+  ['DTG','Datum-Zeit-Gruppe','Tag, Uhrzeit, Zeitzone, Monat, Jahr, z. B. 031430ZOCT26 für den 3. Oktober 2026, 14:30 Uhr UTC.'],
+  ['Zulu-Zeit','Koordinierte Weltzeit (UTC), Zeitzonenbuchstabe Z','Standard für Befehle und Meldungen über Zeitzonen hinweg.'],
+  ['Alfa-Zeit','UTC+1, in Deutschland die Winterzeit (MEZ)'],
+  ['Bravo-Zeit','UTC+2, in Deutschland die Sommerzeit (MESZ)'],
+  ['Juliett-Zeit','Ortszeit am jeweiligen Standort']
+ ]}
+];
+GLOSS2.forEach(g=>g.items.forEach(([k,v,n])=>add(g.deck,'g-'+g.id,(g.id==='zeit'?'Zeitangabe: ':'Abkürzung: ')+k,v,n)));
+const ALPHA='Alfa Bravo Charlie Delta Echo Foxtrot Golf Hotel India Juliett Kilo Lima Mike November Oscar Papa Quebec Romeo Sierra Tango Uniform Victor Whiskey X-ray Yankee Zulu'.split(' ');
+ALPHA.forEach(w=>add('abk','alpha','NATO-Alphabet: '+w[0],w,w==='Alfa'||w==='Juliett'?'Bewusst so geschrieben, damit es in allen Sprachen richtig ausgesprochen wird.':null));
+GLOSS2.push({id:'alpha',t:'NATO-Alphabet (Buchstabieralphabet)',nav:'NATO-Alphabet',deck:'abk',items:ALPHA.map(w=>[w[0],w])});
+const BEH2=[
+ ['PzDiv','Panzerdivision','Das Heer hat die 1. Panzerdivision (Stab in Oldenburg) und die 10. Panzerdivision (Stab in Veitshöchheim).'],
+ ['DSK','Division Schnelle Kräfte','Luftbewegliche Kräfte des Heeres, u. a. Fallschirmjäger und Kommando Spezialkräfte. Stab in Stadtallendorf.'],
+ ['KSK','Kommando Spezialkräfte','Spezialkräfte des Heeres in Calw.']
+];
+BEH2.forEach(([k,v,n])=>add('beh','abk','Abkürzung: '+k,v,n));
+BEH.push(...BEH2);GLOSS.push(...GLOSS2);
+[
+ ['staat','staat','Wer hat im Frieden die Befehls- und Kommandogewalt über die Streitkräfte?','Bundesministerin oder Bundesminister der Verteidigung','Art. 65a GG, kurz IBuK.',['Bundeskanzlerin oder Bundeskanzler','Bundespräsidentin oder Bundespräsident','Generalinspekteur']],
+ ['staat','staat','Auf wen geht die Befehls- und Kommandogewalt im Verteidigungsfall über?','Bundeskanzlerin oder Bundeskanzler','Art. 115b GG.',['Bundespräsidentin oder Bundespräsident','Generalinspekteur','Bundestagspräsidentin oder Bundestagspräsident']],
+ ['staat','staat','Was braucht ein bewaffneter Einsatz der Bundeswehr im Ausland?','Zustimmung des Bundestages (Mandat)','Parlamentsvorbehalt nach dem Urteil des Bundesverfassungsgerichts von 1994. Bei Gefahr im Verzug kann die Zustimmung nachgeholt werden.',['Beschluss des Bundesrates','Befehl des Generalinspekteurs','Zustimmung des Bundespräsidenten']],
+ ['staat','staat','Wer stellt den Verteidigungsfall fest?','Bundestag mit Zustimmung des Bundesrates','Auf Antrag der Bundesregierung, mit Zweidrittelmehrheit (Art. 115a GG).',['Bundesregierung allein','Bundespräsident allein','Nordatlantikrat der NATO']],
+ ['staat','staat','Welcher Grundgesetzartikel regelt Aufstellung und Einsatz der Streitkräfte?','Art. 87a GG',null,['Art. 1 GG','Art. 20 GG','Art. 45b GG']],
+ ['staat','staat','Welcher Bundestagsausschuss kann sich selbst als Untersuchungsausschuss einsetzen?','Verteidigungsausschuss','Art. 45a GG.',['Haushaltsausschuss','Innenausschuss','Petitionsausschuss']],
+ ['staat','staat','Wie heißt die Führungskultur der Bundeswehr?','Innere Führung',null,['Truppendienst','Formaldienst','Traditionspflege']],
+ ['staat','staat','Leitbild der Inneren Führung','Staatsbürger in Uniform',null,['Bürger in Waffen','Kämpfer ohne Politik','Soldat des Vaterlands']],
+ ['staat','staat','Was gilt für einen Befehl, durch dessen Befolgen eine Straftat begangen würde?','Er darf nicht befolgt werden','§ 11 Soldatengesetz. Befehle, die die Menschenwürde verletzen oder nicht dienstlichen Zwecken dienen, sind unverbindlich.',['Er muss befolgt werden','Er muss erst schriftlich bestätigt werden','Er gilt nur im Einsatz']],
+ ['staat','staat','Was bedeutet „Führen mit Auftrag“?','Ziel und Rahmen vorgeben, den Weg selbst wählen lassen','Auch Auftragstaktik genannt.',['Jeden Schritt genau befehlen','Nur schriftlich befehlen','Ohne Befehle führen']],
+ ['staat','staat','Wem ist die oder der Wehrbeauftragte zugeordnet?','Dem Bundestag','Hilfsorgan des Bundestages bei der parlamentarischen Kontrolle (Art. 45b GG), gewählt für fünf Jahre.',['Dem BMVg','Dem Bundespräsidenten','Dem Generalinspekteur']],
+ ['staat','staat','Wie können sich Soldatinnen und Soldaten an die oder den Wehrbeauftragten wenden?','Direkt, ohne Dienstweg',null,['Nur über den Disziplinarvorgesetzten','Nur über die Vertrauensperson','Nur nach Freigabe durch den Kompaniechef']],
+ ['staat','status','Wie lange darf die Dienstzeit als Soldat auf Zeit höchstens dauern?','25 Jahre','§ 40 Soldatengesetz.',['12 Jahre','20 Jahre','Bis zur Altersgrenze']],
+ ['staat','status','Seit wann ist die Wehrpflicht ausgesetzt?','1. Juli 2011','Ausgesetzt, nicht abgeschafft. Im Spannungs- und Verteidigungsfall gilt sie wieder.',['1. Januar 2002','3. Oktober 1990','1. Januar 2026']],
+ ['staat','status','Was müssen junge Männer seit 2026 mit 18 tun?','Einen Fragebogen zu Eignung und Bereitschaft beantworten','Für Frauen ist er freiwillig. Ab Juli 2027 folgt die Musterung junger Männer, der Dienst selbst bleibt freiwillig.',['Sechs Monate Grundwehrdienst leisten','Sich bei der Polizei melden','Nichts, alles ist freiwillig']],
+ ['staat','status','Wer gehört zur Reserve der Bundeswehr?','Ehemalige Soldatinnen und Soldaten','Zu einer Übung herangezogen heißen sie Reservistendienstleistende (RDL).',['Nur Offiziere außer Dienst','Alle Zivilbeschäftigten','Alle 18-Jährigen']],
+ ['staat','status','Wer legt das feierliche Gelöbnis ab?','Freiwillig Wehrdienstleistende','Soldaten auf Zeit und Berufssoldaten schwören den Diensteid (§ 9 Soldatengesetz).',['Berufssoldaten','Soldaten auf Zeit','Reservisten']],
+ ['nato','nato','Was besagt Artikel 5 des Nordatlantikvertrags?','Ein Angriff auf einen Mitgliedstaat gilt als Angriff auf alle','Jeder Staat leistet Beistand mit den Maßnahmen, die er für erforderlich hält. Das muss nicht militärisch sein.',['Jeder Staat verteidigt sich allein','Die NATO handelt nur mit UN-Mandat','Alle Mitglieder geben 2 % ihres BIP für Verteidigung aus']],
+ ['nato','nato','Was regelt Artikel 4 des Nordatlantikvertrags?','Konsultationen bei Bedrohung',null,['Beistand im Angriffsfall','Beitritt neuer Mitglieder','Austritt aus der NATO']],
+ ['nato','nato','Wie oft wurde der NATO-Bündnisfall bisher ausgerufen?','Einmal, nach dem 11. September 2001',null,['Noch nie','Zweimal','Fünfmal']],
+ ['nato','nato','Seit wann ist Deutschland Mitglied der NATO?','1955','Die NATO wurde 1949 gegründet.',['1949','1966','1990']],
+ ['nato','nato','Wo steht das militärische Hauptquartier SHAPE?','Mons (Belgien)','Der politische Sitz der NATO ist Brüssel.',['Brüssel','Norfolk (USA)','Brunssum (Niederlande)']],
+ ['nato','nato','Wo steht das NATO-Kommando JSEC?','Ulm',null,['Brunssum','Mons','Neapel']],
+ ['nato','nato','Wie viele Soldatinnen und Soldaten soll Tier 1 des NATO-Streitkräftemodells in bis zu zehn Tagen bereitstellen?','Rund 100.000','Tier 2: weitere rund 200.000 in 10 bis 30 Tagen. Tier 3: mindestens 500.000 in bis zu sechs Monaten.',['Rund 10.000','Rund 40.000','Rund 500.000']],
+ ['nato','nato','Welcher Verband des Heeres ist dauerhaft in Litauen stationiert?','Panzerbrigade 45','In Dienst gestellt am 1. April 2025 in Vilnius, voll einsatzbereit bis 2027. Geplant sind rund 5.000 Soldatinnen, Soldaten und Zivilbeschäftigte.',['Panzergrenadierbrigade 37','Deutsch-Französische Brigade','Gebirgsjägerbrigade 23']],
+ ['nato','nato','Was meint „Drehscheibe Deutschland“?','Deutschland als Transitland für verbündete Truppen',null,['Ein Logistikzentrum der BWI','Den Sitz des NATO-Hauptquartiers','Die Rotation der Truppen in Litauen']],
+ ['nato','nato','Wer führt seit 2025 die Heimatschutzregimenter?','Heimatschutzdivision','Vorher das Territoriale Führungskommando.',['Landeskommandos','Operatives Führungskommando','Kommando CIR']],
+ ['nato','nato','Wie viele Landeskommandos hat die Bundeswehr?','16, eines je Bundesland',null,['4','8','32']],
+ ['nato','nato','Wer koordiniert den Operationsplan Deutschland?','OpFüKdoBw',null,['BAAINBw','Heimatschutzdivision','SHAPE']],
+ ['nato','nato','Wo steht die Beistandsklausel der EU?','Art. 42 Abs. 7 EU-Vertrag','Bisher einmal angewendet, von Frankreich nach den Anschlägen in Paris 2015.',['Art. 5 Nordatlantikvertrag','Art. 87a GG','Art. 51 UN-Charta']],
+ ['beh','haush','Wie heißt der Verteidigungshaushalt im Bundeshaushalt?','Einzelplan 14',null,['Einzelplan 1','Einzelplan 60','Sondervermögen Bundeswehr']],
+ ['beh','haush','Wie groß war das 2022 beschlossene Sondervermögen Bundeswehr?','100 Milliarden Euro','Kreditfinanziert, abgesichert in Art. 87a Abs. 1a GG.',['10 Milliarden Euro','50 Milliarden Euro','500 Milliarden Euro']],
+ ['beh','haush','Welche Verteidigungsausgaben sind seit 2025 von der Schuldenbremse ausgenommen?','Der Teil über 1 % des BIP','Grundgesetzänderung vom März 2025.',['Alle','Keine','Der Teil über 2 % des BIP']],
+ ['beh','haush','NATO-Ziel für Verteidigungsausgaben seit dem Gipfel in Den Haag 2025','5 % des BIP bis 2035','3,5 % für die Kernverteidigung, 1,5 % für verteidigungsrelevante Infrastruktur und Resilienz. Vorher galt seit 2014 das Zwei-Prozent-Ziel.',['2 % des BIP','3 % des BIP bis 2030','10 % des BIP']],
+ ['beh','haush','Welcher Bundestagsausschuss muss großen Beschaffungsvorhaben zustimmen?','Haushaltsausschuss','„25-Millionen-Vorlagen“: Vorhaben ab 25 Millionen Euro legt das BMVg vorher dem Haushaltsausschuss vor.',['Verteidigungsausschuss','Auswärtiger Ausschuss','Wirtschaftsausschuss']],
+ ['beh','rolle','Wo bewirbt man sich bei der Bundeswehr, und wo findet die Musterung statt?','Karrierecenter der Bundeswehr','Dem BAPersBw unterstellt, dazu Karriereberatungsbüros in der Fläche. Die Kreiswehrersatzämter wurden 2012 aufgelöst.',['Kreiswehrersatzamt','Landeskommando','BAAINBw']],
+ ['gl','div','Wie viele Divisionen hat das Heer?','Vier','1. und 10. Panzerdivision, Division Schnelle Kräfte und seit 2025 die Heimatschutzdivision.',['Zwei','Drei','Sechs']],
+ ['gl','div','Zu welcher Division gehört die Panzerbrigade 45 in Litauen?','10. Panzerdivision',null,['1. Panzerdivision','Division Schnelle Kräfte','Heimatschutzdivision']],
+ ['gl','div','Welche Division führt Fallschirmjäger und Kommando Spezialkräfte?','Division Schnelle Kräfte',null,['1. Panzerdivision','10. Panzerdivision','Heimatschutzdivision']],
+ ['gl','div','Wo haben die beiden Einsatzflottillen der Marine ihren Sitz?','Kiel und Wilhelmshaven','Einsatzflottille 1 in Kiel, Einsatzflottille 2 in Wilhelmshaven.',['Rostock und Hamburg','Kiel und Rostock','Wilhelmshaven und Bremerhaven']],
+ ['abk','zeit','Was bedeutet die Datum-Zeit-Gruppe 031430ZOCT26?','3. Oktober 2026, 14:30 Uhr UTC',null,['3. Januar 2026, 14:30 Uhr Ortszeit','14. März 2026, 03:30 Uhr UTC','3. Oktober 2026, 14:30 Uhr MEZ']],
+ ['abk','zeit','Welche Zeit meint der Buchstabe Z in einer Zeitangabe?','UTC (Zulu-Zeit)',null,['Ortszeit','MEZ','MESZ']],
+ ['abk','zeit','Zeitzonenbuchstabe für die deutsche Winterzeit (MEZ)','A (Alfa)',null,['B (Bravo)','Z (Zulu)','J (Juliett)']],
+ ['abk','zeit','Zeitzonenbuchstabe für die deutsche Sommerzeit (MESZ)','B (Bravo)',null,['A (Alfa)','Z (Zulu)','J (Juliett)']],
+ ['eti','zer','Höchste militärische Zeremonie der Bundeswehr','Großer Zapfenstreich','Z. B. zur Verabschiedung von Bundespräsidenten, Bundeskanzlern und Verteidigungsministern.',['Feierliches Gelöbnis','Appell','Flaggenparade']],
+ ['eti','zer','Höchste Stufe des Ehrenzeichens der Bundeswehr','Ehrenkreuz der Bundeswehr für Tapferkeit','Gestiftet 2008. Darunter folgen das Ehrenkreuz in Gold, Silber und Bronze sowie die Ehrenmedaille.',['Ehrenkreuz in Gold','Einsatzmedaille','Bundesverdienstkreuz']],
+ ['eti','zer','Was zeigen Tätigkeitsabzeichen an der Uniform?','Eine Qualifikation oder Verwendung, z. B. Fallschirmspringer',null,['Den Dienstgrad','Die Truppengattung','Die Zahl der Auslandseinsätze']]
+].forEach(([d,k,q,a,n,x])=>add(d,k,q,a,n,x));
 /* ---------- Symbole ---------- */
 function marker(m){
   const parts=[];let w=0;const sp=4;
@@ -647,7 +761,32 @@ const LESSONS=[
   <p>Kern der Bundeswehr sind die Streitkräfte mit vier Teilstreitkräften: Heer, Luftwaffe, Marine und, als jüngste, Cyber- und Informationsraum (CIR). Jede Teilstreitkraft hat eigene Bezeichnungen für ihre Ebenen und eigene Uniformen. Dazu kommen der Unterstützungsbereich unter dem Unterstützungskommando und das Operative Führungskommando, das seit Oktober 2024 alle Einsätze im In- und Ausland plant und führt.</p>
   <p>Neben den Streitkräften steht die zivile Bundeswehrverwaltung. Dazu gehören die großen Bundesämter, etwa für Ausrüstung (BAAINBw), Personal (BAPersBw) oder Infrastruktur (BAIUDBw). Das BAAINBw ist eine zivile Bundesoberbehörde mit rund 10.000 zivilen und 1.800 militärischen Beschäftigten.</p>
   <div class="callout">In der zivilen Bundeswehrverwaltung arbeiten überwiegend Beamtinnen, Beamte und Tarifbeschäftigte. Für sie gelten Amtsbezeichnungen statt Dienstgrade.</div>
+  <p>Wer zur Bundeswehr will, wendet sich an ein Karrierecenter der Bundeswehr. Die Karrierecenter gehören zum BAPersBw, beraten über Karriereberatungsbüros in der Fläche, prüfen die Eignung und übernehmen auch die Musterung. Die früheren Kreiswehrersatzämter gibt es seit 2012 nicht mehr.</p>
   <p>Im Inland arbeitet die Bundeswehr in der Amts- und Katastrophenhilfe mit den Behörden und Organisationen mit Sicherheitsaufgaben (BOS) zusammen, etwa Polizei, Feuerwehr und THW.</p>`},
+ {id:'staat',t:'Bundeswehr im Staat',d:'Parlamentsarmee, Befehlsgewalt, Innere Führung und wer dient',deck:'staat',b:()=>`
+  <p>Die Bundeswehr ist eine Parlamentsarmee. Ihr Auftrag steht im Grundgesetz: Der Bund stellt Streitkräfte zur Verteidigung auf (Art. 87a GG). Für andere Zwecke darf er sie nur einsetzen, soweit das Grundgesetz es ausdrücklich erlaubt, etwa in der Amts- und Katastrophenhilfe oder in einem System kollektiver Sicherheit wie NATO und Vereinten Nationen.</p>
+  <h3>Wer befiehlt</h3>
+  <p>Im Frieden hat die Bundesministerin oder der Bundesminister der Verteidigung die Befehls- und Kommandogewalt (Art. 65a GG), kurz IBuK. Im Verteidigungsfall geht sie auf die Bundeskanzlerin oder den Bundeskanzler über (Art. 115b GG). Der Generalinspekteur ist der ranghöchste Soldat und militärischer Berater der Bundesregierung, aber kein Oberbefehlshaber.</p>
+  <h3>Was der Bundestag entscheidet</h3>
+  <ol class="ladder">
+   <li><strong>Einsätze</strong><span>Bewaffnete Einsätze im Ausland brauchen vorher die Zustimmung des Bundestages, das Mandat. Es ist befristet und legt Auftrag, Einsatzgebiet und Personalobergrenze fest. Bei Gefahr im Verzug wird die Zustimmung nachgeholt (Parlamentsbeteiligungsgesetz).</span></li>
+   <li><strong>Geld</strong><span>Der Bundestag beschließt den Verteidigungshaushalt, den Einzelplan 14. Beschaffungen ab 25 Millionen Euro gehen vorher in den Haushaltsausschuss.</span></li>
+   <li><strong>Krisenfälle</strong><span>Spannungs- und Verteidigungsfall stellt der Bundestag mit Zweidrittelmehrheit fest, den Verteidigungsfall auf Antrag der Bundesregierung und mit Zustimmung des Bundesrates (Art. 80a, 115a GG).</span></li>
+   <li><strong>Kontrolle</strong><span>Der Verteidigungsausschuss kann sich selbst als Untersuchungsausschuss einsetzen (Art. 45a GG). Dazu kommt die oder der Wehrbeauftragte (Art. 45b GG).</span></li>
+  </ol>
+  <div class="callout">Die oder der Wehrbeauftragte wird vom Bundestag für fünf Jahre gewählt und berichtet jährlich über den Zustand der Truppe. Jede Soldatin und jeder Soldat kann sich direkt dorthin wenden, ohne Dienstweg und ohne Nachteile.</div>
+  <h3>Innere Führung</h3>
+  <p>Die Führungskultur der Bundeswehr heißt Innere Führung, ihr Leitbild ist der „Staatsbürger in Uniform“. Soldatinnen und Soldaten behalten ihre Grundrechte, soweit das Soldatengesetz sie nicht ausdrücklich einschränkt. Gehorsam hat Grenzen: Ein Befehl, der die Menschenwürde verletzt oder keinem dienstlichen Zweck dient, ist unverbindlich. Würde durch das Befolgen eine Straftat begangen, darf er nicht befolgt werden (§ 11 Soldatengesetz).</p>
+  <p>Dazu passt das Prinzip „Führen mit Auftrag“, auch Auftragstaktik: Vorgesetzte geben Ziel und Rahmen vor, den Weg wählen die Geführten selbst.</p>
+  <h3>Wer dient</h3>
+  <ol class="ladder">
+   <li><strong>Berufssoldaten (BS)</strong><span>Dienen bis zur gesetzlichen Altersgrenze und schwören den Diensteid.</span></li>
+   <li><strong>Soldaten auf Zeit (SaZ)</strong><span>Verpflichten sich für eine feste Zeit, höchstens 25 Jahre. Auch sie schwören den Diensteid.</span></li>
+   <li><strong>Wehrdienstleistende</strong><span>Leisten freiwilligen Wehrdienst (FWDL) und legen das feierliche Gelöbnis ab.</span></li>
+   <li><strong>Reservisten</strong><span>Ehemalige Soldatinnen und Soldaten. Bei einer Übung heißen sie Reservistendienstleistende (RDL).</span></li>
+   <li><strong>Zivilbeschäftigte</strong><span>Beamtinnen, Beamte und Tarifbeschäftigte, vor allem in der Bundeswehrverwaltung.</span></li>
+  </ol>
+  <p>Die Wehrpflicht ist seit dem 1. Juli 2011 ausgesetzt, aber nicht abgeschafft. Im Spannungs- und Verteidigungsfall gilt sie wieder. Seit 2026 gilt der neue Wehrdienst: Alle 18-Jährigen erhalten einen Fragebogen zu Eignung und Bereitschaft, für Männer ist er verpflichtend, für Frauen freiwillig. Ab Juli 2027 werden junge Männer wieder gemustert. Der Dienst selbst bleibt freiwillig, reichen die Freiwilligen nicht, kann der Bundestag per Gesetz eine Bedarfswehrpflicht beschließen.</p>`},
  {id:'dienstgrade',t:'Dienstgrade verstehen',d:'Laufbahnen, Dienstgradgruppen und NATO-Rangcodes',deck:'dg',b:()=>`
   <p>Es gibt drei Laufbahngruppen: Mannschaften, Unteroffiziere und Offiziere. Sie gliedern sich in sieben Dienstgradgruppen mit zusammen 26 Dienstgraden:</p>
   <ol class="ladder">${Object.values(G).map(g=>`<li><strong>${esc(g)}</strong><span>${RANKS.filter(r=>r.g===g).map(r=>esc(r.k||r.h)).join(', ')}</span></li>`).join('')}</ol>
@@ -685,7 +824,9 @@ const LESSONS=[
   <ol class="ladder">${GL.map(r=>`<li><strong>${esc(r.e)}</strong><span>${esc(r.n)}. ${esc(r.f)}.</span></li>`).join('')}</ol>
   <p>Die vier Sammelbegriffe tauchen ständig auf: Teileinheit (Trupp bis Zug), Einheit (Kompanie, Batterie, Staffel), Verband (ab Bataillon) und Großverband (ab Brigade).</p>
   <p>Auch die Führungsbezeichnung verrät die Ebene: Teileinheiten haben einen Führer (Gruppenführer, Zugführer), die Kompanie hat einen Chef, ab dem Bataillon führt ein Kommandeur. Der Kompaniechef hat nach der Wehrdisziplinarordnung die unterste Stufe der Disziplinarbefugnis.</p>
-  <div class="callout">Luftwaffe und Marine benennen dieselben Ebenen anders. Die Kompanie heißt in der Luftwaffe Staffel, in der Marine entspricht ihr die Besatzung eines Bootes. Ein Geschwader steht auf Regimentsebene. Die Tabelle unter Nachschlagen zeigt alle Entsprechungen.</div>`},
+  <div class="callout">Luftwaffe und Marine benennen dieselben Ebenen anders. Die Kompanie heißt in der Luftwaffe Staffel, in der Marine entspricht ihr die Besatzung eines Bootes. Ein Geschwader steht auf Regimentsebene. Die Tabelle unter Nachschlagen zeigt alle Entsprechungen.</div>
+  <h3>Die Großverbände</h3>
+  <p>Das Heer hat vier Divisionen: die 1. Panzerdivision (Stab in Oldenburg), die 10. Panzerdivision (Veitshöchheim), zu der auch die Panzerbrigade 45 in Litauen gehört, die Division Schnelle Kräfte (Stadtallendorf) mit Fallschirmjägern und Kommando Spezialkräfte sowie seit 2025 die Heimatschutzdivision (Berlin). Die Marine führt ihre Schiffe und Boote in zwei Einsatzflottillen, in Kiel und in Wilhelmshaven.</p>`},
  {id:'zeichen',t:'NATO-Größenzeichen',d:'Taktische Zeichen auf Lagekarten lesen',deck:'sym',b:()=>`
   <p>Auf Lagekarten und in Lagebildern stehen Truppenteile als taktische Zeichen nach dem NATO-Standard APP-6. Der Rahmen zeigt die Art (das Kreuz steht für Infanterie), das Zeichen darüber die Größe.</p>
   ${syms([['●','Trupp'],['●●','Gruppe'],['●●●','Zug'],['I','Kompanie'],['II','Bataillon'],['III','Regiment'],['X','Brigade'],['XX','Division']])}
@@ -694,6 +835,23 @@ const LESSONS=[
   <p>Ein Kommandeur führt, sein Stab bereitet Entscheidungen vor und setzt sie um. Der Stab ist in nummerierte Abteilungen gegliedert. Die Nummer bedeutet überall dasselbe:</p>
   <ol class="ladder">${STAB.map(([k,v])=>`<li><strong>${k.slice(1)}</strong><span>${esc(v)}</span></li>`).join('')}</ol>
   <p>Der Buchstabe davor zeigt die Ebene oder den Stabstyp: S im Bataillon, G auf höheren Ebenen des Heeres, A für die Luftwaffe, N für die Marine, J in streitkräftegemeinsamen Stäben. Ein Bataillon hat typischerweise nur S1 bis S6, dort umfasst die S3 auch die Ausbildung.</p>`},
+ {id:'buendnis',t:'Im Bündnis: NATO, EU und Heimatschutz',d:'Artikel 5, NATO-Kommandostruktur, Litauen und Drehscheibe Deutschland',deck:'nato',b:()=>`
+  <p>Deutschland verteidigt sich nicht allein. Die NATO wurde 1949 gegründet, die Bundesrepublik trat 1955 bei. Heute hat das Bündnis 32 Mitglieder. Kern ist Artikel 5 des Nordatlantikvertrags: Ein bewaffneter Angriff auf einen Mitgliedstaat gilt als Angriff auf alle. Jeder Staat leistet Beistand mit den Maßnahmen, die er für erforderlich hält. Ausgerufen wurde der Bündnisfall bisher einmal, nach dem 11. September 2001. Artikel 4 sieht Konsultationen vor, wenn sich ein Mitglied bedroht sieht.</p>
+  <h3>Wie die NATO geführt wird</h3>
+  <ol class="ladder">
+   <li><strong>Nordatlantikrat</strong><span>Politisches Entscheidungsgremium in Brüssel, entscheidet im Konsens.</span></li>
+   <li><strong>SHAPE</strong><span>Militärisches Hauptquartier in Mons (Belgien). Dort führt der SACEUR, traditionell ein US-Offizier, das Allied Command Operations.</span></li>
+   <li><strong>ACT</strong><span>Allied Command Transformation in Norfolk (USA), entwickelt die NATO weiter.</span></li>
+   <li><strong>JFC</strong><span>Drei operative Hauptquartiere in Brunssum, Neapel und Norfolk.</span></li>
+   <li><strong>JSEC</strong><span>In Ulm, koordiniert Verlegung und Schutz von Truppen im rückwärtigen Raum Europas.</span></li>
+  </ol>
+  <p>Seit 2023 plant die NATO ihre Kräfte nach dem NATO-Streitkräftemodell in drei Stufen: rund 100.000 Soldatinnen und Soldaten in bis zu zehn Tagen, weitere rund 200.000 in 10 bis 30 Tagen und mindestens 500.000 in bis zu sechs Monaten. Die Kräfte sind festen Verteidigungsplänen zugeordnet.</p>
+  <h3>Deutschlands Beitrag an der Ostflanke</h3>
+  <p>Seit 2017 führt Deutschland den multinationalen Gefechtsverband der enhanced Forward Presence (eFP) in Litauen. Am 1. April 2025 wurde in Vilnius die Panzerbrigade 45 in Dienst gestellt, die erste dauerhaft im Ausland stationierte Brigade der Bundeswehr. Bis 2027 soll sie voll einsatzbereit sein.</p>
+  <h3>Drehscheibe Deutschland und Heimatschutz</h3>
+  <p>Wegen seiner Lage in der Mitte Europas ist Deutschland im Bündnisfall Transitland für verbündete Truppen. Dafür leistet es Host Nation Support: Unterkunft, Verpflegung, Betankung, Transport und Schutz. Wie militärische und zivile Stellen dabei zusammenwirken, legt der eingestufte Operationsplan Deutschland (OPLAN DEU) fest, koordiniert vom Operativen Führungskommando.</p>
+  <p>Den Schutz von Verlegewegen und kritischer Infrastruktur übernehmen die Heimatschutzkräfte. Seit 2025 führt sie die Heimatschutzdivision des Heeres mit Heimatschutzregimentern aus Reservisten und aktiven Soldaten. In jedem Bundesland gibt es außerdem ein Landeskommando als Bindeglied zu Landesregierung und Behörden.</p>
+  <div class="callout">Auch die EU hat eine Beistandsklausel: Art. 42 Abs. 7 EU-Vertrag, Teil der Gemeinsamen Sicherheits- und Verteidigungspolitik (GSVP). Angewendet wurde sie bisher einmal, auf Bitte Frankreichs nach den Anschlägen von Paris 2015.</div>`},
  {id:'beschaffung',t:'Wer braucht, wer beschafft',d:'Bedarfsträger, Bedarfsdecker und die wichtigsten Stellen',deck:'beh',b:()=>`
   <p>Die Bundeswehr trennt zwei Rollen. Der Bedarfsträger formuliert, was gebraucht wird. Der Bedarfsdecker beschafft es. Das zentrale Verfahren heißt Customer Product Management (CPM) und betrachtet ein Produkt über den gesamten Lebenszyklus.</p>
   <ol class="ladder">
@@ -703,16 +861,25 @@ const LESSONS=[
    <li><strong>CIHBw</strong><span>Cyber Innovation Hub, seit 2020 Abteilung der BWI. Testet neue Lösungen mit Nutzern aus der Truppe und übergibt Erfolgreiches an das ZDigBw zur Einführung.</span></li>
    <li><strong>BMWE</strong><span>Das Bundesministerium für Wirtschaft und Energie ist nach § 25 SÜG für den Geheimschutz in Unternehmen zuständig, also für den Sicherheitsbescheid, den eine Firma für eingestufte Aufträge braucht.</span></li>
   </ol>
-  <p>Auf der anderen Seite steht die Sicherheits- und Verteidigungsindustrie (SVI). Große europäische Vorhaben sind etwa FCAS, das Luftkampfsystem der nächsten Generation, und MGCS, das deutsch-französische Landkampfsystem. Die Industrie organisiert sich in Verbänden wie BDSV und BDLI. Gesellschaften wie DWT, Förderkreis Deutsches Heer (FKH) oder Deutsches Maritimes Institut (DMI) bringen Streitkräfte, Verwaltung, Politik und Industrie ins Gespräch. In der NATO berät die NIAG aus Sicht der Industrie.</p>`},
+  <p>Auf der anderen Seite steht die Sicherheits- und Verteidigungsindustrie (SVI). Große europäische Vorhaben sind etwa FCAS, das Luftkampfsystem der nächsten Generation, und MGCS, das deutsch-französische Landkampfsystem. Die Industrie organisiert sich in Verbänden wie BDSV und BDLI. Gesellschaften wie DWT, Förderkreis Deutsches Heer (FKH) oder Deutsches Maritimes Institut (DMI) bringen Streitkräfte, Verwaltung, Politik und Industrie ins Gespräch. In der NATO berät die NIAG aus Sicht der Industrie.</p>
+  <h3>Woher das Geld kommt</h3>
+  <p>Der Verteidigungshaushalt ist der Einzelplan 14 im Bundeshaushalt, beschlossen vom Bundestag. Vorhaben ab 25 Millionen Euro legt das BMVg vorher dem Haushaltsausschuss vor, die sogenannten 25-Millionen-Vorlagen. 2022 kam das kreditfinanzierte Sondervermögen Bundeswehr über 100 Milliarden Euro hinzu. Seit einer Grundgesetzänderung im März 2025 sind Verteidigungsausgaben oberhalb von 1 % des Bruttoinlandsprodukts von der Schuldenbremse ausgenommen.</p>
+  <div class="callout">Lange galt in der NATO das Ziel, 2 % des BIP für Verteidigung auszugeben. Auf dem Gipfel in Den Haag 2025 vereinbarten die Verbündeten 5 % bis 2035: 3,5 % für die Kernverteidigung und 1,5 % für verteidigungsrelevante Infrastruktur und Resilienz.</div>`},
  {id:'anrede',t:'Anrede und Umgang',d:'Anrede nach Dienstgrad, Generale und Sanitätsdienst',deck:'eti',b:()=>`
   <p>Angesprochen wird mit Herr oder Frau und dem Dienstgrad, gegebenenfalls mit Nachnamen: „Herr Oberstleutnant“, „Frau Hauptmann Müller“. Dienstgrade bleiben grammatisch männlich, eine „Hauptfrau“ gibt es nicht.</p>
   <p>Alle Generale werden mit „Herr General“ bzw. „Frau General“ angesprochen, auch Brigadegeneral, Generalmajor und Generalleutnant. Der Plural lautet in der Bundeswehr Generale. Ranghöchster Soldat ist der Generalinspekteur der Bundeswehr.</p>
-  <p>Sanitätsoffiziere tragen eigene Dienstgrade, vom Stabsarzt (Ebene Hauptmann) bis zum Generaloberstabsarzt (Ebene Generalleutnant), und den Äskulapstab am Abzeichen.</p>`},
+  <p>Sanitätsoffiziere tragen eigene Dienstgrade, vom Stabsarzt (Ebene Hauptmann) bis zum Generaloberstabsarzt (Ebene Generalleutnant), und den Äskulapstab am Abzeichen.</p>
+  <h3>Gelöbnis, Eid und Zeremonien</h3>
+  <p>Wehrdienstleistende legen ein feierliches Gelöbnis ab, Soldaten auf Zeit und Berufssoldaten schwören den Diensteid (§ 9 Soldatengesetz). Die höchste militärische Zeremonie ist der Große Zapfenstreich, etwa zur Verabschiedung von Bundespräsidenten, Bundeskanzlern oder Verteidigungsministern.</p>
+  <p>An der Uniform zeigen Tätigkeitsabzeichen eine Qualifikation oder Verwendung, etwa als Fallschirmspringer. Die Einsatzmedaille erhält, wer an einem Auslandseinsatz teilgenommen hat. Das Ehrenzeichen der Bundeswehr gibt es als Ehrenmedaille und als Ehrenkreuz in Bronze, Silber und Gold. Die höchste Stufe ist seit 2008 das Ehrenkreuz der Bundeswehr für Tapferkeit.</p>`},
  {id:'kuerzel',t:'Abkürzungen im Dienstalltag',d:'Von AGA bis DZE, dazu Dienstgrade in Kurzform',deck:'abk',b:()=>`
   <p>Die Bundeswehr kürzt fast alles ab. Wer die häufigsten Kürzel kennt, versteht Dienstpläne, Befehle und Gespräche deutlich besser. Eine Auswahl:</p>
   <ol class="ladder">${GLOSS[0].items.filter(([k])=>['AGA','KzH','DZE','UvD','GvD','KpFw','SaZ','BS','FWDL','RDL'].includes(k)).map(([k,v])=>`<li><strong>${esc(k)}</strong><span>${esc(v)}</span></li>`).join('')}</ol>
   <p>Auch Dienstgrade werden abgekürzt, im Schriftverkehr steht die Abkürzung vor dem Namen, etwa „OTL Müller“ oder „Hptm Schmidt“. Die Kürzel folgen meist den Bausteinen: O für Ober, St für Stabs, Hpt für Haupt. So wird aus Oberstabsfeldwebel OStFw. Ausnahmen sind OTL für Oberstleutnant und O für Oberst.</p>
-  <div class="callout">KzH ist keine Krankmeldung im zivilen Sinn. Soldatinnen und Soldaten werden truppenärztlich versorgt, und der Truppenarzt entscheidet, ob jemand zu Hause gesund werden darf.</div>`},
+  <div class="callout">KzH ist keine Krankmeldung im zivilen Sinn. Soldatinnen und Soldaten werden truppenärztlich versorgt, und der Truppenarzt entscheidet, ob jemand zu Hause gesund werden darf.</div>
+  <h3>Buchstabieren und Zeitangaben</h3>
+  <p>Am Funk und am Telefon wird mit dem NATO-Buchstabieralphabet buchstabiert, meist kurz NATO-Alphabet genannt: Alfa, Bravo, Charlie, Delta und so weiter bis Zulu. Alfa und Juliett werden bewusst so geschrieben, damit sie in allen Sprachen gleich ausgesprochen werden. Die vollständige Liste steht unter Nachschlagen.</p>
+  <p>Zeitpunkte stehen in Befehlen und Meldungen als Datum-Zeit-Gruppe (DTG): Tag, Uhrzeit, Zeitzone, Monat, Jahr. 031430ZOCT26 heißt 3. Oktober 2026, 14:30 Uhr. Der Buchstabe nennt die Zeitzone, ebenfalls nach dem Buchstabieralphabet: Z (Zulu) ist die koordinierte Weltzeit UTC, A (Alfa) die deutsche Winterzeit, B (Bravo) die Sommerzeit, J (Juliett) die Ortszeit.</p>`},
  {id:'geheimschutz',t:'Geheimschutz: VS und SÜ',d:'Geheimhaltungsgrade, Sicherheitsüberprüfung und VSA',deck:'vs',b:()=>`
   <p>Informationen, die im öffentlichen Interesse geheim bleiben müssen, sind Verschlusssachen (VS). Das Sicherheitsüberprüfungsgesetz (SÜG) kennt vier Geheimhaltungsgrade. Je höher der Grad, desto gründlicher die Sicherheitsüberprüfung (SÜ), die Voraussetzung für den Zugang ist:</p>
   <ol class="ladder">
@@ -841,6 +1008,7 @@ function renderQuiz(){
 function renderRef(){
   const tabs=[['dg','Dienstgrade'],['abz','Abzeichen'],['gl','Gliederung'],['stab','Stäbe'],['beh','Begriffe']];
   let h=`<div class="seg" role="group" aria-label="Nachschlagen">${tabs.map(([k,n])=>`<button data-ref="${k}" aria-pressed="${refTab===k}">${n}</button>`).join('')}</div>`;
+  const jump=secs=>`<nav class="jump" aria-label="Springe zu">${secs.map(([id,n])=>`<button class="chip" data-jump="${id}">${esc(n)}</button>`).join('')}</nav>`;
   if(refTab==='dg'){
     let rows='',g='';
     RANKS.forEach(r=>{if(r.g!==g){g=r.g;rows+=`<tr class="grp"><td colspan="3">${esc(g)}</td></tr>`}
@@ -848,6 +1016,7 @@ function renderRef(){
     h+=`<div class="scroll"><table><thead><tr><th>Heer, Luftwaffe</th><th>Marine</th><th>NATO</th></tr></thead><tbody>${rows}</tbody></table></div>
     <p class="small">Sanitätsoffiziere: ${SAN.map(([e,s])=>`${s} (wie ${e})`).join(', ')}.</p>`;
   } else if(refTab==='abz'){
+    h+=jump([['heer','Heer'],['luftwaffe','Luftwaffe'],['marine','Marine'],['sanitaet','Sanität'],['waffenfarben','Waffenfarben'],['barett','Barett']]);
     for(const [t,lbl,id] of [['heer','Heer (Feldanzug)','heer'],['lw','Luftwaffe (Feldanzug)','luftwaffe'],['mar','Marine','marine']]){
       h+=`<h2 id="${id}">${lbl}</h2>`;
       for(const [lg,subs] of INSGRP){
@@ -881,6 +1050,7 @@ function renderRef(){
   } else {
     const dl=(id,t,items)=>`<section class="gloss" id="${id}"><h3 class="lg">${esc(t)}</h3><dl>${items.map(([k,v,n])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}${n?'<br>'+esc(n):''}</dd></div>`).join('')}</dl></section>`;
     h+=`<input type="search" id="gq" class="search" placeholder="Abkürzung oder Begriff suchen" aria-label="Begriffe durchsuchen" value="${esc(glossQ)}">
+    ${jump([['behoerden','Behörden'],...GLOSS.map(g=>[g.id,g.nav||g.t])])}
     ${dl('behoerden','Behörden & Dienststellen',BEH)}${GLOSS.map(g=>dl(g.id,g.t,g.items)).join('')}<p class="small" id="gnone" hidden>Nichts gefunden.</p>`;
   }
   return h;
@@ -903,13 +1073,26 @@ let installEvt=null;
 const standalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
 addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvt=e;if(mode==='help') render()});
 addEventListener('appinstalled',()=>{installEvt=null;if(mode==='help') render()});
+let changes=null; // die letzten Versionen aus CHANGELOG.md, nur veröffentlichte
+function loadChanges(){
+  fetch('CHANGELOG.md').then(r=>r.ok?r.text():Promise.reject()).then(md=>{
+    const out=[];let cur=null;
+    for(const l of md.split('\n')){let m;
+      if((m=l.match(/^## (\d[\d.]*) \((\d{4}-\d\d-\d\d)\)/))){cur={v:m[1],d:m[2],items:[]};out.push(cur)}
+      else if(l.startsWith('## ')) cur=null;
+      else if(cur&&(m=l.match(/^- (.+)/))) cur.items.push(m[1]);
+    }
+    changes=out.slice(0,3);if(mode==='help') render();
+  }).catch(()=>{});
+}
+loadChanges();
 function renderHelp(){
   const n=CARDS.length;
   return `<div class="help">
   <h2>Kein Angebot der Bundeswehr</h2>
   <p>AGAdemy ist ein privates Projekt. Es ist kein Angebot, keine Veröffentlichung und keine offizielle Anwendung der Bundeswehr, des Bundesministeriums der Verteidigung oder einer anderen Dienststelle und steht mit ihnen in keiner Verbindung. Alle Inhalte beruhen auf öffentlich zugänglichen Quellen und können Fehler enthalten. Verbindlich sind allein die offiziellen Quellen. Fehler gefunden? Gern als <a href="https://github.com/FlorianWilhelm/agademy/issues">Issue auf GitHub</a> melden.</p>
   <h2>Wofür die App da ist</h2>
-  <p>Grundwissen über die Bundeswehr: Dienstgrade und Abzeichen, Waffen- und Barettfarben, Gliederung, Stabsabteilungen, Behörden, Anrede, Abkürzungen, Geheimschutz und die Begriffe der militärischen Digitalisierung. Insgesamt ${n} Karten in ${DECKS.length} Themen.</p>
+  <p>Grundwissen über die Bundeswehr: ihre Stellung im Staat, NATO und Heimatschutz, Dienstgrade und Abzeichen, Waffen- und Barettfarben, Gliederung, Stabsabteilungen, Behörden und Haushalt, Anrede, Abkürzungen, NATO-Alphabet, Geheimschutz und die Begriffe der militärischen Digitalisierung. Insgesamt ${n} Karten in ${DECKS.length} Themen.</p>
   <h2>Grundlagen</h2>
   <p>${LESSONS.length} Lektionen vermitteln das Wissen in sinnvoller Reihenfolge, mit Beispielen und Abzeichen. Am Ende jeder Lektion führt „Lernkarten dazu üben“ direkt zum passenden Thema. Gelesene Lektionen sind markiert.</p>
   <h2>Thema wählen</h2>
@@ -920,9 +1103,9 @@ function renderHelp(){
   <h2>Quiz</h2>
   <p>Zehn Fragen mit je vier Antworten aus dem gewählten Thema. Bei Abzeichen-Fragen sind die Antworten Bilder. Richtige Antworten schieben die Karte ein Fach weiter, falsche zurück in Fach 1, Quiz und Lernkarten teilen sich also denselben Lernstand.</p>
   <h2>Nachschlagen</h2>
-  <p>Übersichten zum schnellen Nachsehen: Dienstgradleiter mit Marine-Entsprechung und NATO-Rangcode, alle Abzeichen, Gliederung mit NATO-Größenzeichen, Stabsabteilungen und ein durchsuchbares Verzeichnis aller Abkürzungen.</p>
+  <p>Übersichten zum schnellen Nachsehen: Dienstgradleiter mit Marine-Entsprechung und NATO-Rangcode, alle Abzeichen, Gliederung mit NATO-Größenzeichen, Stabsabteilungen und ein durchsuchbares Verzeichnis aller Abkürzungen samt NATO-Alphabet. Die Leiste „Springe zu“ führt direkt zu jedem Abschnitt.</p>
   <h2>Wie belastbar die Inhalte sind</h2>
-  <p>Dienstgrade, Gliederung und Behördenangaben stammen von bundeswehr.de, Abzeichen und Dienstgradbezeichnungen aus der Anordnung des Bundespräsidenten über die Dienstgradbezeichnungen und die Uniform (2021), Waffen- und Barettfarben aus der BMVg-Broschüre „Bekleidung und Uniformen der Bundeswehr“ (April 2026), Disziplinarbefugnis aus der Wehrdisziplinarordnung, Geheimschutz aus dem SÜG und der VSA, Architekturbegriffe u. a. nach Fraunhofer IESE. NATO-Rangcodes folgen STANAG 2116, Größenzeichen NATO APP-6 in deutscher Lesart. Abzeichen von Luftwaffe und Marine sind nach der Übersicht der Bundeswehr vereinfacht nachgezeichnet, das Heer ist daraus abgeleitet. Stärkeangaben sind Größenordnungen, Führungsdienstgrade typische Besetzungen. Stand Oktober 2026.</p>
+  <p>Dienstgrade, Gliederung und Behördenangaben stammen von bundeswehr.de, Abzeichen und Dienstgradbezeichnungen aus der Anordnung des Bundespräsidenten über die Dienstgradbezeichnungen und die Uniform (2021), Waffen- und Barettfarben aus der BMVg-Broschüre „Bekleidung und Uniformen der Bundeswehr“ (April 2026), Rechtsrahmen aus Grundgesetz, Soldatengesetz, Parlamentsbeteiligungsgesetz und Wehrdienst-Modernisierungsgesetz, NATO-Angaben von nato.int, Disziplinarbefugnis aus der Wehrdisziplinarordnung, Geheimschutz aus dem SÜG und der VSA, Architekturbegriffe u. a. nach Fraunhofer IESE. NATO-Rangcodes folgen STANAG 2116, Größenzeichen NATO APP-6 in deutscher Lesart. Abzeichen von Luftwaffe und Marine sind nach der Übersicht der Bundeswehr vereinfacht nachgezeichnet, das Heer ist daraus abgeleitet. Stärkeangaben sind Größenordnungen, Führungsdienstgrade typische Besetzungen. Stand Oktober 2026.</p>
   <h2 id="app">Als App installieren</h2>
   ${standalone()?'<p>AGAdemy läuft gerade als App. Nach dem ersten Öffnen funktioniert sie auch ohne Internet.</p>':`<p>AGAdemy lässt sich wie eine App auf den Startbildschirm legen. Sie öffnet sich dann ohne Browserleiste und funktioniert nach dem ersten Öffnen auch ohne Internet.</p>
   ${installEvt?'<button class="btn" id="install" style="flex:none;padding:10px 14px;font-size:16px;margin-bottom:10px">Jetzt installieren</button>':''}
@@ -934,6 +1117,10 @@ function renderHelp(){
   <button class="btn ghost" id="reset" style="flex:none;padding:10px 14px;font-size:16px">Lernstand zurücksetzen</button>
   <h2>Lizenz</h2>
   <p>Code unter MIT, Inhalte unter CC BY 4.0. Quelltext auf <a href="https://github.com/FlorianWilhelm/agademy">GitHub</a>.</p>
+  ${changes?`<h2 id="neu">Was ist neu</h2>${changes.map(c=>`<h3 class="lg">Version ${esc(c.v)} <span class="small">${esc(c.d)}</span></h3>
+  <ul class="changes">${c.items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul>`).join('')}
+  <p class="small">Alle Änderungen im <a href="https://github.com/FlorianWilhelm/agademy/blob/main/CHANGELOG.md">Changelog</a>.</p>`:''}
+  <p class="small">Version ${VERSION}, aktualisiert am ${UPDATED}</p>
   </div>`;
 }
 function render(){
@@ -942,23 +1129,39 @@ function render(){
   const v=document.getElementById('view');
   v.innerHTML=mode==='basics'?renderBasics():mode==='learn'?renderLearn():mode==='quiz'?renderQuiz():mode==='ref'?renderRef():renderHelp();
   if(mode==='ref'&&refTab==='beh') filterGloss();
+  spy();
   const sub=lesson&&mode==='basics'?LESSONS.find(l=>l.id===lesson).t:mode==='ref'?v.querySelector('[aria-pressed="true"]').textContent:{basics:'Grundlagen',learn:'Lernkarten',quiz:'Quiz',help:'Hilfe'}[mode];
   document.title=sub+' · AGAdemy';
 }
 function filterGloss(){
   const q=glossQ.trim().toLowerCase();let any=false;
-  document.querySelectorAll('.gloss').forEach(sec=>{let n=0;
-    sec.querySelectorAll('dl div').forEach(d=>{const m=!q||d.textContent.toLowerCase().includes(q);d.hidden=!m;if(m)n++});
-    sec.hidden=!n;if(n)any=true});
+  document.querySelectorAll('.gloss').forEach(sec=>{let n=0;const all=!q||sec.querySelector('h3').textContent.toLowerCase().includes(q); // Treffer im Titel zeigt den ganzen Abschnitt
+    sec.querySelectorAll('dl div').forEach(d=>{const m=all||d.textContent.toLowerCase().includes(q);d.hidden=!m;if(m)n++});
+    sec.hidden=!n;if(n)any=true;
+    const c=document.querySelector('.jump [data-jump="'+sec.id+'"]');if(c) c.hidden=!n});
+  spy();
   const e=document.getElementById('gnone');if(e) e.hidden=any;
 }
+let jumpTo=null; // zuletzt angesprungener Abschnitt
+function spy(){ // markiert in der Sprungleiste den Abschnitt, der gerade oben steht
+  const bar=document.querySelector('.jump');if(!bar) return;
+  const cs=[...bar.querySelectorAll('.chip:not([hidden])')];let cur=cs[0];
+  const top=c=>{const el=document.getElementById(c.dataset.jump);return el?el.getBoundingClientRect().top:Infinity};
+  for(const c of cs) if(top(c)<=bar.offsetHeight+24) cur=c;
+  if(innerHeight+scrollY>=document.documentElement.scrollHeight-2){ // ganz unten erreichen die letzten Abschnitte den oberen Rand nie
+    const j=cs.find(c=>c.dataset.jump===jumpTo);cur=j&&top(j)<innerHeight?j:cs.filter(c=>top(c)<innerHeight).pop()||cur}
+  cs.forEach(c=>c.setAttribute('aria-current',c===cur));
+  if(cur){const l=cur.offsetLeft-bar.offsetLeft,r=l+cur.offsetWidth;
+    if(l<bar.scrollLeft+16||r>bar.scrollLeft+bar.clientWidth-16) bar.scrollLeft=l-16}
+}
+addEventListener('scroll',spy,{passive:true});
 document.addEventListener('input',e=>{if(e.target.id==='gq'){glossQ=e.target.value;filterGloss();history.replaceState(null,'',hashOf())}});
 
 /* ---------- Links ---------- */
 // Die URL bestimmt die Ansicht: #/bereich/unterseite/abschnitt?q=suche
 const MODES={grundlagen:'basics',lernkarten:'learn',quiz:'quiz',nachschlagen:'ref',hilfe:'help'};
 const REFS={dienstgrade:'dg',abzeichen:'abz',gliederung:'gl',staebe:'stab',begriffe:'beh'};
-const TOPICS={dienstgrade:'dg',abzeichen:'abz',marine:'mar',gliederung:'gl',groessenzeichen:'sym',staebe:'stab',behoerden:'beh',abkuerzungen:'abk',geheimschutz:'vs',digitalisierung:'dig',anrede:'eti'};
+const TOPICS={dienstgrade:'dg',abzeichen:'abz',marine:'mar',gliederung:'gl',groessenzeichen:'sym',staebe:'stab',behoerden:'beh',staat:'staat',buendnis:'nato',abkuerzungen:'abk',geheimschutz:'vs',digitalisierung:'dig',anrede:'eti'};
 const slug=(map,v)=>Object.keys(map).find(k=>map[k]===v);
 const topicHash=(m,d)=>'#/'+slug(MODES,m)+(d==='all'?'':'/'+slug(TOPICS,d));
 function hashOf(m=mode,sec){
@@ -995,6 +1198,7 @@ document.addEventListener('click',e=>{
   if(t.id==='topicBtn'){openSheet();return}
   if(t.dataset.close){closeSheet();return}
   if(t.dataset.deck){closeSheet();if(t.dataset.deck===deck){cur=null;quiz=null}go(topicHash(mode,t.dataset.deck));return}
+  if(t.dataset.jump){jumpTo=t.dataset.jump;const el=document.getElementById(t.dataset.jump);if(el){el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});history.replaceState(null,'',hashOf(mode,t.dataset.jump))}return}
   if(t.dataset.ref){go('#/nachschlagen/'+slug(REFS,t.dataset.ref));return}
   if(t.dataset.opt!==undefined){const q=quiz.qs[quiz.i];q.chosen=+t.dataset.opt;const ok=q.opts[q.chosen]===q.c.a;
     if(ok){quiz.score++;setBox(q.c,boxOf(q.c)+1)}else setBox(q.c,0);render();return}

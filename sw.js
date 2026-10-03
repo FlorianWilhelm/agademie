@@ -1,8 +1,8 @@
 // Service Worker: macht AGAdemy offline nutzbar.
-// Seite: zuerst aus dem Netz (damit Updates sofort ankommen), sonst aus dem Cache.
+// Seite und Changelog: zuerst aus dem Netz (damit Updates sofort ankommen), sonst aus dem Cache.
 // Icons und Schriften: aus dem Cache, im Hintergrund aktualisiert.
-const CACHE='agademy-v1';
-const CORE=['./','icons/site.webmanifest','icons/favicon.svg','icons/favicon.ico','icons/apple-touch-icon.png','icons/icon-192.png','icons/icon-512.png'];
+const CACHE='agademy-v2';
+const CORE=['./','CHANGELOG.md','icons/site.webmanifest','icons/favicon.svg','icons/favicon.ico','icons/apple-touch-icon.png','icons/icon-192.png','icons/icon-512.png'];
 const FONTS=/^https:\/\/fonts\.(googleapis|gstatic)\.com\//;
 
 self.addEventListener('install',e=>{
@@ -14,9 +14,10 @@ self.addEventListener('activate',e=>{
 self.addEventListener('fetch',e=>{
   const r=e.request;if(r.method!=='GET') return;
   const u=new URL(r.url);
-  if(r.mode==='navigate'){
-    e.respondWith(fetch(r).then(res=>{if(res.ok){const c=res.clone();caches.open(CACHE).then(x=>x.put('./',c))}return res})
-      .catch(()=>caches.match('./')));
+  if(r.mode==='navigate'||u.pathname.endsWith('/CHANGELOG.md')){ // Seite und Changelog: zuerst aus dem Netz
+    const key=r.mode==='navigate'?'./':r;
+    e.respondWith(fetch(r).then(res=>{if(res.ok){const c=res.clone();caches.open(CACHE).then(x=>x.put(key,c))}return res})
+      .catch(()=>caches.match(key)));
     return;
   }
   if(u.origin!==location.origin&&!FONTS.test(r.url)) return;
