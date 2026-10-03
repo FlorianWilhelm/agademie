@@ -753,10 +753,9 @@ function marker(m){
 }
 function sizeMark(m,h=22){const {inner,w}=marker(m);return `<svg width="${w*h/14}" height="${h}" viewBox="0 0 ${w} 14" aria-hidden="true">${inner}</svg>`}
 function unitSym(m,W=60){
-  const {inner,w}=marker(m);const off=(W-w)/2;
-  const shifted=inner.replace(/(cx|x1|x2)="([\d.]+)"/g,(_,a,v)=>`${a}="${+v+off}"`).replace(/M([\d.]+) /g,(_,v)=>`M${+v+off} `).replace(/L([\d.]+) /g,(_,v)=>`L${+v+off} `);
+  const {inner,w}=marker(m);const k=Math.min(1,(W-4)/w),off=(W-w*k)/2; // breite Zeichen (z. B. XXXX) passend verkleinern
   return `<svg width="${W}" height="${W*0.9}" viewBox="0 0 ${W} ${W*0.9}" role="img" aria-label="Größenzeichen ${m}">
-   <g>${shifted}</g>
+   <g transform="translate(${off} ${(1-k)*14}) scale(${k})">${inner}</g>
    <rect x="2" y="18" width="${W-4}" height="${W*0.9-20}" fill="none" stroke="currentColor" stroke-width="2.5"/>
    <path d="M2 18 L${W-2} ${W*0.9-2} M${W-2} 18 L2 ${W*0.9-2}" stroke="currentColor" stroke-width="1.6"/></svg>`;
 }
