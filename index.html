@@ -220,10 +220,19 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 
 <script>
 /* ---------- Version: setzt release.sh passend zum Git-Tag, nicht von Hand ändern ---------- */
-const VERSION='0.8', UPDATED='2026-10-03';
+const VERSION='0.9', UPDATED='2026-10-03';
 document.getElementById('ver').textContent=`v${VERSION} · ${UPDATED}`;
 // Was ist neu: die letzten Versionen aus CHANGELOG.md, setzt release.sh zusammen mit der Version
 const CHANGES=[
+{v:"0.9",d:"2026-10-03",items:[
+"Lernkarten: Der Lernstand bleibt jetzt erhalten, wenn neue Karten dazukommen. Bisher gespeicherter Lernstand der Lernkarten wird dafür einmalig zurückgesetzt, gelesene Lektionen bleiben markiert",
+"Am Ende jeder Lektion führen zwei gleichrangige Knöpfe zum passenden Thema: „Mit Lernkarten üben“ und neu „Im Quiz prüfen“",
+"Lektion „Bundeswehr im Staat“: neuer Abschnitt „Führen mit Auftrag“ mit Absicht, Befehlsschema LADEF (Lage, Auftrag, Durchführung, Einsatzunterstützung, Führungsunterstützung) und dem Vergleich mit Mission Command der US Army, dazu vier neue Quizfragen",
+"Lektion „Bundeswehr im Staat“: Führungsvorgang als Kreislauf aus Lagefeststellung, Planung und Befehlsgebung, dazu Moltkes Satz über den Operationsplan",
+"Lektion „Bundeswehr im Staat“: neuer Abschnitt „Soldatenpflichten“ mit Grundpflicht, Pflichten der Vorgesetzten, Gehorsam, Kameradschaft und Wahrheit (§§ 7, 10 bis 13 Soldatengesetz)",
+"Lektion „Anrede und Umgang“: neuer Abschnitt „Ungeschriebene Regeln“ mit „Melden macht frei“, Soldatenpünktlichkeit und Dienstweg",
+"Elf neue Quizfragen zu Führungsvorgang, Soldatenpflichten und ungeschriebenen Regeln",
+]},
 {v:"0.8",d:"2026-10-03",items:[
 "Lektion „Abzeichen lesen“: neuer Abschnitt zu Offizieranwärtern mit silberfarbener Kordel (Heer, Luftwaffe) und goldfarbenem Stern (Marine) und dem Zusatz OA",
 "Lektion „Abzeichen lesen“: neuer Abschnitt zu Unteroffizier- und Feldwebelanwärtern (UA, UA mbL, FA, in der Marine MA und BA) mit Zeichnungen von Querbalken, Tresse und altgoldfarbener Kordel",
@@ -231,14 +240,6 @@ const CHANGES=[
 ]},
 {v:"0.7.1",d:"2026-10-03",items:[
 "Lektion „Aufbau der Bundeswehr“: Heer, Luftwaffe und Marine mit ihren Symbolen (gekreuzte Schwerter, Schwinge, Anker), dazu die Erklärung, warum der CIR kein eigenes hat, und drei neue Lernkarten",
-]},
-{v:"0.7",d:"2026-10-03",items:[
-"Hilfe: Ganz oben steht jetzt kurz, was AGAdemy ist und für wen die App gedacht ist",
-"Lektion „Abzeichen lesen“: neuer Abschnitt zur Luftwaffe mit Schwinge und den Beispielen Flieger und Major",
-"Nachschlagen → Abzeichen: Heer und Luftwaffe in einem Abschnitt mit Umschalter, der die Schwinge ergänzt; auch die Sanitätsoffiziere lassen sich mit Schwinge anzeigen",
-"Neue Lektion „Feldanzug und Dienstanzug“: wann welcher Anzug getragen wird und wie sich Heer, Luftwaffe, Marine und CIR unterscheiden, mit schematischen Zeichnungen der Anzüge und acht Quizfragen",
-"Hilfe: Der Abschnitt „Wofür die App da ist“ heißt jetzt „Inhalte der App“ und nennt auch die Uniformen",
-"Hilfe: „Kein Angebot der Bundeswehr“ als Hinweiskasten, Grundlagen, Lernkarten, Quiz und Nachschlagen als Unterabschnitte von „Inhalte der App“",
 ]},
 ]; // Ende CHANGES
 /* ---------- Daten ---------- */

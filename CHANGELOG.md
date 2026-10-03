@@ -4,7 +4,7 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
-## Unveröffentlicht
+## 0.9 (2026-10-03)
 
 - Lernkarten: Der Lernstand bleibt jetzt erhalten, wenn neue Karten dazukommen. Bisher gespeicherter Lernstand der Lernkarten wird dafür einmalig zurückgesetzt, gelesene Lektionen bleiben markiert
 - Am Ende jeder Lektion führen zwei gleichrangige Knöpfe zum passenden Thema: „Mit Lernkarten üben“ und neu „Im Quiz prüfen“
