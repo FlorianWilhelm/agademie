@@ -1278,7 +1278,7 @@ function renderBasics(){
     const pv=LESSONS[i-1],nx=LESSONS[i+1];
     return `<div class="lesson"><button class="back" data-lesson="">Alle Lektionen</button>
       <p class="small" style="margin:10px 0 0">Lektion ${i+1} von ${LESSONS.length}</p><h2>${esc(L.t)}</h2>${L.b()}
-      <div class="actions"><div class="duo"><button class="btn ok" data-practice="${L.deck}">Lernkarten dazu üben</button><button class="btn primary" data-practice="${L.deck}" data-pm="quiz">Quiz dazu</button></div>
+      <div class="actions"><div class="duo"><button class="btn primary" data-practice="${L.deck}">Mit Lernkarten üben</button><button class="btn primary" data-practice="${L.deck}" data-pm="quiz">Im Quiz prüfen</button></div>
       <div class="pager">${pv?`<button class="btn ghost prev" data-lesson="${pv.id}"><small>Zurück</small>${esc(pv.t)}</button>`:''}
       ${nx?`<button class="btn ghost next" data-lesson="${nx.id}"><small>Weiter</small>${esc(nx.t)}</button>`:''}</div></div></div>`;
   }
@@ -1304,7 +1304,7 @@ function renderHelp(){
   <h2>Inhalte der App</h2>
   <p>Grundwissen über die Bundeswehr: ihre Stellung im Staat, NATO und Heimatschutz, Dienstgrade und Abzeichen, Uniformen, Waffen- und Barettfarben, Gliederung, Stabsabteilungen, Behörden und Haushalt, Anrede, Abkürzungen, NATO-Alphabet, Geheimschutz und die Begriffe der militärischen Digitalisierung. Insgesamt ${n} Karten in ${DECKS.length} Themen.</p>
   <h3>Grundlagen</h3>
-  <p>${LESSONS.length} Lektionen vermitteln das Wissen in sinnvoller Reihenfolge, mit Beispielen und Abzeichen. Am Ende jeder Lektion führen „Lernkarten dazu üben“ und „Quiz dazu“ direkt zum passenden Thema. Gelesene Lektionen sind markiert.</p>
+  <p>${LESSONS.length} Lektionen vermitteln das Wissen in sinnvoller Reihenfolge, mit Beispielen und Abzeichen. Am Ende jeder Lektion führen „Mit Lernkarten üben“ und „Im Quiz prüfen“ direkt zum passenden Thema. Gelesene Lektionen sind markiert.</p>
   <h3>Thema wählen</h3>
   <p>Oben bei Lernkarten und Quiz steht das aktuelle Thema. Antippen öffnet die Liste aller Themen mit ihrem Lernstand. „Alle Themen“ mischt alles.</p>
   <h3>Lernkarten</h3>
