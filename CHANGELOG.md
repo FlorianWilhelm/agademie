@@ -4,7 +4,7 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
-## Unveröffentlicht
+## 0.6.1 (2026-10-03)
 
 - Lektionen: Steht am Ende nur „Weiter“ oder nur „Zurück“, ist der Button so breit wie neben dem anderen statt über die ganze Breite
 
