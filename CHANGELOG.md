@@ -6,7 +6,7 @@ per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
 ## Unveröffentlicht
 
-- Lernkarten und Quiz: Die Themen sind jetzt genau die Lektionen, in derselben Reihenfolge. „Mit Lernkarten üben“ und „Im Quiz prüfen“ am Ende einer Lektion fragen nur noch, was in dieser Lektion vorkommt, statt eines größeren Sammelthemas (etwa bei „Feldanzug und Dienstanzug“ bisher alle 241 Abzeichen-Karten). Der Lernstand bleibt erhalten
+- Lernkarten und Quiz: Die Themen sind jetzt genau die Lektionen, mit demselben Titel, derselben Nummer und in derselben Reihenfolge. „Mit Lernkarten üben“ und „Im Quiz prüfen“ am Ende einer Lektion fragen nur noch, was in dieser Lektion vorkommt, statt eines größeren Sammelthemas (etwa bei „Feldanzug und Dienstanzug“ bisher alle 241 Abzeichen-Karten). Der Lernstand bleibt erhalten
 - Lektion „Wer braucht, wer beschafft“: das neu gegründete Innovationszentrum der Bundeswehr (InnoZBw) in Erding, dazu zwei neue Lernkarten und ein Eintrag unter „Behörden & Dienststellen“
 - Abkürzungen: Jede Lektion führt die Abkürzungen ein, nach denen Lernkarten und Quiz fragen, etwa OpFüKdoBw, BMVg, MAD, StAN, SHAPE, JSEC, FCAS und MGCS. Ist die Antwort einer Lernkarte eine Abkürzung, zeigt das Aufdecken darunter die ausgeschriebene Form, etwa „Operatives Führungskommando der Bundeswehr“ unter OpFüKdoBw. Das Quiz fragt weiter nur die Abkürzung ab. Die Lektion „Abkürzungen im Dienstalltag“ zeigt alle 18 Alltagskürzel
 

@@ -82,6 +82,7 @@ dialog::backdrop{background:rgba(8,16,30,.55)}
 .tlist button[aria-current="true"]{background:var(--bg);box-shadow:inset 4px 0 0 var(--accent)}
 .tlist .row{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
 .tlist .nm{font:600 19px/1.2 var(--head)}
+.tlist .no{display:inline-block;min-width:1.6em;color:var(--muted)}
 .tlist .ct{font-size:13px;color:var(--muted);white-space:nowrap}
 .fig{display:flex;justify-content:center;margin-top:16px}
 .help h2{margin-top:24px}
@@ -1170,21 +1171,21 @@ function questionHTML(c){
 /* ---------- Ansichten ---------- */
 const sure=cs=>cs.filter(c=>boxOf(c)>=3).length;
 function topicRows(){
-  return [{id:'all',t:'Alle Themen'},...LESSONS].map(d=>{const cs=d.id==='all'?CARDS:CARDS.filter(c=>c.lesson===d.id);const k=sure(cs);
-    return {id:d.id,name:d.t,n:cs.length,k,pct:Math.round(100*k/cs.length)}});
+  return [{id:'all',t:'Alle Themen'},...LESSONS].map((d,i)=>{const cs=d.id==='all'?CARDS:CARDS.filter(c=>c.lesson===d.id);const k=sure(cs);
+    return {id:d.id,no:i,name:d.t,n:cs.length,k,pct:Math.round(100*k/cs.length)}});
 }
 function renderTopic(){
   const b=document.getElementById('topicBtn');
   b.hidden=!(mode==='learn'||mode==='quiz');
   const r=topicRows().find(x=>x.id===topic);
-  b.innerHTML=`<span class="t"><span class="k">Thema</span><span class="n">${esc(r.name)}</span>
+  b.innerHTML=`<span class="t"><span class="k">${r.no?'Lektion '+r.no:'Thema'}</span><span class="n">${esc(r.name)}</span>
     <span class="k">${r.n} Karten, ${r.k} sicher</span><span class="bar"><i style="width:${r.pct}%"></i></span></span>
     <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>`;
   b.setAttribute('aria-label','Thema wählen, aktuell '+r.name);
 }
 function openSheet(){
   document.getElementById('tlist').innerHTML=topicRows().map(r=>`<li><button data-topic="${r.id}" aria-current="${r.id===topic}">
-    <span class="row"><span class="nm">${esc(r.name)}</span><span class="ct">${r.k} von ${r.n} sicher</span></span>
+    <span class="row"><span class="nm">${r.no?`<span class="no">${r.no}</span>`:''}${esc(r.name)}</span><span class="ct">${r.k} von ${r.n} sicher</span></span>
     <span class="bar"><i style="width:${r.pct}%"></i></span></button></li>`).join('');
   const d=document.getElementById('sheet');
   if(d.showModal) d.showModal(); else d.setAttribute('open','');
