@@ -1,9 +1,9 @@
 // Service Worker: macht AGAdemy offline nutzbar.
 // Seite und Changelog: zuerst aus dem Netz (damit Updates sofort ankommen), sonst aus dem Cache.
 // Icons und Schriften: aus dem Cache, im Hintergrund aktualisiert.
-const CACHE='agademy-v2';
-const CORE=['./','CHANGELOG.md','icons/site.webmanifest','icons/favicon.svg','icons/favicon.ico','icons/apple-touch-icon.png','icons/icon-192.png','icons/icon-512.png'];
-const FONTS=/^https:\/\/fonts\.(googleapis|gstatic)\.com\//;
+const CACHE='agademy-v3';
+const CORE=['./','CHANGELOG.md','icons/site.webmanifest','icons/favicon.svg','icons/favicon.ico','icons/apple-touch-icon.png','icons/icon-192.png','icons/icon-512.png',
+  'fonts/barlow-condensed-500.woff2','fonts/barlow-condensed-600.woff2','fonts/barlow-condensed-700.woff2','fonts/source-sans-3.woff2'];
 
 self.addEventListener('install',e=>{
   e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()));
@@ -20,7 +20,7 @@ self.addEventListener('fetch',e=>{
       .catch(()=>caches.match(key)));
     return;
   }
-  if(u.origin!==location.origin&&!FONTS.test(r.url)) return;
+  if(u.origin!==location.origin) return;
   e.respondWith(caches.open(CACHE).then(c=>c.match(r).then(hit=>{
     const net=fetch(r).then(res=>{if(res.ok||res.type==='opaque') c.put(r,res.clone());return res});
     if(hit){e.waitUntil(net.catch(()=>{}));return hit}

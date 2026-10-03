@@ -35,8 +35,8 @@ NATO STANAG 2116, NATO APP-6). Fehler gefunden? Gern ein Issue aufmachen.
 Eine einzelne statische `index.html`, ausgeliefert über GitHub Pages.
 Ein Service Worker (`sw.js`) und das Manifest (`icons/site.webmanifest`) machen
 daraus eine installierbare PWA, die nach dem ersten Aufruf auch offline läuft.
-Die Seite ist per `<meta name="robots" content="noindex">` von der Indizierung
-durch Suchmaschinen ausgenommen.
+Die Schriften (Barlow Condensed, Source Sans 3, beide SIL Open Font License)
+liegen in `fonts/`, es werden also keine Daten an Dritte wie Google Fonts übertragen.
 
 Änderungen kommen in [CHANGELOG.md](CHANGELOG.md) unter „Unveröffentlicht“.
 Neue Versionen erscheinen über `./release.sh 0.2`: Das Skript setzt Version und
