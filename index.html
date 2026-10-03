@@ -427,7 +427,7 @@ INS.san=SAN.map(([e,s])=>[s,[...INS.heer.find(r=>r[0]===e)[1],'ask']]); // Sanit
 INS.sanlw=INS.san; // Luftwaffe: dieselben Abzeichen mit Schwinge
 const ANW={'Schütze':'Bezeichnung hängt von der Verwendung ab, z. B. auch Jäger, Grenadier oder Funker.','Fahnenjunker':'Offizieranwärter auf Ebene Unteroffizier (silberfarbene Kordel an der Schulterklappe).','Fähnrich':'Offizieranwärter auf Ebene Feldwebel.','Oberfähnrich':'Offizieranwärter auf Ebene Hauptfeldwebel.','Seekadett':'Offizieranwärter der Marine auf Ebene Maat (goldfarbener Stern über dem Dienstgradabzeichen).','Fähnrich zur See':'Offizieranwärter der Marine auf Ebene Bootsmann.','Oberfähnrich zur See':'Offizieranwärter der Marine auf Ebene Hauptbootsmann.'};
 function insignia(key,W=60){
-  const [t,name]=key.split(':');const spec=(INS[t].find(r=>r[0]===name)||[,[]])[1];
+  const [t,full]=key.split(':'),[name,...extra]=full.split('+');const spec=[...(INS[t].find(r=>r[0]===name)||[,[]])[1],...extra]; // Zusätze wie +ua hängen Anwärterkennzeichen an
   const lw=t!=='mar', wing=t==='lw'||t==='sanlw', gold=spec.includes('gold');
   const board=lw?'#6e8160':'#0d2c4d', ink=lw?(gold?'#e8b915':'#141a14'):'#f2c21b';
   let s='';
@@ -453,7 +453,13 @@ function insignia(key,W=60){
       else if((m=e.match(/^c(\d)$/))){const n=+m[1];for(let i=0;i<n;i++){const y=chevTop-i*7.4;s+=`<path d="M18.5 ${y+9} L30 ${y} L41.5 ${y+9} V${y+13.6} L30 ${y+4.6} L18.5 ${y+13.6} Z" fill="${ink}"/>`}}
       else if(e==='loop'){const n=+((spec.find(x=>/^c\d$/.test(x))||'c1').slice(1));const b=chevTop-(n-1)*7.4+1.4,c=b-9.2;
         s+=`<path d="M30 ${b} L39 ${c} L30 ${c-9.2} L21 ${c} Z M30 ${c+3} L33 ${c} L30 ${c-3} L27 ${c} Z" fill="${ink}" fill-rule="evenodd"/>`}
-      else if(e==='silver') s+=`<rect x="7" y="${wing?80.5:89}" width="46" height="3.2" fill="#dfe3e6"/>`;
+      else if(e==='silver'||e==='fa'){const y=wing?80.5:spec.includes('closed')?89:84,[c,d]=e==='fa'?['#d4ac3a','#8a6a1e']:['#e4e7ea','#9aa1a8']; // Kordel quer über der Schulterklappe: silberfarben für OA, altgoldfarben für FA
+        s+=`<rect x="7" y="${y}" width="46" height="3.4" fill="${c}"/><path d="M7 ${y+1.7} H53" stroke="${d}" stroke-width="3.4" stroke-dasharray=".5 1.3"/>`}
+      else if(e==='mbl') s+=`<rect x="7" y="${wing?77:83}" width="46" height="5.5" fill="#cdb77c"/>`; // UA mit bestandenem Lehrgang: hellaltgoldene Tresse
+      else if(e==='ua'||e==='ba'){ // Querbalken der Unteroffizier-/Maat- (einer) und Bootsmannanwärter (zwei)
+        const sn=spec.find(x=>/^s\d$/.test(x)),n=sn?+sn[1]:0,arc=spec.includes('open')||spec.includes('closed');
+        let y=n?Y0-(wing?2:0)-((n-1)*6+(n>3?4.5:0))-4-9:arc?(wing?72:76):(wing?70:74);
+        for(let i=0;i<(e==='ba'?2:1);i++) s+=`<rect x="${arc?21:17}" y="${y-i*7}" width="${arc?18:26}" height="4" fill="${ink}"/>`}
       else if(e==='star'){const cx=30,cy=spec.includes('bar')?46:(spec.includes('c1')&&spec.includes('closed')?42:40),r=6,pts=[];for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r*0.42:r;pts.push((cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1))}s+=`<polygon points="${pts.join(' ')}" fill="${ink}"/>`}
       else if(e==='ask'){ // Äskulapstab: Stab mit Knauf, Schlange in drei Windungen, Kopf oben
         s+=`<rect x="29.2" y="14" width="1.6" height="23" rx=".8" fill="${ink}"/><circle cx="30" cy="13.6" r="1.4" fill="${ink}"/>`;
@@ -925,7 +931,13 @@ const LESSONS=[
   <p>Offizieranwärter (OA) sind auf dem Weg zum Offizier, stehen aber noch auf der Ebene von Mannschaften oder Unteroffizieren. In Heer und Luftwaffe tragen sie eine silberfarbene Kordel, die über die Schulterklappe gezogen wird. In der Marine tragen sie stattdessen einen goldfarbenen fünfzackigen Stern auf Schulterklappe und Ärmel, das Laufbahnabzeichen der Offiziere, oft Seestern genannt.</p>
   ${figs([['heer:Fahnenjunker','Fahnen­junker'],['heer:Fähnrich','Fähnrich'],['heer:Oberfähnrich','Ober­fähnrich'],['mar:Seekadett','See­kadett'],['mar:Fähnrich zur See','Fähnrich zur See'],['mar:Oberfähnrich zur See','Ober­fähnrich zur See']])}
   <p>Auf der Ebene der Unteroffiziere haben Offizieranwärter eigene Dienstgrade: Fahnenjunker, Fähnrich und Oberfähnrich, in der Marine Seekadett, Fähnrich zur See und Oberfähnrich zur See. Davor führen sie ihren Mannschaftsdienstgrad mit dem Zusatz OA, etwa Gefreiter OA. Bei Fahnenjunker, Fähnrich und Co. entfällt der Zusatz, weil der Dienstgrad die Laufbahn schon verrät.</p>
-  <div class="callout">Auch Unteroffizieranwärter (UA) und Feldwebelanwärter (FA) führen einen Zusatz und ein eigenes Kennzeichen: UA einen waagerechten Balken über den Dienstgradabzeichen, FA in Heer und Luftwaffe eine altgoldfarbene Kordel. In der Marine heißen sie Maatanwärter (MA) und Bootsmannanwärter (BA) und tragen einen beziehungsweise zwei Querbalken.</div>
+  <h3>Unteroffizier- und Feldwebelanwärter: Balken und Kordel</h3>
+  <p>Auch wer Unteroffizier oder Feldwebel werden will, ist gekennzeichnet. Unteroffizieranwärter (UA) tragen einen Querbalken über den Dienstgradabzeichen. Nach bestandenem Lehrgang (UA mbL) kommt unten eine altgoldfarbene Tresse dazu.</p>
+  ${figs([['heer:Schütze+ua','Schütze UA'],['heer:Hauptgefreiter+ua','Haupt­gefreiter UA'],['heer:Stabsgefreiter+ua+mbl','Stabs­gefreiter UA mbL']])}
+  <p>Feldwebelanwärter (FA) tragen in Heer und Luftwaffe wie die Offizieranwärter eine Kordel, aber altgoldfarben statt silberfarben.</p>
+  ${figs([['heer:Gefreiter+fa','Gefreiter FA'],['heer:Unteroffizier+fa','Unter­offizier FA'],['heer:Fahnenjunker','Fahnen­junker (OA) zum Vergleich']])}
+  <p>In der Marine heißen sie Maatanwärter (MA) und Bootsmannanwärter (BA). Sie tragen einen beziehungsweise zwei Querbalken.</p>
+  ${figs([['mar:Gefreiter+ua','Gefreiter MA'],['mar:Gefreiter+ba','Gefreiter BA'],['mar:Obermaat+ba','Obermaat BA']])}
   <p>Alle Abzeichen der Luftwaffe und die der Marine-Unteroffiziere stehen unter <a href="#/nachschlagen/abzeichen">Nachschlagen → Abzeichen</a>.</p>`},
  {id:'anzuege',t:'Feldanzug und Dienstanzug',d:'Welcher Anzug wann getragen wird und woran man die Teilstreitkraft erkennt',deck:'abz',b:()=>`
   <p>Im Alltag begegnen einem vor allem zwei Anzüge. Im Feldanzug sehen alle fast gleich aus. Am Dienstanzug erkennt man Heer, Luftwaffe und Marine schon von Weitem.</p>
