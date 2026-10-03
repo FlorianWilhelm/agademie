@@ -10,6 +10,7 @@ letzten Versionen an.
 - Größenzeichen für die Armee (XXXX) wird nicht mehr abgeschnitten
 - Lektionen „Vom Trupp zur Division“ und „NATO-Größenzeichen“ erklären die Ebenen über der Division
 - Lektionen und Hilfe: Silbentrennung und ausgeglichener Zeilenumbruch für ein ruhigeres Schriftbild, Absätze sind so breit wie Tabellen und Hinweise
+- Lektion „Aufbau der Bundeswehr“ zeigt die vier Teilstreitkräfte als Liste
 - Lektionen: Am Ende führt neben „Weiter“ jetzt auch „Zurück“ zur vorherigen Lektion
 - Lektion „Dienstgrade verstehen“ erklärt, woher das Wort „Portepee“ kommt
 - Lektion „Abzeichen lesen“ zeigt alle Dienstgradabzeichen statt einer Auswahl

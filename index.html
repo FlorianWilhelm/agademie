@@ -768,7 +768,14 @@ const figs=(items,W=46)=>`<div class="figs">${items.map(([k,c])=>`<figure>${insi
 const syms=items=>`<div class="figs">${items.map(([m,c])=>`<figure style="color:var(--frame)">${unitSym(m,52)}<figcaption>${esc(c)}</figcaption></figure>`).join('')}</div>`;
 const LESSONS=[
  {id:'aufbau',t:'Aufbau der Bundeswehr',d:'Streitkräfte, Teilstreitkräfte und die zivile Verwaltung',deck:'beh',b:()=>`
-  <p>Kern der Bundeswehr sind die Streitkräfte mit vier Teilstreitkräften: Heer, Luftwaffe, Marine und, als jüngste, Cyber- und Informationsraum (CIR). Jede Teilstreitkraft hat eigene Bezeichnungen für ihre Ebenen und eigene Uniformen. Dazu kommen der Unterstützungsbereich unter dem Unterstützungskommando und das Operative Führungskommando, das seit Oktober 2024 alle Einsätze im In- und Ausland plant und führt.</p>
+  <p>Kern der Bundeswehr sind die Streitkräfte mit vier Teilstreitkräften:</p>
+  <ol class="ladder">
+   <li><strong>Heer</strong><span>Kampf an Land</span></li>
+   <li><strong>Luftwaffe</strong><span>Luftraum und Luftverteidigung</span></li>
+   <li><strong>Marine</strong><span>Einsatz auf und unter See</span></li>
+   <li><strong>Cyber- und Informationsraum (CIR)</strong><span>Die jüngste: IT, Cyberabwehr und elektronischer Kampf</span></li>
+  </ol>
+  <p>Jede Teilstreitkraft hat eigene Bezeichnungen für ihre Ebenen und eigene Uniformen. Dazu kommen der Unterstützungsbereich unter dem Unterstützungskommando und das Operative Führungskommando, das seit Oktober 2024 alle Einsätze im In- und Ausland plant und führt.</p>
   <p>Neben den Streitkräften steht die zivile Bundeswehrverwaltung. Dazu gehören die großen Bundesämter, etwa für Ausrüstung (BAAINBw), Personal (BAPersBw) oder Infrastruktur (BAIUDBw). Das BAAINBw ist eine zivile Bundesoberbehörde mit rund 10.000 zivilen und 1.800 militärischen Beschäftigten.</p>
   <div class="callout">In der zivilen Bundeswehrverwaltung arbeiten überwiegend Beamtinnen, Beamte und Tarifbeschäftigte. Für sie gelten Amtsbezeichnungen statt Dienstgrade.</div>
   <p>Wer zur Bundeswehr will, wendet sich an ein Karrierecenter der Bundeswehr. Die Karrierecenter gehören zum BAPersBw, beraten über Karriereberatungsbüros in der Fläche, prüfen die Eignung und übernehmen auch die Musterung. Die früheren Kreiswehrersatzämter gibt es seit 2012 nicht mehr.</p>
