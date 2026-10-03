@@ -129,6 +129,8 @@ h2{font:600 22px/1.2 var(--head);margin:6px 0 10px}
 .seg{display:flex;border:1.5px solid var(--line);border-radius:6px;overflow:hidden;margin-bottom:16px}
 .seg button{flex:1;border:0;background:var(--surface);padding:9px 4px;font-size:15px}
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.seg.sm{display:inline-flex;margin:0 0 12px}
+.seg.sm button{flex:none;padding:6px 16px;font-size:14px}
 .scroll{overflow-x:auto;border:1.5px solid var(--line);border-radius:6px;background:var(--surface)}
 table{border-collapse:collapse;width:100%;font-size:15px;min-width:520px}
 th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
@@ -414,10 +416,11 @@ const INS={
 const INSGRP=[['Mannschaften',[[G.M,0,8]]],['Unteroffiziere',[[G.UoP,8,11],[G.UmP,11,18]]],['Offiziere',[[G.L,18,20],[G.H,20,22],[G.S,22,25],[G.Gen,25,29]]]];
 INS.heer=INS.lw.map(([n,sp],i)=>[i===0?'Schütze':n,sp]);
 INS.san=SAN.map(([e,s])=>[s,[...INS.heer.find(r=>r[0]===e)[1],'ask']]); // Sanitätsoffiziere: wie die Ebene im Heer, dazu der Äskulapstab
+INS.sanlw=INS.san; // Luftwaffe: dieselben Abzeichen mit Schwinge
 const ANW={'Schütze':'Bezeichnung hängt von der Verwendung ab, z. B. auch Jäger, Grenadier oder Funker.','Fahnenjunker':'Offizieranwärter auf Ebene Unteroffizier (silberne Kordel an der Schulterklappe).','Fähnrich':'Offizieranwärter auf Ebene Feldwebel.','Oberfähnrich':'Offizieranwärter auf Ebene Hauptfeldwebel.','Seekadett':'Offizieranwärter der Marine auf Ebene Maat.','Fähnrich zur See':'Offizieranwärter der Marine auf Ebene Bootsmann.','Oberfähnrich zur See':'Offizieranwärter der Marine auf Ebene Hauptbootsmann.'};
 function insignia(key,W=60){
   const [t,name]=key.split(':');const spec=(INS[t].find(r=>r[0]===name)||[,[]])[1];
-  const lw=t!=='mar', wing=t==='lw', gold=spec.includes('gold');
+  const lw=t!=='mar', wing=t==='lw'||t==='sanlw', gold=spec.includes('gold');
   const board=lw?'#6e8160':'#0d2c4d', ink=lw?(gold?'#e8b915':'#141a14'):'#f2c21b';
   let s='';
   const sl=spec.find(x=>x.startsWith('sl:'));
@@ -963,7 +966,7 @@ const boxOf=c=>store.box[c.id]||0;
 const setBox=(c,b)=>{store.box[c.id]=Math.max(0,Math.min(4,b));save()};
 
 /* ---------- Zustand ---------- */
-let glossQ='', lesson=null, mode='basics', deck='all', refTab='dg', last=null, cur=null, revealed=false, quiz=null;
+let glossQ='', lesson=null, mode='basics', deck='all', refTab='dg', hl='heer', last=null, cur=null, revealed=false, quiz=null;
 const pool=()=>deck==='all'?CARDS:CARDS.filter(c=>c.deck===deck);
 const deckName=id=>(DECKS.find(d=>d.id===id)||{}).name;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1051,6 +1054,23 @@ function renderQuiz(){
      <div class="opts${isImg?' img':''}">${opts}</div>
      ${done?`<div class="actions"><button class="btn primary" data-act="next">${quiz.i+1<quiz.qs.length?'Nächste Frage':'Ergebnis zeigen'}</button></div>`:''}`;
 }
+const insFig=(t,n)=>`<figure>${insignia(t+':'+n,52)}<figcaption>${esc(n)}</figcaption></figure>`;
+function insGrid(t){
+  let h='';
+  for(const [lg,subs] of INSGRP){
+    h+=`<h3 class="lg">${lg}</h3>`;
+    for(const [g,a,b] of subs) h+=`${g!==lg?`<h4 class="dgg">${esc(g)}</h4>`:''}<div class="insgrid">${INS[t].slice(a,b).map(([n])=>insFig(t,n)).join('')}</div>`;
+  }
+  return h;
+}
+const hlGrid=()=>insGrid(hl), sanGrid=()=>INS.san.map(([n])=>insFig(hl==='lw'?'sanlw':'san',n)).join('');
+const hlSeg=`<div class="seg sm" role="group" aria-label="Teilstreitkraft"><button data-hl="heer">Heer</button><button data-hl="lw">Luftwaffe</button></div>`;
+function setHl(t){ // Heer/Luftwaffe umschalten, ohne die Seite neu aufzubauen
+  hl=t;
+  document.querySelectorAll('[data-hl]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.hl===hl));
+  const g=document.getElementById('hlgrid');if(g) g.innerHTML=hlGrid();
+  const s=document.getElementById('sangrid');if(s) s.innerHTML=sanGrid();
+}
 function renderRef(){
   const tabs=[['dg','Dienstgrade'],['abz','Abzeichen'],['gl','Gliederung'],['stab','Stäbe'],['beh','Begriffe']];
   let h=`<div class="seg" role="group" aria-label="Nachschlagen">${tabs.map(([k,n])=>`<button data-ref="${k}" aria-pressed="${refTab===k}">${n}</button>`).join('')}</div>`;
@@ -1062,17 +1082,14 @@ function renderRef(){
     h+=`<div class="scroll"><table><thead><tr><th>Heer, Luftwaffe</th><th>Marine</th><th>NATO</th></tr></thead><tbody>${rows}</tbody></table></div>
     <p class="small">Sanitätsoffiziere: ${SAN.map(([e,s])=>`${s} (wie ${e})`).join(', ')}.</p>`;
   } else if(refTab==='abz'){
-    h+=jump([['heer','Heer'],['luftwaffe','Luftwaffe'],['marine','Marine'],['sanitaet','Sanität'],['waffenfarben','Waffenfarben'],['barett','Barett']]);
-    for(const [t,lbl,id] of [['heer','Heer (Feldanzug)','heer'],['lw','Luftwaffe (Feldanzug)','luftwaffe'],['mar','Marine','marine']]){
+    h+=jump([['heer','Heer & Luftwaffe'],['marine','Marine'],['sanitaet','Sanität'],['waffenfarben','Waffenfarben'],['barett','Barett']]);
+    for(const [t,lbl,id] of [['hl','Heer und Luftwaffe (Feldanzug)','heer'],['mar','Marine','marine']]){
       h+=`<h2 id="${id}">${lbl}</h2>`;
-      for(const [lg,subs] of INSGRP){
-        h+=`<h3 class="lg">${lg}</h3>`;
-        for(const [g,a,b] of subs) h+=`${g!==lg?`<h4 class="dgg">${esc(g)}</h4>`:''}<div class="insgrid">${INS[t].slice(a,b).map(([n])=>`<figure>${insignia(t+':'+n,52)}<figcaption>${esc(n)}</figcaption></figure>`).join('')}</div>`;
-      }
+      if(t==='hl') h+=hlSeg+`<div id="hlgrid">${hlGrid()}</div>`;else h+=insGrid(t);
     }
-    h+=`<h2 id="sanitaet">Sanitätsoffiziere (Heer, Feldanzug)</h2>
-    <p class="small">Ärzte und Zahnärzte tragen den Äskulapstab über den Sternen. Die Luftwaffe trägt zusätzlich die Schwinge, die Marine den Äskulapstab über den Ärmelstreifen.</p>
-    <div class="insgrid">${INS.san.map(([n])=>`<figure>${insignia('san:'+n,52)}<figcaption>${esc(n)}</figcaption></figure>`).join('')}</div>
+    h+=`<h2 id="sanitaet">Sanitätsoffiziere (Feldanzug)</h2>
+    <p class="small">Ärzte und Zahnärzte tragen den Äskulapstab über den Sternen, in der Marine über den Ärmelstreifen.</p>
+    ${hlSeg}<div class="insgrid" id="sangrid">${sanGrid()}</div>
     <div class="scroll"><table><thead><tr><th>Heer, Luftwaffe</th><th>Marine</th><th>Ebene</th></tr></thead><tbody>${SAN.map(([e,n],i)=>`<tr><td>${esc(n)}</td><td>${esc(SANM[i])}</td><td>${esc(e)}</td></tr>`).join('')}</tbody></table></div>
     <p class="small">Apotheker und Veterinäre führen eigene Bezeichnungen, z. B. Stabsapotheker oder Stabsveterinär.</p>`;
     h+=`<h2 id="waffenfarben">Waffenfarben (Heer)</h2>
@@ -1167,6 +1184,7 @@ function render(){
   const v=document.getElementById('view');
   v.innerHTML=mode==='basics'?renderBasics():mode==='learn'?renderLearn():mode==='quiz'?renderQuiz():mode==='ref'?renderRef():renderHelp();
   if(mode==='ref'&&refTab==='beh') filterGloss();
+  if(mode==='ref'&&refTab==='abz') setHl(hl);
   spy();
   const sub=lesson&&mode==='basics'?LESSONS.find(l=>l.id===lesson).t:mode==='ref'?v.querySelector('[aria-pressed="true"]').textContent:{basics:'Grundlagen',learn:'Lernkarten',quiz:'Quiz',help:'Hilfe'}[mode];
   document.title=sub+' · AGAdemy';
@@ -1214,7 +1232,7 @@ let helpFrom='#/grundlagen'; // Ansicht vor der Hilfe, dorthin führen „Zurüc
 function go(h){if(location.hash===h) route();else location.hash=h}
 function route(){
   const [path,qs]=location.hash.replace(/^#\/?/,'').split('?');
-  const [m,a,b]=path.split('/').map(x=>{try{return decodeURIComponent(x)}catch(e){return x}});
+  let [m,a,b]=path.split('/').map(x=>{try{return decodeURIComponent(x)}catch(e){return x}});
   const nm=MODES[m]||'basics';
   if(nm==='quiz'&&mode!=='quiz'&&quiz&&quiz.i>=quiz.qs.length) quiz=null;
   if(nm==='help'&&mode!=='help') helpFrom=hashOf();
@@ -1222,6 +1240,7 @@ function route(){
   lesson=mode==='basics'&&LESSONS.some(l=>l.id===a)?a:null;
   if(mode==='learn'||mode==='quiz'){const d=TOPICS[a]||'all';if(d!==deck){deck=d;cur=null;quiz=null}}
   if(mode==='ref'){refTab=REFS[a]||'dg';glossQ=new URLSearchParams(qs||'').get('q')||''}
+  if(mode==='ref'&&refTab==='abz'&&b==='luftwaffe'){hl='lw';b='heer'} // früherer eigener Abschnitt
   render();
   const sec=mode==='ref'?b:mode==='help'?a:null;
   const el=sec?document.querySelector('#view [id="'+CSS.escape(sec)+'"]'):null;
@@ -1242,6 +1261,7 @@ document.addEventListener('click',e=>{
   if(t.dataset.close){closeSheet();return}
   if(t.dataset.deck){closeSheet();if(t.dataset.deck===deck){cur=null;quiz=null}go(topicHash(mode,t.dataset.deck));return}
   if(t.dataset.jump){jumpTo=t.dataset.jump;const el=document.getElementById(t.dataset.jump);if(el){el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});history.replaceState(null,'',hashOf(mode,t.dataset.jump))}return}
+  if(t.dataset.hl){setHl(t.dataset.hl);return}
   if(t.dataset.ref){go('#/nachschlagen/'+slug(REFS,t.dataset.ref));return}
   if(t.dataset.opt!==undefined){const q=quiz.qs[quiz.i];q.chosen=+t.dataset.opt;const ok=q.opts[q.chosen]===q.c.a;
     if(ok){quiz.score++;setBox(q.c,boxOf(q.c)+1)}else setBox(q.c,0);render();return}
