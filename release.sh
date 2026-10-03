@@ -18,6 +18,8 @@ grep -q "^const VERSION='$v', UPDATED='$d';" index.html || { echo "Versionszeile
 git commit -q -m "Version $v" index.html CHANGELOG.md
 git tag -a "v$v" -m "Version $v"
 git push origin HEAD "v$v"
+# GitHub löst den Pages-Build nach dem Push nicht immer aus, daher ausdrücklich anfordern
+gh api -X POST "repos/{owner}/{repo}/pages/builds" --silent || echo "Pages-Build konnte nicht angefordert werden, bitte prüfen." >&2
 notes="$(awk -v h="## $v ($d)" '$0==h{f=1;next} /^## /{f=0} f' CHANGELOG.md | sed -e '/./,$!d')"
 gh release create "v$v" --verify-tag --title "Version $v" --notes "$notes"
 echo "Version $v ($d) veröffentlicht."
