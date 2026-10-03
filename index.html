@@ -85,7 +85,7 @@ dialog::backdrop{background:rgba(8,16,30,.55)}
 .tlist .ct{font-size:13px;color:var(--muted);white-space:nowrap}
 .fig{display:flex;justify-content:center;margin-top:16px}
 .help h2{margin-top:24px}
-.help h2:first-child{margin-top:0}
+.help .back+h2{margin-top:10px}
 .help p{margin:0 0 10px}
 .changes{margin:0 0 10px;padding-left:20px;font-size:15px;color:var(--muted)}
 .changes li{margin:2px 0}
@@ -1130,7 +1130,7 @@ function install(){ // Browser mit eigenem Dialog fragen direkt, sonst führt de
 }
 function renderHelp(){
   const n=CARDS.length;
-  return `<div class="help">
+  return `<div class="help"><button class="back" data-back="1">Zurück zu ${{basics:'Grundlagen',learn:'Lernkarten',quiz:'Quiz',ref:'Nachschlagen'}[MODES[helpFrom.split('/')[1]]]}</button>
   <h2>Kein Angebot der Bundeswehr</h2>
   <p>AGAdemy ist ein privates Projekt. Es ist kein Angebot, keine Veröffentlichung und keine offizielle Anwendung der Bundeswehr, des Bundesministeriums der Verteidigung oder einer anderen Dienststelle und steht mit ihnen in keiner Verbindung. Alle Inhalte beruhen auf öffentlich zugänglichen Quellen und können Fehler enthalten. Verbindlich sind allein die offiziellen Quellen. Fehler gefunden? Gern als <a href="https://github.com/FlorianWilhelm/agademy/issues">Issue auf GitHub</a> melden.</p>
   <h2>Wofür die App da ist</h2>
@@ -1214,12 +1214,14 @@ function hashOf(m=mode,sec){
   if(m==='ref'){h+='/'+slug(REFS,refTab)+(sec?'/'+sec:'');if(refTab==='beh'&&glossQ.trim()) h+='?q='+encodeURIComponent(glossQ.trim())}
   return h;
 }
+let helpFrom='#/grundlagen'; // Ansicht vor der Hilfe, dorthin führen „Zurück“ und erneutes Antippen des Hilfe-Knopfs
 function go(h){if(location.hash===h) route();else location.hash=h}
 function route(){
   const [path,qs]=location.hash.replace(/^#\/?/,'').split('?');
   const [m,a,b]=path.split('/').map(x=>{try{return decodeURIComponent(x)}catch(e){return x}});
   const nm=MODES[m]||'basics';
   if(nm==='quiz'&&mode!=='quiz'&&quiz&&quiz.i>=quiz.qs.length) quiz=null;
+  if(nm==='help'&&mode!=='help') helpFrom=hashOf();
   mode=nm;
   lesson=mode==='basics'&&LESSONS.some(l=>l.id===a)?a:null;
   if(mode==='learn'||mode==='quiz'){const d=TOPICS[a]||'all';if(d!==deck){deck=d;cur=null;quiz=null}}
@@ -1236,6 +1238,7 @@ window.addEventListener('hashchange',route);
 /* ---------- Ereignisse ---------- */
 document.addEventListener('click',e=>{
   const t=e.target.closest('button');if(!t) return;
+  if(t.dataset.back||t.dataset.mode==='help'&&mode==='help'){go(helpFrom);return}
   if(t.dataset.mode){const m=t.dataset.mode;if(m==='basics')lesson=null;if(m==='quiz'&&mode==='quiz'&&quiz&&quiz.i>=quiz.qs.length)quiz=null;go(hashOf(m));return}
   if(t.dataset.lesson!==undefined){go('#/grundlagen'+(t.dataset.lesson?'/'+t.dataset.lesson:''));return}
   if(t.dataset.practice){go(topicHash('learn',t.dataset.practice));return}
