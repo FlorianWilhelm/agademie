@@ -86,6 +86,8 @@ dialog::backdrop{background:rgba(8,16,30,.55)}
 .fig{display:flex;justify-content:center;margin-top:16px}
 .help h2{margin-top:24px}
 .help .back+h2{margin-top:10px}
+.help h3:not(.lg){font:600 20px/1.2 var(--head);margin:16px 0 4px}
+.help .callout{margin:14px 0}
 .help p{margin:0 0 10px}
 .changes{margin:0 0 10px;padding-left:20px;font-size:15px;color:var(--muted)}
 .changes li{margin:2px 0}
@@ -1200,20 +1202,19 @@ function renderHelp(){
   return `<div class="help"><button class="back" data-back="1">Zurück zu ${{basics:'Grundlagen',learn:'Lernkarten',quiz:'Quiz',ref:'Nachschlagen'}[MODES[helpFrom.split('/')[1]]]}</button>
   <h2>Was ist AGAdemy?</h2>
   <p>AGA steht für Allgemeine Grundausbildung. AGAdemy ist die zivile Variante: für alle, die mit der Bundeswehr zusammenarbeiten und ihre Sprache und Strukturen verstehen wollen.</p>
-  <h2>Kein Angebot der Bundeswehr</h2>
-  <p>AGAdemy ist ein privates Projekt. Es ist kein Angebot, keine Veröffentlichung und keine offizielle Anwendung der Bundeswehr, des Bundesministeriums der Verteidigung oder einer anderen Dienststelle und steht mit ihnen in keiner Verbindung. Alle Inhalte beruhen auf öffentlich zugänglichen Quellen und können Fehler enthalten. Verbindlich sind allein die offiziellen Quellen. Fehler gefunden? Gern als <a href="https://github.com/FlorianWilhelm/agademy/issues">Issue auf GitHub</a> melden.</p>
+  <div class="callout"><strong>Kein Angebot der Bundeswehr.</strong> AGAdemy ist ein privates Projekt. Es ist kein Angebot, keine Veröffentlichung und keine offizielle Anwendung der Bundeswehr, des Bundesministeriums der Verteidigung oder einer anderen Dienststelle und steht mit ihnen in keiner Verbindung. Alle Inhalte beruhen auf öffentlich zugänglichen Quellen und können Fehler enthalten. Verbindlich sind allein die offiziellen Quellen. Fehler gefunden? Gern als <a href="https://github.com/FlorianWilhelm/agademy/issues">Issue auf GitHub</a> melden.</div>
   <h2>Inhalte der App</h2>
   <p>Grundwissen über die Bundeswehr: ihre Stellung im Staat, NATO und Heimatschutz, Dienstgrade und Abzeichen, Uniformen, Waffen- und Barettfarben, Gliederung, Stabsabteilungen, Behörden und Haushalt, Anrede, Abkürzungen, NATO-Alphabet, Geheimschutz und die Begriffe der militärischen Digitalisierung. Insgesamt ${n} Karten in ${DECKS.length} Themen.</p>
-  <h2>Grundlagen</h2>
+  <h3>Grundlagen</h3>
   <p>${LESSONS.length} Lektionen vermitteln das Wissen in sinnvoller Reihenfolge, mit Beispielen und Abzeichen. Am Ende jeder Lektion führt „Lernkarten dazu üben“ direkt zum passenden Thema. Gelesene Lektionen sind markiert.</p>
-  <h2>Thema wählen</h2>
+  <h3>Thema wählen</h3>
   <p>Oben bei Lernkarten und Quiz steht das aktuelle Thema. Antippen öffnet die Liste aller Themen mit ihrem Lernstand. „Alle Themen“ mischt alles.</p>
-  <h2>Lernkarten</h2>
+  <h3>Lernkarten</h3>
   <p>Frage lesen, selbst antworten, dann „Antwort zeigen“. Mit „Gewusst“ wandert die Karte ein Fach weiter, mit „Nochmal“ zurück in Fach 1. Es gibt fünf Fächer. Karten in niedrigen Fächern kommen häufiger dran, so üben Sie vor allem, was noch nicht sitzt. Ab Fach 4 zählt eine Karte als sicher.</p>
   <p>Am Rechner geht es auch per Tastatur: Leertaste zeigt die Antwort, 1 für Nochmal, 2 für Gewusst.</p>
-  <h2>Quiz</h2>
+  <h3>Quiz</h3>
   <p>Zehn Fragen mit je vier Antworten aus dem gewählten Thema. Bei Abzeichen-Fragen sind die Antworten Bilder. Richtige Antworten schieben die Karte ein Fach weiter, falsche zurück in Fach 1, Quiz und Lernkarten teilen sich also denselben Lernstand.</p>
-  <h2>Nachschlagen</h2>
+  <h3>Nachschlagen</h3>
   <p>Übersichten zum schnellen Nachsehen: Dienstgradleiter mit Marine-Entsprechung und NATO-Rangcode, alle Abzeichen, Gliederung mit NATO-Größenzeichen, Stabsabteilungen und ein durchsuchbares Verzeichnis aller Abkürzungen samt NATO-Alphabet. Die Leiste „Springe zu“ führt direkt zu jedem Abschnitt.</p>
   <h2>Wie belastbar die Inhalte sind</h2>
   <p>Dienstgrade, Gliederung und Behördenangaben stammen von bundeswehr.de, Abzeichen und Dienstgradbezeichnungen aus der Anordnung des Bundespräsidenten über die Dienstgradbezeichnungen und die Uniform (2021), Waffen- und Barettfarben aus der BMVg-Broschüre „Bekleidung und Uniformen der Bundeswehr“ (April 2026), Rechtsrahmen aus Grundgesetz, Soldatengesetz, Parlamentsbeteiligungsgesetz und Wehrdienst-Modernisierungsgesetz, NATO-Angaben von nato.int, Disziplinarbefugnis aus der Wehrdisziplinarordnung, Geheimschutz aus dem SÜG und der VSA, Architekturbegriffe u. a. nach Fraunhofer IESE. NATO-Rangcodes folgen STANAG 2116, Größenzeichen NATO APP-6 in deutscher Lesart. Die Abzeichen sind nach der Anordnung des Bundespräsidenten vereinfacht nachgezeichnet. Stärkeangaben sind Größenordnungen, Führungsdienstgrade typische Besetzungen. Stand Oktober 2026.</p>

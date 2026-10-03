@@ -11,6 +11,7 @@ per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 - Nachschlagen → Abzeichen: Heer und Luftwaffe in einem Abschnitt mit Umschalter, der die Schwinge ergänzt; auch die Sanitätsoffiziere lassen sich mit Schwinge anzeigen
 - Neue Lektion „Feldanzug und Dienstanzug“: wann welcher Anzug getragen wird und wie sich Heer, Luftwaffe, Marine und CIR unterscheiden, mit schematischen Zeichnungen der Anzüge und acht Quizfragen
 - Hilfe: Der Abschnitt „Wofür die App da ist“ heißt jetzt „Inhalte der App“ und nennt auch die Uniformen
+- Hilfe: „Kein Angebot der Bundeswehr“ als Hinweiskasten, Grundlagen, Lernkarten, Quiz und Nachschlagen als Unterabschnitte von „Inhalte der App“
 
 ## 0.6.1 (2026-10-03)
 
