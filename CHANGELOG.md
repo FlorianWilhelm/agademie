@@ -4,6 +4,10 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum. Die Hilfe-Seite der App zeigt die
 letzten Versionen an.
 
+## Unveröffentlicht
+
+- Neuer Knopf oben neben der Hilfe: App installieren. Wo der Browser es kann, startet er die Installation direkt, sonst führt er zur Anleitung
+
 ## 0.4 (2026-10-03)
 
 - Größenzeichen für die Armee (XXXX) wird nicht mehr abgeschnitten

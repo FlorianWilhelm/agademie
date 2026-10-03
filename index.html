@@ -144,6 +144,9 @@ dt{font:600 19px/1.2 var(--head)}
 dd{margin:2px 0 0;color:var(--muted)}
 .helpbtn{flex:none;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);display:grid;place-items:center;color:var(--muted)}
 .helpbtn[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+.helpbtn.inst{background:var(--accent);border-color:var(--accent);color:#06302e}
+.helpbtn[hidden]{display:none}
+.tbtns{flex:none;display:flex;gap:8px}
 .lessons{list-style:none;margin:0;padding:0;counter-reset:l}
 .lessons li+li{margin-top:8px}
 .lessons button{width:100%;text-align:left;display:flex;gap:14px;align-items:center;background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:12px 14px}
@@ -194,7 +197,8 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 <div class="app">
   <header class="top">
     <div style="flex:1"><h1>AGAdemy <span class="ver" id="ver"></span></h1><p>Die AGA für Zivis: Bundeswehr-Grundwissen</p></div>
-    <button class="helpbtn" data-mode="help" aria-label="Hilfe"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.2 9.3a2.9 2.9 0 1 1 4.3 2.5c-.9.5-1.5 1.1-1.5 2.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17.3" r="1.2" fill="currentColor"/></svg></button>
+    <div class="tbtns"><button class="helpbtn inst" id="instBtn" aria-label="App installieren" title="App installieren" hidden><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 4v11m-4.5-4.5L12 15l4.5-4.5M5 19.5h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="helpbtn" data-mode="help" aria-label="Hilfe" title="Hilfe"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.2 9.3a2.9 2.9 0 1 1 4.3 2.5c-.9.5-1.5 1.1-1.5 2.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17.3" r="1.2" fill="currentColor"/></svg></button></div>
   </header>
   <button class="topic" id="topicBtn" aria-haspopup="dialog"></button>
   <main id="view"></main>
@@ -1095,8 +1099,12 @@ function renderBasics(){
 }
 let installEvt=null;
 const standalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
-addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvt=e;if(mode==='help') render()});
-addEventListener('appinstalled',()=>{installEvt=null;if(mode==='help') render()});
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvt=e;render()});
+addEventListener('appinstalled',()=>{installEvt=null;render()});
+function install(){ // Browser mit eigenem Dialog fragen direkt, sonst führt der Knopf zur Anleitung in der Hilfe
+  if(installEvt){installEvt.prompt();installEvt.userChoice.finally(()=>{installEvt=null;render()})}
+  else go('#/hilfe/app');
+}
 let changes=null; // die letzten Versionen aus CHANGELOG.md, nur veröffentlichte
 function loadChanges(){
   fetch('CHANGELOG.md').then(r=>r.ok?r.text():Promise.reject()).then(md=>{
@@ -1148,6 +1156,7 @@ function renderHelp(){
 }
 function render(){
   renderDecks();
+  document.getElementById('instBtn').hidden=standalone()||(mode==='help'&&!installEvt);
   document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-current',b.dataset.mode===mode?'page':'false'));
   const v=document.getElementById('view');
   v.innerHTML=mode==='basics'?renderBasics():mode==='learn'?renderLearn():mode==='quiz'?renderQuiz():mode==='ref'?renderRef():renderHelp();
@@ -1191,6 +1200,7 @@ function hashOf(m=mode,sec){
   let h='#/'+slug(MODES,m);
   if(m==='basics'&&lesson) h+='/'+lesson;
   if(m==='learn'||m==='quiz') return topicHash(m,deck);
+  if(m==='help'&&sec) h+='/'+sec;
   if(m==='ref'){h+='/'+slug(REFS,refTab)+(sec?'/'+sec:'');if(refTab==='beh'&&glossQ.trim()) h+='?q='+encodeURIComponent(glossQ.trim())}
   return h;
 }
@@ -1205,8 +1215,9 @@ function route(){
   if(mode==='learn'||mode==='quiz'){const d=TOPICS[a]||'all';if(d!==deck){deck=d;cur=null;quiz=null}}
   if(mode==='ref'){refTab=REFS[a]||'dg';glossQ=new URLSearchParams(qs||'').get('q')||''}
   render();
-  const el=mode==='ref'&&b?document.querySelector('#view [id="'+CSS.escape(b)+'"]'):null;
-  const h=hashOf(mode,el&&b);
+  const sec=mode==='ref'?b:mode==='help'?a:null;
+  const el=sec?document.querySelector('#view [id="'+CSS.escape(sec)+'"]'):null;
+  const h=hashOf(mode,el&&sec);
   if(location.hash!==h) history.replaceState(null,'',h); // ungültige oder unvollständige Links korrigieren
   el?el.scrollIntoView():window.scrollTo(0,0);
 }
@@ -1230,7 +1241,7 @@ document.addEventListener('click',e=>{
   else if(a==='ok'||a==='again'){setBox(cur,a==='ok'?boxOf(cur)+1:0);last=cur;cur=null;render()}
   else if(a==='next'){quiz.i++;render()}
   else if(a==='newquiz'){quiz=null;render()}
-  if(t.id==='install'&&installEvt){installEvt.prompt();installEvt.userChoice.finally(()=>{installEvt=null;render()});return}
+  if(t.id==='install'||t.id==='instBtn'){install();return}
   if(t.id==='reset'&&confirm('Lernstand für alle Karten zurücksetzen?')){store={box:{},read:{}};save();cur=null;quiz=null;render()}
 });
 document.getElementById('sheet').addEventListener('click',e=>{if(e.target.id==='sheet') closeSheet()});
