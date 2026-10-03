@@ -8,7 +8,8 @@ letzten Versionen an.
 
 - Lektionen: Am Ende führt neben „Weiter“ jetzt auch „Zurück“ zur vorherigen Lektion
 - Lektion „Dienstgrade verstehen“ erklärt, woher das Wort „Portepee“ kommt
-- Lektion „Abzeichen lesen“ zeigt auch das Abzeichen des Stabskorporals
+- Lektion „Abzeichen lesen“ zeigt alle Dienstgradabzeichen statt einer Auswahl
+- Links haben die Akzentfarbe der App, auch im dunklen Modus gut lesbar
 - Lektion „Abzeichen lesen“: Bei der Marine heißt es jetzt „mittelbreite Streifen“, wie in der Vorschrift
 
 ## 0.3.1 (2026-10-03)

@@ -56,6 +56,7 @@ html,body{height:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.5 var(--body);-webkit-font-smoothing:antialiased}
 button{font:inherit;color:inherit;cursor:pointer}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+a{color:var(--accent-ink)}
 .app{max-width:640px;margin:0 auto;padding:0 16px 96px;min-height:100%}
 header.top{display:flex;align-items:center;gap:14px;padding:22px 0 14px}
 header.top svg{flex:none}
@@ -805,17 +806,18 @@ const LESSONS=[
   <p>Man muss nicht 26 Bilder auswendig lernen. Die Abzeichen folgen einer Logik, in Heer und Luftwaffe gleich, die Luftwaffe trägt zusätzlich die Schwinge.</p>
   <h3>Mannschaften: Schrägstreifen</h3>
   <p>Je mehr Streifen, desto höher. Korporal und Stabskorporal tragen einen breiten Balken.</p>
-  ${figs([['heer:Gefreiter','Gefreiter'],['heer:Hauptgefreiter','Haupt­gefreiter'],['heer:Oberstabsgefreiter','Ober­stabs­gefreiter'],['heer:Korporal','Korporal'],['heer:Stabskorporal','Stabs­korporal']])}
+  ${figs([['heer:Gefreiter','Gefreiter'],['heer:Obergefreiter','Ober­gefreiter'],['heer:Hauptgefreiter','Haupt­gefreiter'],['heer:Stabsgefreiter','Stabs­gefreiter'],['heer:Oberstabsgefreiter','Ober­stabs­gefreiter'],['heer:Korporal','Korporal'],['heer:Stabskorporal','Stabs­korporal']])}
   <h3>Unteroffiziere: der Bogen (Tresse)</h3>
   <p>Offener Bogen: Unteroffizier. Geschlossener Bogen: ab Stabsunteroffizier. Winkel im Bogen: Feldwebeldienstgrade. Eine kleine Raute über dem Winkel kommt ab Hauptfeldwebel dazu.</p>
-  ${figs([['heer:Unteroffizier','Unter­offizier'],['heer:Stabsunteroffizier','Stabs­unter­offizier'],['heer:Feldwebel','Feldwebel'],['heer:Hauptfeldwebel','Haupt­feld­webel'],['heer:Oberstabsfeldwebel','Ober­stabs­feld­webel']])}
+  ${figs([['heer:Unteroffizier','Unter­offizier'],['heer:Stabsunteroffizier','Stabs­unter­offizier'],['heer:Feldwebel','Feldwebel'],['heer:Oberfeldwebel','Ober­feld­webel'],['heer:Hauptfeldwebel','Haupt­feld­webel'],['heer:Stabsfeldwebel','Stabs­feld­webel'],['heer:Oberstabsfeldwebel','Ober­stabs­feld­webel']])}
   <h3>Offiziere: Sterne, dann Eichenlaub, dann Gold</h3>
   <p>Leutnante und Hauptleute zählen Sterne (eins bis drei, Stabshauptmann vier). Stabsoffiziere tragen zusätzlich Eichenlaub und zählen wieder von eins. Generale tragen goldenes Eichenlaub mit ein bis vier goldenen Sternen. Am Kampfanzug werden silberne Abzeichen schwarz oder weiß getragen, goldene bleiben golden.</p>
-  ${figs([['heer:Leutnant','Leutnant'],['heer:Hauptmann','Haupt­mann'],['heer:Major','Major'],['heer:Oberst','Oberst'],['heer:Brigadegeneral','Brigade­general']])}
+  ${figs([['heer:Leutnant','Leutnant'],['heer:Oberleutnant','Ober­leutnant'],['heer:Hauptmann','Haupt­mann'],['heer:Stabshauptmann','Stabs­haupt­mann'],['heer:Major','Major'],['heer:Oberstleutnant','Oberst­leutnant'],['heer:Oberst','Oberst'],['heer:Brigadegeneral','Brigade­general'],['heer:Generalmajor','General­major'],['heer:Generalleutnant','General­leutnant'],['heer:General','General']])}
   <h3>Marine-Offiziere: Ärmelstreifen</h3>
   <p>Gezählt werden die mittelbreiten Streifen: einer beim Leutnant zur See, vier beim Kapitän zur See. Ein dünner Zusatzstreifen markiert die Zwischenstufe. Admirale erkennt man am breiten Streifen unten.</p>
-  ${figs([['mar:Leutnant zur See','Leutnant z. S.'],['mar:Kapitänleutnant','Kapitän­leutnant'],['mar:Korvettenkapitän','Korvetten­kapitän'],['mar:Kapitän zur See','Kapitän z. S.'],['mar:Konteradmiral','Konter­admiral']])}
-  <div class="callout">Ein silberner Querstreifen kennzeichnet Offizieranwärter, etwa den Fahnenjunker. Sie stehen auf der Ebene eines Unteroffiziers oder Feldwebels, sind aber auf dem Weg zum Offizier.</div>`},
+  ${figs([['mar:Leutnant zur See','Leutnant zur See'],['mar:Oberleutnant zur See','Ober­leutnant zur See'],['mar:Kapitänleutnant','Kapitän­leutnant'],['mar:Stabskapitänleutnant','Stabs­kapitän­leutnant'],['mar:Korvettenkapitän','Korvetten­kapitän'],['mar:Fregattenkapitän','Fregatten­kapitän'],['mar:Kapitän zur See','Kapitän zur See'],['mar:Flottillenadmiral','Flottillen­admiral'],['mar:Konteradmiral','Konter­admiral'],['mar:Vizeadmiral','Vize­admiral'],['mar:Admiral','Admiral']])}
+  <div class="callout">Ein silberner Querstreifen kennzeichnet Offizieranwärter, etwa den Fahnenjunker. Sie stehen auf der Ebene eines Unteroffiziers oder Feldwebels, sind aber auf dem Weg zum Offizier.</div>
+  <p>Die Abzeichen der Luftwaffe, der Marine-Unteroffiziere und des Sanitätsdienstes stehen unter <a href="#/nachschlagen/abzeichen">Nachschlagen → Abzeichen</a>.</p>`},
  {id:'farben',t:'Waffenfarbe und Barett',d:'Litze, Kragenspiegel und Barett verraten die Truppengattung',deck:'abz',b:()=>`
   <p>Das Dienstgradabzeichen sagt, welchen Rang jemand hat. Wozu jemand gehört, zeigt im Heer die Farbe. Jede Truppengattung hat ihre eigene Waffenfarbe, die Tradition reicht bis 1915 zurück.</p>
   <h3>Am Feldanzug: die Litze</h3>
