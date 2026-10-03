@@ -6,7 +6,7 @@ per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
 ## Unveröffentlicht
 
-- Lektion „Abzeichen lesen“: neuer Abschnitt zu Offizieranwärtern mit silberfarbener Kordel (Heer, Luftwaffe) und goldfarbenem Stern (Marine), dem Zusatz OA und einem Hinweis auf UA und FA
+- Lektion „Abzeichen lesen“: neuer Abschnitt zu Offizieranwärtern mit silberfarbener Kordel (Heer, Luftwaffe) und goldfarbenem Stern (Marine), dem Zusatz OA und einem Hinweis auf UA und FA (in der Marine MA und BA)
 
 ## 0.7.1 (2026-10-03)
 
