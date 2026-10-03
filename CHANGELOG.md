@@ -4,7 +4,7 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
-## Unveröffentlicht
+## 0.6 (2026-10-03)
 
 - Hilfe: „Zurück“ oben führt zur vorherigen Ansicht, ebenso ein erneutes Antippen des Hilfe-Knopfs
 - Hilfe: Quellenangabe zu den Dienstgradabzeichen korrigiert

@@ -213,10 +213,16 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 
 <script>
 /* ---------- Version: setzt release.sh passend zum Git-Tag, nicht von Hand ändern ---------- */
-const VERSION='0.5', UPDATED='2026-10-03';
+const VERSION='0.6', UPDATED='2026-10-03';
 document.getElementById('ver').textContent=`v${VERSION} · ${UPDATED}`;
 // Was ist neu: die letzten Versionen aus CHANGELOG.md, setzt release.sh zusammen mit der Version
 const CHANGES=[
+{v:"0.6",d:"2026-10-03",items:[
+"Hilfe: „Zurück“ oben führt zur vorherigen Ansicht, ebenso ein erneutes Antippen des Hilfe-Knopfs",
+"Hilfe: Quellenangabe zu den Dienstgradabzeichen korrigiert",
+"Lektionen in neuer Reihenfolge: „Anrede und Umgang“ folgt direkt auf die Dienstgrade und Abzeichen, „Geheimschutz“ kommt vor „Wer braucht, wer beschafft“",
+"Lektion „Bundeswehr im Staat“ erklärt jetzt die Karrierecenter (vorher in „Aufbau der Bundeswehr“), „Anrede und Umgang“ zeigt die Anrede von Sanitätsoffizieren",
+]},
 {v:"0.5",d:"2026-10-03",items:[
 "Hilfe: „Was ist neu“ passt jetzt immer zur angezeigten Version, auch offline",
 "Neuer Knopf oben neben der Hilfe: App installieren. Wo der Browser es kann, startet er die Installation direkt, sonst führt er zur Anleitung",
@@ -233,9 +239,6 @@ const CHANGES=[
 "Links haben die Akzentfarbe der App, auch im dunklen Modus gut lesbar",
 "Lektion „Abzeichen lesen“: Bei der Marine heißt es jetzt „mittelbreite Streifen“, wie in der Vorschrift",
 "Offizieranwärter: Lektion „Abzeichen lesen“ und Lernkarten nennen das Kennzeichen jetzt richtig, eine silberne Kordel an der Schulterklappe",
-]},
-{v:"0.3.1",d:"2026-10-03",items:[
-"Quiz: Falsche Antworten kommen nur noch aus demselben Thema, keine Bündnisfall-Antwort mehr bei NATO-Rangcodes",
 ]},
 ]; // Ende CHANGES
 /* ---------- Daten ---------- */
