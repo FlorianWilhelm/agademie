@@ -1,11 +1,12 @@
 # Changelog
 
 Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Überschrift
-beim Veröffentlichen durch Version und Datum. Die Hilfe-Seite der App zeigt die
-letzten Versionen an.
+beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
+per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
 ## Unveröffentlicht
 
+- Hilfe: „Was ist neu“ passt jetzt immer zur angezeigten Version, auch offline
 - Neuer Knopf oben neben der Hilfe: App installieren. Wo der Browser es kann, startet er die Installation direkt, sonst führt er zur Anleitung
 
 ## 0.4 (2026-10-03)

@@ -1,5 +1,5 @@
 #!/bin/sh
-# Neue Version veröffentlichen: setzt Version und Datum in index.html und CHANGELOG.md, committet, taggt, pusht
+# Neue Version veröffentlichen: setzt Version, Datum und „Was ist neu“ (über changes.sh) in index.html und CHANGELOG.md, committet, taggt, pusht
 # und legt das GitHub-Release mit dem Changelog-Abschnitt als Text an. Läuft nur auf main.
 # Aufruf: ./release.sh 0.2
 set -eu
@@ -14,6 +14,7 @@ awk '/^## Unveröffentlicht$/{f=1;next} /^## /{f=0} f&&/^- /{n++} END{exit !n}' 
 sed -i.bak -E "s/^## Unveröffentlicht$/## $v ($d)/" CHANGELOG.md && rm CHANGELOG.md.bak
 sed -i.bak -E "s/^const VERSION='[^']*', UPDATED='[^']*';/const VERSION='$v', UPDATED='$d';/" index.html && rm index.html.bak
 grep -q "^const VERSION='$v', UPDATED='$d';" index.html || { echo "Versionszeile in index.html nicht gefunden." >&2; exit 1; }
+./changes.sh && ./changes.sh --check
 git commit -q -m "Version $v" index.html CHANGELOG.md
 git tag -a "v$v" -m "Version $v"
 git push origin HEAD "v$v"

@@ -8,3 +8,5 @@
 - Jede für Nutzer sichtbare Änderung bekommt im selben Commit einen Eintrag unter
   `## Unveröffentlicht` in `CHANGELOG.md`.
 - Pushen von `dev` ist erlaubt, wenn der Nutzer es möchte. Veröffentlichen nur per `/release`.
+- `const CHANGES` in `index.html` ("Was ist neu" in der Hilfe) nie von Hand ändern. `release.sh`
+  erzeugt es per `changes.sh` aus `CHANGELOG.md`; `./changes.sh --check` prüft die Übereinstimmung.

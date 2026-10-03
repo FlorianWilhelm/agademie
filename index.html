@@ -215,6 +215,30 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 /* ---------- Version: setzt release.sh passend zum Git-Tag, nicht von Hand ändern ---------- */
 const VERSION='0.4', UPDATED='2026-10-03';
 document.getElementById('ver').textContent=`v${VERSION} · ${UPDATED}`;
+// Was ist neu: die letzten Versionen aus CHANGELOG.md, setzt release.sh zusammen mit der Version
+const CHANGES=[
+{v:"0.4",d:"2026-10-03",items:[
+"Größenzeichen für die Armee (XXXX) wird nicht mehr abgeschnitten",
+"Lektionen „Vom Trupp zur Division“ und „NATO-Größenzeichen“ erklären die Ebenen über der Division",
+"Lektionen und Hilfe: Silbentrennung und ausgeglichener Zeilenumbruch für ein ruhigeres Schriftbild, Absätze sind so breit wie Tabellen und Hinweise",
+"Lektion „Aufbau der Bundeswehr“ zeigt die vier Teilstreitkräfte als Liste",
+"Lektionen: Am Ende führt neben „Weiter“ jetzt auch „Zurück“ zur vorherigen Lektion, auf dem Handy stehen beide Buttons untereinander",
+"Lektion „Dienstgrade verstehen“ erklärt, woher das Wort „Portepee“ kommt",
+"Lektion „Abzeichen lesen“ zeigt alle Dienstgradabzeichen statt einer Auswahl",
+"Lektionen „Dienstgrade verstehen“ und „Abzeichen lesen“ zeigen auch die Sanitätsoffiziere",
+"Links haben die Akzentfarbe der App, auch im dunklen Modus gut lesbar",
+"Lektion „Abzeichen lesen“: Bei der Marine heißt es jetzt „mittelbreite Streifen“, wie in der Vorschrift",
+"Offizieranwärter: Lektion „Abzeichen lesen“ und Lernkarten nennen das Kennzeichen jetzt richtig, eine silberne Kordel an der Schulterklappe",
+]},
+{v:"0.3.1",d:"2026-10-03",items:[
+"Quiz: Falsche Antworten kommen nur noch aus demselben Thema, keine Bündnisfall-Antwort mehr bei NATO-Rangcodes",
+]},
+{v:"0.3",d:"2026-10-03",items:[
+"Schriften werden selbst ausgeliefert, keine Verbindung mehr zu Google Fonts",
+"Seite darf von Suchmaschinen indiziert werden",
+"Version und Datum stehen klein neben dem Titel",
+]},
+]; // Ende CHANGES
 /* ---------- Daten ---------- */
 const G={M:'Mannschaften',UoP:'Unteroffiziere ohne Portepee',UmP:'Unteroffiziere mit Portepee',L:'Leutnante',H:'Hauptleute',S:'Stabsoffiziere',Gen:'Generale'};
 const RANKS=[
@@ -1105,19 +1129,6 @@ function install(){ // Browser mit eigenem Dialog fragen direkt, sonst führt de
   if(installEvt){installEvt.prompt();installEvt.userChoice.finally(()=>{installEvt=null;render()})}
   else go('#/hilfe/app');
 }
-let changes=null; // die letzten Versionen aus CHANGELOG.md, nur veröffentlichte
-function loadChanges(){
-  fetch('CHANGELOG.md').then(r=>r.ok?r.text():Promise.reject()).then(md=>{
-    const out=[];let cur=null;
-    for(const l of md.split('\n')){let m;
-      if((m=l.match(/^## (\d[\d.]*) \((\d{4}-\d\d-\d\d)\)/))){cur={v:m[1],d:m[2],items:[]};out.push(cur)}
-      else if(l.startsWith('## ')) cur=null;
-      else if(cur&&(m=l.match(/^- (.+)/))) cur.items.push(m[1]);
-    }
-    changes=out.slice(0,3);if(mode==='help') render();
-  }).catch(()=>{});
-}
-loadChanges();
 function renderHelp(){
   const n=CARDS.length;
   return `<div class="help">
@@ -1149,7 +1160,7 @@ function renderHelp(){
   <button class="btn ghost" id="reset" style="flex:none;padding:10px 14px;font-size:16px">Lernstand zurücksetzen</button>
   <h2>Lizenz</h2>
   <p>Code unter MIT, Inhalte unter CC BY 4.0. Quelltext auf <a href="https://github.com/FlorianWilhelm/agademy">GitHub</a>.</p>
-  ${changes?`<h2 id="neu">Was ist neu</h2>${changes.map(c=>`<h3 class="lg">Version ${esc(c.v)} <span class="small">${esc(c.d)}</span></h3>
+  ${CHANGES.length?`<h2 id="neu">Was ist neu</h2>${CHANGES.map(c=>`<h3 class="lg">Version ${esc(c.v)} <span class="small">${esc(c.d)}</span></h3>
   <ul class="changes">${c.items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul>`).join('')}
   <p class="small">Alle Änderungen im <a href="https://github.com/FlorianWilhelm/agademy/blob/main/CHANGELOG.md">Changelog</a>.</p>`:''}
   </div>`;
