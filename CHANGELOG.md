@@ -6,6 +6,7 @@ letzten Versionen an.
 
 ## Unveröffentlicht
 
+- Lektionen: Am Ende führt neben „Weiter“ jetzt auch „Zurück“ zur vorherigen Lektion
 - Lektion „Dienstgrade verstehen“ erklärt, woher das Wort „Portepee“ kommt
 - Lektion „Abzeichen lesen“ zeigt auch das Abzeichen des Stabskorporals
 
