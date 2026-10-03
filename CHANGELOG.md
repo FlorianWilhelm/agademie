@@ -7,6 +7,7 @@ letzten Versionen an.
 ## Unveröffentlicht
 
 - Lektion „Dienstgrade verstehen“ erklärt, woher das Wort „Portepee“ kommt
+- Lektion „Abzeichen lesen“ zeigt auch das Abzeichen des Stabskorporals
 
 ## 0.3.1 (2026-10-03)
 
