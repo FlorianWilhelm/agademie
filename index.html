@@ -425,7 +425,7 @@ const INSGRP=[['Mannschaften',[[G.M,0,8]]],['Unteroffiziere',[[G.UoP,8,11],[G.Um
 INS.heer=INS.lw.map(([n,sp],i)=>[i===0?'Schütze':n,sp]);
 INS.san=SAN.map(([e,s])=>[s,[...INS.heer.find(r=>r[0]===e)[1],'ask']]); // Sanitätsoffiziere: wie die Ebene im Heer, dazu der Äskulapstab
 INS.sanlw=INS.san; // Luftwaffe: dieselben Abzeichen mit Schwinge
-const ANW={'Schütze':'Bezeichnung hängt von der Verwendung ab, z. B. auch Jäger, Grenadier oder Funker.','Fahnenjunker':'Offizieranwärter auf Ebene Unteroffizier (silberne Kordel an der Schulterklappe).','Fähnrich':'Offizieranwärter auf Ebene Feldwebel.','Oberfähnrich':'Offizieranwärter auf Ebene Hauptfeldwebel.','Seekadett':'Offizieranwärter der Marine auf Ebene Maat.','Fähnrich zur See':'Offizieranwärter der Marine auf Ebene Bootsmann.','Oberfähnrich zur See':'Offizieranwärter der Marine auf Ebene Hauptbootsmann.'};
+const ANW={'Schütze':'Bezeichnung hängt von der Verwendung ab, z. B. auch Jäger, Grenadier oder Funker.','Fahnenjunker':'Offizieranwärter auf Ebene Unteroffizier (silberfarbene Kordel an der Schulterklappe).','Fähnrich':'Offizieranwärter auf Ebene Feldwebel.','Oberfähnrich':'Offizieranwärter auf Ebene Hauptfeldwebel.','Seekadett':'Offizieranwärter der Marine auf Ebene Maat (goldfarbener Stern über dem Dienstgradabzeichen).','Fähnrich zur See':'Offizieranwärter der Marine auf Ebene Bootsmann.','Oberfähnrich zur See':'Offizieranwärter der Marine auf Ebene Hauptbootsmann.'};
 function insignia(key,W=60){
   const [t,name]=key.split(':');const spec=(INS[t].find(r=>r[0]===name)||[,[]])[1];
   const lw=t!=='mar', wing=t==='lw'||t==='sanlw', gold=spec.includes('gold');
@@ -921,7 +921,11 @@ const LESSONS=[
   <h3>Marine-Offiziere: Ärmelstreifen</h3>
   <p>Gezählt werden die mittelbreiten Streifen: einer beim Leutnant zur See, vier beim Kapitän zur See. Ein dünner Zusatzstreifen markiert die Zwischenstufe. Admirale erkennt man am breiten Streifen unten.</p>
   ${figs([['mar:Leutnant zur See','Leutnant zur See'],['mar:Oberleutnant zur See','Ober­leutnant zur See'],['mar:Kapitänleutnant','Kapitän­leutnant'],['mar:Stabskapitänleutnant','Stabs­kapitän­leutnant'],['mar:Korvettenkapitän','Korvetten­kapitän'],['mar:Fregattenkapitän','Fregatten­kapitän'],['mar:Kapitän zur See','Kapitän zur See'],['mar:Flottillenadmiral','Flottillen­admiral'],['mar:Konteradmiral','Konter­admiral'],['mar:Vizeadmiral','Vize­admiral'],['mar:Admiral','Admiral']])}
-  <div class="callout">Eine silberne Kordel an der Schulterklappe kennzeichnet Offizieranwärter, etwa den Fahnenjunker. Sie stehen auf der Ebene eines Unteroffiziers oder Feldwebels, sind aber auf dem Weg zum Offizier.</div>
+  <h3>Offizieranwärter: Kordel und Stern</h3>
+  <p>Offizieranwärter (OA) sind auf dem Weg zum Offizier, stehen aber noch auf der Ebene von Mannschaften oder Unteroffizieren. In Heer und Luftwaffe tragen sie eine silberfarbene Kordel, die über die Schulterklappe gezogen wird. In der Marine tragen sie stattdessen einen goldfarbenen fünfzackigen Stern auf Schulterklappe und Ärmel, das Laufbahnabzeichen der Offiziere, oft Seestern genannt.</p>
+  ${figs([['heer:Fahnenjunker','Fahnen­junker'],['heer:Fähnrich','Fähnrich'],['mar:Seekadett','See­kadett'],['mar:Fähnrich zur See','Fähnrich zur See']])}
+  <p>Auf der Ebene der Unteroffiziere haben Offizieranwärter eigene Dienstgrade: Fahnenjunker, Fähnrich und Oberfähnrich, in der Marine Seekadett, Fähnrich zur See und Oberfähnrich zur See. Davor führen sie ihren Mannschaftsdienstgrad mit dem Zusatz OA, etwa Gefreiter OA. Bei Fahnenjunker, Fähnrich und Co. entfällt der Zusatz, weil der Dienstgrad die Laufbahn schon verrät.</p>
+  <div class="callout">Auch Unteroffizieranwärter (UA) und Feldwebelanwärter (FA) führen einen Zusatz und ein eigenes Kennzeichen: UA einen Querbalken, FA in Heer und Luftwaffe eine altgoldfarbene Kordel, in der Marine zwei Querbalken.</div>
   <p>Alle Abzeichen der Luftwaffe und die der Marine-Unteroffiziere stehen unter <a href="#/nachschlagen/abzeichen">Nachschlagen → Abzeichen</a>.</p>`},
  {id:'anzuege',t:'Feldanzug und Dienstanzug',d:'Welcher Anzug wann getragen wird und woran man die Teilstreitkraft erkennt',deck:'abz',b:()=>`
   <p>Im Alltag begegnen einem vor allem zwei Anzüge. Im Feldanzug sehen alle fast gleich aus. Am Dienstanzug erkennt man Heer, Luftwaffe und Marine schon von Weitem.</p>
