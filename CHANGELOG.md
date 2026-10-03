@@ -7,6 +7,8 @@ per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 ## Unveröffentlicht
 
 - Hilfe: Quellenangabe zu den Dienstgradabzeichen korrigiert
+- Lektionen in neuer Reihenfolge: „Anrede und Umgang“ folgt direkt auf die Dienstgrade und Abzeichen, „Geheimschutz“ kommt vor „Wer braucht, wer beschafft“
+- Lektion „Bundeswehr im Staat“ erklärt jetzt die Karrierecenter (vorher in „Aufbau der Bundeswehr“), „Anrede und Umgang“ zeigt die Anrede von Sanitätsoffizieren
 
 ## 0.5 (2026-10-03)
 
