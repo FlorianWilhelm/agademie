@@ -394,7 +394,7 @@ const INS={
 const INSGRP=[['Mannschaften',[[G.M,0,8]]],['Unteroffiziere',[[G.UoP,8,11],[G.UmP,11,18]]],['Offiziere',[[G.L,18,20],[G.H,20,22],[G.S,22,25],[G.Gen,25,29]]]];
 INS.heer=INS.lw.map(([n,sp],i)=>[i===0?'Schütze':n,sp]);
 INS.san=SAN.map(([e,s])=>[s,[...INS.heer.find(r=>r[0]===e)[1],'ask']]); // Sanitätsoffiziere: wie die Ebene im Heer, dazu der Äskulapstab
-const ANW={'Schütze':'Bezeichnung hängt von der Verwendung ab, z. B. auch Jäger, Grenadier oder Funker.','Fahnenjunker':'Offizieranwärter auf Ebene Unteroffizier (silberner Querstreifen).','Fähnrich':'Offizieranwärter auf Ebene Feldwebel.','Oberfähnrich':'Offizieranwärter auf Ebene Hauptfeldwebel.','Seekadett':'Offizieranwärter der Marine auf Ebene Maat.','Fähnrich zur See':'Offizieranwärter der Marine auf Ebene Bootsmann.','Oberfähnrich zur See':'Offizieranwärter der Marine auf Ebene Hauptbootsmann.'};
+const ANW={'Schütze':'Bezeichnung hängt von der Verwendung ab, z. B. auch Jäger, Grenadier oder Funker.','Fahnenjunker':'Offizieranwärter auf Ebene Unteroffizier (silberne Kordel an der Schulterklappe).','Fähnrich':'Offizieranwärter auf Ebene Feldwebel.','Oberfähnrich':'Offizieranwärter auf Ebene Hauptfeldwebel.','Seekadett':'Offizieranwärter der Marine auf Ebene Maat.','Fähnrich zur See':'Offizieranwärter der Marine auf Ebene Bootsmann.','Oberfähnrich zur See':'Offizieranwärter der Marine auf Ebene Hauptbootsmann.'};
 function insignia(key,W=60){
   const [t,name]=key.split(':');const spec=(INS[t].find(r=>r[0]===name)||[,[]])[1];
   const lw=t!=='mar', wing=t==='lw', gold=spec.includes('gold');
@@ -829,7 +829,7 @@ const LESSONS=[
   <h3>Marine-Offiziere: Ärmelstreifen</h3>
   <p>Gezählt werden die mittelbreiten Streifen: einer beim Leutnant zur See, vier beim Kapitän zur See. Ein dünner Zusatzstreifen markiert die Zwischenstufe. Admirale erkennt man am breiten Streifen unten.</p>
   ${figs([['mar:Leutnant zur See','Leutnant zur See'],['mar:Oberleutnant zur See','Ober­leutnant zur See'],['mar:Kapitänleutnant','Kapitän­leutnant'],['mar:Stabskapitänleutnant','Stabs­kapitän­leutnant'],['mar:Korvettenkapitän','Korvetten­kapitän'],['mar:Fregattenkapitän','Fregatten­kapitän'],['mar:Kapitän zur See','Kapitän zur See'],['mar:Flottillenadmiral','Flottillen­admiral'],['mar:Konteradmiral','Konter­admiral'],['mar:Vizeadmiral','Vize­admiral'],['mar:Admiral','Admiral']])}
-  <div class="callout">Ein silberner Querstreifen kennzeichnet Offizieranwärter, etwa den Fahnenjunker. Sie stehen auf der Ebene eines Unteroffiziers oder Feldwebels, sind aber auf dem Weg zum Offizier.</div>
+  <div class="callout">Eine silberne Kordel an der Schulterklappe kennzeichnet Offizieranwärter, etwa den Fahnenjunker. Sie stehen auf der Ebene eines Unteroffiziers oder Feldwebels, sind aber auf dem Weg zum Offizier.</div>
   <p>Die Abzeichen der Luftwaffe und der Marine-Unteroffiziere stehen unter <a href="#/nachschlagen/abzeichen">Nachschlagen → Abzeichen</a>.</p>`},
  {id:'farben',t:'Waffenfarbe und Barett',d:'Litze, Kragenspiegel und Barett verraten die Truppengattung',deck:'abz',b:()=>`
   <p>Das Dienstgradabzeichen sagt, welchen Rang jemand hat. Wozu jemand gehört, zeigt im Heer die Farbe. Jede Truppengattung hat ihre eigene Waffenfarbe, die Tradition reicht bis 1915 zurück.</p>

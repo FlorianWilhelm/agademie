@@ -6,17 +6,17 @@ letzten Versionen an.
 
 ## Unveröffentlicht
 
-- Lektionen: Die Buttons „Zurück“ und „Weiter“ zeigen lange Titel in einer Zeile, auf dem Handy stehen sie untereinander
 - Größenzeichen für die Armee (XXXX) wird nicht mehr abgeschnitten
 - Lektionen „Vom Trupp zur Division“ und „NATO-Größenzeichen“ erklären die Ebenen über der Division
 - Lektionen und Hilfe: Silbentrennung und ausgeglichener Zeilenumbruch für ein ruhigeres Schriftbild, Absätze sind so breit wie Tabellen und Hinweise
 - Lektion „Aufbau der Bundeswehr“ zeigt die vier Teilstreitkräfte als Liste
-- Lektionen: Am Ende führt neben „Weiter“ jetzt auch „Zurück“ zur vorherigen Lektion
+- Lektionen: Am Ende führt neben „Weiter“ jetzt auch „Zurück“ zur vorherigen Lektion, auf dem Handy stehen beide Buttons untereinander
 - Lektion „Dienstgrade verstehen“ erklärt, woher das Wort „Portepee“ kommt
 - Lektion „Abzeichen lesen“ zeigt alle Dienstgradabzeichen statt einer Auswahl
 - Lektionen „Dienstgrade verstehen“ und „Abzeichen lesen“ zeigen auch die Sanitätsoffiziere
 - Links haben die Akzentfarbe der App, auch im dunklen Modus gut lesbar
 - Lektion „Abzeichen lesen“: Bei der Marine heißt es jetzt „mittelbreite Streifen“, wie in der Vorschrift
+- Offizieranwärter: Lektion „Abzeichen lesen“ und Lernkarten nennen das Kennzeichen jetzt richtig, eine silberne Kordel an der Schulterklappe
 
 ## 0.3.1 (2026-10-03)
 
