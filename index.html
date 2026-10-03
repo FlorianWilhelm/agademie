@@ -354,9 +354,9 @@ BEH.forEach(([k,v,n])=>add('beh','abk','Abkürzung: '+k,v,n));
  ['Bedarfsträger für das Teilportfolio Cyber/IT','ZDigBw'],
  ['IT-Systemhaus der Bundeswehr in Bundesbesitz','BWI'],
  ['Innovationseinheit, die mit Startups arbeitet','CIHBw'],
- ['Zuständig für den Geheimschutz in Unternehmen (Bund)','Bundesministerium für Wirtschaft und Energie','Nach § 25 SÜG. Bei Aufträgen eines Bundeslandes ist das jeweilige Landeswirtschaftsministerium zuständig.'],
+ ['Zuständig für den Geheimschutz in Unternehmen (Bund)','Bundesministerium für Wirtschaft und Energie','Nach § 25 SÜG. Bei Aufträgen eines Bundeslandes ist das jeweilige Landeswirtschaftsministerium zuständig.',['Bundesministerium der Verteidigung','Militärischer Abschirmdienst','Bundesamt für Verfassungsschutz']],
  ['Plant und führt alle Einsätze und Operationen im In- und Ausland','OpFüKdoBw']
-].forEach(([q,a,n])=>add('beh','rolle',q,a,n));
+].forEach(([q,a,n,x])=>add('beh','rolle',q,a,n,x));
 add('beh','rolle','Wie viele Teilstreitkräfte hat die Bundeswehr?','Vier','Heer, Luftwaffe, Marine und Cyber- und Informationsraum.',['Drei','Fünf','Sechs']);
 
 [
@@ -931,11 +931,10 @@ function pick(){
   return p[0];
 }
 function distractors(c,n=3){
-  let alts=c.extra&&Array.isArray(c.extra)?c.extra.slice():[];
-  const same=[...new Set(CARDS.filter(x=>x.kind===c.kind&&x.a!==c.a).map(x=>x.a))];
-  alts=[...new Set([...alts,...shuffle(same)])].filter(a=>a!==c.a);
-  if(c.extra&&Array.isArray(c.extra)) return c.extra.slice(0,n);
-  return alts.slice(0,n);
+  if(Array.isArray(c.extra)) return c.extra.slice(0,n);
+  // nur Karten derselben Art im selben Stapel, ohne Einzelfragen mit eigenen Antworten
+  const same=CARDS.filter(x=>x.deck===c.deck&&x.kind===c.kind&&!Array.isArray(x.extra)&&x.a!==c.a).map(x=>x.a);
+  return shuffle([...new Set(same)]).slice(0,n);
 }
 function answerHTML(c,a){
   if(c.kind.startsWith('abzrev')) return insignia(a,44);

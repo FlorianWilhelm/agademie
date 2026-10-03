@@ -4,6 +4,10 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum. Die Hilfe-Seite der App zeigt die
 letzten Versionen an.
 
+## Unveröffentlicht
+
+- Quiz: Falsche Antworten kommen nur noch aus demselben Thema, keine Bündnisfall-Antwort mehr bei NATO-Rangcodes
+
 ## 0.3 (2026-10-03)
 
 - Schriften werden selbst ausgeliefert, keine Verbindung mehr zu Google Fonts
