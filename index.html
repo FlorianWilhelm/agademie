@@ -222,10 +222,14 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 
 <script>
 /* ---------- Version: setzt release.sh passend zum Git-Tag, nicht von Hand ändern ---------- */
-const VERSION='0.10', UPDATED='2026-10-03';
+const VERSION='0.11', UPDATED='2026-10-03';
 document.getElementById('ver').textContent=`v${VERSION} · ${UPDATED}`;
 // Was ist neu: die letzten Versionen aus CHANGELOG.md, setzt release.sh zusammen mit der Version
 const CHANGES=[
+{v:"0.11",d:"2026-10-03",items:[
+"Lektion „Bundeswehr im Staat“: Leitsatz „Leben in der Lage“ als Folge aus Moltkes Satz über den Operationsplan, dazu eine neue Quizfrage",
+"Lektion „Anrede und Umgang“: „Schweiß spart Blut“, „Auftrag vor Befindlichkeit“ und „Leben in der Lage“ bei den ungeschriebenen Regeln, dazu zwei neue Quizfragen",
+]},
 {v:"0.10",d:"2026-10-03",items:[
 "Lernkarten und Quiz: Die Themen sind jetzt genau die Lektionen, mit demselben Titel, derselben Nummer und in derselben Reihenfolge. „Mit Lernkarten üben“ und „Im Quiz prüfen“ am Ende einer Lektion fragen nur noch, was in dieser Lektion vorkommt, statt eines größeren Sammelthemas (etwa bei „Feldanzug und Dienstanzug“ bisher alle 241 Abzeichen-Karten). Der Lernstand bleibt erhalten",
 "Lektion „Wer braucht, wer beschafft“: das neu gegründete Innovationszentrum der Bundeswehr (InnoZBw) in Erding, dazu zwei neue Lernkarten und ein Eintrag unter „Behörden & Dienststellen“",
@@ -239,11 +243,6 @@ const CHANGES=[
 "Lektion „Bundeswehr im Staat“: neuer Abschnitt „Soldatenpflichten“ mit Grundpflicht, Pflichten der Vorgesetzten, Gehorsam, Kameradschaft und Wahrheit (§§ 7, 10 bis 13 Soldatengesetz)",
 "Lektion „Anrede und Umgang“: neuer Abschnitt „Ungeschriebene Regeln“ mit „Melden macht frei“, Soldatenpünktlichkeit und Dienstweg",
 "Elf neue Quizfragen zu Führungsvorgang, Soldatenpflichten und ungeschriebenen Regeln",
-]},
-{v:"0.8",d:"2026-10-03",items:[
-"Lektion „Abzeichen lesen“: neuer Abschnitt zu Offizieranwärtern mit silberfarbener Kordel (Heer, Luftwaffe) und goldfarbenem Stern (Marine) und dem Zusatz OA",
-"Lektion „Abzeichen lesen“: neuer Abschnitt zu Unteroffizier- und Feldwebelanwärtern (UA, UA mbL, FA, in der Marine MA und BA) mit Zeichnungen von Querbalken, Tresse und altgoldfarbener Kordel",
-"Abzeichen: Die Kordel der Offizieranwärter liegt jetzt wie im Original quer über dem Bogen",
 ]},
 ]; // Ende CHANGES
 /* ---------- Daten ---------- */

@@ -4,7 +4,7 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
-## Unveröffentlicht
+## 0.11 (2026-10-03)
 
 - Lektion „Bundeswehr im Staat“: Leitsatz „Leben in der Lage“ als Folge aus Moltkes Satz über den Operationsplan, dazu eine neue Quizfrage
 - Lektion „Anrede und Umgang“: „Schweiß spart Blut“, „Auftrag vor Befindlichkeit“ und „Leben in der Lage“ bei den ungeschriebenen Regeln, dazu zwei neue Quizfragen
