@@ -9,6 +9,7 @@ letzten Versionen an.
 - Lektionen: Die Buttons „Zurück“ und „Weiter“ zeigen lange Titel in einer Zeile, auf dem Handy stehen sie untereinander
 - Größenzeichen für die Armee (XXXX) wird nicht mehr abgeschnitten
 - Lektionen „Vom Trupp zur Division“ und „NATO-Größenzeichen“ erklären die Ebenen über der Division
+- Lektionen und Hilfe: Silbentrennung und ausgeglichener Zeilenumbruch für ein ruhigeres Schriftbild, Absätze sind so breit wie Tabellen und Hinweise
 - Lektionen: Am Ende führt neben „Weiter“ jetzt auch „Zurück“ zur vorherigen Lektion
 - Lektion „Dienstgrade verstehen“ erklärt, woher das Wort „Portepee“ kommt
 - Lektion „Abzeichen lesen“ zeigt alle Dienstgradabzeichen statt einer Auswahl

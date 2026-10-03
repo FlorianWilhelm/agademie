@@ -86,7 +86,7 @@ dialog::backdrop{background:rgba(8,16,30,.55)}
 .fig{display:flex;justify-content:center;margin-top:16px}
 .help h2{margin-top:24px}
 .help h2:first-child{margin-top:0}
-.help p{margin:0 0 10px;max-width:62ch}
+.help p{margin:0 0 10px}
 .changes{margin:0 0 10px;padding-left:20px;font-size:15px;color:var(--muted)}
 .changes li{margin:2px 0}
 .chip{flex:none;border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;font-size:15px;white-space:nowrap}
@@ -154,7 +154,9 @@ dd{margin:2px 0 0;color:var(--muted)}
 .intro{color:var(--muted);margin:0 0 16px}
 .lesson h2{font:700 30px/1.1 var(--head);margin:6px 0 14px}
 .lesson h3{font:600 20px/1.2 var(--head);margin:22px 0 4px}
-.lesson p{margin:0 0 12px;max-width:62ch}
+.lesson p{margin:0 0 12px}
+.help p,.lesson p,.callout{hyphens:auto;-webkit-hyphens:auto;hyphenate-limit-chars:10 4 4;text-wrap:pretty}
+h1,h2,h3{text-wrap:balance}
 .back{border:0;background:none;color:var(--accent-ink);font-weight:600;padding:4px 0;font-size:15px}
 .callout{background:var(--surface);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 14px;margin:16px 0;font-size:16px}
 .ladder{list-style:none;margin:8px 0 14px;padding:0;border:1.5px solid var(--line);border-radius:8px;background:var(--surface)}
