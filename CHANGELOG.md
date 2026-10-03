@@ -6,6 +6,7 @@ letzten Versionen an.
 
 ## Unveröffentlicht
 
+- Lektionen: Die Buttons „Zurück“ und „Weiter“ zeigen lange Titel in einer Zeile, auf dem Handy stehen sie untereinander
 - Größenzeichen für die Armee (XXXX) wird nicht mehr abgeschnitten
 - Lektionen „Vom Trupp zur Division“ und „NATO-Größenzeichen“ erklären die Ebenen über der Division
 - Lektionen: Am Ende führt neben „Weiter“ jetzt auch „Zurück“ zur vorherigen Lektion

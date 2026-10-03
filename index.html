@@ -167,10 +167,11 @@ dd{margin:2px 0 0;color:var(--muted)}
 .figs svg{display:block;margin:0 auto 4px}
 .lesson .actions{margin-top:22px;flex-direction:column}
 .pager{display:flex;gap:10px}
-.pager .btn{line-height:1.2;padding:10px 12px}
+.pager .btn{line-height:1.2;padding:10px 12px;font-size:17px}
 .pager small{display:block;font:600 13px/1.2 var(--body);color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin-bottom:3px}
 .pager .prev{text-align:left}.pager .prev small::before{content:"← "}
 .pager .next{text-align:right;margin-left:auto}.pager .next small::after{content:" →"}
+@media (max-width:559px){.pager{flex-direction:column}.pager .btn{margin-left:0;align-self:stretch}} /* lange Lektionstitel brauchen die volle Breite */
 nav.tabbar{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1.5px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px)}
 nav.tabbar div{display:flex;max-width:640px;width:100%}
 nav.tabbar button{flex:1;border:0;background:none;padding:14px 2px;font:600 17px/1 var(--head);color:var(--muted)}
