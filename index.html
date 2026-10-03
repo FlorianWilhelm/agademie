@@ -312,7 +312,14 @@ const DECKS=[
  {id:'eti',name:'Anrede & Praxis',s:'●'}
 ];
 const CARDS=[];
-const add=(deck,kind,q,a,note,extra)=>CARDS.push({id:deck+'-'+CARDS.length,deck,kind,q,a,note,extra});
+// Karten-ID aus dem Inhalt (FNV-1a), damit Karten an beliebiger Stelle eingefügt werden können, ohne den Lernstand zu verschieben
+const hid=s=>{let h=2166136261;for(let i=0;i<s.length;i++) h=Math.imul(h^s.charCodeAt(i),16777619);return (h>>>0).toString(36)};
+const CARD_IDS=new Set();
+const add=(deck,kind,q,a,note,extra)=>{
+  const id=deck+':'+hid(kind+'|'+q+'|'+a);
+  if(CARD_IDS.has(id)) console.error('Doppelte Karten-ID',id,q,a);
+  CARD_IDS.add(id);CARDS.push({id,deck,kind,q,a,note,extra});
+};
 RANKS.forEach((r,i)=>{
   const nm=r.k||r.h;
   add('dg','nato','NATO-Rangcode: '+nm,r.n,r.note);
@@ -516,7 +523,7 @@ function insignia(key,W=60){
   add('abz','abzrev-'+t,'Welches Abzeichen gehört zu: '+n+' ('+lbl+')',t+':'+n,ANW[n]||null);
 }));
 
-/* ---------- Abkürzungen und Fachbegriffe (neue Karten nur hinten anhängen, IDs sind positionsbasiert) ---------- */
+/* ---------- Abkürzungen und Fachbegriffe ---------- */
 const GLOSS=[
  {id:'alltag',t:'Dienstalltag',deck:'abk',items:[
   ['AGA','Allgemeine Grundausbildung','Die ersten Wochen jeder militärischen Ausbildung, u. a. Formaldienst, Waffen- und Schießausbildung, Erste Hilfe und Gefechtsdienst.'],
@@ -705,12 +712,12 @@ BARETT.slice(0,6).forEach(([f,,ts])=>ts.slice(0,3).forEach(t=>add('abz','bar','B
  ['abz','farbe','Was tragen Gebirgsjäger statt des Baretts?','Bergmütze',null,['Schiffchen','Schirmmütze','Feldmütze']],
  ['abz','farbe','Warum tragen Luftwaffe und Marine am Feldanzug keine bunten Litzen?','Sie haben keine Truppengattungen',null,['Weil sie Ärmelstreifen tragen','Aus Tarngründen','Weil sie keine Schulterklappen haben']]
 ].forEach(([d,k,q,a,n,x])=>add(d,k,q,a,n,x));
-INS.san.forEach(([n])=>{ // hinten angehängt, damit die positionsbasierten Karten-IDs stabil bleiben
+INS.san.forEach(([n])=>{
   add('abz','abz-san','Welcher Dienstgrad ist das? (Sanitätsdienst)',n,null,{ins:'san:'+n});
   add('abz','abzrev-san','Welches Abzeichen gehört zu: '+n+' (Sanitätsdienst)','san:'+n);
 });
 
-/* ---------- Staat, Bündnis, Funk und Großverbände (hinten angehängt, damit die positionsbasierten Karten-IDs stabil bleiben) ---------- */
+/* ---------- Staat, Bündnis, Funk und Großverbände ---------- */
 const GLOSS2=[
  {id:'staat',t:'Staat & Recht',deck:'staat',items:[
   ['GG','Grundgesetz','Art. 87a regelt Aufstellung und Einsatz der Streitkräfte, Art. 65a die Befehls- und Kommandogewalt.'],
@@ -820,7 +827,7 @@ BEH.push(...BEH2);GLOSS.push(...GLOSS2);
  ['abz','anz','Was ist an Bord der Tagesdienstanzug der Marine?','Der Bord- und Gefechtsanzug',null,['Der Feldanzug','Der Sommeranzug, weiß','Der Dienstanzug']],
  ['abz','anz','Welche Uniform tragen Angehörige des Cyber- und Informationsraums?','Die von Heer, Luftwaffe oder Marine, je nach Dienstposten','Gemeinsam ist allen das marineblaue Barett mit dem Abzeichen CIR.',['Eine eigene schwarze Uniform','Immer die des Heeres','Nur Zivilkleidung']]
 ].forEach(([d,k,q,a,n,x])=>add(d,k,q,a,n,x));
-/* Führen mit Auftrag, Soldatenpflichten und ungeschriebene Regeln (hinten angehängt, damit die positionsbasierten Karten-IDs stabil bleiben) */
+/* Führen mit Auftrag, Soldatenpflichten und ungeschriebene Regeln */
 [
  ['staat','staat','Womit beginnt ein militärischer Befehl?','Lage','Schema LADEF: Lage, Auftrag, Durchführung, Einsatzunterstützung, Führungsunterstützung.',['Auftrag','Durchführung','Absicht']],
  ['staat','staat','Wofür steht das Merkwort LADEF?','Lage, Auftrag, Durchführung, Einsatzunterstützung, Führungsunterstützung','Die Gliederung eines Befehls. Die ersten drei Punkte sind immer dabei.',['Lage, Absicht, Dauer, Einsatz, Führung','Leitung, Auftrag, Dienstweg, Einheit, Feldwebel','Lage, Alarm, Durchführung, Erfolg, Folgen']],
@@ -1115,6 +1122,7 @@ const LESSONS=[
 const KEY='agademy:v1';
 let store={box:{},read:{}};
 try{const s=localStorage.getItem(KEY);if(s) store=JSON.parse(s)||store;if(!store.box) store.box={};if(!store.read) store.read={}}catch(e){}
+for(const id in store.box) if(!CARD_IDS.has(id)) delete store.box[id]; // Lernstand entfernter oder geänderter Karten (und alte positionsbasierte IDs) verwerfen
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}};
 const boxOf=c=>store.box[c.id]||0;
 const setBox=(c,b)=>{store.box[c.id]=Math.max(0,Math.min(4,b));save()};

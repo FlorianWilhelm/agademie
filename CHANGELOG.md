@@ -6,6 +6,7 @@ per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
 ## Unveröffentlicht
 
+- Lernkarten: Der Lernstand bleibt jetzt erhalten, wenn neue Karten dazukommen. Bisher gespeicherter Lernstand der Lernkarten wird dafür einmalig zurückgesetzt, gelesene Lektionen bleiben markiert
 - Am Ende jeder Lektion führen zwei gleichrangige Knöpfe zum passenden Thema: „Mit Lernkarten üben“ und neu „Im Quiz prüfen“
 - Lektion „Bundeswehr im Staat“: neuer Abschnitt „Führen mit Auftrag“ mit Absicht, Befehlsschema LADEF (Lage, Auftrag, Durchführung, Einsatzunterstützung, Führungsunterstützung) und dem Vergleich mit Mission Command der US Army, dazu vier neue Quizfragen
 - Lektion „Bundeswehr im Staat“: Führungsvorgang als Kreislauf aus Lagefeststellung, Planung und Befehlsgebung, dazu Moltkes Satz über den Operationsplan
