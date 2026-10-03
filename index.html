@@ -221,6 +221,7 @@ const RANKS=[
  {h:'Generalleutnant',m:'Vizeadmiral',n:'OF-8',g:G.Gen,note:'Drei Sterne.'},
  {h:'General',m:'Admiral',n:'OF-9',g:G.Gen,note:'Vier Sterne, z. B. der Generalinspekteur der Bundeswehr.'}
 ];
+const SANM=['Stabsarzt','Oberstabsarzt','Flottillenarzt','Flottenarzt','Admiralarzt','Admiralstabsarzt','Admiraloberstabsarzt']; // Marine, gleiche Reihenfolge wie SAN
 const SAN=[['Hauptmann','Stabsarzt'],['Major','Oberstabsarzt'],['Oberstleutnant','Oberfeldarzt'],['Oberst','Oberstarzt'],['Brigadegeneral','Generalarzt'],['Generalmajor','Generalstabsarzt'],['Generalleutnant','Generaloberstabsarzt']];
 const SYMS=[
  {m:'Ø',l:'Team oder Besatzung (ohne feste deutsche Entsprechung)'},
@@ -370,6 +371,7 @@ const INS={
 /* Gliederung der Abzeichen-Übersicht: Laufbahngruppe, Dienstgradgruppe, Indexbereich in INS */
 const INSGRP=[['Mannschaften',[[G.M,0,8]]],['Unteroffiziere',[[G.UoP,8,11],[G.UmP,11,18]]],['Offiziere',[[G.L,18,20],[G.H,20,22],[G.S,22,25],[G.Gen,25,29]]]];
 INS.heer=INS.lw.map(([n,sp],i)=>[i===0?'Schütze':n,sp]);
+INS.san=SAN.map(([e,s])=>[s,[...INS.heer.find(r=>r[0]===e)[1],'ask']]); // Sanitätsoffiziere: wie die Ebene im Heer, dazu der Äskulapstab
 const ANW={'Schütze':'Bezeichnung hängt von der Verwendung ab, z. B. auch Jäger, Grenadier oder Funker.','Fahnenjunker':'Offizieranwärter auf Ebene Unteroffizier (silberner Querstreifen).','Fähnrich':'Offizieranwärter auf Ebene Feldwebel.','Oberfähnrich':'Offizieranwärter auf Ebene Hauptfeldwebel.','Seekadett':'Offizieranwärter der Marine auf Ebene Maat.','Fähnrich zur See':'Offizieranwärter der Marine auf Ebene Bootsmann.','Oberfähnrich zur See':'Offizieranwärter der Marine auf Ebene Hauptbootsmann.'};
 function insignia(key,W=60){
   const [t,name]=key.split(':');const spec=(INS[t].find(r=>r[0]===name)||[,[]])[1];
@@ -400,6 +402,10 @@ function insignia(key,W=60){
         s+=`<path d="M30 ${b} L39 ${c} L30 ${c-9.2} L21 ${c} Z M30 ${c+3} L33 ${c} L30 ${c-3} L27 ${c} Z" fill="${ink}" fill-rule="evenodd"/>`}
       else if(e==='silver') s+=`<rect x="7" y="${wing?80.5:89}" width="46" height="3.2" fill="#dfe3e6"/>`;
       else if(e==='star'){const cx=30,cy=spec.includes('bar')?46:(spec.includes('c1')&&spec.includes('closed')?42:40),r=6,pts=[];for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r*0.42:r;pts.push((cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1))}s+=`<polygon points="${pts.join(' ')}" fill="${ink}"/>`}
+      else if(e==='ask'){ // Äskulapstab: Stab mit Knauf, Schlange in drei Windungen, Kopf oben
+        s+=`<rect x="29.2" y="14" width="1.6" height="23" rx=".8" fill="${ink}"/><circle cx="30" cy="13.6" r="1.4" fill="${ink}"/>`;
+        s+=`<path d="M30 36 C25 34.5 25 31.5 30 30.5 C35 29.5 35 26.5 30 25.5 C25 24.5 25 21.5 30 20.5 C33.5 19.8 34.5 18.2 33 17" fill="none" stroke="${ink}" stroke-width="1.6" stroke-linecap="round"/>`;
+        s+=`<ellipse cx="32.4" cy="16.4" rx="1.6" ry="1.1" transform="rotate(-35 32.4 16.4)" fill="${ink}"/>`}
       else if(e==='bar') s+=`<rect x="6.5" y="86" width="47" height="4" fill="${ink}"/>`;
       else if(e==='w'){ // Eichenlaub: zwei sichelförmige Wedel aus schmalen, gelappten Blättern, unten spitz zusammenlaufend
         const leaf='M0 0 C-.8 -.6 -1.4 -1.6 -1.1 -2.6 C-1.8 -3 -1.8 -4 -1.2 -4.4 C-1.7 -5 -1.4 -6 -.8 -6.2 C-.8 -7.2 -.3 -7.8 0 -8 C.3 -7.8 .8 -7.2 .8 -6.2 C1.4 -6 1.7 -5 1.2 -4.4 C1.8 -4 1.8 -3 1.1 -2.6 C1.4 -1.6 .8 -.6 0 0 Z';
@@ -608,6 +614,10 @@ BARETT.slice(0,6).forEach(([f,,ts])=>ts.slice(0,3).forEach(t=>add('abz','bar','B
  ['abz','farbe','Was tragen Gebirgsjäger statt des Baretts?','Bergmütze',null,['Schiffchen','Schirmmütze','Feldmütze']],
  ['abz','farbe','Warum tragen Luftwaffe und Marine am Feldanzug keine bunten Litzen?','Sie haben keine Truppengattungen',null,['Weil sie Ärmelstreifen tragen','Aus Tarngründen','Weil sie keine Schulterklappen haben']]
 ].forEach(([d,k,q,a,n,x])=>add(d,k,q,a,n,x));
+INS.san.forEach(([n])=>{ // hinten angehängt, damit die positionsbasierten Karten-IDs stabil bleiben
+  add('abz','abz-san','Welcher Dienstgrad ist das? (Sanitätsdienst)',n,null,{ins:'san:'+n});
+  add('abz','abzrev-san','Welches Abzeichen gehört zu: '+n+' (Sanitätsdienst)','san:'+n);
+});
 /* ---------- Symbole ---------- */
 function marker(m){
   const parts=[];let w=0;const sp=4;
@@ -845,6 +855,11 @@ function renderRef(){
         for(const [g,a,b] of subs) h+=`${g!==lg?`<h4 class="dgg">${esc(g)}</h4>`:''}<div class="insgrid">${INS[t].slice(a,b).map(([n])=>`<figure>${insignia(t+':'+n,52)}<figcaption>${esc(n)}</figcaption></figure>`).join('')}</div>`;
       }
     }
+    h+=`<h2 id="sanitaet">Sanitätsoffiziere (Heer, Feldanzug)</h2>
+    <p class="small">Ärzte und Zahnärzte tragen den Äskulapstab über den Sternen. Die Luftwaffe trägt zusätzlich die Schwinge, die Marine den Äskulapstab über den Ärmelstreifen.</p>
+    <div class="insgrid">${INS.san.map(([n])=>`<figure>${insignia('san:'+n,52)}<figcaption>${esc(n)}</figcaption></figure>`).join('')}</div>
+    <div class="scroll"><table><thead><tr><th>Heer, Luftwaffe</th><th>Marine</th><th>Ebene</th></tr></thead><tbody>${SAN.map(([e,n],i)=>`<tr><td>${esc(n)}</td><td>${esc(SANM[i])}</td><td>${esc(e)}</td></tr>`).join('')}</tbody></table></div>
+    <p class="small">Apotheker und Veterinäre führen eigene Bezeichnungen, z. B. Stabsapotheker oder Stabsveterinär.</p>`;
     h+=`<h2 id="waffenfarben">Waffenfarben (Heer)</h2>
     <div class="scroll"><table><thead><tr><th></th><th>Waffenfarbe</th><th>Truppengattung</th></tr></thead><tbody>
     ${[...WAFF.map(([f,c,t,n])=>[c,f,t,n]),['gen','Hochrot mit Gold','Generale']].map(([c,f,t,n])=>`<tr><td class="sym">${collar(c,24)}</td><td><strong>${esc(f)}</strong></td><td>${esc(t)}${n?`<br><span class="small">${esc(n)}</span>`:''}</td></tr>`).join('')}
