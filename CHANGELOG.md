@@ -6,6 +6,7 @@ letzten Versionen an.
 
 ## Unveröffentlicht
 
+- Lektionen „Vom Trupp zur Division“ und „NATO-Größenzeichen“ erklären die Ebenen über der Division
 - Lektionen: Am Ende führt neben „Weiter“ jetzt auch „Zurück“ zur vorherigen Lektion
 - Lektion „Dienstgrade verstehen“ erklärt, woher das Wort „Portepee“ kommt
 - Lektion „Abzeichen lesen“ zeigt alle Dienstgradabzeichen statt einer Auswahl
