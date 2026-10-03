@@ -383,13 +383,13 @@ const BEH=[
 ];
 BEH.forEach(([k,v,n])=>add('beh','abk','Abkürzung: '+k,v,n));
 [
- ['Bedarfsdecker für Wehrmaterial und IT','BAAINBw'],
- ['Bedarfsträger für das Teilportfolio Cyber/IT','ZDigBw'],
- ['IT-Systemhaus der Bundeswehr in Bundesbesitz','BWI'],
- ['Innovationseinheit in der BWI, die mit Startups arbeitet','CIHBw'],
- ['Koordiniert seit Dezember 2025 die Innovation der Bundeswehr, Sitz in Erding','InnoZBw','Dem BAAINBw unmittelbar nachgeordnet, eröffnet im Februar 2026.'],
- ['Zuständig für den Geheimschutz in Unternehmen (Bund)','Bundesministerium für Wirtschaft und Energie','Nach § 25 SÜG. Bei Aufträgen eines Bundeslandes ist das jeweilige Landeswirtschaftsministerium zuständig.',['Bundesministerium der Verteidigung','Militärischer Abschirmdienst','Bundesamt für Verfassungsschutz']],
- ['Plant und führt alle Einsätze und Operationen im In- und Ausland','OpFüKdoBw']
+ ['Bedarfsdecker für Wehrmaterial und IT','BAAINBw (Bundesamt für Ausrüstung, Informationstechnik und Nutzung der Bundeswehr)'],
+ ['Bedarfsträger für das Teilportfolio Cyber/IT','ZDigBw (Zentrum Digitalisierung der Bundeswehr und Fähigkeitsentwicklung Cyber- und Informationsraum)'],
+ ['Betreibt und modernisiert als hundertprozentige Bundesgesellschaft die IT der Bundeswehr','BWI (BWI GmbH, IT-Systemhaus der Bundeswehr)'],
+ ['Innovationseinheit in der BWI, die mit Startups arbeitet','CIHBw (Cyber Innovation Hub der Bundeswehr)'],
+ ['Koordiniert seit Dezember 2025 die Innovation der Bundeswehr, Sitz in Erding','InnoZBw (Innovationszentrum der Bundeswehr)','Dem BAAINBw unmittelbar nachgeordnet, eröffnet im Februar 2026.'],
+ ['Zuständig für den Geheimschutz in Unternehmen (Bund)','BMWE (Bundesministerium für Wirtschaft und Energie)','Nach § 25 SÜG. Bei Aufträgen eines Bundeslandes ist das jeweilige Landeswirtschaftsministerium zuständig.',['BMVg (Bundesministerium der Verteidigung)','MAD (Militärischer Abschirmdienst)','BfV (Bundesamt für Verfassungsschutz)']],
+ ['Plant und führt alle Einsätze und Operationen im In- und Ausland','OpFüKdoBw (Operatives Führungskommando der Bundeswehr)']
 ].forEach(([q,a,n,x])=>add('beh','rolle',q,a,n,x));
 add('beh','rolle','Wie viele Teilstreitkräfte hat die Bundeswehr?','Vier','Heer, Luftwaffe, Marine und Cyber- und Informationsraum.',['Drei','Fünf','Sechs']);
 add('beh','rolle','Welches Symbol hat das Heer, etwa an der Schirmmütze?','Gekreuzte Schwerter','Die Luftwaffe hat die Schwinge, die Marine den Anker.',['Schwinge','Anker','Eichenlaub']);
@@ -401,7 +401,7 @@ add('beh','rolle','Warum hat der CIR kein eigenes Symbol wie Heer, Luftwaffe und
  ['Anrede eines Brigadegenerals','Herr General','Alle Generale werden so angesprochen, ebenso Generalmajor und Generalleutnant.',['Herr Brigadier','Herr Brigadegeneral Major','Herr Stern']],
  ['Plural von General in der Bundeswehr','Generale','Die Bundeswehr verwendet „Generale“ (Dienstgradgruppe Generale).',['Generäle','Generals','Generalen']],
  ['Wie viele Dienstgrade gibt es in der Bundeswehr?','26','In sieben Dienstgradgruppen, mit 82 Dienstgradbezeichnungen.',['18','32','41']],
- ['Ranghöchster Soldat der Bundeswehr','Generalinspekteur der Bundeswehr','Dienstgrad General bzw. Admiral.',['Inspekteur des Heeres','Befehlshaber OpFüKdoBw','Verteidigungsminister']],
+ ['Ranghöchster Soldat der Bundeswehr','Generalinspekteur der Bundeswehr','Dienstgrad General bzw. Admiral.',['Inspekteur des Heeres','Befehlshaber des Operativen Führungskommandos','Verteidigungsminister']],
  ['Woran erkennt man Luftwaffenangehörige auf der Schulterklappe am Feldanzug?','Schwingen',null,['Anker','Äskulapstab','Eichenlaub']],
  ['Woran erkennt man Sanitätsoffiziere am Dienstgradabzeichen?','Äskulapstab',null,['Schwingen','Anker','Kreuz']],
  ['Wer hat die unterste Stufe der Disziplinarbefugnis?','Kompaniechef','Nach § 28 Wehrdisziplinarordnung, darüber folgt der Bataillonskommandeur.',['Gruppenführer','Zugführer','Spieß']]
@@ -593,7 +593,7 @@ const GLOSS=[
 GLOSS.forEach(g=>g.items.forEach(([k,v,n])=>add(g.deck,'g-'+g.id,(g.id==='dgk'?'Dienstgrad-Abkürzung: ':['Core','Fog','Edge'].includes(k)?'IT-Ebene: ':'Abkürzung: ')+k,v,n)));
 [
  ['abk','alltag2','Was bedeutet es, wenn jemand „KzH“ hat?','Krank zu Hause, vom Truppenarzt angeordnet',null,['Kurz zum Heimaturlaub','Kein zusätzlicher Heimweg','Kommandiert zur Hauptstadt']],
- ['abk','alltag2','Wer unterstützt den UvD?','GvD',null,['OvWa','KpFw','StOÄ']],
+ ['abk','alltag2','Wer unterstützt den Unteroffizier vom Dienst (UvD)?','GvD (Gefreiter vom Dienst)',null,['OvWa (Offizier vom Wachdienst)','KpFw (Kompaniefeldwebel)','StOÄ (Standortältester)']],
  ['abk','alltag2','Umgangssprachlicher Name für den Kompaniefeldwebel','Spieß',null,['Chef','Hauptmann','Kamerad']],
  ['abk','alltag2','So steht ein Oberstleutnant namens Müller im Schriftverkehr','OTL Müller','Dienstgrad-Abkürzung vor dem Namen.',['OL Müller','ObstLt Müller','O Müller']],
  ['vs','vsgrad','Niedrigster deutscher Geheimhaltungsgrad','VS – Nur für den Dienstgebrauch',null,['VS – Vertraulich','GEHEIM','STRENG GEHEIM']],
@@ -608,7 +608,7 @@ GLOSS.forEach(g=>g.items.forEach(([k,v,n])=>add(g.deck,'g-'+g.id,(g.id==='dgk'?'
  ['vs','vsnato','NATO-Entsprechung von VS-VERTRAULICH','NATO CONFIDENTIAL'],
  ['vs','vsnato','NATO-Entsprechung von GEHEIM','NATO SECRET'],
  ['vs','vsnato','NATO-Entsprechung von STRENG GEHEIM','COSMIC TOP SECRET'],
- ['vs','vsprax','Wer wirkt bei Sicherheitsüberprüfungen im Geschäftsbereich des BMVg mit?','MAD','Sonst ist es in der Regel das Bundesamt für Verfassungsschutz.',['BAAINBw','BAPersBw','BWI']],
+ ['vs','vsprax','Wer wirkt bei Sicherheitsüberprüfungen im Geschäftsbereich des Bundesministeriums der Verteidigung (BMVg) mit?','MAD (Militärischer Abschirmdienst)','Sonst ist es in der Regel das Bundesamt für Verfassungsschutz.',['BAPersBw (Bundesamt für das Personalmanagement der Bundeswehr)','BWI (BWI GmbH, IT-Systemhaus der Bundeswehr)','KdoCIR (Kommando Cyber- und Informationsraum)']],
  ['vs','vsprax','Grundsatz: Von einer VS darf nur Kenntnis erhalten, wer …','sie für seine Aufgabe kennen muss','„Kenntnis nur, wenn nötig“ (Need-to-know). Eine SÜ allein berechtigt noch nicht.',['eine Sicherheitsüberprüfung hat','Offizier ist','im selben Gebäude arbeitet']],
  ['vs','vsprax','Was braucht ein Unternehmen für Aufträge mit eingestuften Inhalten ab VS-VERTRAULICH?','Sicherheitsbescheid','Erteilt vom Bundesministerium für Wirtschaft und Energie, Grundlage ist das Geheimschutzhandbuch.',['Gewerbeschein','ISO-27001-Zertifikat','Unbedenklichkeitsbescheinigung des MAD']],
  ['dig','begr','Was ist mit „Wirksystem“ gemeint?','Waffensystem','Im Fachjargon „wirken“ oder „einwirken“ für den Einsatz von Waffen, z. B. schießen.',['Führungssystem','Sensorsystem','Logistiksystem']],
@@ -618,8 +618,8 @@ GLOSS.forEach(g=>g.items.forEach(([k,v,n])=>add(g.deck,'g-'+g.id,(g.id==='dgk'?'
  ['dig','begr','Welche IT-Ebene bilden die großen Rechenzentren?','Core',null,['Fog','Edge','D-LBO']],
  ['dig','begr','Welche Dimensionen verbindet MDO?','Land, Luft, See, Weltraum sowie Cyber- und Informationsraum',null,['Nur Land und Luft','Heer, Luftwaffe und Marine','Aufklärung und Wirkung']],
  ['dig','begr','Was kommt bei C4ISR gegenüber C4I hinzu?','Surveillance und Reconnaissance','Überwachung und Aufklärung. Intelligence steckt schon in C4I.',['Cyber und Space','Consultation','Computers']],
- ['beh','proj','Deutsch-französisches Landkampfsystem der nächsten Generation','MGCS',null,['FCAS','NGVA','D-LBO']],
- ['beh','proj','Europäisches Luftkampfsystem der nächsten Generation','FCAS',null,['MGCS','FACE','SOSA']]
+ ['beh','proj','Deutsch-französisches Landkampfsystem der nächsten Generation','MGCS (Main Ground Combat System)',null,['FCAS (Future Combat Air System)','NGVA (NATO Generic Vehicle Architecture)','D-LBO (Digitalisierung landbasierter Operationen)']],
+ ['beh','proj','Europäisches Luftkampfsystem der nächsten Generation','FCAS (Future Combat Air System)',null,['MGCS (Main Ground Combat System)','FACE (Future Airborne Capability Environment)','SOSA (Sensor Open Systems Architecture)']]
 ].forEach(([d,k,q,a,n,x])=>add(d,k,q,a,n,x));
 
 /* ---------- Waffen- und Barettfarben (BMVg, Bekleidung und Uniformen der Bundeswehr, Stand April 2026) ---------- */
@@ -769,26 +769,26 @@ BEH.push(...BEH2);GLOSS.push(...GLOSS2);
  ['staat','staat','Leitbild der Inneren Führung','Staatsbürger in Uniform',null,['Bürger in Waffen','Kämpfer ohne Politik','Soldat des Vaterlands']],
  ['staat','staat','Was gilt für einen Befehl, durch dessen Befolgen eine Straftat begangen würde?','Er darf nicht befolgt werden','§ 11 Soldatengesetz. Befehle, die die Menschenwürde verletzen oder nicht dienstlichen Zwecken dienen, sind unverbindlich.',['Er muss befolgt werden','Er muss erst schriftlich bestätigt werden','Er gilt nur im Einsatz']],
  ['staat','staat','Was bedeutet „Führen mit Auftrag“?','Ziel und Rahmen vorgeben, den Weg selbst wählen lassen','Auch Auftragstaktik genannt.',['Jeden Schritt genau befehlen','Nur schriftlich befehlen','Ohne Befehle führen']],
- ['staat','staat','Wem ist die oder der Wehrbeauftragte zugeordnet?','Dem Bundestag','Hilfsorgan des Bundestages bei der parlamentarischen Kontrolle (Art. 45b GG), gewählt für fünf Jahre.',['Dem BMVg','Dem Bundespräsidenten','Dem Generalinspekteur']],
+ ['staat','staat','Wem ist die oder der Wehrbeauftragte zugeordnet?','Dem Bundestag','Hilfsorgan des Bundestages bei der parlamentarischen Kontrolle (Art. 45b GG), gewählt für fünf Jahre.',['Dem Verteidigungsministerium','Dem Bundespräsidenten','Dem Generalinspekteur']],
  ['staat','staat','Wie können sich Soldatinnen und Soldaten an die oder den Wehrbeauftragten wenden?','Direkt, ohne Dienstweg',null,['Nur über den Disziplinarvorgesetzten','Nur über die Vertrauensperson','Nur nach Freigabe durch den Kompaniechef']],
  ['staat','status','Wie lange darf die Dienstzeit als Soldat auf Zeit höchstens dauern?','25 Jahre','§ 40 Soldatengesetz.',['12 Jahre','20 Jahre','Bis zur Altersgrenze']],
  ['staat','status','Seit wann ist die Wehrpflicht ausgesetzt?','1. Juli 2011','Ausgesetzt, nicht abgeschafft. Im Spannungs- und Verteidigungsfall gilt sie wieder.',['1. Januar 2002','3. Oktober 1990','1. Januar 2026']],
  ['staat','status','Was müssen junge Männer seit 2026 mit 18 tun?','Einen Fragebogen zu Eignung und Bereitschaft beantworten','Für Frauen ist er freiwillig. Ab Juli 2027 folgt die Musterung junger Männer, der Dienst selbst bleibt freiwillig.',['Sechs Monate Grundwehrdienst leisten','Sich bei der Polizei melden','Nichts, alles ist freiwillig']],
  ['staat','status','Wer gehört zur Reserve der Bundeswehr?','Ehemalige Soldatinnen und Soldaten','Zu einer Übung herangezogen heißen sie Reservistendienstleistende (RDL).',['Nur Offiziere außer Dienst','Alle Zivilbeschäftigten','Alle 18-Jährigen']],
  ['staat','status','Wer legt das feierliche Gelöbnis ab?','Freiwillig Wehrdienstleistende','Soldaten auf Zeit und Berufssoldaten schwören den Diensteid (§ 9 Soldatengesetz).',['Berufssoldaten','Soldaten auf Zeit','Reservisten']],
- ['nato','nato','Was besagt Artikel 5 des Nordatlantikvertrags?','Ein Angriff auf einen Mitgliedstaat gilt als Angriff auf alle','Jeder Staat leistet Beistand mit den Maßnahmen, die er für erforderlich hält. Das muss nicht militärisch sein.',['Jeder Staat verteidigt sich allein','Die NATO handelt nur mit UN-Mandat','Alle Mitglieder geben 2 % ihres BIP für Verteidigung aus']],
+ ['nato','nato','Was besagt Artikel 5 des Nordatlantikvertrags?','Ein Angriff auf einen Mitgliedstaat gilt als Angriff auf alle','Jeder Staat leistet Beistand mit den Maßnahmen, die er für erforderlich hält. Das muss nicht militärisch sein.',['Jeder Staat verteidigt sich allein','Die NATO handelt nur mit UN-Mandat','Alle Mitglieder geben 2 % ihres Bruttoinlandsprodukts für Verteidigung aus']],
  ['nato','nato','Was regelt Artikel 4 des Nordatlantikvertrags?','Konsultationen bei Bedrohung',null,['Beistand im Angriffsfall','Beitritt neuer Mitglieder','Austritt aus der NATO']],
  ['nato','nato','Wie oft wurde der NATO-Bündnisfall bisher ausgerufen?','Einmal, nach dem 11. September 2001',null,['Noch nie','Zweimal','Fünfmal']],
  ['nato','nato','Seit wann ist Deutschland Mitglied der NATO?','1955','Die NATO wurde 1949 gegründet.',['1949','1966','1990']],
- ['nato','nato','Wo steht das militärische Hauptquartier SHAPE?','Mons (Belgien)','Der politische Sitz der NATO ist Brüssel.',['Brüssel','Norfolk (USA)','Brunssum (Niederlande)']],
- ['nato','nato','Wo steht das NATO-Kommando JSEC?','Ulm',null,['Brunssum','Mons','Neapel']],
+ ['nato','nato','Wo steht das militärische Hauptquartier SHAPE (Supreme Headquarters Allied Powers Europe)?','Mons (Belgien)','Der politische Sitz der NATO ist Brüssel.',['Brüssel','Norfolk (USA)','Brunssum (Niederlande)']],
+ ['nato','nato','Wo steht das NATO-Kommando JSEC (Joint Support and Enabling Command)?','Ulm',null,['Brunssum','Mons','Neapel']],
  ['nato','nato','Wie viele Soldatinnen und Soldaten soll Tier 1 des NATO-Streitkräftemodells in bis zu zehn Tagen bereitstellen?','Rund 100.000','Tier 2: weitere rund 200.000 in 10 bis 30 Tagen. Tier 3: mindestens 500.000 in bis zu sechs Monaten.',['Rund 10.000','Rund 40.000','Rund 500.000']],
  ['nato','nato','Welcher Verband des Heeres ist dauerhaft in Litauen stationiert?','Panzerbrigade 45','In Dienst gestellt am 1. April 2025 in Vilnius, voll einsatzbereit bis 2027. Geplant sind rund 5.000 Soldatinnen, Soldaten und Zivilbeschäftigte.',['Panzergrenadierbrigade 37','Deutsch-Französische Brigade','Gebirgsjägerbrigade 23']],
- ['nato','nato','Was meint „Drehscheibe Deutschland“?','Deutschland als Transitland für verbündete Truppen',null,['Ein Logistikzentrum der BWI','Den Sitz des NATO-Hauptquartiers','Die Rotation der Truppen in Litauen']],
- ['nato','nato','Wer führt seit 2025 die Heimatschutzregimenter?','Heimatschutzdivision','Vorher das Territoriale Führungskommando.',['Landeskommandos','Operatives Führungskommando','Kommando CIR']],
+ ['nato','nato','Was meint „Drehscheibe Deutschland“?','Deutschland als Transitland für verbündete Truppen',null,['Ein Logistikzentrum der Bundeswehr','Den Sitz des NATO-Hauptquartiers','Die Rotation der Truppen in Litauen']],
+ ['nato','nato','Wer führt seit 2025 die Heimatschutzregimenter?','Heimatschutzdivision','Vorher das Territoriale Führungskommando.',['Landeskommandos','Operatives Führungskommando','Kommando Cyber- und Informationsraum']],
  ['nato','nato','Wie viele Landeskommandos hat die Bundeswehr?','16, eines je Bundesland',null,['4','8','32']],
- ['nato','nato','Wer koordiniert den Operationsplan Deutschland?','OpFüKdoBw',null,['BAAINBw','Heimatschutzdivision','SHAPE']],
- ['nato','nato','Wo steht die Beistandsklausel der EU?','Art. 42 Abs. 7 EU-Vertrag','Bisher einmal angewendet, von Frankreich nach den Anschlägen in Paris 2015.',['Art. 5 Nordatlantikvertrag','Art. 87a GG','Art. 51 UN-Charta']],
+ ['nato','nato','Wer koordiniert den Operationsplan Deutschland?','OpFüKdoBw (Operatives Führungskommando der Bundeswehr)',null,['HSchDiv (Heimatschutzdivision)','SHAPE (Supreme Headquarters Allied Powers Europe)','JSEC (Joint Support and Enabling Command)']],
+ ['nato','nato','Wo steht die Beistandsklausel der EU?','Art. 42 Abs. 7 EU-Vertrag','Bisher einmal angewendet, von Frankreich nach den Anschlägen in Paris 2015.',['Art. 5 Nordatlantikvertrag','Art. 87a Grundgesetz','Art. 51 UN-Charta']],
  ['beh','haush','Wie heißt der Verteidigungshaushalt im Bundeshaushalt?','Einzelplan 14',null,['Einzelplan 1','Einzelplan 60','Sondervermögen Bundeswehr']],
  ['beh','haush','Wie groß war das 2022 beschlossene Sondervermögen Bundeswehr?','100 Milliarden Euro','Kreditfinanziert, abgesichert in Art. 87a Abs. 1a GG.',['10 Milliarden Euro','50 Milliarden Euro','500 Milliarden Euro']],
  ['beh','haush','Welche Verteidigungsausgaben sind seit 2025 von der Schuldenbremse ausgenommen?','Der Teil über 1 % des BIP','Grundgesetzänderung vom März 2025.',['Alle','Keine','Der Teil über 2 % des BIP']],
@@ -800,7 +800,7 @@ BEH.push(...BEH2);GLOSS.push(...GLOSS2);
  ['gl','div','Welche Division führt Fallschirmjäger und Kommando Spezialkräfte?','Division Schnelle Kräfte',null,['1. Panzerdivision','10. Panzerdivision','Heimatschutzdivision']],
  ['gl','div','Wo haben die beiden Einsatzflottillen der Marine ihren Sitz?','Kiel und Wilhelmshaven','Einsatzflottille 1 in Kiel, Einsatzflottille 2 in Wilhelmshaven.',['Rostock und Hamburg','Kiel und Rostock','Wilhelmshaven und Bremerhaven']],
  ['abk','zeit','Was bedeutet die Datum-Zeit-Gruppe 031430ZOCT26?','3. Oktober 2026, 14:30 Uhr UTC',null,['3. Januar 2026, 14:30 Uhr Ortszeit','14. März 2026, 03:30 Uhr UTC','3. Oktober 2026, 14:30 Uhr MEZ']],
- ['abk','zeit','Welche Zeit meint der Buchstabe Z in einer Zeitangabe?','UTC (Zulu-Zeit)',null,['Ortszeit','MEZ','MESZ']],
+ ['abk','zeit','Welche Zeit meint der Buchstabe Z in einer Zeitangabe?','UTC (koordinierte Weltzeit)',null,['Ortszeit','MEZ (Mitteleuropäische Zeit)','MESZ (Mitteleuropäische Sommerzeit)']],
  ['abk','zeit','Zeitzonenbuchstabe für die deutsche Winterzeit (MEZ)','A (Alfa)',null,['B (Bravo)','Z (Zulu)','J (Juliett)']],
  ['abk','zeit','Zeitzonenbuchstabe für die deutsche Sommerzeit (MESZ)','B (Bravo)',null,['A (Alfa)','Z (Zulu)','J (Juliett)']],
  ['eti','zer','Höchste militärische Zeremonie der Bundeswehr','Großer Zapfenstreich','Z. B. zur Verabschiedung von Bundespräsidenten, Bundeskanzlern und Verteidigungsministern.',['Feierliches Gelöbnis','Appell','Flaggenparade']],
@@ -878,32 +878,32 @@ function tskSym(t){ // Symbole der Teilstreitkräfte, wie an der Schirmmütze: e
 }
 const LESSONS=[
  {id:'aufbau',t:'Aufbau der Bundeswehr',d:'Streitkräfte, Teilstreitkräfte und die zivile Verwaltung',b:()=>`
-  <p>Kern der Bundeswehr sind die Streitkräfte mit vier Teilstreitkräften:</p>
+  <p>Kern der Bundeswehr sind die Streitkräfte mit vier Teilstreitkräften (TSK):</p>
   <ol class="ladder">
    <li><strong>${tskSym('heer')}Heer</strong><span>Kampf an Land</span></li>
    <li><strong>${tskSym('lw')}Luftwaffe</strong><span>Luftraum und Luftverteidigung</span></li>
    <li><strong>${tskSym('mar')}Marine</strong><span>Einsatz auf und unter See</span></li>
    <li><strong>${tskSym()}Cyber- und Informationsraum (CIR)</strong><span>Die jüngste: IT, Cyberabwehr und elektronischer Kampf</span></li>
   </ol>
-  <p>Heer, Luftwaffe und Marine erkennt man an ihren Symbolen, etwa an der Schirmmütze: gekreuzte Schwerter, Schwinge und Anker. Der CIR hat kein eigenes Symbol, weil er keine eigene Uniform hat. Seine Angehörigen tragen die von Heer, Luftwaffe oder Marine, dazu das marineblaue Barett mit dem Abzeichen CIR.</p>
-  <p>Jede Teilstreitkraft hat eigene Bezeichnungen für ihre Ebenen. Dazu kommen der Unterstützungsbereich unter dem Unterstützungskommando und das Operative Führungskommando, das seit Oktober 2024 alle Einsätze im In- und Ausland plant und führt.</p>
-  <p>Neben den Streitkräften steht die zivile Bundeswehrverwaltung. Dazu gehören die großen Bundesämter, etwa für Ausrüstung (BAAINBw), Personal (BAPersBw) oder Infrastruktur (BAIUDBw). Das BAAINBw ist eine zivile Bundesoberbehörde mit rund 10.000 zivilen und 1.800 militärischen Beschäftigten.</p>
+  <p>Heer, Luftwaffe und Marine erkennt man an ihren Symbolen, etwa an der Schirmmütze: gekreuzte Schwerter, Schwinge und Anker. Der CIR hat kein eigenes Symbol, weil er keine eigene Uniform hat. Seine Angehörigen tragen die von Heer, Luftwaffe oder Marine, dazu das marineblaue Barett mit dem Abzeichen CIR. Geführt wird der CIR vom Kommando Cyber- und Informationsraum (KdoCIR). Für den Schutz der IT-Systeme und IT-Services der Bundeswehr ist das Zentrum für Cyber-Sicherheit der Bundeswehr (ZCSBw) in Euskirchen zuständig.</p>
+  <p>Jede Teilstreitkraft hat eigene Bezeichnungen für ihre Ebenen. Dazu kommen der Unterstützungsbereich unter dem Unterstützungskommando und das Operative Führungskommando der Bundeswehr (OpFüKdoBw), das seit Oktober 2024 alle Einsätze im In- und Ausland plant und führt. Wie viel Personal und Material eine Einheit planmäßig hat, legt ihre Stärke- und Ausstattungsnachweisung (StAN) fest.</p>
+  <p>Neben den Streitkräften steht die zivile Bundeswehrverwaltung, beide unterstehen dem Bundesministerium der Verteidigung (BMVg). Zur Verwaltung gehören die großen Bundesämter: das Bundesamt für Ausrüstung, Informationstechnik und Nutzung der Bundeswehr (BAAINBw), das Bundesamt für das Personalmanagement der Bundeswehr (BAPersBw) und das Bundesamt für Infrastruktur, Umweltschutz und Dienstleistungen der Bundeswehr (BAIUDBw). Das BAAINBw ist eine zivile Bundesoberbehörde mit rund 10.000 zivilen und 1.800 militärischen Beschäftigten. Zum Geschäftsbereich des BMVg gehört auch der Militärische Abschirmdienst (MAD), der Nachrichtendienst der Bundeswehr zur Abwehr von Spionage, Sabotage und Extremismus.</p>
   <div class="callout">In der zivilen Bundeswehrverwaltung arbeiten überwiegend Beamtinnen, Beamte und Tarifbeschäftigte. Für sie gelten Amtsbezeichnungen statt Dienstgrade.</div>
-  <p>Im Inland arbeitet die Bundeswehr in der Amts- und Katastrophenhilfe mit den Behörden und Organisationen mit Sicherheitsaufgaben (BOS) zusammen, etwa Polizei, Feuerwehr und THW.</p>`},
+  <p>Im Inland arbeitet die Bundeswehr in der Amts- und Katastrophenhilfe mit den Behörden und Organisationen mit Sicherheitsaufgaben (BOS) zusammen, etwa Polizei, Feuerwehr und Technisches Hilfswerk (THW). Den gemeinsamen Digitalfunk der BOS betreibt die Bundesanstalt für den Digitalfunk der Behörden und Organisationen mit Sicherheitsaufgaben (BDBOS).</p>`},
  {id:'staat',t:'Bundeswehr im Staat',d:'Parlamentsarmee, Befehlsgewalt, Innere Führung, Soldatenpflichten, Führen mit Auftrag und wer dient',b:()=>`
-  <p>Die Bundeswehr ist eine Parlamentsarmee. Ihr Auftrag steht im Grundgesetz: Der Bund stellt Streitkräfte zur Verteidigung auf (Art. 87a GG). Für andere Zwecke darf er sie nur einsetzen, soweit das Grundgesetz es ausdrücklich erlaubt, etwa in der Amts- und Katastrophenhilfe oder in einem System kollektiver Sicherheit wie NATO und Vereinten Nationen.</p>
+  <p>Die Bundeswehr ist eine Parlamentsarmee. Ihr Auftrag steht im Grundgesetz (GG): Der Bund stellt Streitkräfte zur Verteidigung auf (Art. 87a GG). Für andere Zwecke darf er sie nur einsetzen, soweit das Grundgesetz es ausdrücklich erlaubt, etwa in der Amts- und Katastrophenhilfe oder in einem System kollektiver Sicherheit wie NATO und Vereinten Nationen.</p>
   <h3>Wer befiehlt</h3>
-  <p>Im Frieden hat die Bundesministerin oder der Bundesminister der Verteidigung die Befehls- und Kommandogewalt (Art. 65a GG), kurz IBuK. Im Verteidigungsfall geht sie auf die Bundeskanzlerin oder den Bundeskanzler über (Art. 115b GG). Der Generalinspekteur ist der ranghöchste Soldat und militärischer Berater der Bundesregierung, aber kein Oberbefehlshaber.</p>
+  <p>Im Frieden hat die Bundesministerin oder der Bundesminister der Verteidigung die Befehls- und Kommandogewalt (Art. 65a GG), kurz IBuK für Inhaber der Befehls- und Kommandogewalt. Im Verteidigungsfall geht sie auf die Bundeskanzlerin oder den Bundeskanzler über (Art. 115b GG). Der Generalinspekteur der Bundeswehr (GenInspBw) ist der ranghöchste Soldat und militärischer Berater der Bundesregierung, aber kein Oberbefehlshaber.</p>
   <h3>Was der Bundestag entscheidet</h3>
   <ol class="ladder">
-   <li><strong>Einsätze</strong><span>Bewaffnete Einsätze im Ausland brauchen vorher die Zustimmung des Bundestages, das Mandat. Es ist befristet und legt Auftrag, Einsatzgebiet und Personalobergrenze fest. Bei Gefahr im Verzug wird die Zustimmung nachgeholt (Parlamentsbeteiligungsgesetz).</span></li>
-   <li><strong>Geld</strong><span>Der Bundestag beschließt den Verteidigungshaushalt, den Einzelplan 14. Beschaffungen ab 25 Millionen Euro gehen vorher in den Haushaltsausschuss.</span></li>
+   <li><strong>Einsätze</strong><span>Bewaffnete Einsätze im Ausland brauchen vorher die Zustimmung des Bundestages, das Mandat. Es ist befristet und legt Auftrag, Einsatzgebiet und Personalobergrenze fest. Bei Gefahr im Verzug wird die Zustimmung nachgeholt (Parlamentsbeteiligungsgesetz, ParlBG).</span></li>
+   <li><strong>Geld</strong><span>Der Bundestag beschließt den Verteidigungshaushalt, den Einzelplan 14 (Epl. 14). Beschaffungen ab 25 Millionen Euro gehen vorher in den Haushaltsausschuss.</span></li>
    <li><strong>Krisenfälle</strong><span>Spannungs- und Verteidigungsfall stellt der Bundestag mit Zweidrittelmehrheit fest, den Verteidigungsfall auf Antrag der Bundesregierung und mit Zustimmung des Bundesrates (Art. 80a, 115a GG).</span></li>
    <li><strong>Kontrolle</strong><span>Der Verteidigungsausschuss kann sich selbst als Untersuchungsausschuss einsetzen (Art. 45a GG). Dazu kommt die oder der Wehrbeauftragte (Art. 45b GG).</span></li>
   </ol>
-  <div class="callout">Die oder der Wehrbeauftragte wird vom Bundestag für fünf Jahre gewählt und berichtet jährlich über den Zustand der Truppe. Jede Soldatin und jeder Soldat kann sich direkt dorthin wenden, ohne Dienstweg und ohne Nachteile.</div>
+  <div class="callout">Die oder der Wehrbeauftragte wird vom Bundestag für fünf Jahre gewählt und berichtet jährlich über den Zustand der Truppe. Jede Soldatin und jeder Soldat kann sich direkt dorthin wenden, ohne Dienstweg und ohne Nachteile. Wer sich unrichtig behandelt fühlt, kann sich außerdem nach der Wehrbeschwerdeordnung (WBO) beschweren.</div>
   <h3>Innere Führung</h3>
-  <p>Die Führungskultur der Bundeswehr heißt Innere Führung, ihr Leitbild ist der „Staatsbürger in Uniform“. Soldatinnen und Soldaten behalten ihre Grundrechte, soweit das Soldatengesetz sie nicht ausdrücklich einschränkt. Gehorsam hat Grenzen: Ein Befehl, der die Menschenwürde verletzt oder keinem dienstlichen Zweck dient, ist unverbindlich. Würde durch das Befolgen eine Straftat begangen, darf er nicht befolgt werden (§ 11 Soldatengesetz).</p>
+  <p>Die Führungskultur der Bundeswehr heißt Innere Führung, ihr Leitbild ist der „Staatsbürger in Uniform“. Soldatinnen und Soldaten behalten ihre Grundrechte, soweit das Soldatengesetz (SG) sie nicht ausdrücklich einschränkt. Gehorsam hat Grenzen: Ein Befehl, der die Menschenwürde verletzt oder keinem dienstlichen Zweck dient, ist unverbindlich. Würde durch das Befolgen eine Straftat begangen, darf er nicht befolgt werden (§ 11 Soldatengesetz). Gelehrt und weiterentwickelt wird die Innere Führung am Zentrum Innere Führung (ZInFü) in Koblenz.</p>
   <h3>Soldatenpflichten</h3>
   <p>Das Soldatengesetz legt fest, was von Soldatinnen und Soldaten erwartet wird. Diese Pflichten prägen auch den Umgang miteinander:</p>
   <ol class="ladder">
@@ -913,7 +913,7 @@ const LESSONS=[
    <li><strong>§ 12 Kameradschaft</strong><span>Würde, Ehre und Rechte der Kameraden achten und ihnen in Not und Gefahr beistehen.</span></li>
    <li><strong>§ 13 Wahrheit</strong><span>In dienstlichen Angelegenheiten die Wahrheit sagen, gerade in Meldungen.</span></li>
   </ol>
-  <div class="callout">Kameradschaft ist eine Dienstpflicht, keine Frage der Sympathie. Sie schließt gegenseitige Anerkennung, Rücksicht und die Achtung anderer Anschauungen ein. Wer Kameraden schikaniert oder bloßstellt, verletzt seine Pflichten und muss mit Disziplinarmaßnahmen rechnen.</div>
+  <div class="callout">Kameradschaft ist eine Dienstpflicht, keine Frage der Sympathie. Sie schließt gegenseitige Anerkennung, Rücksicht und die Achtung anderer Anschauungen ein. Wer Kameraden schikaniert oder bloßstellt, verletzt seine Pflichten und muss mit Disziplinarmaßnahmen rechnen. Welche das sind und wer sie verhängen darf, regelt die Wehrdisziplinarordnung (WDO).</div>
   <h3>Führen mit Auftrag</h3>
   <p>Zur Inneren Führung gehört das Prinzip „Führen mit Auftrag“, auch Auftragstaktik: Vorgesetzte geben ihre Absicht vor, also was erreicht werden soll und warum, dazu Ziel, Mittel und Zeit. Den Weg wählen die Geführten selbst. Ändert sich die Lage, handeln sie im Sinne dieser Absicht, statt auf einen neuen Befehl zu warten. Das Prinzip stammt aus dem preußischen Heer des 19. Jahrhunderts und ist mit Generalfeldmarschall Helmuth von Moltke verbunden. Das Gegenstück heißt Befehlstaktik: Der Befehl schreibt auch den Weg im Detail vor.</p>
   <div class="callout">„Kein Operationsplan reicht mit einiger Sicherheit über das erste Zusammentreffen mit der feindlichen Hauptmacht hinaus.“ Helmuth von Moltke, 1871. Heute meist verkürzt zu „Kein Plan überlebt die erste Feindberührung“. Genau deshalb zählt die Absicht mehr als der Plan.</div>
@@ -938,11 +938,11 @@ const LESSONS=[
    <li><strong>Berufssoldaten (BS)</strong><span>Dienen bis zur gesetzlichen Altersgrenze und schwören den Diensteid.</span></li>
    <li><strong>Soldaten auf Zeit (SaZ)</strong><span>Verpflichten sich für eine feste Zeit, höchstens 25 Jahre. Auch sie schwören den Diensteid.</span></li>
    <li><strong>Wehrdienstleistende</strong><span>Leisten freiwilligen Wehrdienst (FWDL) und legen das feierliche Gelöbnis ab.</span></li>
-   <li><strong>Reservisten</strong><span>Ehemalige Soldatinnen und Soldaten. Bei einer Übung heißen sie Reservistendienstleistende (RDL).</span></li>
+   <li><strong>Reservisten</strong><span>Ehemalige Soldatinnen und Soldaten. Bei einer Übung heißen sie Reservistendienstleistende (RDL). Viele sind im Verband der Reservisten der Deutschen Bundeswehr (VdRBw) organisiert.</span></li>
    <li><strong>Zivilbeschäftigte</strong><span>Beamtinnen, Beamte und Tarifbeschäftigte, vor allem in der Bundeswehrverwaltung.</span></li>
   </ol>
-  <p>Die Wehrpflicht ist seit dem 1. Juli 2011 ausgesetzt, aber nicht abgeschafft. Im Spannungs- und Verteidigungsfall gilt sie wieder. Seit 2026 gilt der neue Wehrdienst: Alle 18-Jährigen erhalten einen Fragebogen zu Eignung und Bereitschaft, für Männer ist er verpflichtend, für Frauen freiwillig. Ab Juli 2027 werden junge Männer wieder gemustert. Der Dienst selbst bleibt freiwillig, reichen die Freiwilligen nicht, kann der Bundestag per Gesetz eine Bedarfswehrpflicht beschließen.</p>
-  <p>Wer zur Bundeswehr will, wendet sich an ein Karrierecenter der Bundeswehr. Die Karrierecenter gehören zum BAPersBw, beraten über Karriereberatungsbüros in der Fläche, prüfen die Eignung und übernehmen auch die Musterung. Die früheren Kreiswehrersatzämter gibt es seit 2012 nicht mehr.</p>`},
+  <p>Die Wehrpflicht nach dem Wehrpflichtgesetz (WPflG) ist seit dem 1. Juli 2011 ausgesetzt, aber nicht abgeschafft. Im Spannungs- und Verteidigungsfall gilt sie wieder. Seit 2026 gilt mit dem Wehrdienst-Modernisierungsgesetz (WDModG) der neue Wehrdienst: Alle 18-Jährigen erhalten einen Fragebogen zu Eignung und Bereitschaft, für Männer ist er verpflichtend, für Frauen freiwillig. Ab Juli 2027 werden junge Männer wieder gemustert. Der Dienst selbst bleibt freiwillig, reichen die Freiwilligen nicht, kann der Bundestag per Gesetz eine Bedarfswehrpflicht beschließen.</p>
+  <p>Wer zur Bundeswehr will, wendet sich an ein Karrierecenter der Bundeswehr. Die Karrierecenter gehören zum Bundesamt für das Personalmanagement der Bundeswehr (BAPersBw), beraten über Karriereberatungsbüros in der Fläche, prüfen die Eignung und übernehmen auch die Musterung. Die früheren Kreiswehrersatzämter gibt es seit 2012 nicht mehr.</p>`},
  {id:'dienstgrade',t:'Dienstgrade verstehen',d:'Laufbahnen, Dienstgradgruppen und NATO-Rangcodes',b:()=>`
   <p>Es gibt drei Laufbahngruppen: Mannschaften, Unteroffiziere und Offiziere. Sie gliedern sich in sieben Dienstgradgruppen mit zusammen 26 Dienstgraden:</p>
   <ol class="ladder">${Object.values(G).map(g=>`<li><strong>${esc(g)}</strong><span>${RANKS.filter(r=>r.g===g).map(r=>esc(r.k||r.h)).join(', ')}</span></li>`).join('')}</ol>
@@ -998,17 +998,17 @@ const LESSONS=[
    <li><strong>Luftwaffe: blau</strong><span>Blaue Jacke, hellblaues Hemd, dunkelblaue Krawatte. Kopfbedeckung ist das blaue Schiffchen</span></li>
    <li><strong>Marine: dunkelblau</strong><span>Zweireihige Jacke mit weißem Hemd und weißer Mütze, keine Kragenspiegel. Den Dienstgrad zeigen die Ärmel. Junge Mannschaften tragen den klassischen Matrosenanzug</span></li>
   </ol>
-  <p>Der Cyber- und Informationsraum hat keine eigene Uniform. Seine Angehörigen tragen je nach Dienstposten die Uniform von Heer, Luftwaffe oder Marine, ihren sogenannten Uniformträgerbereich. Gemeinsames Erkennungszeichen ist das marineblaue Barett mit dem Abzeichen CIR. Dasselbe Prinzip gilt im Unterstützungsbereich, etwa im Sanitätsdienst.</p>
+  <p>Der Cyber- und Informationsraum (CIR) hat keine eigene Uniform. Seine Angehörigen tragen je nach Dienstposten die Uniform von Heer, Luftwaffe oder Marine, ihren sogenannten Uniformträgerbereich. Gemeinsames Erkennungszeichen ist das marineblaue Barett mit dem Abzeichen CIR. Dasselbe Prinzip gilt im Unterstützungsbereich, etwa im Sanitätsdienst.</p>
   <div class="callout">Weiß trägt nur die Marine: Den Sommeranzug gibt es im Allgemeinen erst südlich des 40. Breitengrads, im Inland ist er nicht erlaubt.</div>`},
  {id:'farben',t:'Waffenfarbe und Barett',d:'Litze, Kragenspiegel und Barett verraten die Truppengattung',b:()=>`
   <p>Das Dienstgradabzeichen sagt, welchen Rang jemand hat. Wozu jemand gehört, zeigt im Heer die Farbe. Jede Truppengattung hat ihre eigene Waffenfarbe, die Tradition reicht bis 1915 zurück.</p>
   <h3>Am Feldanzug: die Litze</h3>
-  <p>An den Schulterklappen des Feldanzugs sitzt eine etwa 4 mm schmale Schlaufe in Waffenfarbe, die Litze. Grün heißt Infanterie, Rosa Panzertruppe, Schwarz Pioniere. Die Dienstgradabzeichen selbst sind bei allen gleich.</p>
+  <p>An den Schulterklappen des Feldanzugs sitzt eine etwa 4 mm schmale Schlaufe in Waffenfarbe, die Litze. Grün heißt Infanterie, Rosa Panzertruppe, Schwarz Pioniere, Bordeauxrot ABC-Abwehr, also Schutz vor atomaren, biologischen und chemischen Gefahren. Die Dienstgradabzeichen selbst sind bei allen gleich.</p>
   <h3>Am Dienstanzug: der Kragenspiegel</h3>
   <p>Am grauen Dienstanzug erscheint dieselbe Farbe als Kragenspiegel mit silberner Doppellitze und als Umrandung der Schulterklappen. Zwei Ausnahmen fallen sofort auf: Generale tragen goldene Stickerei auf Hochrot, Offiziere im Generalstabsdienst einen karmesinroten Kragenspiegel.</p>
   <div class="figs">${[...['Infanterie','Panzer','Aufklärer','Artillerie','Pioniere','Heeres­flieger','Fernmelder','Logistik','Sanität'].map((t,i)=>[WAFF[i][1],t]),['gen','Generale']].map(([c,t])=>`<figure>${collar(c,30)}<figcaption>${esc(t)}</figcaption></figure>`).join('')}</div>
   <h3>Das Barett</h3>
-  <p>Die Barettfarbe fasst mehrere Truppengattungen zu Gruppen zusammen. Grün tragen Jäger und Panzergrenadiere, Schwarz Panzer und Aufklärer, Bordeauxrot Fallschirmjäger, KSK und Heeresflieger. Korallenrot steht für die meisten unterstützenden Truppen wie Artillerie, Pioniere und Fernmelder. Die genaue Truppengattung zeigt das Metallabzeichen am Barett.</p>
+  <p>Die Barettfarbe fasst mehrere Truppengattungen zu Gruppen zusammen. Grün tragen Jäger und Panzergrenadiere, Schwarz Panzer und Aufklärer, Bordeauxrot Fallschirmjäger, Kommando Spezialkräfte (KSK) und Heeresflieger. Korallenrot steht für die meisten unterstützenden Truppen wie Artillerie, Pioniere und Fernmelder. Die genaue Truppengattung zeigt das Metallabzeichen am Barett.</p>
   <p>Die Gebirgsjäger tragen statt des Baretts die Bergmütze. Wer zum Cyber- und Informationsraum gehört, trägt unabhängig von der Truppengattung ein marineblaues Barett.</p>
   <div class="callout">Luftwaffe und Marine haben keine Truppengattungen und deshalb auch keine bunten Litzen. Die Luftwaffe trägt meist das blaue Schiffchen, die Marine hat am Dienstanzug keine Kragenspiegel. Alle Farben stehen unter Nachschlagen bei den Abzeichen.</div>`},
  {id:'anrede',t:'Anrede und Umgang',d:'Anrede nach Dienstgrad, Generale, Sanitätsdienst und ungeschriebene Regeln',b:()=>`
@@ -1031,10 +1031,10 @@ const LESSONS=[
   <p>Auch die Führungsbezeichnung verrät die Ebene: Teileinheiten haben einen Führer (Gruppenführer, Zugführer), die Kompanie hat einen Chef, ab dem Bataillon führt ein Kommandeur. Der Kompaniechef hat nach der Wehrdisziplinarordnung die unterste Stufe der Disziplinarbefugnis.</p>
   <div class="callout">Luftwaffe und Marine benennen dieselben Ebenen anders. Die Kompanie heißt in der Luftwaffe Staffel, in der Marine entspricht ihr die Besatzung eines Bootes. Ein Geschwader steht auf Regimentsebene. Die Tabelle unter Nachschlagen zeigt alle Entsprechungen.</div>
   <h3>Die Großverbände</h3>
-  <p>Das Heer hat vier Divisionen: die 1. Panzerdivision (Stab in Oldenburg), die 10. Panzerdivision (Veitshöchheim), zu der auch die Panzerbrigade 45 in Litauen gehört, die Division Schnelle Kräfte (Stadtallendorf) mit Fallschirmjägern und Kommando Spezialkräfte sowie seit 2025 die Heimatschutzdivision (Berlin). Die Marine führt ihre Schiffe und Boote in zwei Einsatzflottillen, in Kiel und in Wilhelmshaven.</p>
+  <p>Das Heer hat vier Divisionen: zwei Panzerdivisionen (PzDiv), die 1. mit Stab in Oldenburg und die 10. in Veitshöchheim, zu der auch die Panzerbrigade 45 in Litauen gehört, dazu die Division Schnelle Kräfte (DSK) in Stadtallendorf mit Fallschirmjägern und dem Kommando Spezialkräfte (KSK) sowie seit 2025 die Heimatschutzdivision (HSchDiv) in Berlin. Die Marine führt ihre Schiffe und Boote in zwei Einsatzflottillen, in Kiel und in Wilhelmshaven.</p>
   <p>Über der Division endet die deutsche Gliederung. Die Divisionen führt das Kommando Heer in Strausberg, eine Führungsbehörde, kein Großverband. Korps gibt es nur noch multinational: Deutsche Truppen gehören etwa zum 1. Deutsch-Niederländischen Korps in Münster, zum Multinationalen Korps Nordost in Stettin und zum Eurokorps in Straßburg.</p>`},
  {id:'zeichen',t:'NATO-Größenzeichen',d:'Taktische Zeichen auf Lagekarten lesen',b:()=>`
-  <p>Auf Lagekarten und in Lagebildern stehen Truppenteile als taktische Zeichen nach dem NATO-Standard APP-6. Der Rahmen zeigt die Art (das Kreuz steht für Infanterie), das Zeichen darüber die Größe.</p>
+  <p>Auf Lagekarten und in Lagebildern stehen Truppenteile als taktische Zeichen nach dem NATO-Standard APP-6 (Allied Procedural Publication 6). Der Rahmen zeigt die Art (das Kreuz steht für Infanterie), das Zeichen darüber die Größe.</p>
   ${syms([['●','Trupp'],['●●','Gruppe'],['●●●','Zug'],['I','Kompanie'],['II','Bataillon'],['III','Regiment'],['X','Brigade'],['XX','Division'],['XXX','Korps'],['XXXX','Armee']])}
   <p>Die Logik: Punkte für Teileinheiten, senkrechte Striche von der Kompanie bis zum Regiment, Kreuze ab der Brigade, bis zu Korps (XXX) und Armee (XXXX). Die Zuordnung von Trupp und Gruppe zu einem und zwei Punkten folgt der deutschen Lesart; APP-6 kennt darunter noch Team oder Besatzung (Ø).</p>`},
  {id:'staebe',t:'Stäbe und Stabsabteilungen',d:'Wer im Stab wofür zuständig ist',b:()=>`
@@ -1042,54 +1042,54 @@ const LESSONS=[
   <ol class="ladder">${STAB.map(([k,v])=>`<li><strong>${k.slice(1)}</strong><span>${esc(v)}</span></li>`).join('')}</ol>
   <p>Der Buchstabe davor zeigt die Ebene oder den Stabstyp: S im Bataillon, G auf höheren Ebenen des Heeres, A für die Luftwaffe, N für die Marine, J in streitkräftegemeinsamen Stäben. Ein Bataillon hat typischerweise nur S1 bis S6, dort umfasst die S3 auch die Ausbildung.</p>`},
  {id:'buendnis',t:'Im Bündnis: NATO, EU und Heimatschutz',d:'Artikel 5, NATO-Kommandostruktur, Litauen und Drehscheibe Deutschland',b:()=>`
-  <p>Deutschland verteidigt sich nicht allein. Die NATO wurde 1949 gegründet, die Bundesrepublik trat 1955 bei. Heute hat das Bündnis 32 Mitglieder. Kern ist Artikel 5 des Nordatlantikvertrags: Ein bewaffneter Angriff auf einen Mitgliedstaat gilt als Angriff auf alle. Jeder Staat leistet Beistand mit den Maßnahmen, die er für erforderlich hält. Ausgerufen wurde der Bündnisfall bisher einmal, nach dem 11. September 2001. Artikel 4 sieht Konsultationen vor, wenn sich ein Mitglied bedroht sieht.</p>
+  <p>Deutschland verteidigt sich nicht allein. Die NATO (North Atlantic Treaty Organization) wurde 1949 gegründet, die Bundesrepublik trat 1955 bei. Heute hat das Bündnis 32 Mitglieder. Kern ist Artikel 5 des Nordatlantikvertrags: Ein bewaffneter Angriff auf einen Mitgliedstaat gilt als Angriff auf alle. Jeder Staat leistet Beistand mit den Maßnahmen, die er für erforderlich hält. Ausgerufen wurde der Bündnisfall bisher einmal, nach dem 11. September 2001. Artikel 4 sieht Konsultationen vor, wenn sich ein Mitglied bedroht sieht.</p>
   <h3>Wie die NATO geführt wird</h3>
   <ol class="ladder">
-   <li><strong>Nordatlantikrat</strong><span>Politisches Entscheidungsgremium in Brüssel, entscheidet im Konsens.</span></li>
-   <li><strong>SHAPE</strong><span>Militärisches Hauptquartier in Mons (Belgien). Dort führt der SACEUR, traditionell ein US-Offizier, das Allied Command Operations.</span></li>
+   <li><strong>Nordatlantikrat (NAC)</strong><span>North Atlantic Council, politisches Entscheidungsgremium in Brüssel, entscheidet im Konsens.</span></li>
+   <li><strong>SHAPE</strong><span>Supreme Headquarters Allied Powers Europe, das militärische Hauptquartier in Mons (Belgien). Dort führt der Supreme Allied Commander Europe (SACEUR), traditionell ein US-Offizier, das Allied Command Operations (ACO).</span></li>
    <li><strong>ACT</strong><span>Allied Command Transformation in Norfolk (USA), entwickelt die NATO weiter.</span></li>
-   <li><strong>JFC</strong><span>Drei operative Hauptquartiere in Brunssum, Neapel und Norfolk.</span></li>
-   <li><strong>JSEC</strong><span>In Ulm, koordiniert Verlegung und Schutz von Truppen im rückwärtigen Raum Europas.</span></li>
+   <li><strong>JFC</strong><span>Joint Force Commands, drei operative Hauptquartiere in Brunssum, Neapel und Norfolk.</span></li>
+   <li><strong>JSEC</strong><span>Joint Support and Enabling Command in Ulm, koordiniert Verlegung und Schutz von Truppen im rückwärtigen Raum Europas.</span></li>
   </ol>
-  <p>Seit 2023 plant die NATO ihre Kräfte nach dem NATO-Streitkräftemodell in drei Stufen: rund 100.000 Soldatinnen und Soldaten in bis zu zehn Tagen, weitere rund 200.000 in 10 bis 30 Tagen und mindestens 500.000 in bis zu sechs Monaten. Die Kräfte sind festen Verteidigungsplänen zugeordnet.</p>
+  <p>Seit 2023 plant die NATO ihre Kräfte nach dem NATO-Streitkräftemodell (NATO Force Model, NFM) in drei Stufen: rund 100.000 Soldatinnen und Soldaten in bis zu zehn Tagen, weitere rund 200.000 in 10 bis 30 Tagen und mindestens 500.000 in bis zu sechs Monaten. Die Kräfte sind festen Verteidigungsplänen zugeordnet.</p>
   <h3>Deutschlands Beitrag an der Ostflanke</h3>
   <p>Seit 2017 führt Deutschland den multinationalen Gefechtsverband der enhanced Forward Presence (eFP) in Litauen. Am 1. April 2025 wurde in Vilnius die Panzerbrigade 45 in Dienst gestellt, die erste dauerhaft im Ausland stationierte Brigade der Bundeswehr. Bis 2027 soll sie voll einsatzbereit sein.</p>
   <h3>Drehscheibe Deutschland und Heimatschutz</h3>
-  <p>Wegen seiner Lage in der Mitte Europas ist Deutschland im Bündnisfall Transitland für verbündete Truppen. Dafür leistet es Host Nation Support: Unterkunft, Verpflegung, Betankung, Transport und Schutz. Wie militärische und zivile Stellen dabei zusammenwirken, legt der eingestufte Operationsplan Deutschland (OPLAN DEU) fest, koordiniert vom Operativen Führungskommando.</p>
-  <p>Den Schutz von Verlegewegen und kritischer Infrastruktur übernehmen die Heimatschutzkräfte. Seit 2025 führt sie die Heimatschutzdivision des Heeres mit Heimatschutzregimentern aus Reservisten und aktiven Soldaten. In jedem Bundesland gibt es außerdem ein Landeskommando als Bindeglied zu Landesregierung und Behörden.</p>
-  <div class="callout">Auch die EU hat eine Beistandsklausel: Art. 42 Abs. 7 EU-Vertrag, Teil der Gemeinsamen Sicherheits- und Verteidigungspolitik (GSVP). Angewendet wurde sie bisher einmal, auf Bitte Frankreichs nach den Anschlägen von Paris 2015.</div>`},
+  <p>Wegen seiner Lage in der Mitte Europas ist Deutschland im Bündnisfall Transitland für verbündete Truppen. Dafür leistet es Host Nation Support (HNS): Unterkunft, Verpflegung, Betankung, Transport und Schutz. Wie militärische und zivile Stellen dabei zusammenwirken, legt der eingestufte Operationsplan Deutschland (OPLAN DEU) fest, koordiniert vom Operativen Führungskommando der Bundeswehr (OpFüKdoBw).</p>
+  <p>Den Schutz von Verlegewegen und kritischer Infrastruktur (KRITIS) übernehmen die Heimatschutzkräfte. Seit 2025 führt sie die Heimatschutzdivision (HSchDiv) des Heeres mit Heimatschutzregimentern aus Reservisten und aktiven Soldaten. In jedem Bundesland gibt es außerdem ein Landeskommando (LKdo) als Bindeglied zu Landesregierung und Behörden.</p>
+  <div class="callout">Auch die Europäische Union (EU) hat eine Beistandsklausel: Art. 42 Abs. 7 EU-Vertrag, Teil der Gemeinsamen Sicherheits- und Verteidigungspolitik (GSVP). Angewendet wurde sie bisher einmal, auf Bitte Frankreichs nach den Anschlägen von Paris 2015.</div>`},
  {id:'kuerzel',t:'Abkürzungen im Dienstalltag',d:'Von AGA bis DZE, dazu Dienstgrade in Kurzform',b:()=>`
-  <p>Die Bundeswehr kürzt fast alles ab. Wer die häufigsten Kürzel kennt, versteht Dienstpläne, Befehle und Gespräche deutlich besser. Eine Auswahl:</p>
-  <ol class="ladder">${GLOSS[0].items.filter(([k])=>['AGA','KzH','DZE','UvD','GvD','KpFw','SaZ','BS','FWDL','RDL'].includes(k)).map(([k,v])=>`<li><strong>${esc(k)}</strong><span>${esc(v)}</span></li>`).join('')}</ol>
-  <p>Auch Dienstgrade werden abgekürzt, im Schriftverkehr steht die Abkürzung vor dem Namen, etwa „OTL Müller“ oder „Hptm Schmidt“. Die Kürzel folgen meist den Bausteinen: O für Ober, St für Stabs, Hpt für Haupt. So wird aus Oberstabsfeldwebel OStFw. Ausnahmen sind OTL für Oberstleutnant und O für Oberst.</p>
+  <p>Die Bundeswehr kürzt fast alles ab. Wer die häufigsten Kürzel kennt, versteht Dienstpläne, Befehle und Gespräche deutlich besser. Die wichtigsten im Alltag:</p>
+  <ol class="ladder">${GLOSS[0].items.map(([k,v])=>`<li><strong>${esc(k)}</strong><span>${esc(v)}</span></li>`).join('')}</ol>
+  <p>Auch Dienstgrade werden abgekürzt, im Schriftverkehr steht die Abkürzung vor dem Namen, etwa „OTL Müller“ oder „Hptm Schmidt“. Die Kürzel folgen meist den Bausteinen: O für Ober, St für Stabs, Hpt für Haupt. So wird aus Oberstabsfeldwebel OStFw. Ausnahmen sind OTL für Oberstleutnant und O für Oberst. Weitere Beispiele: Uffz (Unteroffizier), Lt (Leutnant), Maj (Major), BrigGen (Brigadegeneral), GenMaj (Generalmajor), GenLt (Generalleutnant), in der Marine KptLt (Kapitänleutnant), KKpt (Korvettenkapitän), FKpt (Fregattenkapitän) und KzS (Kapitän zur See).</p>
   <div class="callout">KzH ist keine Krankmeldung im zivilen Sinn. Soldatinnen und Soldaten werden truppenärztlich versorgt, und der Truppenarzt entscheidet, ob jemand zu Hause gesund werden darf.</div>
   <h3>Buchstabieren und Zeitangaben</h3>
   <p>Am Funk und am Telefon wird mit dem NATO-Buchstabieralphabet buchstabiert, meist kurz NATO-Alphabet genannt: Alfa, Bravo, Charlie, Delta und so weiter bis Zulu. Alfa und Juliett werden bewusst so geschrieben, damit sie in allen Sprachen gleich ausgesprochen werden. Die vollständige Liste steht unter Nachschlagen.</p>
-  <p>Zeitpunkte stehen in Befehlen und Meldungen als Datum-Zeit-Gruppe (DTG): Tag, Uhrzeit, Zeitzone, Monat, Jahr. 031430ZOCT26 heißt 3. Oktober 2026, 14:30 Uhr. Der Buchstabe nennt die Zeitzone, ebenfalls nach dem Buchstabieralphabet: Z (Zulu) ist die koordinierte Weltzeit UTC, A (Alfa) die deutsche Winterzeit, B (Bravo) die Sommerzeit, J (Juliett) die Ortszeit.</p>`},
+  <p>Zeitpunkte stehen in Befehlen und Meldungen als Datum-Zeit-Gruppe (DTG): Tag, Uhrzeit, Zeitzone, Monat, Jahr. 031430ZOCT26 heißt 3. Oktober 2026, 14:30 Uhr. Der Buchstabe nennt die Zeitzone, ebenfalls nach dem Buchstabieralphabet: Z (Zulu) ist die koordinierte Weltzeit (UTC), A (Alfa) die Mitteleuropäische Zeit (MEZ), also die deutsche Winterzeit, B (Bravo) die Mitteleuropäische Sommerzeit (MESZ), J (Juliett) die Ortszeit.</p>`},
  {id:'geheimschutz',t:'Geheimschutz: VS und SÜ',d:'Geheimhaltungsgrade, Sicherheitsüberprüfung und VSA',b:()=>`
   <p>Informationen, die im öffentlichen Interesse geheim bleiben müssen, sind Verschlusssachen (VS). Das Sicherheitsüberprüfungsgesetz (SÜG) kennt vier Geheimhaltungsgrade. Je höher der Grad, desto gründlicher die Sicherheitsüberprüfung (SÜ), die Voraussetzung für den Zugang ist:</p>
   <ol class="ladder">
-   <li><strong>VS – Nur für den Dienstgebrauch</strong><span>Keine SÜ, aber Belehrung über den Umgang. NATO RESTRICTED.</span></li>
-   <li><strong>VS – Vertraulich</strong><span>Ü1, einfache SÜ. NATO CONFIDENTIAL.</span></li>
+   <li><strong>VS – Nur für den Dienstgebrauch (VS-NfD)</strong><span>Keine SÜ, aber Belehrung über den Umgang. NATO RESTRICTED.</span></li>
+   <li><strong>VS – Vertraulich (VS-V)</strong><span>Ü1, einfache SÜ. NATO CONFIDENTIAL.</span></li>
    <li><strong>GEHEIM</strong><span>Ü2, erweiterte SÜ. NATO SECRET.</span></li>
    <li><strong>STRENG GEHEIM</strong><span>Ü3, erweiterte SÜ mit Sicherheitsermittlungen. COSMIC TOP SECRET.</span></li>
   </ol>
-  <p>Wer sehr viele Unterlagen eines Grades bearbeitet, braucht die nächsthöhere Überprüfung: bei vielen VS-VERTRAULICH eine Ü2, bei vielen GEHEIM eine Ü3. Im Geschäftsbereich des BMVg wirkt der MAD an der Überprüfung mit, sonst meist das Bundesamt für Verfassungsschutz.</p>
-  <p>Wie mit VS praktisch umzugehen ist, also Kennzeichnung, Aufbewahrung, Weitergabe und Vernichtung, regelt die Verschlusssachenanweisung (VSA). Für Unternehmen gilt das Geheimschutzhandbuch (GHB) des Bundesministeriums für Wirtschaft und Energie, ab VS-VERTRAULICH braucht eine Firma einen Sicherheitsbescheid.</p>
+  <p>Wer sehr viele Unterlagen eines Grades bearbeitet, braucht die nächsthöhere Überprüfung: bei vielen VS-VERTRAULICH eine Ü2, bei vielen GEHEIM eine Ü3. Im Geschäftsbereich des Bundesministeriums der Verteidigung (BMVg) wirkt der Militärische Abschirmdienst (MAD) an der Überprüfung mit, sonst meist das Bundesamt für Verfassungsschutz.</p>
+  <p>Wie mit VS praktisch umzugehen ist, also Kennzeichnung, Aufbewahrung, Weitergabe und Vernichtung, regelt die Verschlusssachenanweisung (VSA). Für Unternehmen gilt das Geheimschutzhandbuch (GHB) des Bundesministeriums für Wirtschaft und Energie (BMWE), ab VS-VERTRAULICH braucht eine Firma einen Sicherheitsbescheid.</p>
   <div class="callout">Eine SÜ berechtigt nicht automatisch zum Lesen. Es gilt „Kenntnis nur, wenn nötig“: Zugang erhält nur, wer die VS für die eigene Aufgabe braucht.</div>`},
  {id:'beschaffung',t:'Wer braucht, wer beschafft',d:'Bedarfsträger, Bedarfsdecker und die wichtigsten Stellen',b:()=>`
   <p>Die Bundeswehr trennt zwei Rollen. Der Bedarfsträger formuliert, was gebraucht wird. Der Bedarfsdecker beschafft es. Das zentrale Verfahren heißt Customer Product Management (CPM) und betrachtet ein Produkt über den gesamten Lebenszyklus.</p>
   <ol class="ladder">
-   <li><strong>BAAINBw</strong><span>Zivile Bundesoberbehörde in Koblenz, Bedarfsdecker der Streitkräfte. Größere Vorhaben laufen über CPM, betriebsbedingte Bedarfe über den Einkauf der Bundeswehr.</span></li>
-   <li><strong>BWI</strong><span>IT-Systemhaus der Bundeswehr, hundertprozentige Bundesgesellschaft. Betreibt und modernisiert die IT der Bundeswehr.</span></li>
-   <li><strong>ZDigBw</strong><span>Dem Kommando CIR unterstellt, Bedarfsträger für das Teilportfolio Cyber/IT.</span></li>
-   <li><strong>CIHBw</strong><span>Cyber Innovation Hub, seit 2020 Abteilung der BWI. Testet neue Lösungen mit Nutzern aus der Truppe und übergibt Erfolgreiches an das ZDigBw zur Einführung.</span></li>
+   <li><strong>BAAINBw</strong><span>Bundesamt für Ausrüstung, Informationstechnik und Nutzung der Bundeswehr, zivile Bundesoberbehörde in Koblenz, Bedarfsdecker der Streitkräfte. Größere Vorhaben laufen über CPM, betriebsbedingte Bedarfe über den Einkauf der Bundeswehr.</span></li>
+   <li><strong>BWI</strong><span>BWI GmbH, das IT-Systemhaus der Bundeswehr, hundertprozentige Bundesgesellschaft. Betreibt und modernisiert die IT der Bundeswehr.</span></li>
+   <li><strong>ZDigBw</strong><span>Zentrum Digitalisierung der Bundeswehr und Fähigkeitsentwicklung Cyber- und Informationsraum, dem Kommando Cyber- und Informationsraum unterstellt, Bedarfsträger für das Teilportfolio Cyber/IT.</span></li>
+   <li><strong>CIHBw</strong><span>Cyber Innovation Hub der Bundeswehr, seit 2020 Abteilung der BWI. Testet neue Lösungen mit Nutzern aus der Truppe und übergibt Erfolgreiches an das ZDigBw zur Einführung.</span></li>
    <li><strong>InnoZBw</strong><span>Innovationszentrum der Bundeswehr in Erding, seit Dezember 2025 dem BAAINBw unmittelbar nachgeordnet. Koordiniert die Innovationslandschaft der Bundeswehr, erschließt neue Technologien mit eigenen Testkampagnen, etwa zu Drohnen, und bereitet schnell skalierbare Beschaffungen vor. Anlaufstelle für Startups, eng verbunden mit CIHBw, ZDigBw und der Cyberagentur.</span></li>
-   <li><strong>BMWE</strong><span>Das Bundesministerium für Wirtschaft und Energie ist nach § 25 SÜG für den Geheimschutz in Unternehmen zuständig, also für den Sicherheitsbescheid, den eine Firma für eingestufte Aufträge braucht.</span></li>
+   <li><strong>BMWE</strong><span>Das Bundesministerium für Wirtschaft und Energie ist nach § 25 Sicherheitsüberprüfungsgesetz (SÜG) für den Geheimschutz in Unternehmen zuständig, also für den Sicherheitsbescheid, den eine Firma für eingestufte Aufträge braucht.</span></li>
   </ol>
-  <p>Auf der anderen Seite steht die Sicherheits- und Verteidigungsindustrie (SVI). Große europäische Vorhaben sind etwa FCAS, das Luftkampfsystem der nächsten Generation, und MGCS, das deutsch-französische Landkampfsystem. Die Industrie organisiert sich in Verbänden wie BDSV und BDLI. Gesellschaften wie DWT, Förderkreis Deutsches Heer (FKH) oder Deutsches Maritimes Institut (DMI) bringen Streitkräfte, Verwaltung, Politik und Industrie ins Gespräch. In der NATO berät die NIAG aus Sicht der Industrie.</p>
+  <p>Auf der anderen Seite steht die Sicherheits- und Verteidigungsindustrie (SVI). Große europäische Vorhaben sind etwa das Future Combat Air System (FCAS), das Luftkampfsystem der nächsten Generation, und das Main Ground Combat System (MGCS), das deutsch-französische Landkampfsystem. Die Industrie organisiert sich in Verbänden wie dem Bundesverband der Deutschen Sicherheits- und Verteidigungsindustrie (BDSV) und dem Bundesverband der Deutschen Luft- und Raumfahrtindustrie (BDLI). Gesellschaften wie die Deutsche Gesellschaft für Wehrtechnik (DWT), Förderkreis Deutsches Heer (FKH) oder Deutsches Maritimes Institut (DMI) bringen Streitkräfte, Verwaltung, Politik und Industrie ins Gespräch. In der NATO berät die NATO Industrial Advisory Group (NIAG) aus Sicht der Industrie.</p>
   <h3>Woher das Geld kommt</h3>
-  <p>Der Verteidigungshaushalt ist der Einzelplan 14 im Bundeshaushalt, beschlossen vom Bundestag. Vorhaben ab 25 Millionen Euro legt das BMVg vorher dem Haushaltsausschuss vor, die sogenannten 25-Millionen-Vorlagen. 2022 kam das kreditfinanzierte Sondervermögen Bundeswehr über 100 Milliarden Euro hinzu. Seit einer Grundgesetzänderung im März 2025 sind Verteidigungsausgaben oberhalb von 1 % des Bruttoinlandsprodukts von der Schuldenbremse ausgenommen.</p>
+  <p>Der Verteidigungshaushalt ist der Einzelplan 14 im Bundeshaushalt, beschlossen vom Bundestag. Vorhaben ab 25 Millionen Euro legt das Bundesministerium der Verteidigung (BMVg) vorher dem Haushaltsausschuss vor, die sogenannten 25-Millionen-Vorlagen. 2022 kam das kreditfinanzierte Sondervermögen Bundeswehr über 100 Milliarden Euro hinzu. Seit einer Grundgesetzänderung im März 2025 sind Verteidigungsausgaben oberhalb von 1 % des Bruttoinlandsprodukts (BIP) von der Schuldenbremse ausgenommen.</p>
   <div class="callout">Lange galt in der NATO das Ziel, 2 % des BIP für Verteidigung auszugeben. Auf dem Gipfel in Den Haag 2025 vereinbarten die Verbündeten 5 % bis 2035: 3,5 % für die Kernverteidigung und 1,5 % für verteidigungsrelevante Infrastruktur und Resilienz.</div>`},
  {id:'digital',t:'Führung digital: von C2 bis MDO',d:'C4ISR, Multi-Domain, Core, Fog, Edge und offene Architekturen',b:()=>`
   <p>Viele Begriffe der militärischen Digitalisierung stammen aus NATO und US-Streitkräften und werden auch im Deutschen auf Englisch verwendet. Die C-Kürzel bauen aufeinander auf:</p>
@@ -1099,11 +1099,11 @@ const LESSONS=[
    <li><strong>C4I</strong><span>Dazu Communications, Computers und Intelligence.</span></li>
    <li><strong>C4ISR</strong><span>Dazu Surveillance und Reconnaissance: Führung und Aufklärung als Gesamtsystem.</span></li>
   </ol>
-  <p>Multi-Domain Operations (MDO) meint das koordinierte Vorgehen über alle Dimensionen: Land, Luft, See, Weltraum sowie Cyber- und Informationsraum. Dazu gehört das elektromagnetische Spektrum, in dem EMSO stattfinden, darunter die Elektronische Kampfführung (EloKa). Im Jargon heißen Waffensysteme oft Wirksysteme, und „wirken“ steht für den Waffeneinsatz.</p>
+  <p>Multi-Domain Operations (MDO) meint das koordinierte Vorgehen über alle Dimensionen: Land, Luft, See, Weltraum sowie Cyber- und Informationsraum. Dazu gehört das elektromagnetische Spektrum, in dem Electromagnetic Spectrum Operations (EMSO) stattfinden, darunter die Elektronische Kampfführung (EloKa). Im Jargon heißen Waffensysteme oft Wirksysteme, und „wirken“ steht für den Waffeneinsatz.</p>
   <h3>Core, Fog, Edge</h3>
   <p>Die IT der Bundeswehr wird in Ebenen beschrieben. Core sind die großen Rechenzentren, darunter die private Cloud der Bundeswehr (pCloudBw). Fog sind die IT-Systeme der obersten taktischen Ebene, etwa digitale Gefechtsstände. Edge ist die IT einzelner Waffensysteme, etwa an Bord einer Fregatte. Für die Landstreitkräfte steht das Vorhaben D-LBO, Digitalisierung landbasierter Operationen.</p>
   <h3>Offene Architekturen</h3>
-  <p>Damit Systeme verschiedener Hersteller zusammenpassen und sich modernisieren lassen, setzen Streitkräfte auf offene Standards. MOSA ist der übergreifende Ansatz des US-Verteidigungsministeriums, SOSA standardisiert Sensorik, FACE die Avionik-Software, NGVA (STANAG 4754) Landfahrzeuge. Software Defined Defence (SDD) entkoppelt Software von Hardware, sodass neue Fähigkeiten per Update kommen können. cATO ersetzt die einmalige Betriebszulassung durch eine laufende.</p>
+  <p>Damit Systeme verschiedener Hersteller zusammenpassen und sich modernisieren lassen, setzen Streitkräfte auf offene Standards. Der Modular Open Systems Approach (MOSA) ist der übergreifende Ansatz des US-Verteidigungsministeriums, die Sensor Open Systems Architecture (SOSA) standardisiert Sensorik, das Future Airborne Capability Environment (FACE) die Avionik-Software, die NATO Generic Vehicle Architecture (NGVA) Landfahrzeuge, festgelegt im NATO-Standardisierungsabkommen STANAG 4754 (Standardization Agreement). Software Defined Defence (SDD) entkoppelt Software von Hardware, sodass neue Fähigkeiten per Update kommen können. Continuous Authorization to Operate (cATO) ersetzt die einmalige Betriebszulassung durch eine laufende.</p>
   <div class="callout">Die Kürzel sind nicht immer einheitlich: C3 heißt in der NATO Consultation, Command and Control, anderswo Command, Control, Communications. Im Zweifel nachfragen, welche Lesart gemeint ist.</div>`}
 ];
 // Jede Karte gehört zu genau einer Lektion, Lernkarten und Quiz üben je Lektion. Die Zuordnung folgt dem Stapel (deck, Teil der Karten-ID),
@@ -1112,7 +1112,7 @@ const LESSON_OF_DECK={dg:'dienstgrade',mar:'dienstgrade',abz:'abzeichen',eti:'an
 const LESSON_OF_KIND={anz:'anzuege',wf:'farben',wfrev:'farben',bar:'farben',farbe:'farben','g-ind':'beschaffung',proj:'beschaffung',haush:'beschaffung'};
 const LESSON_OF_Q={
  'Abkürzung: BAAINBw':'beschaffung','Abkürzung: BWI':'beschaffung','Abkürzung: CIHBw':'beschaffung','Abkürzung: InnoZBw':'beschaffung','Abkürzung: ZDigBw':'beschaffung','Abkürzung: CPM':'beschaffung',
- 'Bedarfsdecker für Wehrmaterial und IT':'beschaffung','Bedarfsträger für das Teilportfolio Cyber/IT':'beschaffung','IT-Systemhaus der Bundeswehr in Bundesbesitz':'beschaffung',
+ 'Bedarfsdecker für Wehrmaterial und IT':'beschaffung','Bedarfsträger für das Teilportfolio Cyber/IT':'beschaffung','Betreibt und modernisiert als hundertprozentige Bundesgesellschaft die IT der Bundeswehr':'beschaffung',
  'Innovationseinheit in der BWI, die mit Startups arbeitet':'beschaffung','Koordiniert seit Dezember 2025 die Innovation der Bundeswehr, Sitz in Erding':'beschaffung','Zuständig für den Geheimschutz in Unternehmen (Bund)':'beschaffung',
  'Abkürzung: BOS':'aufbau','Abkürzung: BDBOS':'aufbau',
  'Abkürzung: PzDiv':'gliederung','Abkürzung: DSK':'gliederung','Abkürzung: KSK':'gliederung',
