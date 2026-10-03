@@ -4,7 +4,7 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
-## Unveröffentlicht
+## 0.8 (2026-10-03)
 
 - Lektion „Abzeichen lesen“: neuer Abschnitt zu Offizieranwärtern mit silberfarbener Kordel (Heer, Luftwaffe) und goldfarbenem Stern (Marine) und dem Zusatz OA
 - Lektion „Abzeichen lesen“: neuer Abschnitt zu Unteroffizier- und Feldwebelanwärtern (UA, UA mbL, FA, in der Marine MA und BA) mit Zeichnungen von Querbalken, Tresse und altgoldfarbener Kordel

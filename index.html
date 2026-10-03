@@ -219,10 +219,15 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 
 <script>
 /* ---------- Version: setzt release.sh passend zum Git-Tag, nicht von Hand ändern ---------- */
-const VERSION='0.7.1', UPDATED='2026-10-03';
+const VERSION='0.8', UPDATED='2026-10-03';
 document.getElementById('ver').textContent=`v${VERSION} · ${UPDATED}`;
 // Was ist neu: die letzten Versionen aus CHANGELOG.md, setzt release.sh zusammen mit der Version
 const CHANGES=[
+{v:"0.8",d:"2026-10-03",items:[
+"Lektion „Abzeichen lesen“: neuer Abschnitt zu Offizieranwärtern mit silberfarbener Kordel (Heer, Luftwaffe) und goldfarbenem Stern (Marine) und dem Zusatz OA",
+"Lektion „Abzeichen lesen“: neuer Abschnitt zu Unteroffizier- und Feldwebelanwärtern (UA, UA mbL, FA, in der Marine MA und BA) mit Zeichnungen von Querbalken, Tresse und altgoldfarbener Kordel",
+"Abzeichen: Die Kordel der Offizieranwärter liegt jetzt wie im Original quer über dem Bogen",
+]},
 {v:"0.7.1",d:"2026-10-03",items:[
 "Lektion „Aufbau der Bundeswehr“: Heer, Luftwaffe und Marine mit ihren Symbolen (gekreuzte Schwerter, Schwinge, Anker), dazu die Erklärung, warum der CIR kein eigenes hat, und drei neue Lernkarten",
 ]},
@@ -233,9 +238,6 @@ const CHANGES=[
 "Neue Lektion „Feldanzug und Dienstanzug“: wann welcher Anzug getragen wird und wie sich Heer, Luftwaffe, Marine und CIR unterscheiden, mit schematischen Zeichnungen der Anzüge und acht Quizfragen",
 "Hilfe: Der Abschnitt „Wofür die App da ist“ heißt jetzt „Inhalte der App“ und nennt auch die Uniformen",
 "Hilfe: „Kein Angebot der Bundeswehr“ als Hinweiskasten, Grundlagen, Lernkarten, Quiz und Nachschlagen als Unterabschnitte von „Inhalte der App“",
-]},
-{v:"0.6.1",d:"2026-10-03",items:[
-"Lektionen: Steht am Ende nur „Weiter“ oder nur „Zurück“, ist der Button so breit wie neben dem anderen statt über die ganze Breite",
 ]},
 ]; // Ende CHANGES
 /* ---------- Daten ---------- */
