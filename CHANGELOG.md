@@ -4,6 +4,10 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
+## Unveröffentlicht
+
+- Lernkarten und Quiz: Die Themen sind jetzt genau die Lektionen, in derselben Reihenfolge. „Mit Lernkarten üben“ und „Im Quiz prüfen“ am Ende einer Lektion fragen nur noch, was in dieser Lektion vorkommt, statt eines größeren Sammelthemas (etwa bei „Feldanzug und Dienstanzug“ bisher alle 241 Abzeichen-Karten). Der Lernstand bleibt erhalten
+
 ## 0.9 (2026-10-03)
 
 - Lernkarten: Der Lernstand bleibt jetzt erhalten, wenn neue Karten dazukommen. Bisher gespeicherter Lernstand der Lernkarten wird dafür einmalig zurückgesetzt, gelesene Lektionen bleiben markiert
