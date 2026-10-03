@@ -4,6 +4,10 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum. Die Hilfe-Seite der App zeigt die
 letzten Versionen an.
 
+## Unveröffentlicht
+
+- Lektion „Dienstgrade verstehen“ erklärt, woher das Wort „Portepee“ kommt
+
 ## 0.3.1 (2026-10-03)
 
 - Quiz: Falsche Antworten kommen nur noch aus demselben Thema, keine Bündnisfall-Antwort mehr bei NATO-Rangcodes
