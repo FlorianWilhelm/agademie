@@ -1024,6 +1024,9 @@ const LESSONS=[
   <p>Angesprochen wird mit Herr oder Frau und dem Dienstgrad, gegebenenfalls mit Nachnamen: „Herr Oberstleutnant“, „Frau Hauptmann Müller“. Dienstgrade bleiben grammatisch männlich, eine „Hauptfrau“ gibt es nicht.</p>
   <p>Alle Generale werden mit „Herr General“ bzw. „Frau General“ angesprochen, auch Brigadegeneral, Generalmajor und Generalleutnant. Der Plural lautet in der Bundeswehr Generale. Ranghöchster Soldat ist der Generalinspekteur der Bundeswehr.</p>
   <p>Sanitätsoffiziere werden mit ihrem eigenen Dienstgrad angesprochen, etwa „Herr Oberstabsarzt“ oder „Frau Generalarzt“.</p>
+  <h3>Gelöbnis, Eid und Zeremonien</h3>
+  <p>Wehrdienstleistende legen ein feierliches Gelöbnis ab, Soldaten auf Zeit und Berufssoldaten schwören den Diensteid (§ 9 Soldatengesetz). Die höchste militärische Zeremonie ist der Große Zapfenstreich, etwa zur Verabschiedung von Bundespräsidenten, Bundeskanzlern oder Verteidigungsministern.</p>
+  <p>An der Uniform zeigen Tätigkeitsabzeichen eine Qualifikation oder Verwendung, etwa als Fallschirmspringer. Die Einsatzmedaille erhält, wer an einem Auslandseinsatz teilgenommen hat. Das Ehrenzeichen der Bundeswehr gibt es als Ehrenmedaille und als Ehrenkreuz in Bronze, Silber und Gold. Die höchste Stufe ist seit 2008 das Ehrenkreuz der Bundeswehr für Tapferkeit.</p>
   <h3>Ungeschriebene Regeln</h3>
   <p>Neben Gesetzen und Vorschriften prägen Merksätze den Alltag, die jeder Soldat schon in der Grundausbildung hört. Meist stehen sie in keiner Vorschrift. Sie fassen Erfahrungen aus Ausbildung und Einsatz in wenige Worte und werden von Ausbildern an jeden neuen Jahrgang weitergegeben. Wer sie kennt, versteht, warum Soldaten oft früher da sind, auch Kleinigkeiten melden oder gelassen bleiben, wenn sich der Plan ändert.</p>
   <ol class="ladder">
@@ -1041,10 +1044,7 @@ const LESSONS=[
    <li><strong>Nicht anlehnen</strong><span>Wer an Wand, Tisch oder Fahrzeug lehnt, wirkt unbeteiligt. Man steht frei und aufrecht.</span></li>
    <li><strong>Händedruck</strong><span>Fest und mit Blickkontakt. Nach allgemeiner Etikette reicht die ranghöhere Person zuerst die Hand.</span></li>
    <li><strong>Grüßen</strong><span>Hier gibt es eine Vorschrift: Soldaten in Uniform grüßen höhere Dienstgradgruppen bei der ersten Begegnung am Tag, und zwar innerhalb militärischer Anlagen. Die eigenen Vorgesetzten sowie Generale und Admirale werden auch draußen gegrüßt. Zivilisten grüßen nicht militärisch, ein „Guten Morgen“ reicht.</span></li>
-  </ol>
-  <h3>Gelöbnis, Eid und Zeremonien</h3>
-  <p>Wehrdienstleistende legen ein feierliches Gelöbnis ab, Soldaten auf Zeit und Berufssoldaten schwören den Diensteid (§ 9 Soldatengesetz). Die höchste militärische Zeremonie ist der Große Zapfenstreich, etwa zur Verabschiedung von Bundespräsidenten, Bundeskanzlern oder Verteidigungsministern.</p>
-  <p>An der Uniform zeigen Tätigkeitsabzeichen eine Qualifikation oder Verwendung, etwa als Fallschirmspringer. Die Einsatzmedaille erhält, wer an einem Auslandseinsatz teilgenommen hat. Das Ehrenzeichen der Bundeswehr gibt es als Ehrenmedaille und als Ehrenkreuz in Bronze, Silber und Gold. Die höchste Stufe ist seit 2008 das Ehrenkreuz der Bundeswehr für Tapferkeit.</p>`},
+  </ol>`},
  {id:'gliederung',t:'Vom Trupp zur Division',d:'Ebenen, Größen und wer sie führt',b:()=>`
   <p>Die Bundeswehr ist in Ebenen gegliedert, die jeweils mehrere Elemente der Ebene darunter bündeln. Ab der Kompanie wächst die Größe nicht mehr gleichmäßig, weil Fahrzeuge, Waffensysteme und Unterstützungspersonal den Umfang bestimmen.</p>
   <ol class="ladder">${GL.map(r=>`<li><strong>${esc(r.e)}</strong><span>${esc(r.n)}. ${esc(r.f)}.</span></li>`).join('')}</ol>
