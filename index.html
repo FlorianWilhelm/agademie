@@ -217,10 +217,18 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 
 <script>
 /* ---------- Version: setzt release.sh passend zum Git-Tag, nicht von Hand ändern ---------- */
-const VERSION='0.6.1', UPDATED='2026-10-03';
+const VERSION='0.7', UPDATED='2026-10-03';
 document.getElementById('ver').textContent=`v${VERSION} · ${UPDATED}`;
 // Was ist neu: die letzten Versionen aus CHANGELOG.md, setzt release.sh zusammen mit der Version
 const CHANGES=[
+{v:"0.7",d:"2026-10-03",items:[
+"Hilfe: Ganz oben steht jetzt kurz, was AGAdemy ist und für wen die App gedacht ist",
+"Lektion „Abzeichen lesen“: neuer Abschnitt zur Luftwaffe mit Schwinge und den Beispielen Flieger und Major",
+"Nachschlagen → Abzeichen: Heer und Luftwaffe in einem Abschnitt mit Umschalter, der die Schwinge ergänzt; auch die Sanitätsoffiziere lassen sich mit Schwinge anzeigen",
+"Neue Lektion „Feldanzug und Dienstanzug“: wann welcher Anzug getragen wird und wie sich Heer, Luftwaffe, Marine und CIR unterscheiden, mit schematischen Zeichnungen der Anzüge und acht Quizfragen",
+"Hilfe: Der Abschnitt „Wofür die App da ist“ heißt jetzt „Inhalte der App“ und nennt auch die Uniformen",
+"Hilfe: „Kein Angebot der Bundeswehr“ als Hinweiskasten, Grundlagen, Lernkarten, Quiz und Nachschlagen als Unterabschnitte von „Inhalte der App“",
+]},
 {v:"0.6.1",d:"2026-10-03",items:[
 "Lektionen: Steht am Ende nur „Weiter“ oder nur „Zurück“, ist der Button so breit wie neben dem anderen statt über die ganze Breite",
 ]},
@@ -229,10 +237,6 @@ const CHANGES=[
 "Hilfe: Quellenangabe zu den Dienstgradabzeichen korrigiert",
 "Lektionen in neuer Reihenfolge: „Anrede und Umgang“ folgt direkt auf die Dienstgrade und Abzeichen, „Geheimschutz“ kommt vor „Wer braucht, wer beschafft“",
 "Lektion „Bundeswehr im Staat“ erklärt jetzt die Karrierecenter (vorher in „Aufbau der Bundeswehr“), „Anrede und Umgang“ zeigt die Anrede von Sanitätsoffizieren",
-]},
-{v:"0.5",d:"2026-10-03",items:[
-"Hilfe: „Was ist neu“ passt jetzt immer zur angezeigten Version, auch offline",
-"Neuer Knopf oben neben der Hilfe: App installieren. Wo der Browser es kann, startet er die Installation direkt, sonst führt er zur Anleitung",
 ]},
 ]; // Ende CHANGES
 /* ---------- Daten ---------- */
