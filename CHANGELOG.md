@@ -8,6 +8,7 @@ letzten Versionen an.
 
 - Schriften werden selbst ausgeliefert, keine Verbindung mehr zu Google Fonts
 - Seite darf von Suchmaschinen indiziert werden
+- Version und Datum stehen klein neben dem Titel
 
 ## 0.2 (2026-10-03)
 
