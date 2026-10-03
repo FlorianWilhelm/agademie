@@ -219,10 +219,13 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 
 <script>
 /* ---------- Version: setzt release.sh passend zum Git-Tag, nicht von Hand ändern ---------- */
-const VERSION='0.7', UPDATED='2026-10-03';
+const VERSION='0.7.1', UPDATED='2026-10-03';
 document.getElementById('ver').textContent=`v${VERSION} · ${UPDATED}`;
 // Was ist neu: die letzten Versionen aus CHANGELOG.md, setzt release.sh zusammen mit der Version
 const CHANGES=[
+{v:"0.7.1",d:"2026-10-03",items:[
+"Lektion „Aufbau der Bundeswehr“: Heer, Luftwaffe und Marine mit ihren Symbolen (gekreuzte Schwerter, Schwinge, Anker), dazu die Erklärung, warum der CIR kein eigenes hat, und drei neue Lernkarten",
+]},
 {v:"0.7",d:"2026-10-03",items:[
 "Hilfe: Ganz oben steht jetzt kurz, was AGAdemy ist und für wen die App gedacht ist",
 "Lektion „Abzeichen lesen“: neuer Abschnitt zur Luftwaffe mit Schwinge und den Beispielen Flieger und Major",
@@ -233,12 +236,6 @@ const CHANGES=[
 ]},
 {v:"0.6.1",d:"2026-10-03",items:[
 "Lektionen: Steht am Ende nur „Weiter“ oder nur „Zurück“, ist der Button so breit wie neben dem anderen statt über die ganze Breite",
-]},
-{v:"0.6",d:"2026-10-03",items:[
-"Hilfe: „Zurück“ oben führt zur vorherigen Ansicht, ebenso ein erneutes Antippen des Hilfe-Knopfs",
-"Hilfe: Quellenangabe zu den Dienstgradabzeichen korrigiert",
-"Lektionen in neuer Reihenfolge: „Anrede und Umgang“ folgt direkt auf die Dienstgrade und Abzeichen, „Geheimschutz“ kommt vor „Wer braucht, wer beschafft“",
-"Lektion „Bundeswehr im Staat“ erklärt jetzt die Karrierecenter (vorher in „Aufbau der Bundeswehr“), „Anrede und Umgang“ zeigt die Anrede von Sanitätsoffizieren",
 ]},
 ]; // Ende CHANGES
 /* ---------- Daten ---------- */
