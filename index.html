@@ -171,6 +171,8 @@ h1,h2,h3{text-wrap:balance}
 .ladder li:last-child{border-bottom:0}
 .ladder strong{flex:0 0 38%;font:600 17px/1.25 var(--head)}
 .ladder span{color:var(--muted)}
+.ladder strong:has(.tsym){display:flex;align-items:center;gap:10px}
+.tsym{flex:0 0 auto}
 .figs{display:flex;flex-wrap:wrap;gap:12px 10px;margin:10px 0 6px}
 .figs figure{margin:0;width:62px;text-align:center;font-size:12px;line-height:1.2;color:var(--muted);hyphens:manual;-webkit-hyphens:manual}
 .figs svg{display:block;margin:0 auto 4px}
@@ -395,6 +397,9 @@ BEH.forEach(([k,v,n])=>add('beh','abk','Abkürzung: '+k,v,n));
  ['Plant und führt alle Einsätze und Operationen im In- und Ausland','OpFüKdoBw']
 ].forEach(([q,a,n,x])=>add('beh','rolle',q,a,n,x));
 add('beh','rolle','Wie viele Teilstreitkräfte hat die Bundeswehr?','Vier','Heer, Luftwaffe, Marine und Cyber- und Informationsraum.',['Drei','Fünf','Sechs']);
+add('beh','rolle','Welches Symbol hat das Heer, etwa an der Schirmmütze?','Gekreuzte Schwerter','Die Luftwaffe hat die Schwinge, die Marine den Anker.',['Schwinge','Anker','Eichenlaub']);
+add('beh','rolle','Welches Symbol hat die Marine, etwa an der Schirmmütze?','Anker','Das Heer hat gekreuzte Schwerter, die Luftwaffe die Schwinge.',['Gekreuzte Schwerter','Schwinge','Stern']);
+add('beh','rolle','Warum hat der CIR kein eigenes Symbol wie Heer, Luftwaffe und Marine?','Er hat keine eigene Uniform','Seine Angehörigen tragen die Uniform von Heer, Luftwaffe oder Marine, dazu das marineblaue Barett mit dem Abzeichen CIR.',['Er ist keine Teilstreitkraft','Er ist geheim','Er nutzt das Eiserne Kreuz']);
 
 [
  ['Anrede einer Soldatin im Dienstgrad Hauptmann','Frau Hauptmann','Dienstgrade bleiben grammatisch maskulin, „Frau“ wird vorangestellt.',['Frau Hauptfrau','Frau Kameradin','Hauptmännin']],
@@ -832,16 +837,37 @@ function unitSym(m,W=60){
 /* ---------- Grundlagen (Lektionen) ---------- */
 const figs=(items,W=46)=>`<div class="figs">${items.map(([k,c])=>`<figure>${insignia(k,W)}<figcaption>${esc(c)}</figcaption></figure>`).join('')}</div>`;
 const syms=items=>`<div class="figs">${items.map(([m,c])=>`<figure style="color:var(--frame)">${unitSym(m,52)}<figcaption>${esc(c)}</figcaption></figure>`).join('')}</div>`;
+function tskSym(t){ // Symbole der Teilstreitkräfte, wie an der Schirmmütze: eigene schematische Zeichnungen
+  let s='';
+  if(t==='heer'){ // gekreuzte Schwerter, Spitzen oben
+    const sw=`<path d="M20 3 L21.7 6.5 V27.6 H18.3 V6.5 Z"/><rect x="14.6" y="27.6" width="10.8" height="2.6" rx="1.1"/><rect x="19" y="30" width="2" height="4.4"/><circle cx="20" cy="36" r="2"/>`;
+    s=`<g transform="rotate(38 20 20)">${sw}</g><g transform="rotate(-38 20 20)">${sw}</g>`;
+  } else if(t==='lw'){ // Schwinge: Federband mit spitzen Enden, unten gezackt
+    const f=v=>v.toFixed(2);
+    for(const side of [-1,1]){
+      const X=x=>f(20+side*x);let low='';
+      for(let i=1;i<=6;i++){const a=i/6,b=(i-.5)/6;low+=` L${X(18-b*15.5)} ${f(19+b*4.5+1.2)} L${X(18-a*15.5)} ${f(19+a*4.5)}`}
+      s+=`<path d="M${X(0)} 18.2 L${X(2)} 16.6 L${X(17.4)} 15.6 Q${X(19.6)} 16.2 ${X(18)} 19${low} L${X(0)} 25.6 Z"/>`;
+      s+=`<path d="M${X(3)} 18.3 L${X(16)} 17.6 M${X(3.5)} 20.6 L${X(12.5)} 20.1" fill="none" stroke="var(--surface)" stroke-width=".7" stroke-linecap="round"/>`;
+    }
+  } else if(t==='mar'){ // unklarer Anker: Ring, Stock, Schaft, Arme mit Flunken, Tau
+    s=`<circle cx="20" cy="5.4" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="12.5" y="10" width="15" height="2.6" rx="1.2"/><rect x="18.8" y="8" width="2.4" height="26"/>
+     <path d="M8.6 25.2 Q20 38.5 31.4 25.2" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M5.6 22 L11.6 24.2 L8 28.2 Z M34.4 22 L28.4 24.2 L32 28.2 Z"/>
+     <path d="M22.4 6.8 C28.5 8.5 28 13.5 20 15.5 C12 17.5 12 22.5 20 24.5 C25.5 25.8 26 28.5 22.8 30.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>`;
+  }
+  return `<svg class="tsym" viewBox="0 0 40 40" width="34" height="34" fill="currentColor" aria-hidden="true">${s}</svg>`;
+}
 const LESSONS=[
  {id:'aufbau',t:'Aufbau der Bundeswehr',d:'Streitkräfte, Teilstreitkräfte und die zivile Verwaltung',deck:'beh',b:()=>`
   <p>Kern der Bundeswehr sind die Streitkräfte mit vier Teilstreitkräften:</p>
   <ol class="ladder">
-   <li><strong>Heer</strong><span>Kampf an Land</span></li>
-   <li><strong>Luftwaffe</strong><span>Luftraum und Luftverteidigung</span></li>
-   <li><strong>Marine</strong><span>Einsatz auf und unter See</span></li>
-   <li><strong>Cyber- und Informationsraum (CIR)</strong><span>Die jüngste: IT, Cyberabwehr und elektronischer Kampf</span></li>
+   <li><strong>${tskSym('heer')}Heer</strong><span>Kampf an Land</span></li>
+   <li><strong>${tskSym('lw')}Luftwaffe</strong><span>Luftraum und Luftverteidigung</span></li>
+   <li><strong>${tskSym('mar')}Marine</strong><span>Einsatz auf und unter See</span></li>
+   <li><strong>${tskSym()}Cyber- und Informationsraum (CIR)</strong><span>Die jüngste: IT, Cyberabwehr und elektronischer Kampf</span></li>
   </ol>
-  <p>Jede Teilstreitkraft hat eigene Bezeichnungen für ihre Ebenen und eigene Uniformen. Dazu kommen der Unterstützungsbereich unter dem Unterstützungskommando und das Operative Führungskommando, das seit Oktober 2024 alle Einsätze im In- und Ausland plant und führt.</p>
+  <p>Heer, Luftwaffe und Marine erkennt man an ihren Symbolen, etwa an der Schirmmütze: gekreuzte Schwerter, Schwinge und Anker. Der CIR hat kein eigenes Symbol, weil er keine eigene Uniform hat. Seine Angehörigen tragen die von Heer, Luftwaffe oder Marine, dazu das marineblaue Barett mit dem Abzeichen CIR.</p>
+  <p>Jede Teilstreitkraft hat eigene Bezeichnungen für ihre Ebenen. Dazu kommen der Unterstützungsbereich unter dem Unterstützungskommando und das Operative Führungskommando, das seit Oktober 2024 alle Einsätze im In- und Ausland plant und führt.</p>
   <p>Neben den Streitkräften steht die zivile Bundeswehrverwaltung. Dazu gehören die großen Bundesämter, etwa für Ausrüstung (BAAINBw), Personal (BAPersBw) oder Infrastruktur (BAIUDBw). Das BAAINBw ist eine zivile Bundesoberbehörde mit rund 10.000 zivilen und 1.800 militärischen Beschäftigten.</p>
   <div class="callout">In der zivilen Bundeswehrverwaltung arbeiten überwiegend Beamtinnen, Beamte und Tarifbeschäftigte. Für sie gelten Amtsbezeichnungen statt Dienstgrade.</div>
   <p>Im Inland arbeitet die Bundeswehr in der Amts- und Katastrophenhilfe mit den Behörden und Organisationen mit Sicherheitsaufgaben (BOS) zusammen, etwa Polizei, Feuerwehr und THW.</p>`},

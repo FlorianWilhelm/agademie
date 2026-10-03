@@ -4,6 +4,10 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
+## Unveröffentlicht
+
+- Lektion „Aufbau der Bundeswehr“: Heer, Luftwaffe und Marine mit ihren Symbolen (gekreuzte Schwerter, Schwinge, Anker), dazu die Erklärung, warum der CIR kein eigenes hat, und drei neue Lernkarten
+
 ## 0.7 (2026-10-03)
 
 - Hilfe: Ganz oben steht jetzt kurz, was AGAdemy ist und für wen die App gedacht ist
