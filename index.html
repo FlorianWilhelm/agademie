@@ -99,6 +99,7 @@ dialog::backdrop{background:rgba(8,16,30,.55)}
 .q{font:600 27px/1.15 var(--head);margin:0}
 .ans{margin-top:20px;padding-top:18px;border-top:1.5px dashed var(--line)}
 .ans .a{font:700 25px/1.15 var(--head);color:var(--accent-ink);margin:0}
+.ans .full{font:600 18px/1.25 var(--head);color:var(--accent-ink);margin:4px 0 0}
 .note{color:var(--muted);font-size:15px;margin:8px 0 0}
 .ans svg{display:block;margin-top:8px;color:var(--frame)}
 .actions{display:flex;gap:10px;margin-top:16px}
@@ -383,13 +384,13 @@ const BEH=[
 ];
 BEH.forEach(([k,v,n])=>add('beh','abk','Abkürzung: '+k,v,n));
 [
- ['Bedarfsdecker für Wehrmaterial und IT','BAAINBw (Bundesamt für Ausrüstung, Informationstechnik und Nutzung der Bundeswehr)'],
- ['Bedarfsträger für das Teilportfolio Cyber/IT','ZDigBw (Zentrum Digitalisierung der Bundeswehr und Fähigkeitsentwicklung Cyber- und Informationsraum)'],
- ['Betreibt und modernisiert als hundertprozentige Bundesgesellschaft die IT der Bundeswehr','BWI (BWI GmbH, IT-Systemhaus der Bundeswehr)'],
- ['Innovationseinheit in der BWI, die mit Startups arbeitet','CIHBw (Cyber Innovation Hub der Bundeswehr)'],
- ['Koordiniert seit Dezember 2025 die Innovation der Bundeswehr, Sitz in Erding','InnoZBw (Innovationszentrum der Bundeswehr)','Dem BAAINBw unmittelbar nachgeordnet, eröffnet im Februar 2026.'],
- ['Zuständig für den Geheimschutz in Unternehmen (Bund)','BMWE (Bundesministerium für Wirtschaft und Energie)','Nach § 25 SÜG. Bei Aufträgen eines Bundeslandes ist das jeweilige Landeswirtschaftsministerium zuständig.',['BMVg (Bundesministerium der Verteidigung)','MAD (Militärischer Abschirmdienst)','BfV (Bundesamt für Verfassungsschutz)']],
- ['Plant und führt alle Einsätze und Operationen im In- und Ausland','OpFüKdoBw (Operatives Führungskommando der Bundeswehr)']
+ ['Bedarfsdecker für Wehrmaterial und IT','BAAINBw'],
+ ['Bedarfsträger für das Teilportfolio Cyber/IT','ZDigBw'],
+ ['IT-Systemhaus der Bundeswehr in Bundesbesitz','BWI'],
+ ['Innovationseinheit in der BWI, die mit Startups arbeitet','CIHBw'],
+ ['Koordiniert seit Dezember 2025 die Innovation der Bundeswehr, Sitz in Erding','InnoZBw','Dem BAAINBw unmittelbar nachgeordnet, eröffnet im Februar 2026.'],
+ ['Zuständig für den Geheimschutz in Unternehmen (Bund)','Bundesministerium für Wirtschaft und Energie','Nach § 25 SÜG. Bei Aufträgen eines Bundeslandes ist das jeweilige Landeswirtschaftsministerium zuständig.',['Bundesministerium der Verteidigung','Militärischer Abschirmdienst','Bundesamt für Verfassungsschutz']],
+ ['Plant und führt alle Einsätze und Operationen im In- und Ausland','OpFüKdoBw']
 ].forEach(([q,a,n,x])=>add('beh','rolle',q,a,n,x));
 add('beh','rolle','Wie viele Teilstreitkräfte hat die Bundeswehr?','Vier','Heer, Luftwaffe, Marine und Cyber- und Informationsraum.',['Drei','Fünf','Sechs']);
 add('beh','rolle','Welches Symbol hat das Heer, etwa an der Schirmmütze?','Gekreuzte Schwerter','Die Luftwaffe hat die Schwinge, die Marine den Anker.',['Schwinge','Anker','Eichenlaub']);
@@ -593,7 +594,7 @@ const GLOSS=[
 GLOSS.forEach(g=>g.items.forEach(([k,v,n])=>add(g.deck,'g-'+g.id,(g.id==='dgk'?'Dienstgrad-Abkürzung: ':['Core','Fog','Edge'].includes(k)?'IT-Ebene: ':'Abkürzung: ')+k,v,n)));
 [
  ['abk','alltag2','Was bedeutet es, wenn jemand „KzH“ hat?','Krank zu Hause, vom Truppenarzt angeordnet',null,['Kurz zum Heimaturlaub','Kein zusätzlicher Heimweg','Kommandiert zur Hauptstadt']],
- ['abk','alltag2','Wer unterstützt den Unteroffizier vom Dienst (UvD)?','GvD (Gefreiter vom Dienst)',null,['OvWa (Offizier vom Wachdienst)','KpFw (Kompaniefeldwebel)','StOÄ (Standortältester)']],
+ ['abk','alltag2','Wer unterstützt den UvD?','GvD',null,['OvWa','KpFw','StOÄ']],
  ['abk','alltag2','Umgangssprachlicher Name für den Kompaniefeldwebel','Spieß',null,['Chef','Hauptmann','Kamerad']],
  ['abk','alltag2','So steht ein Oberstleutnant namens Müller im Schriftverkehr','OTL Müller','Dienstgrad-Abkürzung vor dem Namen.',['OL Müller','ObstLt Müller','O Müller']],
  ['vs','vsgrad','Niedrigster deutscher Geheimhaltungsgrad','VS – Nur für den Dienstgebrauch',null,['VS – Vertraulich','GEHEIM','STRENG GEHEIM']],
@@ -608,7 +609,7 @@ GLOSS.forEach(g=>g.items.forEach(([k,v,n])=>add(g.deck,'g-'+g.id,(g.id==='dgk'?'
  ['vs','vsnato','NATO-Entsprechung von VS-VERTRAULICH','NATO CONFIDENTIAL'],
  ['vs','vsnato','NATO-Entsprechung von GEHEIM','NATO SECRET'],
  ['vs','vsnato','NATO-Entsprechung von STRENG GEHEIM','COSMIC TOP SECRET'],
- ['vs','vsprax','Wer wirkt bei Sicherheitsüberprüfungen im Geschäftsbereich des Bundesministeriums der Verteidigung (BMVg) mit?','MAD (Militärischer Abschirmdienst)','Sonst ist es in der Regel das Bundesamt für Verfassungsschutz.',['BAPersBw (Bundesamt für das Personalmanagement der Bundeswehr)','BWI (BWI GmbH, IT-Systemhaus der Bundeswehr)','KdoCIR (Kommando Cyber- und Informationsraum)']],
+ ['vs','vsprax','Wer wirkt bei Sicherheitsüberprüfungen im Geschäftsbereich des BMVg mit?','MAD','Sonst ist es in der Regel das Bundesamt für Verfassungsschutz.',['BAPersBw','BWI','KdoCIR']],
  ['vs','vsprax','Grundsatz: Von einer VS darf nur Kenntnis erhalten, wer …','sie für seine Aufgabe kennen muss','„Kenntnis nur, wenn nötig“ (Need-to-know). Eine SÜ allein berechtigt noch nicht.',['eine Sicherheitsüberprüfung hat','Offizier ist','im selben Gebäude arbeitet']],
  ['vs','vsprax','Was braucht ein Unternehmen für Aufträge mit eingestuften Inhalten ab VS-VERTRAULICH?','Sicherheitsbescheid','Erteilt vom Bundesministerium für Wirtschaft und Energie, Grundlage ist das Geheimschutzhandbuch.',['Gewerbeschein','ISO-27001-Zertifikat','Unbedenklichkeitsbescheinigung des MAD']],
  ['dig','begr','Was ist mit „Wirksystem“ gemeint?','Waffensystem','Im Fachjargon „wirken“ oder „einwirken“ für den Einsatz von Waffen, z. B. schießen.',['Führungssystem','Sensorsystem','Logistiksystem']],
@@ -618,8 +619,8 @@ GLOSS.forEach(g=>g.items.forEach(([k,v,n])=>add(g.deck,'g-'+g.id,(g.id==='dgk'?'
  ['dig','begr','Welche IT-Ebene bilden die großen Rechenzentren?','Core',null,['Fog','Edge','D-LBO']],
  ['dig','begr','Welche Dimensionen verbindet MDO?','Land, Luft, See, Weltraum sowie Cyber- und Informationsraum',null,['Nur Land und Luft','Heer, Luftwaffe und Marine','Aufklärung und Wirkung']],
  ['dig','begr','Was kommt bei C4ISR gegenüber C4I hinzu?','Surveillance und Reconnaissance','Überwachung und Aufklärung. Intelligence steckt schon in C4I.',['Cyber und Space','Consultation','Computers']],
- ['beh','proj','Deutsch-französisches Landkampfsystem der nächsten Generation','MGCS (Main Ground Combat System)',null,['FCAS (Future Combat Air System)','NGVA (NATO Generic Vehicle Architecture)','D-LBO (Digitalisierung landbasierter Operationen)']],
- ['beh','proj','Europäisches Luftkampfsystem der nächsten Generation','FCAS (Future Combat Air System)',null,['MGCS (Main Ground Combat System)','FACE (Future Airborne Capability Environment)','SOSA (Sensor Open Systems Architecture)']]
+ ['beh','proj','Deutsch-französisches Landkampfsystem der nächsten Generation','MGCS',null,['FCAS','NGVA','D-LBO']],
+ ['beh','proj','Europäisches Luftkampfsystem der nächsten Generation','FCAS',null,['MGCS','FACE','SOSA']]
 ].forEach(([d,k,q,a,n,x])=>add(d,k,q,a,n,x));
 
 /* ---------- Waffen- und Barettfarben (BMVg, Bekleidung und Uniformen der Bundeswehr, Stand April 2026) ---------- */
@@ -780,14 +781,14 @@ BEH.push(...BEH2);GLOSS.push(...GLOSS2);
  ['nato','nato','Was regelt Artikel 4 des Nordatlantikvertrags?','Konsultationen bei Bedrohung',null,['Beistand im Angriffsfall','Beitritt neuer Mitglieder','Austritt aus der NATO']],
  ['nato','nato','Wie oft wurde der NATO-Bündnisfall bisher ausgerufen?','Einmal, nach dem 11. September 2001',null,['Noch nie','Zweimal','Fünfmal']],
  ['nato','nato','Seit wann ist Deutschland Mitglied der NATO?','1955','Die NATO wurde 1949 gegründet.',['1949','1966','1990']],
- ['nato','nato','Wo steht das militärische Hauptquartier SHAPE (Supreme Headquarters Allied Powers Europe)?','Mons (Belgien)','Der politische Sitz der NATO ist Brüssel.',['Brüssel','Norfolk (USA)','Brunssum (Niederlande)']],
- ['nato','nato','Wo steht das NATO-Kommando JSEC (Joint Support and Enabling Command)?','Ulm',null,['Brunssum','Mons','Neapel']],
+ ['nato','nato','Wo steht das militärische Hauptquartier SHAPE?','Mons (Belgien)','Der politische Sitz der NATO ist Brüssel.',['Brüssel','Norfolk (USA)','Brunssum (Niederlande)']],
+ ['nato','nato','Wo steht das NATO-Kommando JSEC?','Ulm',null,['Brunssum','Mons','Neapel']],
  ['nato','nato','Wie viele Soldatinnen und Soldaten soll Tier 1 des NATO-Streitkräftemodells in bis zu zehn Tagen bereitstellen?','Rund 100.000','Tier 2: weitere rund 200.000 in 10 bis 30 Tagen. Tier 3: mindestens 500.000 in bis zu sechs Monaten.',['Rund 10.000','Rund 40.000','Rund 500.000']],
  ['nato','nato','Welcher Verband des Heeres ist dauerhaft in Litauen stationiert?','Panzerbrigade 45','In Dienst gestellt am 1. April 2025 in Vilnius, voll einsatzbereit bis 2027. Geplant sind rund 5.000 Soldatinnen, Soldaten und Zivilbeschäftigte.',['Panzergrenadierbrigade 37','Deutsch-Französische Brigade','Gebirgsjägerbrigade 23']],
  ['nato','nato','Was meint „Drehscheibe Deutschland“?','Deutschland als Transitland für verbündete Truppen',null,['Ein Logistikzentrum der Bundeswehr','Den Sitz des NATO-Hauptquartiers','Die Rotation der Truppen in Litauen']],
  ['nato','nato','Wer führt seit 2025 die Heimatschutzregimenter?','Heimatschutzdivision','Vorher das Territoriale Führungskommando.',['Landeskommandos','Operatives Führungskommando','Kommando Cyber- und Informationsraum']],
  ['nato','nato','Wie viele Landeskommandos hat die Bundeswehr?','16, eines je Bundesland',null,['4','8','32']],
- ['nato','nato','Wer koordiniert den Operationsplan Deutschland?','OpFüKdoBw (Operatives Führungskommando der Bundeswehr)',null,['HSchDiv (Heimatschutzdivision)','SHAPE (Supreme Headquarters Allied Powers Europe)','JSEC (Joint Support and Enabling Command)']],
+ ['nato','nato','Wer koordiniert den Operationsplan Deutschland?','OpFüKdoBw',null,['HSchDiv','SHAPE','JSEC']],
  ['nato','nato','Wo steht die Beistandsklausel der EU?','Art. 42 Abs. 7 EU-Vertrag','Bisher einmal angewendet, von Frankreich nach den Anschlägen in Paris 2015.',['Art. 5 Nordatlantikvertrag','Art. 87a Grundgesetz','Art. 51 UN-Charta']],
  ['beh','haush','Wie heißt der Verteidigungshaushalt im Bundeshaushalt?','Einzelplan 14',null,['Einzelplan 1','Einzelplan 60','Sondervermögen Bundeswehr']],
  ['beh','haush','Wie groß war das 2022 beschlossene Sondervermögen Bundeswehr?','100 Milliarden Euro','Kreditfinanziert, abgesichert in Art. 87a Abs. 1a GG.',['10 Milliarden Euro','50 Milliarden Euro','500 Milliarden Euro']],
@@ -800,7 +801,7 @@ BEH.push(...BEH2);GLOSS.push(...GLOSS2);
  ['gl','div','Welche Division führt Fallschirmjäger und Kommando Spezialkräfte?','Division Schnelle Kräfte',null,['1. Panzerdivision','10. Panzerdivision','Heimatschutzdivision']],
  ['gl','div','Wo haben die beiden Einsatzflottillen der Marine ihren Sitz?','Kiel und Wilhelmshaven','Einsatzflottille 1 in Kiel, Einsatzflottille 2 in Wilhelmshaven.',['Rostock und Hamburg','Kiel und Rostock','Wilhelmshaven und Bremerhaven']],
  ['abk','zeit','Was bedeutet die Datum-Zeit-Gruppe 031430ZOCT26?','3. Oktober 2026, 14:30 Uhr UTC',null,['3. Januar 2026, 14:30 Uhr Ortszeit','14. März 2026, 03:30 Uhr UTC','3. Oktober 2026, 14:30 Uhr MEZ']],
- ['abk','zeit','Welche Zeit meint der Buchstabe Z in einer Zeitangabe?','UTC (koordinierte Weltzeit)',null,['Ortszeit','MEZ (Mitteleuropäische Zeit)','MESZ (Mitteleuropäische Sommerzeit)']],
+ ['abk','zeit','Welche Zeit meint der Buchstabe Z in einer Zeitangabe?','UTC (Zulu-Zeit)',null,['Ortszeit','MEZ','MESZ']],
  ['abk','zeit','Zeitzonenbuchstabe für die deutsche Winterzeit (MEZ)','A (Alfa)',null,['B (Bravo)','Z (Zulu)','J (Juliett)']],
  ['abk','zeit','Zeitzonenbuchstabe für die deutsche Sommerzeit (MESZ)','B (Bravo)',null,['A (Alfa)','Z (Zulu)','J (Juliett)']],
  ['eti','zer','Höchste militärische Zeremonie der Bundeswehr','Großer Zapfenstreich','Z. B. zur Verabschiedung von Bundespräsidenten, Bundeskanzlern und Verteidigungsministern.',['Feierliches Gelöbnis','Appell','Flaggenparade']],
@@ -1112,7 +1113,7 @@ const LESSON_OF_DECK={dg:'dienstgrade',mar:'dienstgrade',abz:'abzeichen',eti:'an
 const LESSON_OF_KIND={anz:'anzuege',wf:'farben',wfrev:'farben',bar:'farben',farbe:'farben','g-ind':'beschaffung',proj:'beschaffung',haush:'beschaffung'};
 const LESSON_OF_Q={
  'Abkürzung: BAAINBw':'beschaffung','Abkürzung: BWI':'beschaffung','Abkürzung: CIHBw':'beschaffung','Abkürzung: InnoZBw':'beschaffung','Abkürzung: ZDigBw':'beschaffung','Abkürzung: CPM':'beschaffung',
- 'Bedarfsdecker für Wehrmaterial und IT':'beschaffung','Bedarfsträger für das Teilportfolio Cyber/IT':'beschaffung','Betreibt und modernisiert als hundertprozentige Bundesgesellschaft die IT der Bundeswehr':'beschaffung',
+ 'Bedarfsdecker für Wehrmaterial und IT':'beschaffung','Bedarfsträger für das Teilportfolio Cyber/IT':'beschaffung','IT-Systemhaus der Bundeswehr in Bundesbesitz':'beschaffung',
  'Innovationseinheit in der BWI, die mit Startups arbeitet':'beschaffung','Koordiniert seit Dezember 2025 die Innovation der Bundeswehr, Sitz in Erding':'beschaffung','Zuständig für den Geheimschutz in Unternehmen (Bund)':'beschaffung',
  'Abkürzung: BOS':'aufbau','Abkürzung: BDBOS':'aufbau',
  'Abkürzung: PzDiv':'gliederung','Abkürzung: DSK':'gliederung','Abkürzung: KSK':'gliederung',
@@ -1136,6 +1137,8 @@ const setBox=(c,b)=>{store.box[c.id]=Math.max(0,Math.min(4,b));save()};
 let glossQ='', lesson=null, mode='basics', topic='all', refTab='dg', hl='heer', last=null, cur=null, revealed=false, quiz=null;
 const pool=()=>topic==='all'?CARDS:CARDS.filter(c=>c.lesson===topic);
 const topicName=id=>LESSONS.find(l=>l.id===id).t;
+// Langform von Abkürzungen fürs Aufdecken der Lernkarten, das Quiz zeigt nur die Abkürzung
+const ABK_FULL=new Map([...BEH,...GLOSS.flatMap(g=>g.id==='alpha'?[]:g.items)].map(([k,v])=>[k,v]));
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
 
@@ -1193,8 +1196,8 @@ function boxesHTML(){
 }
 function renderLearn(){
   if(!cur){cur=pick();revealed=false}
-  const c=cur;
-  const ans=revealed?`<div class="ans"><p class="a">${c.kind==='symrev'||c.kind.startsWith('abzrev')?'':esc(c.a)}</p>${c.kind.startsWith('abzrev')?`<div class="fig">${insignia(c.a,84)}</div>`:''}${c.kind==='symrev'?`<div class="fig" style="color:var(--frame)">${unitSym(c.a,72)}</div>`:''}${c.note?`<p class="note">${esc(c.note)}</p>`:''}</div>`:'';
+  const c=cur;const full=ABK_FULL.get(c.a);
+  const ans=revealed?`<div class="ans"><p class="a">${c.kind==='symrev'||c.kind.startsWith('abzrev')?'':esc(c.a)}</p>${full?`<p class="full">${esc(full)}</p>`:''}${c.kind.startsWith('abzrev')?`<div class="fig">${insignia(c.a,84)}</div>`:''}${c.kind==='symrev'?`<div class="fig" style="color:var(--frame)">${unitSym(c.a,72)}</div>`:''}${c.note?`<p class="note">${esc(c.note)}</p>`:''}</div>`:'';
   const act=revealed?`<div class="actions"><button class="btn again" data-act="again">Nochmal</button><button class="btn ok" data-act="ok">Gewusst</button></div>`
                     :`<div class="actions"><button class="btn primary" data-act="reveal">Antwort zeigen</button></div>`;
   return `<div class="card"><p class="deckname">${esc(topicName(c.lesson))}, Fach ${boxOf(c)+1} von 5</p>${questionHTML(c)}${ans}</div>${act}${boxesHTML()}`;
