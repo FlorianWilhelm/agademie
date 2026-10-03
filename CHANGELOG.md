@@ -7,7 +7,7 @@ per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 ## Unveröffentlicht
 
 - Lektion „Bundeswehr im Staat“: Leitsatz „Leben in der Lage“ als Folge aus Moltkes Satz über den Operationsplan, dazu eine neue Quizfrage
-- Lektion „Anrede und Umgang“: „Schweiß spart Blut“ bei den ungeschriebenen Regeln, dazu eine neue Quizfrage
+- Lektion „Anrede und Umgang“: „Schweiß spart Blut“ und „Auftrag vor Befindlichkeit“ bei den ungeschriebenen Regeln, dazu zwei neue Quizfragen
 
 ## 0.10 (2026-10-03)
 
