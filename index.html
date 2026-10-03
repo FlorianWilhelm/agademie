@@ -649,14 +649,16 @@ function collar(c,W=30){
 let suitN=0;
 function suit(k,W=60){
   const id='suit'+(++suitN),body='M24 6 L9 11 Q6 12 5.5 16 L3 50 L11 52 L14 27 L14 64 L46 64 L46 27 L49 52 L57 50 L54.5 16 Q54 12 51 11 L36 6 Z';
-  const S={feld:['#8a8a5c'],heer:['#878b86','#fff','#3a3d40','#2f7d46','#c9ced3'],lw:['#36598c','#bcd3ec','#1d2f52','#e2b93b','#c9ced3'],mar:['#1c2438','#fff','#111','','#d4a72c']}[k];
+  const S={feld:['#a3a477'],heer:['#878b86','#fff','#3a3d40','#2f7d46','#c9ced3'],lw:['#36598c','#bcd3ec','#1d2f52','#e2b93b','#c9ced3'],mar:['#1c2438','#fff','#111','','#d4a72c']}[k];
   const btn=(x,y)=>`<circle cx="${x}" cy="${y}" r="1.3" fill="${S[4]}"/>`;
   let inner;
   if(k==='feld'){
-    const spots=[['#5b6a3a','M8 14 q6-4 10 1 q-2 6-9 4z M30 30 q8-3 11 3 q-5 5-12 1z M16 50 q5-3 9 1 q-3 5-9 3z M44 14 q6 0 7 5 q-5 3-8-1z M2 34 q5-2 7 2 q-3 4-7 2z M48 40 q6-1 8 4 q-4 3-8 0z M34 52 q5-2 8 2 q-3 3-8 1z'],
-      ['#6e5435','M20 20 q5-2 7 2 q-3 4-7 1z M38 22 q4-1 6 3 q-3 2-6 0z M24 40 q6-2 8 3 q-4 3-8 0z M6 26 q3-1 5 2 q-2 3-5 1z M50 30 q3-1 5 2 q-3 2-5 0z M40 58 q4-1 5 2 q-3 2-5 0z'],
-      ['#2d3024','M14 32 q2-1 3 1 q-1 2-3 1z M42 46 q2-1 3 1 q-2 2-3 0z M27 12 q2-1 3 1 q-1 2-3 0z M20 58 q2-1 3 1 q-2 2-3 0z M52 22 q2-1 3 1 q-2 2-3 0z']];
-    inner=`<g clip-path="url(#${id})">${spots.map(([c,d])=>`<path d="${d}" fill="${c}"/>`).join('')}</g>
+    // Flecktarn: dichte Tupfengruppen in Hellgrün, Dunkelgrün, Braun und Schwarz auf hellem Grund (feste Saat, damit es immer gleich aussieht)
+    let r=123456789;const rnd=()=>(r=(r*16807)%2147483647)/2147483647;
+    const dots=[['#7a8a48',55,6,1.8],['#46582f',55,6,1.7],['#5c4630',40,5,1.5],['#23241e',30,3,1]].map(([c,n,m,s])=>{let d='';
+      for(let j=0;j<n;j++){const cx=rnd()*60,cy=rnd()*70,q=2+Math.floor(rnd()*m);for(let h=0;h<q;h++){const x=cx+(rnd()-.5)*5,y=cy+(rnd()-.5)*5,rr=(.6+rnd()*.6)*s;d+=`M${(x-rr).toFixed(1)} ${y.toFixed(1)}a${rr.toFixed(1)} ${rr.toFixed(1)} 0 1 0 ${(2*rr).toFixed(1)} 0a${rr.toFixed(1)} ${rr.toFixed(1)} 0 1 0 ${(-2*rr).toFixed(1)} 0`}}
+      return `<path d="${d}" fill="${c}"/>`}).join('');
+    inner=`<g clip-path="url(#${id})">${dots}</g>
      <path d="M24 6 L30 13 L36 6 M24 6 L22 13 L28 15 M36 6 L38 13 L32 15 M30 13 V64" fill="none" stroke="#2d3024" stroke-width="1"/>
      <rect x="17" y="22" width="9" height="10" rx="1" fill="none" stroke="#2d3024" stroke-width="1"/><rect x="34" y="22" width="9" height="10" rx="1" fill="none" stroke="#2d3024" stroke-width="1"/>`;
   }else{
