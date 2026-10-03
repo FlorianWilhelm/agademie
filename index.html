@@ -222,10 +222,15 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 
 <script>
 /* ---------- Version: setzt release.sh passend zum Git-Tag, nicht von Hand ändern ---------- */
-const VERSION='0.9', UPDATED='2026-10-03';
+const VERSION='0.10', UPDATED='2026-10-03';
 document.getElementById('ver').textContent=`v${VERSION} · ${UPDATED}`;
 // Was ist neu: die letzten Versionen aus CHANGELOG.md, setzt release.sh zusammen mit der Version
 const CHANGES=[
+{v:"0.10",d:"2026-10-03",items:[
+"Lernkarten und Quiz: Die Themen sind jetzt genau die Lektionen, mit demselben Titel, derselben Nummer und in derselben Reihenfolge. „Mit Lernkarten üben“ und „Im Quiz prüfen“ am Ende einer Lektion fragen nur noch, was in dieser Lektion vorkommt, statt eines größeren Sammelthemas (etwa bei „Feldanzug und Dienstanzug“ bisher alle 241 Abzeichen-Karten). Der Lernstand bleibt erhalten",
+"Lektion „Wer braucht, wer beschafft“: das neu gegründete Innovationszentrum der Bundeswehr (InnoZBw) in Erding, dazu zwei neue Lernkarten und ein Eintrag unter „Behörden & Dienststellen“",
+"Abkürzungen: Jede Lektion führt die Abkürzungen ein, nach denen Lernkarten und Quiz fragen, etwa OpFüKdoBw, BMVg, MAD, StAN, SHAPE, JSEC, FCAS und MGCS. Ist die Antwort einer Lernkarte eine Abkürzung, zeigt das Aufdecken darunter die ausgeschriebene Form, etwa „Operatives Führungskommando der Bundeswehr“ unter OpFüKdoBw. Das Quiz fragt weiter nur die Abkürzung ab. Die Lektion „Abkürzungen im Dienstalltag“ zeigt alle 18 Alltagskürzel",
+]},
 {v:"0.9",d:"2026-10-03",items:[
 "Lernkarten: Der Lernstand bleibt jetzt erhalten, wenn neue Karten dazukommen. Bisher gespeicherter Lernstand der Lernkarten wird dafür einmalig zurückgesetzt, gelesene Lektionen bleiben markiert",
 "Am Ende jeder Lektion führen zwei gleichrangige Knöpfe zum passenden Thema: „Mit Lernkarten üben“ und neu „Im Quiz prüfen“",
@@ -239,9 +244,6 @@ const CHANGES=[
 "Lektion „Abzeichen lesen“: neuer Abschnitt zu Offizieranwärtern mit silberfarbener Kordel (Heer, Luftwaffe) und goldfarbenem Stern (Marine) und dem Zusatz OA",
 "Lektion „Abzeichen lesen“: neuer Abschnitt zu Unteroffizier- und Feldwebelanwärtern (UA, UA mbL, FA, in der Marine MA und BA) mit Zeichnungen von Querbalken, Tresse und altgoldfarbener Kordel",
 "Abzeichen: Die Kordel der Offizieranwärter liegt jetzt wie im Original quer über dem Bogen",
-]},
-{v:"0.7.1",d:"2026-10-03",items:[
-"Lektion „Aufbau der Bundeswehr“: Heer, Luftwaffe und Marine mit ihren Symbolen (gekreuzte Schwerter, Schwinge, Anker), dazu die Erklärung, warum der CIR kein eigenes hat, und drei neue Lernkarten",
 ]},
 ]; // Ende CHANGES
 /* ---------- Daten ---------- */

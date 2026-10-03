@@ -4,7 +4,7 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
-## Unveröffentlicht
+## 0.10 (2026-10-03)
 
 - Lernkarten und Quiz: Die Themen sind jetzt genau die Lektionen, mit demselben Titel, derselben Nummer und in derselben Reihenfolge. „Mit Lernkarten üben“ und „Im Quiz prüfen“ am Ende einer Lektion fragen nur noch, was in dieser Lektion vorkommt, statt eines größeren Sammelthemas (etwa bei „Feldanzug und Dienstanzug“ bisher alle 241 Abzeichen-Karten). Der Lernstand bleibt erhalten
 - Lektion „Wer braucht, wer beschafft“: das neu gegründete Innovationszentrum der Bundeswehr (InnoZBw) in Erding, dazu zwei neue Lernkarten und ein Eintrag unter „Behörden & Dienststellen“
