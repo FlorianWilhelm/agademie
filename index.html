@@ -368,6 +368,7 @@ const BEH=[
  ['BAAINBw','Bundesamt für Ausrüstung, Informationstechnik und Nutzung der Bundeswehr','Zivile Bundesoberbehörde in Koblenz und Lahnstein mit rund 10.000 zivilen und 1.800 militärischen Beschäftigten. Bedarfsdecker der Streitkräfte.'],
  ['BWI','BWI GmbH, IT-Systemhaus der Bundeswehr','Hundertprozentige Bundesgesellschaft.'],
  ['CIHBw','Cyber Innovation Hub der Bundeswehr','Seit 2020 als Abteilung in der BWI GmbH verankert, arbeitet mit Startups und Intrapreneuren.'],
+ ['InnoZBw','Innovationszentrum der Bundeswehr','Seit Dezember 2025 in Erding, dem BAAINBw unmittelbar nachgeordnet. Ging aus dem Innovationslabor System Soldat hervor.'],
  ['CIR','Cyber- und Informationsraum','Vierte und jüngste Teilstreitkraft neben Heer, Luftwaffe und Marine.'],
  ['KdoCIR','Kommando Cyber- und Informationsraum'],
  ['ZDigBw','Zentrum Digitalisierung der Bundeswehr und Fähigkeitsentwicklung Cyber- und Informationsraum','Dem KdoCIR unterstellt. Bedarfsträger für das Teilportfolio Cyber/IT, aufgestellt 2022 u. a. aus dem Zentrum für Softwarekompetenz.'],
@@ -385,7 +386,8 @@ BEH.forEach(([k,v,n])=>add('beh','abk','Abkürzung: '+k,v,n));
  ['Bedarfsdecker für Wehrmaterial und IT','BAAINBw'],
  ['Bedarfsträger für das Teilportfolio Cyber/IT','ZDigBw'],
  ['IT-Systemhaus der Bundeswehr in Bundesbesitz','BWI'],
- ['Innovationseinheit, die mit Startups arbeitet','CIHBw'],
+ ['Innovationseinheit in der BWI, die mit Startups arbeitet','CIHBw'],
+ ['Koordiniert seit Dezember 2025 die Innovation der Bundeswehr, Sitz in Erding','InnoZBw','Dem BAAINBw unmittelbar nachgeordnet, eröffnet im Februar 2026.'],
  ['Zuständig für den Geheimschutz in Unternehmen (Bund)','Bundesministerium für Wirtschaft und Energie','Nach § 25 SÜG. Bei Aufträgen eines Bundeslandes ist das jeweilige Landeswirtschaftsministerium zuständig.',['Bundesministerium der Verteidigung','Militärischer Abschirmdienst','Bundesamt für Verfassungsschutz']],
  ['Plant und führt alle Einsätze und Operationen im In- und Ausland','OpFüKdoBw']
 ].forEach(([q,a,n,x])=>add('beh','rolle',q,a,n,x));
@@ -1082,6 +1084,7 @@ const LESSONS=[
    <li><strong>BWI</strong><span>IT-Systemhaus der Bundeswehr, hundertprozentige Bundesgesellschaft. Betreibt und modernisiert die IT der Bundeswehr.</span></li>
    <li><strong>ZDigBw</strong><span>Dem Kommando CIR unterstellt, Bedarfsträger für das Teilportfolio Cyber/IT.</span></li>
    <li><strong>CIHBw</strong><span>Cyber Innovation Hub, seit 2020 Abteilung der BWI. Testet neue Lösungen mit Nutzern aus der Truppe und übergibt Erfolgreiches an das ZDigBw zur Einführung.</span></li>
+   <li><strong>InnoZBw</strong><span>Innovationszentrum der Bundeswehr in Erding, seit Dezember 2025 dem BAAINBw unmittelbar nachgeordnet. Koordiniert die Innovationslandschaft der Bundeswehr, erschließt neue Technologien mit eigenen Testkampagnen, etwa zu Drohnen, und bereitet schnell skalierbare Beschaffungen vor. Anlaufstelle für Startups, eng verbunden mit CIHBw, ZDigBw und der Cyberagentur.</span></li>
    <li><strong>BMWE</strong><span>Das Bundesministerium für Wirtschaft und Energie ist nach § 25 SÜG für den Geheimschutz in Unternehmen zuständig, also für den Sicherheitsbescheid, den eine Firma für eingestufte Aufträge braucht.</span></li>
   </ol>
   <p>Auf der anderen Seite steht die Sicherheits- und Verteidigungsindustrie (SVI). Große europäische Vorhaben sind etwa FCAS, das Luftkampfsystem der nächsten Generation, und MGCS, das deutsch-französische Landkampfsystem. Die Industrie organisiert sich in Verbänden wie BDSV und BDLI. Gesellschaften wie DWT, Förderkreis Deutsches Heer (FKH) oder Deutsches Maritimes Institut (DMI) bringen Streitkräfte, Verwaltung, Politik und Industrie ins Gespräch. In der NATO berät die NIAG aus Sicht der Industrie.</p>
@@ -1108,9 +1111,9 @@ const LESSONS=[
 const LESSON_OF_DECK={dg:'dienstgrade',mar:'dienstgrade',abz:'abzeichen',eti:'anrede',gl:'gliederung',sym:'zeichen',stab:'staebe',beh:'aufbau',staat:'staat',nato:'buendnis',abk:'kuerzel',vs:'geheimschutz',dig:'digital'};
 const LESSON_OF_KIND={anz:'anzuege',wf:'farben',wfrev:'farben',bar:'farben',farbe:'farben','g-ind':'beschaffung',proj:'beschaffung',haush:'beschaffung'};
 const LESSON_OF_Q={
- 'Abkürzung: BAAINBw':'beschaffung','Abkürzung: BWI':'beschaffung','Abkürzung: CIHBw':'beschaffung','Abkürzung: ZDigBw':'beschaffung','Abkürzung: CPM':'beschaffung',
+ 'Abkürzung: BAAINBw':'beschaffung','Abkürzung: BWI':'beschaffung','Abkürzung: CIHBw':'beschaffung','Abkürzung: InnoZBw':'beschaffung','Abkürzung: ZDigBw':'beschaffung','Abkürzung: CPM':'beschaffung',
  'Bedarfsdecker für Wehrmaterial und IT':'beschaffung','Bedarfsträger für das Teilportfolio Cyber/IT':'beschaffung','IT-Systemhaus der Bundeswehr in Bundesbesitz':'beschaffung',
- 'Innovationseinheit, die mit Startups arbeitet':'beschaffung','Zuständig für den Geheimschutz in Unternehmen (Bund)':'beschaffung',
+ 'Innovationseinheit in der BWI, die mit Startups arbeitet':'beschaffung','Koordiniert seit Dezember 2025 die Innovation der Bundeswehr, Sitz in Erding':'beschaffung','Zuständig für den Geheimschutz in Unternehmen (Bund)':'beschaffung',
  'Abkürzung: BOS':'aufbau','Abkürzung: BDBOS':'aufbau',
  'Abkürzung: PzDiv':'gliederung','Abkürzung: DSK':'gliederung','Abkürzung: KSK':'gliederung',
  'Wie viele Dienstgrade gibt es in der Bundeswehr?':'dienstgrade',
