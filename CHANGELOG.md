@@ -4,6 +4,10 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
+## Unveröffentlicht
+
+- Lektion „Anrede und Umgang“: Einleitung zu den ungeschriebenen Regeln und neuer Abschnitt „Auftreten“ mit Händen aus den Taschen, Nicht-Anlehnen, Händedruck und Grußpflicht, dazu drei neue Quizfragen
+
 ## 0.11 (2026-10-03)
 
 - Lektion „Bundeswehr im Staat“: Leitsatz „Leben in der Lage“ als Folge aus Moltkes Satz über den Operationsplan, dazu eine neue Quizfrage
