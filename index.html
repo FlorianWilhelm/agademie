@@ -177,7 +177,8 @@ h1,h2,h3{text-wrap:balance}
 .figs figure{margin:0;width:62px;text-align:center;font-size:12px;line-height:1.2;color:var(--muted);hyphens:manual;-webkit-hyphens:manual}
 .figs svg{display:block;margin:0 auto 4px}
 .lesson .actions{margin-top:22px;flex-direction:column}
-.pager{display:flex;gap:10px}
+.pager,.duo{display:flex;gap:10px}
+.duo .btn{line-height:1.2}
 .pager .btn{line-height:1.2;padding:10px 12px;font-size:17px;max-width:calc(50% - 5px)} /* allein so breit wie neben dem anderen */
 .pager small{display:block;font:600 13px/1.2 var(--body);color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin-bottom:3px}
 .pager .prev{text-align:left}.pager .prev small::before{content:"← "}
@@ -773,10 +774,6 @@ BEH.push(...BEH2);GLOSS.push(...GLOSS2);
  ['staat','staat','Leitbild der Inneren Führung','Staatsbürger in Uniform',null,['Bürger in Waffen','Kämpfer ohne Politik','Soldat des Vaterlands']],
  ['staat','staat','Was gilt für einen Befehl, durch dessen Befolgen eine Straftat begangen würde?','Er darf nicht befolgt werden','§ 11 Soldatengesetz. Befehle, die die Menschenwürde verletzen oder nicht dienstlichen Zwecken dienen, sind unverbindlich.',['Er muss befolgt werden','Er muss erst schriftlich bestätigt werden','Er gilt nur im Einsatz']],
  ['staat','staat','Was bedeutet „Führen mit Auftrag“?','Ziel und Rahmen vorgeben, den Weg selbst wählen lassen','Auch Auftragstaktik genannt.',['Jeden Schritt genau befehlen','Nur schriftlich befehlen','Ohne Befehle führen']],
- ['staat','staat','Womit beginnt ein militärischer Befehl?','Lage','Schema LADEF: Lage, Auftrag, Durchführung, Einsatzunterstützung, Führungsunterstützung.',['Auftrag','Durchführung','Absicht']],
- ['staat','staat','Wofür steht das Merkwort LADEF?','Lage, Auftrag, Durchführung, Einsatzunterstützung, Führungsunterstützung','Die Gliederung eines Befehls. Die ersten drei Punkte sind immer dabei.',['Lage, Absicht, Dauer, Einsatz, Führung','Leitung, Auftrag, Dienstweg, Einheit, Feldwebel','Lage, Alarm, Durchführung, Erfolg, Folgen']],
- ['staat','staat','Was müssen Vorgesetzte beim Führen mit Auftrag vor allem vermitteln?','Ihre Absicht: was erreicht werden soll und warum','Ändert sich die Lage, handeln die Geführten im Sinne dieser Absicht.',['Jeden einzelnen Arbeitsschritt','Nur die Uhrzeit','Die Namen aller Beteiligten']],
- ['staat','staat','Wie heißt das Führen mit Auftrag in der US Army?','Mission Command','Seit 2012 in der Doktrin der US Army, nach dem Vorbild der Auftragstaktik.',['Command and Control','Rules of Engagement','Chain of Command']],
  ['staat','staat','Wem ist die oder der Wehrbeauftragte zugeordnet?','Dem Bundestag','Hilfsorgan des Bundestages bei der parlamentarischen Kontrolle (Art. 45b GG), gewählt für fünf Jahre.',['Dem BMVg','Dem Bundespräsidenten','Dem Generalinspekteur']],
  ['staat','staat','Wie können sich Soldatinnen und Soldaten an die oder den Wehrbeauftragten wenden?','Direkt, ohne Dienstweg',null,['Nur über den Disziplinarvorgesetzten','Nur über die Vertrauensperson','Nur nach Freigabe durch den Kompaniechef']],
  ['staat','status','Wie lange darf die Dienstzeit als Soldat auf Zeit höchstens dauern?','25 Jahre','§ 40 Soldatengesetz.',['12 Jahre','20 Jahre','Bis zur Altersgrenze']],
@@ -822,6 +819,24 @@ BEH.push(...BEH2);GLOSS.push(...GLOSS2);
  ['abz','anz','Wo zeigen Marineangehörige am Dienstanzug ihren Dienstgrad?','An den Ärmeln','Kragenspiegel gibt es in der Marine nicht.',['Auf Kragenspiegeln','Nur auf der Mütze','Auf der Brusttasche']],
  ['abz','anz','Was ist an Bord der Tagesdienstanzug der Marine?','Der Bord- und Gefechtsanzug',null,['Der Feldanzug','Der Sommeranzug, weiß','Der Dienstanzug']],
  ['abz','anz','Welche Uniform tragen Angehörige des Cyber- und Informationsraums?','Die von Heer, Luftwaffe oder Marine, je nach Dienstposten','Gemeinsam ist allen das marineblaue Barett mit dem Abzeichen CIR.',['Eine eigene schwarze Uniform','Immer die des Heeres','Nur Zivilkleidung']]
+].forEach(([d,k,q,a,n,x])=>add(d,k,q,a,n,x));
+/* Führen mit Auftrag, Soldatenpflichten und ungeschriebene Regeln (hinten angehängt, damit die positionsbasierten Karten-IDs stabil bleiben) */
+[
+ ['staat','staat','Womit beginnt ein militärischer Befehl?','Lage','Schema LADEF: Lage, Auftrag, Durchführung, Einsatzunterstützung, Führungsunterstützung.',['Auftrag','Durchführung','Absicht']],
+ ['staat','staat','Wofür steht das Merkwort LADEF?','Lage, Auftrag, Durchführung, Einsatzunterstützung, Führungsunterstützung','Die Gliederung eines Befehls. Die ersten drei Punkte sind immer dabei.',['Lage, Absicht, Dauer, Einsatz, Führung','Leitung, Auftrag, Dienstweg, Einheit, Feldwebel','Lage, Alarm, Durchführung, Erfolg, Folgen']],
+ ['staat','staat','Was müssen Vorgesetzte beim Führen mit Auftrag vor allem vermitteln?','Ihre Absicht: was erreicht werden soll und warum','Ändert sich die Lage, handeln die Geführten im Sinne dieser Absicht.',['Jeden einzelnen Arbeitsschritt','Nur die Uhrzeit','Die Namen aller Beteiligten']],
+ ['staat','staat','Wie heißt das Führen mit Auftrag in der US Army?','Mission Command','Seit 2012 in der Doktrin der US Army, nach dem Vorbild der Auftragstaktik.',['Command and Control','Rules of Engagement','Chain of Command']],
+ ['staat','staat','Was ist der Führungsvorgang?','Ein Kreislauf aus Lagefeststellung, Planung und Befehlsgebung','Die Kontrolle nach dem Befehl fließt in die nächste Lagefeststellung ein.',['Die Reihenfolge der Dienstgrade','Das Schema eines Befehls','Der Weg einer Beschwerde']],
+ ['staat','staat','Womit endet die Planung im Führungsvorgang?','Mit dem Entschluss','Vorher wird die Lage beurteilt. Der Entschluss ist der Kern des folgenden Befehls.',['Mit der Lagefeststellung','Mit der Kontrolle','Mit der Meldung']],
+ ['staat','staat','Von wem stammt der Gedanke, dass kein Plan die erste Begegnung mit dem Feind übersteht?','Helmuth von Moltke','Generalfeldmarschall, 1871: „Kein Operationsplan reicht mit einiger Sicherheit über das erste Zusammentreffen mit der feindlichen Hauptmacht hinaus.“',['Carl von Clausewitz','Otto von Bismarck','Erwin Rommel']],
+ ['staat','staat','Wie lautet die Grundpflicht des Soldaten?','Der Bundesrepublik treu dienen und Recht und Freiheit des deutschen Volkes tapfer verteidigen','§ 7 Soldatengesetz.',['Jeden Befehl ohne Ausnahme befolgen','Der Bundesregierung persönlich dienen','Das Gebiet der NATO verteidigen']],
+ ['staat','staat','Was verlangt das Soldatengesetz von Vorgesetzten?','Beispiel geben, Dienstaufsicht führen und für die Untergebenen sorgen','§ 10 Soldatengesetz.',['Alle Befehle schriftlich erteilen','Jeden Arbeitsschritt selbst erledigen','Nur mündlich befehlen']],
+ ['staat','staat','Wo ist die Pflicht zur Kameradschaft geregelt?','§ 12 Soldatengesetz',null,['Art. 1 GG','§ 11 Soldatengesetz','Im Wehrpflichtgesetz']],
+ ['staat','staat','Wozu verpflichtet die Kameradschaft nach dem Soldatengesetz?','Würde, Ehre und Rechte der Kameraden achten und ihnen in Not und Gefahr beistehen','Das schließt gegenseitige Anerkennung, Rücksicht und Achtung fremder Anschauungen ein (§ 12 Soldatengesetz).',['Die Freizeit gemeinsam verbringen','Fehler von Kameraden nicht melden','Nur der eigenen Einheit helfen']],
+ ['staat','staat','Was regelt § 13 Soldatengesetz?','Die Pflicht, in dienstlichen Angelegenheiten die Wahrheit zu sagen','Das gilt besonders für Meldungen.',['Die Pflicht zur Kameradschaft','Den Gehorsam','Die Verschwiegenheit']],
+ ['eti','eti','Was bedeutet „Melden macht frei“?','Mit der Meldung gehen Verantwortung und Entscheidung an die Vorgesetzten über','Deshalb wird auch Kleines gemeldet.',['Wer meldet, hat dienstfrei','Meldungen sind freiwillig','Wer meldet, muss nicht mehr mithelfen']],
+ ['eti','eti','Wann ist man nach Soldatenart pünktlich?','Fünf Minuten vor der Zeit','„Fünf Minuten vor der Zeit ist die Soldatenpünktlichkeit.“',['Auf die Minute genau','Bis fünf Minuten nach der Zeit','Eine Stunde vor der Zeit']],
+ ['eti','eti','Wie heißt der Weg eines Anliegens über die direkten Vorgesetzten?','Dienstweg','Ausnahme: An die oder den Wehrbeauftragten kann man sich direkt wenden.',['Befehlsweg','Meldekette','Kommandoweg']],
 ].forEach(([d,k,q,a,n,x])=>add(d,k,q,a,n,x));
 /* ---------- Symbole ---------- */
 function marker(m){
@@ -880,7 +895,7 @@ const LESSONS=[
   <p>Neben den Streitkräften steht die zivile Bundeswehrverwaltung. Dazu gehören die großen Bundesämter, etwa für Ausrüstung (BAAINBw), Personal (BAPersBw) oder Infrastruktur (BAIUDBw). Das BAAINBw ist eine zivile Bundesoberbehörde mit rund 10.000 zivilen und 1.800 militärischen Beschäftigten.</p>
   <div class="callout">In der zivilen Bundeswehrverwaltung arbeiten überwiegend Beamtinnen, Beamte und Tarifbeschäftigte. Für sie gelten Amtsbezeichnungen statt Dienstgrade.</div>
   <p>Im Inland arbeitet die Bundeswehr in der Amts- und Katastrophenhilfe mit den Behörden und Organisationen mit Sicherheitsaufgaben (BOS) zusammen, etwa Polizei, Feuerwehr und THW.</p>`},
- {id:'staat',t:'Bundeswehr im Staat',d:'Parlamentsarmee, Befehlsgewalt, Innere Führung, Führen mit Auftrag und wer dient',deck:'staat',b:()=>`
+ {id:'staat',t:'Bundeswehr im Staat',d:'Parlamentsarmee, Befehlsgewalt, Innere Führung, Soldatenpflichten, Führen mit Auftrag und wer dient',deck:'staat',b:()=>`
   <p>Die Bundeswehr ist eine Parlamentsarmee. Ihr Auftrag steht im Grundgesetz: Der Bund stellt Streitkräfte zur Verteidigung auf (Art. 87a GG). Für andere Zwecke darf er sie nur einsetzen, soweit das Grundgesetz es ausdrücklich erlaubt, etwa in der Amts- und Katastrophenhilfe oder in einem System kollektiver Sicherheit wie NATO und Vereinten Nationen.</p>
   <h3>Wer befiehlt</h3>
   <p>Im Frieden hat die Bundesministerin oder der Bundesminister der Verteidigung die Befehls- und Kommandogewalt (Art. 65a GG), kurz IBuK. Im Verteidigungsfall geht sie auf die Bundeskanzlerin oder den Bundeskanzler über (Art. 115b GG). Der Generalinspekteur ist der ranghöchste Soldat und militärischer Berater der Bundesregierung, aber kein Oberbefehlshaber.</p>
@@ -894,9 +909,26 @@ const LESSONS=[
   <div class="callout">Die oder der Wehrbeauftragte wird vom Bundestag für fünf Jahre gewählt und berichtet jährlich über den Zustand der Truppe. Jede Soldatin und jeder Soldat kann sich direkt dorthin wenden, ohne Dienstweg und ohne Nachteile.</div>
   <h3>Innere Führung</h3>
   <p>Die Führungskultur der Bundeswehr heißt Innere Führung, ihr Leitbild ist der „Staatsbürger in Uniform“. Soldatinnen und Soldaten behalten ihre Grundrechte, soweit das Soldatengesetz sie nicht ausdrücklich einschränkt. Gehorsam hat Grenzen: Ein Befehl, der die Menschenwürde verletzt oder keinem dienstlichen Zweck dient, ist unverbindlich. Würde durch das Befolgen eine Straftat begangen, darf er nicht befolgt werden (§ 11 Soldatengesetz).</p>
+  <h3>Soldatenpflichten</h3>
+  <p>Das Soldatengesetz legt fest, was von Soldatinnen und Soldaten erwartet wird. Diese Pflichten prägen auch den Umgang miteinander:</p>
+  <ol class="ladder">
+   <li><strong>§ 7 Grundpflicht</strong><span>Der Bundesrepublik Deutschland treu dienen und das Recht und die Freiheit des deutschen Volkes tapfer verteidigen.</span></li>
+   <li><strong>§ 10 Vorgesetzte</strong><span>In Haltung und Pflichterfüllung ein Beispiel geben, Dienstaufsicht führen und für die Untergebenen sorgen.</span></li>
+   <li><strong>§ 11 Gehorsam</strong><span>Befehle vollständig, gewissenhaft und unverzüglich ausführen, mit den oben genannten Grenzen.</span></li>
+   <li><strong>§ 12 Kameradschaft</strong><span>Würde, Ehre und Rechte der Kameraden achten und ihnen in Not und Gefahr beistehen.</span></li>
+   <li><strong>§ 13 Wahrheit</strong><span>In dienstlichen Angelegenheiten die Wahrheit sagen, gerade in Meldungen.</span></li>
+  </ol>
+  <div class="callout">Kameradschaft ist eine Dienstpflicht, keine Frage der Sympathie. Sie schließt gegenseitige Anerkennung, Rücksicht und die Achtung anderer Anschauungen ein. Wer Kameraden schikaniert oder bloßstellt, verletzt seine Pflichten und muss mit Disziplinarmaßnahmen rechnen.</div>
   <h3>Führen mit Auftrag</h3>
-  <p>Dazu passt das Prinzip „Führen mit Auftrag“, auch Auftragstaktik: Vorgesetzte geben ihre Absicht vor, also was erreicht werden soll und warum, dazu Ziel, Mittel und Zeit. Den Weg wählen die Geführten selbst. Ändert sich die Lage, handeln sie im Sinne dieser Absicht, statt auf einen neuen Befehl zu warten. Das Prinzip stammt aus dem preußischen Heer des 19. Jahrhunderts und ist mit Generalfeldmarschall Helmuth von Moltke verbunden. Das Gegenstück heißt Befehlstaktik: Der Befehl schreibt auch den Weg im Detail vor.</p>
-  <p>Ein Befehl folgt einem festen Schema, Merkwort LADEF:</p>
+  <p>Zur Inneren Führung gehört das Prinzip „Führen mit Auftrag“, auch Auftragstaktik: Vorgesetzte geben ihre Absicht vor, also was erreicht werden soll und warum, dazu Ziel, Mittel und Zeit. Den Weg wählen die Geführten selbst. Ändert sich die Lage, handeln sie im Sinne dieser Absicht, statt auf einen neuen Befehl zu warten. Das Prinzip stammt aus dem preußischen Heer des 19. Jahrhunderts und ist mit Generalfeldmarschall Helmuth von Moltke verbunden. Das Gegenstück heißt Befehlstaktik: Der Befehl schreibt auch den Weg im Detail vor.</p>
+  <blockquote class="callout">„Kein Operationsplan reicht mit einiger Sicherheit über das erste Zusammentreffen mit der feindlichen Hauptmacht hinaus.“ Helmuth von Moltke, 1871. Heute meist verkürzt zu „Kein Plan überlebt die erste Feindberührung“. Genau deshalb zählt die Absicht mehr als der Plan.</blockquote>
+  <p>Wie ein Befehl entsteht, beschreibt der Führungsvorgang. Er ist ein Kreislauf aus drei Schritten:</p>
+  <ol class="ladder">
+   <li><strong>Lage&shy;feststellung</strong><span>Was hat sich geändert? Dazu gehören Aufklärung und die Kontrolle, ob frühere Befehle umgesetzt werden.</span></li>
+   <li><strong>Planung</strong><span>Die Lage beurteilen, Möglichkeiten abwägen und einen Entschluss fassen.</span></li>
+   <li><strong>Befehls&shy;gebung</strong><span>Aus dem Entschluss wird ein Befehl. Danach beginnt der Kreis mit der Lagefeststellung von vorn.</span></li>
+  </ol>
+  <p>Der Befehl selbst folgt einem festen Schema, Merkwort LADEF:</p>
   <ol class="ladder">
    <li><strong>1. Lage</strong><span>Was ist los? Feind, eigene Kräfte, Gelände, Absicht der übergeordneten Führung.</span></li>
    <li><strong>2. Auftrag</strong><span>Was ist zu tun und wozu? Der Kern des Befehls, kurz und eindeutig.</span></li>
@@ -984,10 +1016,16 @@ const LESSONS=[
   <p>Die Barettfarbe fasst mehrere Truppengattungen zu Gruppen zusammen. Grün tragen Jäger und Panzergrenadiere, Schwarz Panzer und Aufklärer, Bordeauxrot Fallschirmjäger, KSK und Heeresflieger. Korallenrot steht für die meisten unterstützenden Truppen wie Artillerie, Pioniere und Fernmelder. Die genaue Truppengattung zeigt das Metallabzeichen am Barett.</p>
   <p>Die Gebirgsjäger tragen statt des Baretts die Bergmütze. Wer zum Cyber- und Informationsraum gehört, trägt unabhängig von der Truppengattung ein marineblaues Barett.</p>
   <div class="callout">Luftwaffe und Marine haben keine Truppengattungen und deshalb auch keine bunten Litzen. Die Luftwaffe trägt meist das blaue Schiffchen, die Marine hat am Dienstanzug keine Kragenspiegel. Alle Farben stehen unter Nachschlagen bei den Abzeichen.</div>`},
- {id:'anrede',t:'Anrede und Umgang',d:'Anrede nach Dienstgrad, Generale und Sanitätsdienst',deck:'eti',b:()=>`
+ {id:'anrede',t:'Anrede und Umgang',d:'Anrede nach Dienstgrad, Generale, Sanitätsdienst und ungeschriebene Regeln',deck:'eti',b:()=>`
   <p>Angesprochen wird mit Herr oder Frau und dem Dienstgrad, gegebenenfalls mit Nachnamen: „Herr Oberstleutnant“, „Frau Hauptmann Müller“. Dienstgrade bleiben grammatisch männlich, eine „Hauptfrau“ gibt es nicht.</p>
   <p>Alle Generale werden mit „Herr General“ bzw. „Frau General“ angesprochen, auch Brigadegeneral, Generalmajor und Generalleutnant. Der Plural lautet in der Bundeswehr Generale. Ranghöchster Soldat ist der Generalinspekteur der Bundeswehr.</p>
   <p>Sanitätsoffiziere werden mit ihrem eigenen Dienstgrad angesprochen, etwa „Herr Oberstabsarzt“ oder „Frau Generalarzt“.</p>
+  <h3>Ungeschriebene Regeln</h3>
+  <ol class="ladder">
+   <li><strong>Melden macht frei</strong><span>Wer etwas meldet, gibt Verantwortung und Entscheidung an die Vorgesetzten weiter. Deshalb wird auch Kleines gemeldet, lieber einmal zu oft als zu selten.</span></li>
+   <li><strong>Fünf Minuten vor der Zeit</strong><span>Das ist die Soldatenpünktlichkeit. Wer auf die Minute genau kommt, gilt schon als knapp.</span></li>
+   <li><strong>Dienstweg</strong><span>Anliegen gehen über die direkten Vorgesetzten. Auch als Zivilist kommt es gut an, zuerst die zuständige Stelle anzusprechen und nicht gleich ganz oben.</span></li>
+  </ol>
   <h3>Gelöbnis, Eid und Zeremonien</h3>
   <p>Wehrdienstleistende legen ein feierliches Gelöbnis ab, Soldaten auf Zeit und Berufssoldaten schwören den Diensteid (§ 9 Soldatengesetz). Die höchste militärische Zeremonie ist der Große Zapfenstreich, etwa zur Verabschiedung von Bundespräsidenten, Bundeskanzlern oder Verteidigungsministern.</p>
   <p>An der Uniform zeigen Tätigkeitsabzeichen eine Qualifikation oder Verwendung, etwa als Fallschirmspringer. Die Einsatzmedaille erhält, wer an einem Auslandseinsatz teilgenommen hat. Das Ehrenzeichen der Bundeswehr gibt es als Ehrenmedaille und als Ehrenkreuz in Bronze, Silber und Gold. Die höchste Stufe ist seit 2008 das Ehrenkreuz der Bundeswehr für Tapferkeit.</p>`},
@@ -1240,7 +1278,7 @@ function renderBasics(){
     const pv=LESSONS[i-1],nx=LESSONS[i+1];
     return `<div class="lesson"><button class="back" data-lesson="">Alle Lektionen</button>
       <p class="small" style="margin:10px 0 0">Lektion ${i+1} von ${LESSONS.length}</p><h2>${esc(L.t)}</h2>${L.b()}
-      <div class="actions"><button class="btn ok" data-practice="${L.deck}">Lernkarten dazu üben</button>
+      <div class="actions"><div class="duo"><button class="btn ok" data-practice="${L.deck}">Lernkarten dazu üben</button><button class="btn primary" data-practice="${L.deck}" data-pm="quiz">Quiz dazu</button></div>
       <div class="pager">${pv?`<button class="btn ghost prev" data-lesson="${pv.id}"><small>Zurück</small>${esc(pv.t)}</button>`:''}
       ${nx?`<button class="btn ghost next" data-lesson="${nx.id}"><small>Weiter</small>${esc(nx.t)}</button>`:''}</div></div></div>`;
   }
@@ -1266,7 +1304,7 @@ function renderHelp(){
   <h2>Inhalte der App</h2>
   <p>Grundwissen über die Bundeswehr: ihre Stellung im Staat, NATO und Heimatschutz, Dienstgrade und Abzeichen, Uniformen, Waffen- und Barettfarben, Gliederung, Stabsabteilungen, Behörden und Haushalt, Anrede, Abkürzungen, NATO-Alphabet, Geheimschutz und die Begriffe der militärischen Digitalisierung. Insgesamt ${n} Karten in ${DECKS.length} Themen.</p>
   <h3>Grundlagen</h3>
-  <p>${LESSONS.length} Lektionen vermitteln das Wissen in sinnvoller Reihenfolge, mit Beispielen und Abzeichen. Am Ende jeder Lektion führt „Lernkarten dazu üben“ direkt zum passenden Thema. Gelesene Lektionen sind markiert.</p>
+  <p>${LESSONS.length} Lektionen vermitteln das Wissen in sinnvoller Reihenfolge, mit Beispielen und Abzeichen. Am Ende jeder Lektion führen „Lernkarten dazu üben“ und „Quiz dazu“ direkt zum passenden Thema. Gelesene Lektionen sind markiert.</p>
   <h3>Thema wählen</h3>
   <p>Oben bei Lernkarten und Quiz steht das aktuelle Thema. Antippen öffnet die Liste aller Themen mit ihrem Lernstand. „Alle Themen“ mischt alles.</p>
   <h3>Lernkarten</h3>
@@ -1373,7 +1411,7 @@ document.addEventListener('click',e=>{
   if(t.dataset.back||t.dataset.mode==='help'&&mode==='help'){go(helpFrom);return}
   if(t.dataset.mode){const m=t.dataset.mode;if(m==='basics')lesson=null;if(m==='quiz'&&mode==='quiz'&&quiz&&quiz.i>=quiz.qs.length)quiz=null;go(hashOf(m));return}
   if(t.dataset.lesson!==undefined){go('#/grundlagen'+(t.dataset.lesson?'/'+t.dataset.lesson:''));return}
-  if(t.dataset.practice){go(topicHash('learn',t.dataset.practice));return}
+  if(t.dataset.practice){go(topicHash(t.dataset.pm||'learn',t.dataset.practice));return}
   if(t.id==='topicBtn'){openSheet();return}
   if(t.dataset.close){closeSheet();return}
   if(t.dataset.deck){closeSheet();if(t.dataset.deck===deck){cur=null;quiz=null}go(topicHash(mode,t.dataset.deck));return}

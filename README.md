@@ -12,7 +12,7 @@ Strukturen verstehen wollen.
 ## Inhalte
 
 * Strukturen: BMVg, Teilstreitkräfte, Organisationsbereiche, Karrierecenter
-* Bundeswehr im Staat: Parlamentsarmee, Befehlsgewalt, Innere Führung, Führen mit Auftrag und Befehlsschema, Wehrbeauftragte, Statusgruppen, Wehrdienst
+* Bundeswehr im Staat: Parlamentsarmee, Befehlsgewalt, Innere Führung, Soldatenpflichten, Führen mit Auftrag und Befehlsschema, Wehrbeauftragte, Statusgruppen, Wehrdienst
 * Bündnis: NATO, Artikel 5, Brigade Litauen, Drehscheibe Deutschland, Heimatschutz, EU
 * Dienstgrade, Abzeichen und Anreden
 * Waffenfarben (Litze, Kragenspiegel) und Barettfarben
@@ -20,7 +20,7 @@ Strukturen verstehen wollen.
 * Stabsabteilungen (J1 bis J9)
 * Abkürzungen, Buchstabieralphabet und Datum-Zeit-Gruppe
 * Beschaffung und Haushalt: Bedarfsträger, BAAINBw, BWI, Einzelplan 14, Sondervermögen
-* Anrede, Gelöbnis, Zeremonien und Auszeichnungen
+* Anrede, ungeschriebene Regeln, Gelöbnis, Zeremonien und Auszeichnungen
 
 Lektionen, Lernkarten mit Karteikasten-System, Quiz und Nachschlagetabellen.
 Der Lernstand wird nur lokal im Browser gespeichert.
