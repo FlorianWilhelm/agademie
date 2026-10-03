@@ -12,7 +12,7 @@ Strukturen verstehen wollen.
 ## Inhalte
 
 * Strukturen: BMVg, Teilstreitkräfte, Organisationsbereiche, Karrierecenter
-* Bundeswehr im Staat: Parlamentsarmee, Befehlsgewalt, Innere Führung, Wehrbeauftragte, Statusgruppen, Wehrdienst
+* Bundeswehr im Staat: Parlamentsarmee, Befehlsgewalt, Innere Führung, Führen mit Auftrag und Befehlsschema, Wehrbeauftragte, Statusgruppen, Wehrdienst
 * Bündnis: NATO, Artikel 5, Brigade Litauen, Drehscheibe Deutschland, Heimatschutz, EU
 * Dienstgrade, Abzeichen und Anreden
 * Waffenfarben (Litze, Kragenspiegel) und Barettfarben

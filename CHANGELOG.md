@@ -4,6 +4,10 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
+## Unveröffentlicht
+
+- Lektion „Bundeswehr im Staat“: neuer Abschnitt „Führen mit Auftrag“ mit Absicht, Befehlsschema LADEF (Lage, Auftrag, Durchführung, Einsatzunterstützung, Führungsunterstützung) und dem Vergleich mit Mission Command der US Army, dazu vier neue Quizfragen
+
 ## 0.8 (2026-10-03)
 
 - Lektion „Abzeichen lesen“: neuer Abschnitt zu Offizieranwärtern mit silberfarbener Kordel (Heer, Luftwaffe) und goldfarbenem Stern (Marine) und dem Zusatz OA
