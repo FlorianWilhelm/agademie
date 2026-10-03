@@ -655,7 +655,7 @@ function suit(k,W=60){
   if(k==='feld'){
     // Flecktarn: dichte Tupfengruppen in Hellgrün, Dunkelgrün, Braun und Schwarz auf hellem Grund (feste Saat, damit es immer gleich aussieht)
     let r=123456789;const rnd=()=>(r=(r*16807)%2147483647)/2147483647;
-    const dots=[['#7a8a48',55,6,1.8],['#46582f',55,6,1.7],['#5c4630',40,5,1.5],['#23241e',30,3,1]].map(([c,n,m,s])=>{let d='';
+    const dots=[['#7a8a48',80,7,1.8],['#46582f',80,7,1.7],['#5c4630',60,6,1.5],['#23241e',45,4,1]].map(([c,n,m,s])=>{let d='';
       for(let j=0;j<n;j++){const cx=rnd()*60,cy=rnd()*70,q=2+Math.floor(rnd()*m);for(let h=0;h<q;h++){const x=cx+(rnd()-.5)*5,y=cy+(rnd()-.5)*5,rr=(.6+rnd()*.6)*s;d+=`M${(x-rr).toFixed(1)} ${y.toFixed(1)}a${rr.toFixed(1)} ${rr.toFixed(1)} 0 1 0 ${(2*rr).toFixed(1)} 0a${rr.toFixed(1)} ${rr.toFixed(1)} 0 1 0 ${(-2*rr).toFixed(1)} 0`}}
       return `<path d="${d}" fill="${c}"/>`}).join('');
     inner=`<g clip-path="url(#${id})">${dots}</g>
