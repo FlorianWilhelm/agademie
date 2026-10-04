@@ -1,8 +1,8 @@
-# AGAdemy
+# AGAdemie
 
 **Die AGA für Zivis.** Bundeswehr-Grundwissen spielerisch lernen.
 
-AGA steht für Allgemeine Grundausbildung. AGAdemy ist die zivile Variante:
+AGA steht für Allgemeine Grundausbildung. AGAdemie ist die zivile Variante:
 für alle, die mit der Bundeswehr zusammenarbeiten und ihre Sprache und
 Strukturen verstehen wollen.
 

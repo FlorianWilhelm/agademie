@@ -3,27 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>AGAdemy</title>
+<title>AGAdemie</title>
 <meta name="description" content="Privates Projekt: Bundeswehr-Grundwissen für Zivilisten. Kein Angebot der Bundeswehr oder des BMVg.">
 <meta name="theme-color" content="#0f1c33">
 <link rel="icon" href="icons/favicon.ico" sizes="48x48">
 <link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="manifest" href="icons/site.webmanifest">
-<meta name="apple-mobile-web-app-title" content="AGAdemy">
+<meta name="apple-mobile-web-app-title" content="AGAdemie">
 <meta name="mobile-web-app-capable" content="yes">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="AGAdemy">
+<meta property="og:site_name" content="AGAdemie">
 <meta property="og:url" content="https://florianwilhelm.info/agademy/">
-<meta property="og:title" content="AGAdemy: Die AGA für Zivis">
+<meta property="og:title" content="AGAdemie: Die AGA für Zivis">
 <meta property="og:description" content="Bundeswehr-Grundwissen spielerisch lernen. Privates Projekt, kein Angebot der Bundeswehr.">
 <meta property="og:image" content="https://florianwilhelm.info/agademy/social/banner-1200x630.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="AGAdemy: Die AGA für Zivis. Bundeswehr-Grundwissen spielerisch lernen.">
+<meta property="og:image:alt" content="AGAdemie: Die AGA für Zivis. Bundeswehr-Grundwissen spielerisch lernen.">
 <meta property="og:locale" content="de_DE">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AGAdemy: Die AGA für Zivis">
+<meta name="twitter:title" content="AGAdemie: Die AGA für Zivis">
 <meta name="twitter:description" content="Bundeswehr-Grundwissen spielerisch lernen. Privates Projekt, kein Angebot der Bundeswehr.">
 <meta name="twitter:image" content="https://florianwilhelm.info/agademy/social/banner-1200x630.png">
 <link rel="preload" href="fonts/source-sans-3.woff2" as="font" type="font/woff2" crossorigin>
@@ -205,7 +205,7 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 <body>
 <div class="app">
   <header class="top">
-    <div style="flex:1"><h1>AGAdemy <span class="ver" id="ver"></span></h1><p>Die AGA für Zivis: Bundeswehr-Grundwissen</p></div>
+    <div style="flex:1"><h1>AGAdemie <span class="ver" id="ver"></span></h1><p>Die AGA für Zivis: Bundeswehr-Grundwissen</p></div>
     <div class="tbtns"><button class="helpbtn inst" id="instBtn" aria-label="App installieren" title="App installieren" hidden><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 4v11m-4.5-4.5L12 15l4.5-4.5M5 19.5h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button class="helpbtn" data-mode="help" aria-label="Hilfe" title="Hilfe"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.2 9.3a2.9 2.9 0 1 1 4.3 2.5c-.9.5-1.5 1.1-1.5 2.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17.3" r="1.2" fill="currentColor"/></svg></button></div>
   </header>
@@ -1157,7 +1157,7 @@ for(const q in LESSON_OF_Q) if(!CARDS.some(c=>c.q===q)) console.error('Lektionsz
 CARDS.forEach(c=>c.lesson=LESSON_OF_Q[c.q]||LESSON_OF_KIND[c.kind]||LESSON_OF_DECK[c.deck]);
 
 /* ---------- Speicher ---------- */
-const KEY='agademy:v1';
+const KEY='agademie:v1';
 let store={box:{},read:{}};
 try{const s=localStorage.getItem(KEY);if(s) store=JSON.parse(s)||store;if(!store.box) store.box={};if(!store.read) store.read={}}catch(e){}
 for(const id in store.box) if(!CARD_IDS.has(id)) delete store.box[id]; // Lernstand entfernter oder geänderter Karten (und alte positionsbasierte IDs) verwerfen
@@ -1346,9 +1346,9 @@ function install(){ // Browser mit eigenem Dialog fragen direkt, sonst führt de
 function renderHelp(){
   const n=CARDS.length;
   return `<div class="help"><button class="back" data-back="1">Zurück zu ${{basics:'Grundlagen',learn:'Lernkarten',quiz:'Quiz',ref:'Nachschlagen'}[MODES[helpFrom.split('/')[1]]]}</button>
-  <h2>Was ist AGAdemy?</h2>
-  <p>AGA steht für Allgemeine Grundausbildung. AGAdemy ist die zivile Variante: für alle, die mit der Bundeswehr zusammenarbeiten und ihre Sprache und Strukturen verstehen wollen.</p>
-  <div class="callout"><strong>Kein Angebot der Bundeswehr.</strong> AGAdemy ist ein privates Projekt. Es ist kein Angebot, keine Veröffentlichung und keine offizielle Anwendung der Bundeswehr, des Bundesministeriums der Verteidigung oder einer anderen Dienststelle und steht mit ihnen in keiner Verbindung. Alle Inhalte beruhen auf öffentlich zugänglichen Quellen und können Fehler enthalten. Verbindlich sind allein die offiziellen Quellen. Fehler gefunden? Gern als <a href="https://github.com/FlorianWilhelm/agademy/issues">Issue auf GitHub</a> melden.</div>
+  <h2>Was ist AGAdemie?</h2>
+  <p>AGA steht für Allgemeine Grundausbildung. AGAdemie ist die zivile Variante: für alle, die mit der Bundeswehr zusammenarbeiten und ihre Sprache und Strukturen verstehen wollen.</p>
+  <div class="callout"><strong>Kein Angebot der Bundeswehr.</strong> AGAdemie ist ein privates Projekt. Es ist kein Angebot, keine Veröffentlichung und keine offizielle Anwendung der Bundeswehr, des Bundesministeriums der Verteidigung oder einer anderen Dienststelle und steht mit ihnen in keiner Verbindung. Alle Inhalte beruhen auf öffentlich zugänglichen Quellen und können Fehler enthalten. Verbindlich sind allein die offiziellen Quellen. Fehler gefunden? Gern als <a href="https://github.com/FlorianWilhelm/agademy/issues">Issue auf GitHub</a> melden.</div>
   <h2>Inhalte der App</h2>
   <p>Grundwissen über die Bundeswehr: ihre Stellung im Staat, NATO und Heimatschutz, Dienstgrade und Abzeichen, Uniformen, Waffen- und Barettfarben, Gliederung, Stabsabteilungen, Behörden und Haushalt, Anrede, Abkürzungen, NATO-Alphabet, Geheimschutz und die Begriffe der militärischen Digitalisierung. Insgesamt ${n} Karten zu ${LESSONS.length} Lektionen.</p>
   <h3>Grundlagen</h3>
@@ -1365,7 +1365,7 @@ function renderHelp(){
   <h2>Wie belastbar die Inhalte sind</h2>
   <p>Dienstgrade, Gliederung und Behördenangaben stammen von bundeswehr.de, Abzeichen und Dienstgradbezeichnungen aus der Anordnung des Bundespräsidenten über die Dienstgradbezeichnungen und die Uniform (2021), Waffen- und Barettfarben aus der BMVg-Broschüre „Bekleidung und Uniformen der Bundeswehr“ (April 2026), Rechtsrahmen aus Grundgesetz, Soldatengesetz, Parlamentsbeteiligungsgesetz und Wehrdienst-Modernisierungsgesetz, NATO-Angaben von nato.int, Disziplinarbefugnis aus der Wehrdisziplinarordnung, Geheimschutz aus dem SÜG und der VSA, Architekturbegriffe u. a. nach Fraunhofer IESE. NATO-Rangcodes folgen STANAG 2116, Größenzeichen NATO APP-6 in deutscher Lesart. Die Abzeichen sind nach der Anordnung des Bundespräsidenten vereinfacht nachgezeichnet. Stärkeangaben sind Größenordnungen, Führungsdienstgrade typische Besetzungen. Stand Oktober 2026.</p>
   <h2 id="app">Als App installieren</h2>
-  ${standalone()?'<p>AGAdemy läuft gerade als App. Nach dem ersten Öffnen funktioniert sie auch ohne Internet.</p>':`<p>AGAdemy lässt sich wie eine App auf den Startbildschirm legen. Sie öffnet sich dann ohne Browserleiste und funktioniert nach dem ersten Öffnen auch ohne Internet.</p>
+  ${standalone()?'<p>AGAdemie läuft gerade als App. Nach dem ersten Öffnen funktioniert sie auch ohne Internet.</p>':`<p>AGAdemie lässt sich wie eine App auf den Startbildschirm legen. Sie öffnet sich dann ohne Browserleiste und funktioniert nach dem ersten Öffnen auch ohne Internet.</p>
   ${installEvt?'<button class="btn" id="install" style="flex:none;padding:10px 14px;font-size:16px;margin-bottom:10px">Jetzt installieren</button>':''}
   <p><strong>iPhone und iPad:</strong> In Safari unten (bzw. oben) auf das Teilen-Symbol tippen, dann „Zum Home-Bildschirm“ und „Hinzufügen“.</p>
   <p><strong>Android:</strong> In Chrome oben rechts auf das Menü ⋮ tippen, dann „App installieren“ oder „Zum Startbildschirm hinzufügen“.</p>
@@ -1390,7 +1390,7 @@ function render(){
   if(mode==='ref'&&refTab==='abz') setHl(hl);
   spy();
   const sub=lesson&&mode==='basics'?LESSONS.find(l=>l.id===lesson).t:mode==='ref'?v.querySelector('[aria-pressed="true"]').textContent:{basics:'Grundlagen',learn:'Lernkarten',quiz:'Quiz',help:'Hilfe'}[mode];
-  document.title=sub+' · AGAdemy';
+  document.title=sub+' · AGAdemie';
 }
 function filterGloss(){
   const q=glossQ.trim().toLowerCase();let any=false;

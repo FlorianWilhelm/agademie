@@ -1,7 +1,7 @@
-// Service Worker: macht AGAdemy offline nutzbar.
+// Service Worker: macht AGAdemie offline nutzbar.
 // Seite: zuerst aus dem Netz (damit Updates sofort ankommen), sonst aus dem Cache.
 // Icons und Schriften: aus dem Cache, im Hintergrund aktualisiert.
-const CACHE='agademy-v4';
+const CACHE='agademie-v1';
 const CORE=['./','icons/site.webmanifest','icons/favicon.svg','icons/favicon.ico','icons/apple-touch-icon.png','icons/icon-192.png','icons/icon-512.png',
   'fonts/barlow-condensed-500.woff2','fonts/barlow-condensed-600.woff2','fonts/barlow-condensed-700.woff2','fonts/source-sans-3.woff2'];
 

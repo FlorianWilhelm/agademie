@@ -1,4 +1,4 @@
-# AGAdemy
+# AGAdemie
 
 ## Branches und Releases
 

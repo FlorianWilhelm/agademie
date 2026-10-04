@@ -1,6 +1,6 @@
 ---
 name: release
-description: Neue AGAdemy-Version veröffentlichen. dev nach main mergen, Changelog prüfen, taggen, pushen und GitHub-Release anlegen.
+description: Neue AGAdemie-Version veröffentlichen. dev nach main mergen, Changelog prüfen, taggen, pushen und GitHub-Release anlegen.
 argument-hint: "[version, z. B. 0.3]"
 disable-model-invocation: true
 ---
