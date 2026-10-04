@@ -63,5 +63,5 @@ Danach steht `dev` auf dem Release-Commit und es kann weitergehen.
 ## 5. Abschluss
 
 Kurz melden: Version, Link zum GitHub-Release (`gh release view v<version> --json url -q .url`)
-und dass die Seite unter https://florianwilhelm.info/agademy/ nach dem Pages-Build
+und dass die Seite unter https://florianwilhelm.info/agademie/ nach dem Pages-Build
 (ein bis zwei Minuten) aktuell ist.
