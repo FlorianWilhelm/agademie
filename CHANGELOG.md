@@ -6,6 +6,7 @@ per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
 ## Unveröffentlicht
 
+- Lektion „Anrede und Umgang“: neuer Abschnitt „Sprache im Dienst“ mit dem Wichtigsten zuerst, knappen Formeln, direktem Feedback und Entscheidungsfreude, dazu drei neue Quizfragen
 - Lektion „Anrede und Umgang“: Einleitung zu den ungeschriebenen Regeln und neuer Abschnitt „Auftreten“ mit Händen aus den Taschen, Nicht-Anlehnen, Händedruck und Grußpflicht, dazu drei neue Quizfragen. „Gelöbnis, Eid und Zeremonien“ steht jetzt vor den ungeschriebenen Regeln
 
 ## 0.11 (2026-10-03)
