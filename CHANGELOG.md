@@ -4,7 +4,7 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
-## Unveröffentlicht
+## 0.12 (2026-10-04)
 
 - Die App heißt jetzt AGAdemie statt AGAdemy, passend zum deutschen Wort Akademie. Die neue Adresse ist florianwilhelm.info/agademie, der Lernstand beginnt dabei einmalig von vorn
 - Lektion „Anrede und Umgang“: neuer Abschnitt „Sprache im Dienst“ mit dem Wichtigsten zuerst, knappen Formeln, direktem Feedback und Entscheidungsfreude, dazu drei neue Quizfragen

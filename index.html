@@ -222,10 +222,15 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 
 <script>
 /* ---------- Version: setzt release.sh passend zum Git-Tag, nicht von Hand ändern ---------- */
-const VERSION='0.11', UPDATED='2026-10-03';
+const VERSION='0.12', UPDATED='2026-10-04';
 document.getElementById('ver').textContent=`v${VERSION} · ${UPDATED}`;
 // Was ist neu: die letzten Versionen aus CHANGELOG.md, setzt release.sh zusammen mit der Version
 const CHANGES=[
+{v:"0.12",d:"2026-10-04",items:[
+"Die App heißt jetzt AGAdemie statt AGAdemy, passend zum deutschen Wort Akademie. Die neue Adresse ist florianwilhelm.info/agademie, der Lernstand beginnt dabei einmalig von vorn",
+"Lektion „Anrede und Umgang“: neuer Abschnitt „Sprache im Dienst“ mit dem Wichtigsten zuerst, knappen Formeln, direktem Feedback und Entscheidungsfreude, dazu drei neue Quizfragen",
+"Lektion „Anrede und Umgang“: Einleitung zu den ungeschriebenen Regeln und neuer Abschnitt „Auftreten“ mit Händen aus den Taschen, Nicht-Anlehnen, Händedruck und Grußpflicht, dazu drei neue Quizfragen. „Gelöbnis, Eid und Zeremonien“ steht jetzt vor den ungeschriebenen Regeln",
+]},
 {v:"0.11",d:"2026-10-03",items:[
 "Lektion „Bundeswehr im Staat“: Leitsatz „Leben in der Lage“ als Folge aus Moltkes Satz über den Operationsplan, dazu eine neue Quizfrage",
 "Lektion „Anrede und Umgang“: „Schweiß spart Blut“, „Auftrag vor Befindlichkeit“ und „Leben in der Lage“ bei den ungeschriebenen Regeln, dazu zwei neue Quizfragen",
@@ -234,15 +239,6 @@ const CHANGES=[
 "Lernkarten und Quiz: Die Themen sind jetzt genau die Lektionen, mit demselben Titel, derselben Nummer und in derselben Reihenfolge. „Mit Lernkarten üben“ und „Im Quiz prüfen“ am Ende einer Lektion fragen nur noch, was in dieser Lektion vorkommt, statt eines größeren Sammelthemas (etwa bei „Feldanzug und Dienstanzug“ bisher alle 241 Abzeichen-Karten). Der Lernstand bleibt erhalten",
 "Lektion „Wer braucht, wer beschafft“: das neu gegründete Innovationszentrum der Bundeswehr (InnoZBw) in Erding, dazu zwei neue Lernkarten und ein Eintrag unter „Behörden & Dienststellen“",
 "Abkürzungen: Jede Lektion führt die Abkürzungen ein, nach denen Lernkarten und Quiz fragen, etwa OpFüKdoBw, BMVg, MAD, StAN, SHAPE, JSEC, FCAS und MGCS. Ist die Antwort einer Lernkarte eine Abkürzung, zeigt das Aufdecken darunter die ausgeschriebene Form, etwa „Operatives Führungskommando der Bundeswehr“ unter OpFüKdoBw. Das Quiz fragt weiter nur die Abkürzung ab. Die Lektion „Abkürzungen im Dienstalltag“ zeigt alle 18 Alltagskürzel",
-]},
-{v:"0.9",d:"2026-10-03",items:[
-"Lernkarten: Der Lernstand bleibt jetzt erhalten, wenn neue Karten dazukommen. Bisher gespeicherter Lernstand der Lernkarten wird dafür einmalig zurückgesetzt, gelesene Lektionen bleiben markiert",
-"Am Ende jeder Lektion führen zwei gleichrangige Knöpfe zum passenden Thema: „Mit Lernkarten üben“ und neu „Im Quiz prüfen“",
-"Lektion „Bundeswehr im Staat“: neuer Abschnitt „Führen mit Auftrag“ mit Absicht, Befehlsschema LADEF (Lage, Auftrag, Durchführung, Einsatzunterstützung, Führungsunterstützung) und dem Vergleich mit Mission Command der US Army, dazu vier neue Quizfragen",
-"Lektion „Bundeswehr im Staat“: Führungsvorgang als Kreislauf aus Lagefeststellung, Planung und Befehlsgebung, dazu Moltkes Satz über den Operationsplan",
-"Lektion „Bundeswehr im Staat“: neuer Abschnitt „Soldatenpflichten“ mit Grundpflicht, Pflichten der Vorgesetzten, Gehorsam, Kameradschaft und Wahrheit (§§ 7, 10 bis 13 Soldatengesetz)",
-"Lektion „Anrede und Umgang“: neuer Abschnitt „Ungeschriebene Regeln“ mit „Melden macht frei“, Soldatenpünktlichkeit und Dienstweg",
-"Elf neue Quizfragen zu Führungsvorgang, Soldatenpflichten und ungeschriebenen Regeln",
 ]},
 ]; // Ende CHANGES
 /* ---------- Daten ---------- */
