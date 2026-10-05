@@ -4,7 +4,7 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
-## Unveröffentlicht
+## 0.14.2 (2026-10-05)
 
 - Link-Vorschau: Das Vorschaubild zeigt den Namen jetzt in der Mitte, damit er auch in kleinen Vorschauen wie bei Slack ganz zu sehen ist
 
