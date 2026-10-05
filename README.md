@@ -18,6 +18,7 @@ Strukturen verstehen wollen.
 * Waffenfarben (Litze, Kragenspiegel) und Barettfarben
 * Gliederung vom Trupp zur Division, Großverbände, NATO-Größenzeichen
 * Stabsabteilungen (J1 bis J9)
+* Führungsbegriffe: Raum, Bewegung, Verzögern, Ausweichen, Lösen, dazu wirken und andere Umschreibungen
 * Abkürzungen, Buchstabieralphabet und Datum-Zeit-Gruppe
 * Beschaffung und Haushalt: Bedarfsträger, BAAINBw, BWI, Einzelplan 14, Sondervermögen
 * Anrede, ungeschriebene Regeln, Gelöbnis, Zeremonien und Auszeichnungen

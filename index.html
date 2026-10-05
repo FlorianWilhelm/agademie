@@ -841,6 +841,24 @@ BEH.push(...BEH2);GLOSS.push(...GLOSS2);
  ['eti','eti','Woher stammt das Wort „Manöverkritik“?','Aus der Auswertung nach militärischen Übungen','Dort werden Fehler offen benannt. Heute wird das Wort auch außerhalb des Militärs gebraucht.',['Aus der Theaterkritik','Aus dem Sport','Aus der Politik']],
  ['eti','eti','Warum werden Befehle oft wiederholt?','Damit klar ist, dass sie richtig angekommen sind','Missverständnisse können im Ernstfall Leben kosten.',['Aus Höflichkeit','Weil es das Soldatengesetz verlangt','Um Zeit zu gewinnen']],
 ].forEach(([d,k,q,a,n,x])=>add(d,k,q,a,n,x));
+/* Raum, Bewegung, Gefecht */
+[
+ ['fb','fb','Welche drei Gefechtsarten unterscheidet das Heer?','Angriff, Verteidigung und Verzögerung',null,['Angriff, Verteidigung und Rückzug','Angriff, Halten und Sperren','Aufklärung, Angriff und Verfolgung']],
+ ['fb','fb','Was tauscht eine Truppe in der Verzögerung?','Raum gegen Zeit','Sie gibt schrittweise Gelände auf, hemmt, bindet und nutzt den Feind ab.',['Zeit gegen Kräfte','Kräfte gegen Raum','Feuer gegen Bewegung']],
+ ['fb','fb','Wo hält sich eine Truppe für weitere Aufträge bereit?','Im Verfügungsraum','Unmittelbar vor dem Angriff ordnet sie sich im Bereitstellungsraum.',['Im Bereitstellungsraum','Im Gefechtsstreifen','Im rückwärtigen Raum']],
+ ['fb','fb','Wo ordnet sich eine Truppe unmittelbar vor dem Angriff?','Im Bereitstellungsraum',null,['Im Verfügungsraum','Im Gefechtsstreifen','Im rückwärtigen Raum']],
+ ['fb','fb','Was grenzt einen Gefechtsstreifen gegen die Nachbarn ab?','Trennungslinien',null,['Sperren','Marschstraßen','Landesgrenzen']],
+ ['fb','fb','Was wird verbracht?','Material, Verwundete oder Gefangene, die andere an einen Ort schaffen','Wechselt eine Truppe selbst den Raum, heißt das verlegen.',['Eine Truppe, die selbst in einen anderen Raum wechselt','Ein Befehl, der weitergegeben wird','Eine Stellung, die aufgegeben wird']],
+ ['fb','fb','Was bedeutet „Antreten“ im Gefecht?','Den Angriff beginnen','Im Formaldienst heißt Antreten, sich in Reih und Glied aufzustellen.',['Sich in Reih und Glied aufstellen','Eine Stellung beziehen','Den Wehrdienst beginnen']],
+ ['fb','fb','Was heißt „Abriegeln“ im Gefecht?','Einen Einbruch des Feindes eingrenzen',null,['Eine Kaserne abschließen','Den Funkverkehr sperren','Eine Straße für Zivilisten sperren']],
+ ['fb','fb','Was meint „Ausweichen“ im Gefecht?','Geplant und unter Kontrolle nach rückwärts gehen','Etwa in der Verzögerung von einer Stellung in die nächste.',['Ungeordnet fliehen','Ein Hindernis umfahren','Einen Befehl umgehen']],
+ ['fb','fb','Was heißt „Lösen“ im Gefecht?','Die Gefechtsberührung mit dem Feind abbrechen','Meist abschnittsweise: Ein Teil gibt Feuerschutz, der andere setzt sich ab.',['Einen Auftrag erfüllen','Gefangene freilassen','Eine Sperre räumen']],
+ ['fb','fb','Was meint „Aufnahme“ im Gefecht?','Truppen in Stellung übernehmen eigene Kräfte, die zurückkommen',null,['Neue Soldaten werden eingestellt','Der Feind wird gefangen genommen','Eine Meldung wird notiert']],
+ ['fb','fb','Was bedeutet „wirken“ im militärischen Sprachgebrauch?','Waffen einsetzen','Waffen und Munition heißen Wirkmittel.',['Aufklären','Eine Stellung ausbauen','Verwundete versorgen']],
+ ['fb','fb','Was meint „rausnehmen“ im militärischen Jargon?','Eine einzelne Person gezielt ausschalten, meist töten','Im Polizeijargon heißt es eher, jemanden festzunehmen oder aus einer Menge zu holen.',['Einen Soldaten vom Dienst befreien','Ein Fahrzeug aus der Kolonne ziehen','Einen Verwundeten bergen']],
+ ['fb','fb','Welches militärische Wort wurde 1999 zum Unwort des Jahres?','Kollateralschaden','Gemeint sind unbeabsichtigte Schäden, vor allem getötete oder verletzte Zivilisten.',['Wirkmittel','Friendly Fire','Robustes Mandat']],
+ ['fb','fb','Was erlaubt ein robustes Mandat?','Waffengewalt auch, um den Auftrag durchzusetzen','Nicht nur zur Selbstverteidigung.',['Nur Waffengewalt zur Selbstverteidigung','Einsätze ohne Zustimmung des Bundestages','Den Einsatz von Wehrpflichtigen']],
+].forEach(([d,k,q,a,n,x])=>add(d,k,q,a,n,x));
 /* ---------- Symbole ---------- */
 function marker(m){
   const parts=[];let w=0;const sp=4;
@@ -1070,6 +1088,66 @@ const LESSONS=[
   <p>Ein Kommandeur führt, sein Stab bereitet Entscheidungen vor und setzt sie um. Der Stab ist in nummerierte Abteilungen gegliedert. Die Nummer bedeutet überall dasselbe:</p>
   <ol class="ladder">${STAB.map(([k,v])=>`<li><strong>${k.slice(1)}</strong><span>${esc(v)}</span></li>`).join('')}</ol>
   <p>Der Buchstabe davor zeigt die Ebene oder den Stabstyp: S im Bataillon, G auf höheren Ebenen des Heeres, A für die Luftwaffe, N für die Marine, J in streitkräftegemeinsamen Stäben. Ein Bataillon hat typischerweise nur S1 bis S6, dort umfasst die S3 auch die Ausbildung.</p>`},
+ {id:'gefecht',t:'Raum, Bewegung, Gefecht',d:'Führungsbegriffe von Verfügungsraum bis Verzögern, dazu wirken und andere Umschreibungen',b:()=>`
+  <p>Für Bewegungen und Gefechtshandlungen hat die Bundeswehr eigene Wörter. Sie klingen manchmal umständlich, sagen aber genau, was gemeint ist. Wer den Auftrag „verzögern“ bekommt statt „halten“, weiß ohne weitere Erklärung, dass er Gelände aufgeben darf, um Zeit zu gewinnen. Das Heer unterscheidet drei Gefechtsarten: Angriff, Verteidigung und Verzögerung.</p>
+  <h3>Raum</h3>
+  <p>Kräfte, Raum und Zeit sind die Größen, mit denen jede Planung rechnet. Raum meint Gelände als militärische Größe: Man kann ihn gewinnen, halten oder aufgeben und Raum gegen Zeit tauschen. „Im Raum Münster“ bezeichnet bewusst kein genaues Ziel, sondern ein Gebiet.</p>
+  <ol class="ladder">
+   <li><strong>Verfügungsraum</strong><span>Hier hält sich eine Truppe für weitere Aufträge bereit, außerhalb unmittelbarer Kampfhandlungen.</span></li>
+   <li><strong>Bereitstellungsraum</strong><span>Hier ordnet sich eine Truppe unmittelbar vor dem Angriff, möglichst gedeckt, und tritt von dort an.</span></li>
+   <li><strong>Einsatzraum</strong><span>Das Gebiet, in dem eine Truppe ihren Auftrag erfüllt.</span></li>
+   <li><strong>Gefechtsstreifen</strong><span>Der Raum, den eine Truppe für das Gefecht zugewiesen bekommt. Trennungslinien grenzen ihn gegen die Nachbarn ab.</span></li>
+   <li><strong>Rückwärtiger Raum</strong><span>Hinter den kämpfenden Truppen, mit Versorgung, Verkehrswegen und Reserven.</span></li>
+  </ol>
+  <h3>Bewegen ohne Gefecht</h3>
+  <ol class="ladder">
+   <li><strong>Verlegen</strong><span>Eine Truppe wechselt in einen anderen Raum, über Straße, Schiene, See oder Luft.</span></li>
+   <li><strong>Verbringen</strong><span>Material, Verwundete oder Gefangene werden an einen Ort geschafft. Sie bewegen sich nicht selbst, andere bringen sie hin.</span></li>
+   <li><strong>Einrücken, abrücken</strong><span>In einen Raum oder eine Stellung hineingehen und ihn geordnet wieder verlassen. Einrücken heißt daneben auch, den Wehrdienst anzutreten.</span></li>
+   <li><strong>Beziehen</strong><span>Einen Raum oder eine Stellung einnehmen und einrichten, etwa „Stellung beziehen“.</span></li>
+   <li><strong>Heranführen</strong><span>Kräfte gezielt an einen Ort bringen, etwa Reserven dorthin, wo sie gebraucht werden.</span></li>
+   <li><strong>Dazustoßen</strong><span>Ein Teil trifft auf eine Truppe und schließt sich ihr an. Wer dann wem Befehle gibt, regelt die Unterstellung.</span></li>
+   <li><strong>Ausholen</strong><span>Einen weiten Bogen schlagen, etwa um den Gegner zu umgehen und ihn von der Seite zu fassen.</span></li>
+  </ol>
+  <h3>Nach vorn</h3>
+  <ol class="ladder">
+   <li><strong>Antreten</strong><span>Den Angriff aus der Bereitstellung beginnen. Im Formaldienst heißt dasselbe Wort, sich in Reih und Glied aufzustellen.</span></li>
+   <li><strong>Vorgehen</strong><span>Sich auf den Feind zubewegen. Vorrücken meint dasselbe.</span></li>
+   <li><strong>Nehmen</strong><span>Ein Geländeteil, das der Feind besetzt hält, im Angriff erobern.</span></li>
+   <li><strong>Inbesitznehmen</strong><span>Ein Geländeteil besetzen, in dem kein oder nur schwacher Feind erwartet wird.</span></li>
+   <li><strong>Gegenangriff</strong><span>Angriff aus der Verteidigung oder Verzögerung heraus, etwa gegen einen eingebrochenen Feind.</span></li>
+  </ol>
+  <h3>Stehen bleiben</h3>
+  <ol class="ladder">
+   <li><strong>Halten</strong><span>Einen Raum behaupten und nicht aufgeben, auch unter Druck.</span></li>
+   <li><strong>Sperren</strong><span>Den Feind an einer Stelle zum Stehen bringen, meist mit Hindernissen und Feuer. Er muss sich dort abarbeiten.</span></li>
+   <li><strong>Binden</strong><span>Kräfte des Gegners an einer Stelle festhalten, damit sie anderswo fehlen.</span></li>
+   <li><strong>Abriegeln</strong><span>Einen Einbruch des Feindes eingrenzen, damit er sich nicht ausweitet.</span></li>
+  </ol>
+  <h3>Zurück</h3>
+  <p>Von Rückzug ist im Dienst selten die Rede. Stattdessen unterscheiden mehrere Begriffe genau, was geschieht.</p>
+  <ol class="ladder">
+   <li><strong>Verzögern</strong><span>Raum gegen Zeit tauschen. Die Truppe gibt schrittweise Gelände auf, hemmt, bindet und nutzt den Feind ab und hält dabei Kontakt zu ihm.</span></li>
+   <li><strong>Ausweichen</strong><span>Geplant und unter Kontrolle nach rückwärts gehen, etwa in der Verzögerung von einer Stellung in die nächste.</span></li>
+   <li><strong>Lösen</strong><span>Die Gefechtsberührung abbrechen. Meist abschnittsweise: Ein Teil gibt Feuerschutz, der andere setzt sich ab, dann wird gewechselt.</span></li>
+   <li><strong>Absetzen</strong><span>Nach dem Lösen Abstand zum Feind gewinnen und in vorbereitete Stellungen gehen.</span></li>
+   <li><strong>Aufnahme</strong><span>Truppen in einer Stellung übernehmen eigene Kräfte, die zurückkommen, etwa Aufklärer oder die verzögernde Truppe.</span></li>
+   <li><strong>Ablösen</strong><span>Eine Truppe übernimmt Raum und Auftrag einer anderen, die dann herausgelöst wird.</span></li>
+  </ol>
+  <div class="callout">Diese Wörter beschönigen nichts, sie sind genauer als „Rückzug“. Sie halten fest, ob noch Feindberührung besteht, ob Zeit gewonnen werden soll und wer die Truppe aufnimmt. Vor allem zeigen sie, dass die Führung entscheidet, wann Raum aufgegeben wird.</div>
+  <h3>Wirken und andere Umschreibungen</h3>
+  <p>Wo es ums Töten und Sterben geht, wird die Sprache dagegen oft technisch. Das schafft Abstand und hält Meldungen sachlich. Von außen klingt es leicht verharmlosend.</p>
+  <ol class="ladder">
+   <li><strong>Wirken</strong><span>Waffen einsetzen. Waffen und Munition heißen Wirkmittel, Waffensysteme Wirksysteme. „Wirkung im Ziel“ meldet einen Treffer.</span></li>
+   <li><strong>Bekämpfen</strong><span>Ein Ziel mit Waffen angreifen, vom Fahrzeug bis zur feindlichen Stellung.</span></li>
+   <li><strong>Ausschalten, neutralisieren</strong><span>Einen Gegner kampfunfähig machen. Ob er dabei getötet, verwundet oder nur sein Gerät zerstört wird, lässt das Wort offen.</span></li>
+   <li><strong>Rausnehmen</strong><span>Jargon für das gezielte Ausschalten einer einzelnen Person, meist ist Töten gemeint. Im Polizeijargon heißt es dagegen eher, jemanden festzunehmen oder aus einer Menge zu holen.</span></li>
+   <li><strong>Verluste</strong><span>Eigene Tote, Verwundete und Vermisste zusammen. Gefallen ist, wer im Gefecht getötet wurde.</span></li>
+   <li><strong>Kollateralschaden</strong><span>Unbeabsichtigte Schäden, vor allem getötete oder verletzte Zivilisten. 1999 wurde das Wort zum Unwort des Jahres gewählt.</span></li>
+   <li><strong>Robustes Mandat</strong><span>Ein Einsatzauftrag, der Waffengewalt nicht nur zur Selbstverteidigung erlaubt, sondern auch, um den Auftrag durchzusetzen.</span></li>
+   <li><strong>Kinetisch</strong><span>Mit Waffen und physischer Gewalt. Nicht kinetisch wirkt man etwa mit Störsendern, Cyberangriffen oder Information.</span></li>
+  </ol>
+  <div class="callout">Wie schwer sich auch die Politik mit dem Wort Krieg tat, zeigt Afghanistan. Lange war vom Stabilisierungseinsatz die Rede. Ende 2009 sprach Verteidigungsminister Karl-Theodor zu Guttenberg von „kriegsähnlichen Zuständen“, 2010 sagte er, man könne umgangssprachlich von Krieg sprechen. Die Soldaten im Einsatz nannten es längst so.</div>`},
  {id:'buendnis',t:'Im Bündnis: NATO, EU und Heimatschutz',d:'Artikel 5, NATO-Kommandostruktur, Litauen und Drehscheibe Deutschland',b:()=>`
   <p>Deutschland verteidigt sich nicht allein. Die NATO (North Atlantic Treaty Organization) wurde 1949 gegründet, die Bundesrepublik trat 1955 bei. Heute hat das Bündnis 32 Mitglieder. Kern ist Artikel 5 des Nordatlantikvertrags: Ein bewaffneter Angriff auf einen Mitgliedstaat gilt als Angriff auf alle. Jeder Staat leistet Beistand mit den Maßnahmen, die er für erforderlich hält. Ausgerufen wurde der Bündnisfall bisher einmal, nach dem 11. September 2001. Artikel 4 sieht Konsultationen vor, wenn sich ein Mitglied bedroht sieht.</p>
   <h3>Wie die NATO geführt wird</h3>
@@ -1137,7 +1215,7 @@ const LESSONS=[
 ];
 // Jede Karte gehört zu genau einer Lektion, Lernkarten und Quiz üben je Lektion. Die Zuordnung folgt dem Stapel (deck, Teil der Karten-ID),
 // wo ein Stapel mehrere Lektionen abdeckt der Kartenart, einzelne Karten sind nach ihrer Frage zugeordnet.
-const LESSON_OF_DECK={dg:'dienstgrade',mar:'dienstgrade',abz:'abzeichen',eti:'anrede',gl:'gliederung',sym:'zeichen',stab:'staebe',beh:'aufbau',staat:'staat',nato:'buendnis',abk:'kuerzel',vs:'geheimschutz',dig:'digital'};
+const LESSON_OF_DECK={dg:'dienstgrade',mar:'dienstgrade',abz:'abzeichen',eti:'anrede',gl:'gliederung',sym:'zeichen',stab:'staebe',fb:'gefecht',beh:'aufbau',staat:'staat',nato:'buendnis',abk:'kuerzel',vs:'geheimschutz',dig:'digital'};
 const LESSON_OF_KIND={anz:'anzuege',wf:'farben',wfrev:'farben',bar:'farben',farbe:'farben','g-ind':'beschaffung',proj:'beschaffung',haush:'beschaffung'};
 const LESSON_OF_Q={
  'Abkürzung: BAAINBw':'beschaffung','Abkürzung: BWI':'beschaffung','Abkürzung: CIHBw':'beschaffung','Abkürzung: InnoZBw':'beschaffung','Abkürzung: ZDigBw':'beschaffung','Abkürzung: CPM':'beschaffung',
@@ -1346,7 +1424,7 @@ function renderHelp(){
   <p>AGA steht für Allgemeine Grundausbildung. AGAdemie ist die zivile Variante: für alle, die mit der Bundeswehr zusammenarbeiten und ihre Sprache und Strukturen verstehen wollen.</p>
   <div class="callout"><strong>Kein Angebot der Bundeswehr.</strong> AGAdemie ist ein privates Projekt. Es ist kein Angebot, keine Veröffentlichung und keine offizielle Anwendung der Bundeswehr, des Bundesministeriums der Verteidigung oder einer anderen Dienststelle und steht mit ihnen in keiner Verbindung. Alle Inhalte beruhen auf öffentlich zugänglichen Quellen und können Fehler enthalten. Verbindlich sind allein die offiziellen Quellen. Fehler gefunden? Gern als <a href="https://github.com/FlorianWilhelm/agademie/issues">Issue auf GitHub</a> melden.</div>
   <h2>Inhalte der App</h2>
-  <p>Grundwissen über die Bundeswehr: ihre Stellung im Staat, NATO und Heimatschutz, Dienstgrade und Abzeichen, Uniformen, Waffen- und Barettfarben, Gliederung, Stabsabteilungen, Behörden und Haushalt, Anrede, Abkürzungen, NATO-Alphabet, Geheimschutz und die Begriffe der militärischen Digitalisierung. Insgesamt ${n} Karten zu ${LESSONS.length} Lektionen.</p>
+  <p>Grundwissen über die Bundeswehr: ihre Stellung im Staat, NATO und Heimatschutz, Dienstgrade und Abzeichen, Uniformen, Waffen- und Barettfarben, Gliederung, Stabsabteilungen, Führungsbegriffe, Behörden und Haushalt, Anrede, Abkürzungen, NATO-Alphabet, Geheimschutz und die Begriffe der militärischen Digitalisierung. Insgesamt ${n} Karten zu ${LESSONS.length} Lektionen.</p>
   <h3>Grundlagen</h3>
   <p>${LESSONS.length} Lektionen vermitteln das Wissen in sinnvoller Reihenfolge, mit Beispielen und Abzeichen. Am Ende jeder Lektion führen „Mit Lernkarten üben“ und „Im Quiz prüfen“ direkt zum passenden Thema. Gelesene Lektionen sind markiert.</p>
   <h3>Thema wählen</h3>
