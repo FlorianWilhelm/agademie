@@ -222,10 +222,13 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 
 <script>
 /* ---------- Version: setzt release.sh passend zum Git-Tag, nicht von Hand ändern ---------- */
-const VERSION='0.14', UPDATED='2026-10-05';
+const VERSION='0.14.1', UPDATED='2026-10-05';
 document.getElementById('ver').textContent=`v${VERSION} · ${UPDATED}`;
 // Was ist neu: die letzten Versionen aus CHANGELOG.md, setzt release.sh zusammen mit der Version
 const CHANGES=[
+{v:"0.14.1",d:"2026-10-05",items:[
+"Lektionen: Verweise auf Nachschlagen sind jetzt Links, die direkt zum passenden Abschnitt springen, etwa zum NATO-Alphabet, zu den Waffenfarben und zur Gliederungstabelle",
+]},
 {v:"0.14",d:"2026-10-05",items:[
 "Lektion „Anrede und Umgang“: Aufstehen zum Abschied beim Abschnitt „Auftreten“, dazu eine neue Quizfrage",
 "Lektionen: „NATO-Größenzeichen“ ist jetzt ein Abschnitt der Lektion „Vom Trupp zur Division“, wie unter Nachschlagen. Lernkarten und Quiz dieser Lektion fragen die Größenzeichen mit ab",
@@ -237,11 +240,6 @@ const CHANGES=[
 ]},
 {v:"0.13",d:"2026-10-05",items:[
 "Neue Lektion „Raum, Bewegung, Gefecht“ nach den Stäben: Führungsbegriffe wie Verfügungs- und Bereitstellungsraum, Verlegen und Verbringen, Antreten, Halten und Sperren, dazu Verzögern, Ausweichen, Lösen und Aufnahme statt „Rückzug“. Ein eigener Abschnitt erklärt wirken, ausschalten, rausnehmen, Kollateralschaden und andere Umschreibungen. Dazu 15 Quizfragen",
-]},
-{v:"0.12",d:"2026-10-04",items:[
-"Die App heißt jetzt AGAdemie statt AGAdemy, passend zum deutschen Wort Akademie. Die neue Adresse ist florianwilhelm.info/agademie, der Lernstand beginnt dabei einmalig von vorn",
-"Lektion „Anrede und Umgang“: neuer Abschnitt „Sprache im Dienst“ mit dem Wichtigsten zuerst, knappen Formeln, direktem Feedback und Entscheidungsfreude, dazu drei neue Quizfragen",
-"Lektion „Anrede und Umgang“: Einleitung zu den ungeschriebenen Regeln und neuer Abschnitt „Auftreten“ mit Händen aus den Taschen, Nicht-Anlehnen, Händedruck und Grußpflicht, dazu drei neue Quizfragen. „Gelöbnis, Eid und Zeremonien“ steht jetzt vor den ungeschriebenen Regeln",
 ]},
 ]; // Ende CHANGES
 /* ---------- Daten ---------- */
