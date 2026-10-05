@@ -7,6 +7,9 @@ per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 ## Unveröffentlicht
 
 - Lektion „Anrede und Umgang“: Aufstehen zum Abschied beim Abschnitt „Auftreten“, dazu eine neue Quizfrage
+- Lektionen: „NATO-Größenzeichen“ ist jetzt ein Abschnitt der Lektion „Vom Trupp zur Division“, wie unter Nachschlagen. Lernkarten und Quiz dieser Lektion fragen die Größenzeichen mit ab
+- Lektionsübersicht: Die Beschreibungen von „Anrede und Umgang“ und „Abkürzungen im Dienstalltag“ nennen jetzt alle Abschnitte
+- Lektionen: Die Titel kommen ohne Abkürzungen aus und haben eine einheitliche Form, damit auch Einsteiger sofort sehen, worum es geht. Neu heißen „Dienstgrade und Laufbahnen“ (bisher „Dienstgrade verstehen“), „Dienstgradabzeichen“ („Abzeichen lesen“), „NATO, EU und Heimatschutz“ („Im Bündnis: NATO, EU und Heimatschutz“), „Geheimschutz und Sicherheitsüberprüfung“ („Geheimschutz: VS und SÜ“) und „Digitalisierung der Bundeswehr“ („Führung digital: von C2 bis MDO“)
 
 ## 0.13 (2026-10-05)
 

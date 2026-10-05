@@ -968,7 +968,7 @@ const LESSONS=[
   </ol>
   <p>Die Wehrpflicht nach dem Wehrpflichtgesetz (WPflG) ist seit dem 1. Juli 2011 ausgesetzt, aber nicht abgeschafft. Im Spannungs- und Verteidigungsfall gilt sie wieder. Seit 2026 gilt mit dem Wehrdienst-Modernisierungsgesetz (WDModG) der neue Wehrdienst: Alle 18-Jährigen erhalten einen Fragebogen zu Eignung und Bereitschaft, für Männer ist er verpflichtend, für Frauen freiwillig. Ab Juli 2027 werden junge Männer wieder gemustert. Der Dienst selbst bleibt freiwillig, reichen die Freiwilligen nicht, kann der Bundestag per Gesetz eine Bedarfswehrpflicht beschließen.</p>
   <p>Wer zur Bundeswehr will, wendet sich an ein Karrierecenter der Bundeswehr. Die Karrierecenter gehören zum Bundesamt für das Personalmanagement der Bundeswehr (BAPersBw), beraten über Karriereberatungsbüros in der Fläche, prüfen die Eignung und übernehmen auch die Musterung. Die früheren Kreiswehrersatzämter gibt es seit 2012 nicht mehr.</p>`},
- {id:'dienstgrade',t:'Dienstgrade verstehen',d:'Laufbahnen, Dienstgradgruppen und NATO-Rangcodes',b:()=>`
+ {id:'dienstgrade',t:'Dienstgrade und Laufbahnen',d:'Laufbahnen, Dienstgradgruppen und NATO-Rangcodes',b:()=>`
   <p>Es gibt drei Laufbahngruppen: Mannschaften, Unteroffiziere und Offiziere. Sie gliedern sich in sieben Dienstgradgruppen mit zusammen 26 Dienstgraden:</p>
   <ol class="ladder">${Object.values(G).map(g=>`<li><strong>${esc(g)}</strong><span>${RANKS.filter(r=>r.g===g).map(r=>esc(r.k||r.h)).join(', ')}</span></li>`).join('')}</ol>
   <p>Sanitätsoffiziere, also Ärztinnen und Ärzte, haben eigene Dienstgrade. Sie stehen jeweils auf der Ebene eines Offiziers: Stabsarzt (Hauptmann), Oberstabsarzt (Major), Oberfeldarzt (Oberstleutnant), Oberstarzt (Oberst), Generalarzt (Brigadegeneral), Generalstabsarzt (Generalmajor) und Generaloberstabsarzt (Generalleutnant). Einen Sanitätsdienstgrad mit vier Sternen gibt es nicht. In der Marine heißen die Dienstgrade ab Oberfeldarzt anders, etwa Flottillenarzt oder Admiralarzt. Apotheker und Tierärzte haben eigene Namen, etwa Stabsapotheker oder Stabsveterinär.</p>
@@ -976,7 +976,7 @@ const LESSONS=[
   <p>Das Wort kommt aus dem Französischen: <em>porte-épée</em> heißt wörtlich „Degenträger“. Gemeint ist die Quaste am Griff von Degen oder Säbel. Sie war ursprünglich eine Schlaufe, damit die Waffe im Gefecht nicht verloren ging. In Preußen wurde daraus ein Rangzeichen: Offiziere und Feldwebel trugen ein Portepee in Silber oder Gold, einfache Unteroffiziere nicht. Daher kommen die Bezeichnungen „mit“ und „ohne Portepee“.</p>
   <p>Für internationale Zusammenarbeit gibt es die NATO-Rangcodes: OR-1 bis OR-9 für Mannschaften und Unteroffiziere, OF-1 bis OF-9 für Offiziere. Ein OF-4 ist in jeder NATO-Armee vergleichbar, in der Bundeswehr entspricht ihm der Oberstleutnant, in der Marine der Fregattenkapitän.</p>
   <div class="callout">Die Marine hat für fast alle Dienstgrade ab Unteroffizier eigene Namen: aus dem Feldwebel wird der Bootsmann, aus dem Major der Korvettenkapitän. Die Rangfolge ist identisch.</div>`},
- {id:'abzeichen',t:'Abzeichen lesen',d:'Das System hinter Streifen, Bögen, Rauten und Eichenlaub',b:()=>`
+ {id:'abzeichen',t:'Dienstgradabzeichen',d:'Das System hinter Streifen, Bögen, Rauten und Eichenlaub',b:()=>`
   <p>Man muss nicht 26 Bilder auswendig lernen. Die Abzeichen folgen einer Logik, in Heer und Luftwaffe gleich, die Luftwaffe trägt zusätzlich die Schwinge.</p>
   <h3>Mannschaften: Schrägstreifen</h3>
   <p>Je mehr Streifen, desto höher. Korporal und Stabskorporal tragen einen breiten Balken.</p>
@@ -1036,7 +1036,7 @@ const LESSONS=[
   <p>Die Barettfarbe fasst mehrere Truppengattungen zu Gruppen zusammen. Grün tragen Jäger und Panzergrenadiere, Schwarz Panzer und Aufklärer, Bordeauxrot Fallschirmjäger, Kommando Spezialkräfte (KSK) und Heeresflieger. Korallenrot steht für die meisten unterstützenden Truppen wie Artillerie, Pioniere und Fernmelder. Die genaue Truppengattung zeigt das Metallabzeichen am Barett.</p>
   <p>Die Gebirgsjäger tragen statt des Baretts die Bergmütze. Wer zum Cyber- und Informationsraum gehört, trägt unabhängig von der Truppengattung ein marineblaues Barett.</p>
   <div class="callout">Luftwaffe und Marine haben keine Truppengattungen und deshalb auch keine bunten Litzen. Die Luftwaffe trägt meist das blaue Schiffchen, die Marine hat am Dienstanzug keine Kragenspiegel. Alle Farben stehen unter Nachschlagen bei den Abzeichen.</div>`},
- {id:'anrede',t:'Anrede und Umgang',d:'Anrede nach Dienstgrad, Generale, Sanitätsdienst und ungeschriebene Regeln',b:()=>`
+ {id:'anrede',t:'Anrede und Umgang',d:'Anrede nach Dienstgrad, Zeremonien, ungeschriebene Regeln, Auftreten und Sprache im Dienst',b:()=>`
   <p>Angesprochen wird mit Herr oder Frau und dem Dienstgrad, gegebenenfalls mit Nachnamen: „Herr Oberstleutnant“, „Frau Hauptmann Müller“. Dienstgrade bleiben grammatisch männlich, eine „Hauptfrau“ gibt es nicht.</p>
   <p>Alle Generale werden mit „Herr General“ bzw. „Frau General“ angesprochen, auch Brigadegeneral, Generalmajor und Generalleutnant. Der Plural lautet in der Bundeswehr Generale. Ranghöchster Soldat ist der Generalinspekteur der Bundeswehr.</p>
   <p>Sanitätsoffiziere werden mit ihrem eigenen Dienstgrad angesprochen, etwa „Herr Oberstabsarzt“ oder „Frau Generalarzt“.</p>
@@ -1071,7 +1071,7 @@ const LESSONS=[
    <li><strong>Lieber entscheiden als zögern</strong><span>Eine Entscheidung trotz Unsicherheit gilt als besser als keine. Schon preußische Vorschriften vom Anfang des 20. Jahrhunderts hielten fest, dass „Unterlassen und Versäumnis eine schwerere Belastung bilden als Fehlgreifen in der Wahl der Mittel“.</span></li>
    <li><strong>Wirkung nach außen</strong><span>Der Ton wirkt auf Außenstehende oft schroff, ist aber selten persönlich gemeint. Umgekehrt gilt langes Drumherumreden in der Truppe schnell als unklar oder unsicher.</span></li>
   </ol>`},
- {id:'gliederung',t:'Vom Trupp zur Division',d:'Ebenen, Größen und wer sie führt',b:()=>`
+ {id:'gliederung',t:'Vom Trupp zur Division',d:'Ebenen, Größen, wer sie führt und ihre Zeichen auf der Lagekarte',b:()=>`
   <p>Die Bundeswehr ist in Ebenen gegliedert, die jeweils mehrere Elemente der Ebene darunter bündeln. Ab der Kompanie wächst die Größe nicht mehr gleichmäßig, weil Fahrzeuge, Waffensysteme und Unterstützungspersonal den Umfang bestimmen.</p>
   <ol class="ladder">${GL.map(r=>`<li><strong>${esc(r.e)}</strong><span>${esc(r.n)}. ${esc(r.f)}.</span></li>`).join('')}</ol>
   <p>Die vier Sammelbegriffe tauchen ständig auf: Teileinheit (Trupp bis Zug), Einheit (Kompanie, Batterie, Staffel), Verband (ab Bataillon) und Großverband (ab Brigade).</p>
@@ -1079,8 +1079,8 @@ const LESSONS=[
   <div class="callout">Luftwaffe und Marine benennen dieselben Ebenen anders. Die Kompanie heißt in der Luftwaffe Staffel, in der Marine entspricht ihr die Besatzung eines Bootes. Ein Geschwader steht auf Regimentsebene. Die Tabelle unter Nachschlagen zeigt alle Entsprechungen.</div>
   <h3>Die Großverbände</h3>
   <p>Das Heer hat vier Divisionen: zwei Panzerdivisionen (PzDiv), die 1. mit Stab in Oldenburg und die 10. in Veitshöchheim, zu der auch die Panzerbrigade 45 in Litauen gehört, dazu die Division Schnelle Kräfte (DSK) in Stadtallendorf mit Fallschirmjägern und dem Kommando Spezialkräfte (KSK) sowie seit 2025 die Heimatschutzdivision (HSchDiv) in Berlin. Die Marine führt ihre Schiffe und Boote in zwei Einsatzflottillen, in Kiel und in Wilhelmshaven.</p>
-  <p>Über der Division endet die deutsche Gliederung. Die Divisionen führt das Kommando Heer in Strausberg, eine Führungsbehörde, kein Großverband. Korps gibt es nur noch multinational: Deutsche Truppen gehören etwa zum 1. Deutsch-Niederländischen Korps in Münster, zum Multinationalen Korps Nordost in Stettin und zum Eurokorps in Straßburg.</p>`},
- {id:'zeichen',t:'NATO-Größenzeichen',d:'Taktische Zeichen auf Lagekarten lesen',b:()=>`
+  <p>Über der Division endet die deutsche Gliederung. Die Divisionen führt das Kommando Heer in Strausberg, eine Führungsbehörde, kein Großverband. Korps gibt es nur noch multinational: Deutsche Truppen gehören etwa zum 1. Deutsch-Niederländischen Korps in Münster, zum Multinationalen Korps Nordost in Stettin und zum Eurokorps in Straßburg.</p>
+  <h3>Die Größenzeichen</h3>
   <p>Auf Lagekarten und in Lagebildern stehen Truppenteile als taktische Zeichen nach dem NATO-Standard APP-6 (Allied Procedural Publication 6). Der Rahmen zeigt die Art (das Kreuz steht für Infanterie), das Zeichen darüber die Größe.</p>
   ${syms([['●','Trupp'],['●●','Gruppe'],['●●●','Zug'],['I','Kompanie'],['II','Bataillon'],['III','Regiment'],['X','Brigade'],['XX','Division'],['XXX','Korps'],['XXXX','Armee']])}
   <p>Die Logik: Punkte für Teileinheiten, senkrechte Striche von der Kompanie bis zum Regiment, Kreuze ab der Brigade, bis zu Korps (XXX) und Armee (XXXX). Die Zuordnung von Trupp und Gruppe zu einem und zwei Punkten folgt der deutschen Lesart; APP-6 kennt darunter noch Team oder Besatzung (Ø).</p>`},
@@ -1148,7 +1148,7 @@ const LESSONS=[
    <li><strong>Kinetisch</strong><span>Mit Waffen und physischer Gewalt. Nicht kinetisch wirkt man etwa mit Störsendern, Cyberangriffen oder Information.</span></li>
   </ol>
   <div class="callout">Wie schwer sich auch die Politik mit dem Wort Krieg tat, zeigt Afghanistan. Lange war vom Stabilisierungseinsatz die Rede. Ende 2009 sprach Verteidigungsminister Karl-Theodor zu Guttenberg von „kriegsähnlichen Zuständen“, 2010 sagte er, man könne umgangssprachlich von Krieg sprechen. Die Soldaten im Einsatz nannten es längst so.</div>`},
- {id:'buendnis',t:'Im Bündnis: NATO, EU und Heimatschutz',d:'Artikel 5, NATO-Kommandostruktur, Litauen und Drehscheibe Deutschland',b:()=>`
+ {id:'buendnis',t:'NATO, EU und Heimatschutz',d:'Artikel 5, NATO-Kommandostruktur, Litauen und Drehscheibe Deutschland',b:()=>`
   <p>Deutschland verteidigt sich nicht allein. Die NATO (North Atlantic Treaty Organization) wurde 1949 gegründet, die Bundesrepublik trat 1955 bei. Heute hat das Bündnis 32 Mitglieder. Kern ist Artikel 5 des Nordatlantikvertrags: Ein bewaffneter Angriff auf einen Mitgliedstaat gilt als Angriff auf alle. Jeder Staat leistet Beistand mit den Maßnahmen, die er für erforderlich hält. Ausgerufen wurde der Bündnisfall bisher einmal, nach dem 11. September 2001. Artikel 4 sieht Konsultationen vor, wenn sich ein Mitglied bedroht sieht.</p>
   <h3>Wie die NATO geführt wird</h3>
   <ol class="ladder">
@@ -1165,7 +1165,7 @@ const LESSONS=[
   <p>Wegen seiner Lage in der Mitte Europas ist Deutschland im Bündnisfall Transitland für verbündete Truppen. Dafür leistet es Host Nation Support (HNS): Unterkunft, Verpflegung, Betankung, Transport und Schutz. Wie militärische und zivile Stellen dabei zusammenwirken, legt der eingestufte Operationsplan Deutschland (OPLAN DEU) fest, koordiniert vom Operativen Führungskommando der Bundeswehr (OpFüKdoBw).</p>
   <p>Den Schutz von Verlegewegen und kritischer Infrastruktur (KRITIS) übernehmen die Heimatschutzkräfte. Seit 2025 führt sie die Heimatschutzdivision (HSchDiv) des Heeres mit Heimatschutzregimentern aus Reservisten und aktiven Soldaten. In jedem Bundesland gibt es außerdem ein Landeskommando (LKdo) als Bindeglied zu Landesregierung und Behörden.</p>
   <div class="callout">Auch die Europäische Union (EU) hat eine Beistandsklausel: Art. 42 Abs. 7 EU-Vertrag, Teil der Gemeinsamen Sicherheits- und Verteidigungspolitik (GSVP). Angewendet wurde sie bisher einmal, auf Bitte Frankreichs nach den Anschlägen von Paris 2015.</div>`},
- {id:'kuerzel',t:'Abkürzungen im Dienstalltag',d:'Von AGA bis DZE, dazu Dienstgrade in Kurzform',b:()=>`
+ {id:'kuerzel',t:'Abkürzungen im Dienstalltag',d:'Von AGA bis DZE, dazu Dienstgrade in Kurzform, NATO-Alphabet und Datum-Zeit-Gruppe',b:()=>`
   <p>Die Bundeswehr kürzt fast alles ab. Wer die häufigsten Kürzel kennt, versteht Dienstpläne, Befehle und Gespräche deutlich besser. Die wichtigsten im Alltag:</p>
   <ol class="ladder">${GLOSS[0].items.map(([k,v])=>`<li><strong>${esc(k)}</strong><span>${esc(v)}</span></li>`).join('')}</ol>
   <p>Auch Dienstgrade werden abgekürzt, im Schriftverkehr steht die Abkürzung vor dem Namen, etwa „OTL Müller“ oder „Hptm Schmidt“. Die Kürzel folgen meist den Bausteinen: O für Ober, St für Stabs, Hpt für Haupt. So wird aus Oberstabsfeldwebel OStFw. Ausnahmen sind OTL für Oberstleutnant und O für Oberst. Weitere Beispiele: Uffz (Unteroffizier), Lt (Leutnant), Maj (Major), BrigGen (Brigadegeneral), GenMaj (Generalmajor), GenLt (Generalleutnant), in der Marine KptLt (Kapitänleutnant), KKpt (Korvettenkapitän), FKpt (Fregattenkapitän) und KzS (Kapitän zur See).</p>
@@ -1173,7 +1173,7 @@ const LESSONS=[
   <h3>Buchstabieren und Zeitangaben</h3>
   <p>Am Funk und am Telefon wird mit dem NATO-Buchstabieralphabet buchstabiert, meist kurz NATO-Alphabet genannt: Alfa, Bravo, Charlie, Delta und so weiter bis Zulu. Alfa und Juliett werden bewusst so geschrieben, damit sie in allen Sprachen gleich ausgesprochen werden. Die vollständige Liste steht unter Nachschlagen.</p>
   <p>Zeitpunkte stehen in Befehlen und Meldungen als Datum-Zeit-Gruppe (DTG): Tag, Uhrzeit, Zeitzone, Monat, Jahr. 031430ZOCT26 heißt 3. Oktober 2026, 14:30 Uhr. Der Buchstabe nennt die Zeitzone, ebenfalls nach dem Buchstabieralphabet: Z (Zulu) ist die koordinierte Weltzeit (UTC), A (Alfa) die Mitteleuropäische Zeit (MEZ), also die deutsche Winterzeit, B (Bravo) die Mitteleuropäische Sommerzeit (MESZ), J (Juliett) die Ortszeit.</p>`},
- {id:'geheimschutz',t:'Geheimschutz: VS und SÜ',d:'Geheimhaltungsgrade, Sicherheitsüberprüfung und VSA',b:()=>`
+ {id:'geheimschutz',t:'Geheimschutz und Sicherheitsüberprüfung',d:'Geheimhaltungsgrade, Sicherheitsüberprüfung und VSA',b:()=>`
   <p>Informationen, die im öffentlichen Interesse geheim bleiben müssen, sind Verschlusssachen (VS). Das Sicherheitsüberprüfungsgesetz (SÜG) kennt vier Geheimhaltungsgrade. Je höher der Grad, desto gründlicher die Sicherheitsüberprüfung (SÜ), die Voraussetzung für den Zugang ist:</p>
   <ol class="ladder">
    <li><strong>VS – Nur für den Dienstgebrauch (VS-NfD)</strong><span>Keine SÜ, aber Belehrung über den Umgang. NATO RESTRICTED.</span></li>
@@ -1198,7 +1198,7 @@ const LESSONS=[
   <h3>Woher das Geld kommt</h3>
   <p>Der Verteidigungshaushalt ist der Einzelplan 14 im Bundeshaushalt, beschlossen vom Bundestag. Vorhaben ab 25 Millionen Euro legt das Bundesministerium der Verteidigung (BMVg) vorher dem Haushaltsausschuss vor, die sogenannten 25-Millionen-Vorlagen. 2022 kam das kreditfinanzierte Sondervermögen Bundeswehr über 100 Milliarden Euro hinzu. Seit einer Grundgesetzänderung im März 2025 sind Verteidigungsausgaben oberhalb von 1 % des Bruttoinlandsprodukts (BIP) von der Schuldenbremse ausgenommen.</p>
   <div class="callout">Lange galt in der NATO das Ziel, 2 % des BIP für Verteidigung auszugeben. Auf dem Gipfel in Den Haag 2025 vereinbarten die Verbündeten 5 % bis 2035: 3,5 % für die Kernverteidigung und 1,5 % für verteidigungsrelevante Infrastruktur und Resilienz.</div>`},
- {id:'digital',t:'Führung digital: von C2 bis MDO',d:'C4ISR, Multi-Domain, Core, Fog, Edge und offene Architekturen',b:()=>`
+ {id:'digital',t:'Digitalisierung der Bundeswehr',d:'C4ISR, Multi-Domain, Core, Fog, Edge und offene Architekturen',b:()=>`
   <p>Viele Begriffe der militärischen Digitalisierung stammen aus NATO und US-Streitkräften und werden auch im Deutschen auf Englisch verwendet. Die C-Kürzel bauen aufeinander auf:</p>
   <ol class="ladder">
    <li><strong>C2</strong><span>Command and Control, also Führung.</span></li>
@@ -1215,7 +1215,7 @@ const LESSONS=[
 ];
 // Jede Karte gehört zu genau einer Lektion, Lernkarten und Quiz üben je Lektion. Die Zuordnung folgt dem Stapel (deck, Teil der Karten-ID),
 // wo ein Stapel mehrere Lektionen abdeckt der Kartenart, einzelne Karten sind nach ihrer Frage zugeordnet.
-const LESSON_OF_DECK={dg:'dienstgrade',mar:'dienstgrade',abz:'abzeichen',eti:'anrede',gl:'gliederung',sym:'zeichen',stab:'staebe',fb:'gefecht',beh:'aufbau',staat:'staat',nato:'buendnis',abk:'kuerzel',vs:'geheimschutz',dig:'digital'};
+const LESSON_OF_DECK={dg:'dienstgrade',mar:'dienstgrade',abz:'abzeichen',eti:'anrede',gl:'gliederung',sym:'gliederung',stab:'staebe',fb:'gefecht',beh:'aufbau',staat:'staat',nato:'buendnis',abk:'kuerzel',vs:'geheimschutz',dig:'digital'};
 const LESSON_OF_KIND={anz:'anzuege',wf:'farben',wfrev:'farben',bar:'farben',farbe:'farben','g-ind':'beschaffung',proj:'beschaffung',haush:'beschaffung'};
 const LESSON_OF_Q={
  'Abkürzung: BAAINBw':'beschaffung','Abkürzung: BWI':'beschaffung','Abkürzung: CIHBw':'beschaffung','Abkürzung: InnoZBw':'beschaffung','Abkürzung: ZDigBw':'beschaffung','Abkürzung: CPM':'beschaffung',
@@ -1494,7 +1494,7 @@ document.addEventListener('input',e=>{if(e.target.id==='gq'){glossQ=e.target.val
 // Die URL bestimmt die Ansicht: #/bereich/unterseite/abschnitt?q=suche
 const MODES={grundlagen:'basics',lernkarten:'learn',quiz:'quiz',nachschlagen:'ref',hilfe:'help'};
 const REFS={dienstgrade:'dg',abzeichen:'abz',gliederung:'gl',staebe:'stab',begriffe:'beh'};
-const OLD_TOPICS={marine:'dienstgrade',groessenzeichen:'zeichen',behoerden:'aufbau',abkuerzungen:'kuerzel',digitalisierung:'digital'}; // frühere Themen-Links
+const OLD_TOPICS={marine:'dienstgrade',groessenzeichen:'gliederung',behoerden:'aufbau',abkuerzungen:'kuerzel',digitalisierung:'digital'}; // frühere Themen-Links
 const slug=(map,v)=>Object.keys(map).find(k=>map[k]===v);
 const topicHash=(m,t)=>'#/'+slug(MODES,m)+(t==='all'?'':'/'+t);
 function hashOf(m=mode,sec){
