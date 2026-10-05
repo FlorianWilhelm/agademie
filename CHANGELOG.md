@@ -4,6 +4,10 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
+## Unveröffentlicht
+
+- Link-Vorschau: Das Vorschaubild zeigt den Namen jetzt in der Mitte, damit er auch in kleinen Vorschauen wie bei Slack ganz zu sehen ist
+
 ## 0.14.1 (2026-10-05)
 
 - Lektionen: Verweise auf Nachschlagen sind jetzt Links, die direkt zum passenden Abschnitt springen, etwa zum NATO-Alphabet, zu den Waffenfarben und zur Gliederungstabelle

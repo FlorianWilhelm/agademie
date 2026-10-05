@@ -8,65 +8,42 @@
 *{margin:0;box-sizing:border-box}
 html,body{background:var(--navy)}
 .b{position:relative;overflow:hidden;width:var(--w);height:var(--h);background:
-  radial-gradient(ellipse 60% 90% at 85% 50%,rgba(47,214,208,.16),transparent 70%),
+  radial-gradient(ellipse 34% 62% at 50% 50%,rgba(47,214,208,.13),transparent 72%),
   linear-gradient(115deg,#0b1628 0%,var(--navy) 45%,var(--navy2) 100%);
   color:var(--ink);font-family:"Source Sans 3",sans-serif}
 .grid{position:absolute;inset:0;background-image:
   linear-gradient(rgba(154,171,194,.07) 1px,transparent 1px),
   linear-gradient(90deg,rgba(154,171,194,.07) 1px,transparent 1px);background-size:40px 40px;
-  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 55%);mask-image:linear-gradient(90deg,transparent 0%,#000 55%)}
-.stripe{position:absolute;left:0;top:0;bottom:0;width:14px;background:repeating-linear-gradient(-45deg,var(--warn) 0 14px,var(--navy) 14px 28px)}
-.txt{position:absolute;left:var(--pad);top:50%;transform:translateY(-50%)}
-.kicker{font:700 var(--k)/1 "Barlow Condensed";letter-spacing:.22em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:14px}
-.kicker:before{content:"";width:42px;height:4px;background:var(--accent)}
+  -webkit-mask-image:linear-gradient(90deg,#000 0%,transparent 32%,transparent 68%,#000 100%);
+  mask-image:linear-gradient(90deg,#000 0%,transparent 32%,transparent 68%,#000 100%)}
+.stripe{position:absolute;top:0;bottom:0;width:14px;background:repeating-linear-gradient(-45deg,var(--warn) 0 14px,var(--navy) 14px 28px)}
+.stripe.l{left:0}.stripe.r{right:0}
+/* Alles Wichtige steht in der Mitte: Slack zeigt in der kompakten Vorschau nur einen fast quadratischen Ausschnitt */
+.txt{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;width:var(--safe)}
+.kicker{font:700 var(--k)/1 "Barlow Condensed";letter-spacing:.22em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;justify-content:center;gap:14px;padding-left:.22em}
+.kicker:before,.kicker:after{content:"";width:34px;height:4px;background:var(--accent)}
 h1{font:800 var(--t)/.9 "Barlow Condensed";letter-spacing:-.01em;margin:.12em 0 .08em}
 h1 span{color:var(--accent)}
 .tag{font:700 var(--s)/1.05 "Barlow Condensed";letter-spacing:.01em}
 .tag em{font-style:normal;background:var(--warn);color:var(--navy);padding:0 .18em;border-radius:3px}
 .sub{font-size:var(--p);color:var(--muted);margin-top:.7em}
-.chips{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.chips{display:flex;gap:10px;margin-top:22px;justify-content:center}
 .chips b{font:600 var(--c)/1 "Barlow Condensed";letter-spacing:.06em;text-transform:uppercase;border:2px solid var(--line);color:var(--ink);padding:8px 12px;border-radius:6px;background:rgba(21,38,64,.7)}
-.art{position:absolute;right:var(--pad);top:50%;transform:translateY(-50%)}
-.fine{position:absolute;right:var(--pad);bottom:18px;font-size:13px;color:#6f819b;letter-spacing:.02em}
+.art{position:absolute;top:50%;transform:translateY(-50%);overflow:visible}
+.art.l{left:var(--side)}.art.r{right:var(--side)}
+.fine{position:absolute;left:0;right:0;bottom:16px;text-align:center;font-size:13px;color:#6f819b;letter-spacing:.02em}
 /* sizes */
-.og{--w:1200px;--h:630px;--pad:80px;--k:24px;--t:150px;--s:44px;--p:24px;--c:18px}
-.gh{--w:1280px;--h:640px;--pad:96px;--k:25px;--t:158px;--s:46px;--p:25px;--c:19px}
-.gh .art{right:90px}
-.x{--w:1500px;--h:500px;--pad:90px;--k:22px;--t:132px;--s:40px;--p:22px;--c:17px}
-.x .txt{top:46%}
-.x .art{right:110px}
+.og{--w:1200px;--h:630px;--safe:600px;--side:20px;--k:24px;--t:150px;--s:44px;--p:24px;--c:18px}
+.gh{--w:1280px;--h:640px;--safe:620px;--side:30px;--k:25px;--t:154px;--s:45px;--p:25px;--c:19px}
+.x{--w:1500px;--h:500px;--safe:620px;--side:120px;--k:22px;--t:132px;--s:40px;--p:22px;--c:17px}
 </style></head>
 <body>
 <div class="b" id="b">
-  <div class="grid"></div><div class="stripe"></div>
-  <div class="txt">
-    <div class="kicker">Allgemeine Grundausbildung</div>
-    <h1><span>AGA</span>demie</h1>
-    <div class="tag">Die <em>AGA für Zivis.</em></div>
-    <div class="sub">Bundeswehr-Grundwissen spielerisch lernen.</div>
-    <div class="chips"><b>Dienstgrade</b><b>Gliederung</b><b>J1–J9</b><b>Abkürzungen</b></div>
-  </div>
-  <svg class="art" id="art" viewBox="0 0 420 420" width="420" height="420" aria-hidden="true">
-    <!-- orbit rings -->
-    <circle cx="210" cy="210" r="196" fill="none" stroke="#2b4266" stroke-width="2" stroke-dasharray="4 10"/>
-    <circle cx="210" cy="210" r="150" fill="none" stroke="#2b4266" stroke-width="1.5"/>
-    <!-- NATO unit symbol: Panzergrenadiere, Bataillon (II) -->
-    <g transform="translate(120 150)">
-      <g fill="#e7edf4"><rect x="74" y="-34" width="9" height="26" rx="1"/><rect x="97" y="-34" width="9" height="26" rx="1"/></g>
-      <rect x="0" y="0" width="180" height="120" rx="3" fill="#80e0ff" fill-opacity=".14" stroke="#e7edf4" stroke-width="6"/>
-      <path d="M3 3L177 117M177 3L3 117" stroke="#e7edf4" stroke-width="6"/>
-      <ellipse cx="90" cy="60" rx="50" ry="26" fill="none" stroke="#e7edf4" stroke-width="6"/>
-    </g>
-    <!-- Rank chevrons (Winkel) badge -->
-    <g transform="translate(300 268) rotate(8)">
-      <rect x="-46" y="-62" width="92" height="124" rx="10" fill="#152640" stroke="#2fd6d0" stroke-width="3"/>
-      <g fill="none" stroke="#f2c21b" stroke-width="9" stroke-linejoin="miter">
-        <path d="M-28 -24L0 -2L28 -24"/><path d="M-28 -2L0 20L28 -2"/><path d="M-28 20L0 42L28 20"/>
-      </g>
-      <circle cx="0" cy="-42" r="6" fill="#f2c21b"/>
-    </g>
+  <div class="grid"></div><div class="stripe l"></div><div class="stripe r"></div>
+  <svg class="art l" viewBox="0 0 260 440" width="260" height="440" aria-hidden="true">
+    <circle cx="96" cy="220" r="176" fill="none" stroke="#2b4266" stroke-width="2" stroke-dasharray="4 10"/>
     <!-- Flashcard -->
-    <g transform="translate(36 52) rotate(-9)">
+    <g transform="translate(10 96) rotate(-9)">
       <rect width="150" height="96" rx="10" fill="#e7edf4"/>
       <rect width="150" height="22" rx="10" fill="#2fd6d0"/><rect y="12" width="150" height="10" fill="#2fd6d0"/>
       <text x="14" y="16" font-family="Barlow Condensed" font-weight="700" font-size="14" fill="#0f1c33" letter-spacing="1.5">LERNKARTE</text>
@@ -74,20 +51,46 @@ h1 span{color:var(--accent)}
       <text x="14" y="82" font-family="Source Sans 3" font-size="12" fill="#51627a">Wofür steht das?</text>
     </g>
     <!-- Quiz check -->
-    <g transform="translate(78 322)">
+    <g transform="translate(140 318)">
       <circle r="34" fill="#2fd6d0"/>
       <path d="M-15 1L-4 12L17 -11" fill="none" stroke="#0f1c33" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
     </g>
-    <!-- size marks -->
     <g font-family="Barlow Condensed" font-weight="700" fill="#9aabc2" font-size="22" letter-spacing="2">
-      <text x="300" y="70">XX</text><text x="352" y="128">III</text><text x="190" y="392">●●●</text>
+      <text x="40" y="380">●●●</text>
     </g>
   </svg>
+  <svg class="art r" viewBox="0 0 260 440" width="260" height="440" aria-hidden="true">
+    <circle cx="164" cy="220" r="176" fill="none" stroke="#2b4266" stroke-width="2" stroke-dasharray="4 10"/>
+    <!-- NATO unit symbol: Panzergrenadiere, Bataillon (II) -->
+    <g transform="translate(88 128) scale(.84)">
+      <g fill="#e7edf4"><rect x="74" y="-34" width="9" height="26" rx="1"/><rect x="97" y="-34" width="9" height="26" rx="1"/></g>
+      <rect x="0" y="0" width="180" height="120" rx="3" fill="#80e0ff" fill-opacity=".14" stroke="#e7edf4" stroke-width="6"/>
+      <path d="M3 3L177 117M177 3L3 117" stroke="#e7edf4" stroke-width="6"/>
+      <ellipse cx="90" cy="60" rx="50" ry="26" fill="none" stroke="#e7edf4" stroke-width="6"/>
+    </g>
+    <!-- Rank chevrons (Winkel) badge -->
+    <g transform="translate(196 300) rotate(8)">
+      <rect x="-46" y="-62" width="92" height="124" rx="10" fill="#152640" stroke="#2fd6d0" stroke-width="3"/>
+      <g fill="none" stroke="#f2c21b" stroke-width="9" stroke-linejoin="miter">
+        <path d="M-28 -24L0 -2L28 -24"/><path d="M-28 -2L0 20L28 -2"/><path d="M-28 20L0 42L28 20"/>
+      </g>
+      <circle cx="0" cy="-42" r="6" fill="#f2c21b"/>
+    </g>
+    <g font-family="Barlow Condensed" font-weight="700" fill="#9aabc2" font-size="22" letter-spacing="2">
+      <text x="196" y="58">XX</text><text x="104" y="408">III</text>
+    </g>
+  </svg>
+  <div class="txt">
+    <div class="kicker">Allgemeine Grundausbildung</div>
+    <h1><span>AGA</span>demie</h1>
+    <div class="tag">Die <em>AGA für Zivis.</em></div>
+    <div class="sub">Bundeswehr-Grundwissen spielerisch lernen.</div>
+    <div class="chips"><b>Dienstgrade</b><b>Gliederung</b><b>J1–J9</b><b>Abkürzungen</b></div>
+  </div>
   <div class="fine">Privates Projekt · kein Angebot der Bundeswehr</div>
 </div>
 <script>
 const p=new URLSearchParams(location.search).get('s')||'og';
 document.getElementById('b').classList.add(p);
-if(p==='x'){const a=document.getElementById('art');a.setAttribute('width',400);a.setAttribute('height',400)}
 </script>
 </body></html>
