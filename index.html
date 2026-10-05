@@ -616,7 +616,8 @@ GLOSS.forEach(g=>g.items.forEach(([k,v,n])=>add(g.deck,'g-'+g.id,(g.id==='dgk'?'
  ['dig','begr','Welche Dimensionen verbindet MDO?','Land, Luft, See, Weltraum sowie Cyber- und Informationsraum',null,['Nur Land und Luft','Heer, Luftwaffe und Marine','Aufklärung und Wirkung']],
  ['dig','begr','Was kommt bei C4ISR gegenüber C4I hinzu?','Surveillance und Reconnaissance','Überwachung und Aufklärung. Intelligence steckt schon in C4I.',['Cyber und Space','Consultation','Computers']],
  ['beh','proj','Deutsch-französisches Landkampfsystem der nächsten Generation','MGCS',null,['FCAS','NGVA','D-LBO']],
- ['beh','proj','Europäisches Luftkampfsystem der nächsten Generation','FCAS',null,['MGCS','FACE','SOSA']]
+ ['beh','proj','Europäisches Luftkampfsystem der nächsten Generation','FCAS',null,['MGCS','FACE','SOSA']],
+ ['beh','proj','Nach welchen Dimensionen gliedert die Reformagenda Rüstung von 2026 das BAAINBw?','Land, Luft, See, Cyber- und Informationsraum sowie Weltraum','Mit flexiblen Projektteams statt starrer Hierarchie und neuen Standorten unter anderem in Bremen, Dresden und Brüssel.',['Heer, Luftwaffe und Marine','Nach Bundesländern','Nach Herstellern']]
 ].forEach(([d,k,q,a,n,x])=>add(d,k,q,a,n,x));
 
 /* ---------- Waffen- und Barettfarben (BMVg, Bekleidung und Uniformen der Bundeswehr, Stand April 2026) ---------- */
@@ -717,6 +718,24 @@ const GLOSS2=[
   ['ZInFü','Zentrum Innere Führung','In Koblenz, lehrt und entwickelt die Innere Führung.'],
   ['VdRBw','Verband der Reservisten der Deutschen Bundeswehr'],
   ['Epl. 14','Einzelplan 14','Der Verteidigungshaushalt im Bundeshaushalt.']
+ ]},
+ {id:'min',t:'Ministerium & Verwaltung',nav:'Ministerium',deck:'min',items:[
+  ['PSts','Parlamentarischer Staatssekretär','Bundestagsabgeordnete, die die Leitung eines Ministeriums politisch unterstützen. Im BMVg derzeit zwei.'],
+  ['Sts','Staatssekretär','Beamtete Leitung der Verwaltung eines Ministeriums. Im BMVg derzeit drei, einer ist Stellvertreter des Ministers.'],
+  ['AL','Abteilungsleiter','Leitet eine Abteilung im Ministerium, meist als Ministerialdirektor, auch als Generalleutnant oder Vizeadmiral.'],
+  ['UAL','Unterabteilungsleiter','Meist Ministerialdirigent, Brigadegeneral oder Generalmajor.'],
+  ['RL','Referatsleiter','Leitet ein Referat, die tragende Einheit eines Ministeriums. Meist Ministerialrat, Oberst oder Kapitän zur See.'],
+  ['RR','Regierungsrat','Einstiegsamt des höheren Dienstes, A 13 wie Major.'],
+  ['ORR','Oberregierungsrat','A 14 wie Oberstleutnant.'],
+  ['RD','Regierungsdirektor','A 15 wie ein höher besoldeter Oberstleutnant.'],
+  ['LtdRD','Leitender Regierungsdirektor','A 16 wie Oberst.'],
+  ['MinR','Ministerialrat','A 16 oder B 3 wie Oberst, im Ministerium oft Referatsleiter.'],
+  ['MinDirig','Ministerialdirigent','B 6 wie Brigadegeneral, im Ministerium oft Unterabteilungsleiter.'],
+  ['MinDir','Ministerialdirektor','B 9 wie Generalleutnant, im Ministerium meist Abteilungsleiter.'],
+  ['GGO','Gemeinsame Geschäftsordnung der Bundesministerien','Regelt Aufbau und Arbeitsweise der Ministerien, etwa Federführung, Mitzeichnung und Zeichnung.'],
+  ['i. A.','Im Auftrag','So zeichnen im Ministerium alle, die nicht zur Leitung gehören (§ 18 GGO).'],
+  ['i. V.','In Vertretung','So zeichnet, wer die Leitung vertritt, etwa ein Staatssekretär für den Minister.'],
+  ['i. G.','Im Generalstabsdienst','Zusatz hinter dem Dienstgrad, etwa Oberst i. G. Diese Offiziere haben die Generalstabsausbildung an der Führungsakademie der Bundeswehr durchlaufen.']
  ]},
  {id:'nato',t:'NATO, EU & Heimatschutz',deck:'nato',items:[
   ['NATO','North Atlantic Treaty Organization','Gegründet 1949, Deutschland ist seit 1955 Mitglied. Heute 32 Mitgliedstaaten.'],
@@ -858,6 +877,25 @@ BEH.push(...BEH2);GLOSS.push(...GLOSS2);
  ['fb','fb','Welches militärische Wort wurde 1999 zum Unwort des Jahres?','Kollateralschaden','Gemeint sind unbeabsichtigte Schäden, vor allem getötete oder verletzte Zivilisten.',['Wirkmittel','Friendly Fire','Robustes Mandat']],
  ['fb','fb','Was erlaubt ein robustes Mandat?','Waffengewalt auch, um den Auftrag durchzusetzen','Nicht nur zur Selbstverteidigung.',['Nur Waffengewalt zur Selbstverteidigung','Einsätze ohne Zustimmung des Bundestages','Den Einsatz von Wehrpflichtigen']],
 ].forEach(([d,k,q,a,n,x])=>add(d,k,q,a,n,x));
+/* Ministerium und Verwaltung */
+[
+ ['Was sind Parlamentarische Staatssekretäre im BMVg?','Bundestagsabgeordnete, die die Leitung politisch unterstützen','Die Verwaltung leiten die beamteten Staatssekretäre.',['Beamte, die die Abteilungen leiten','Vertreter des Bundestages, die das Ministerium kontrollieren','Stellvertreter des Generalinspekteurs']],
+ ['Wer leitet die Verwaltung des BMVg unter der Ministerin oder dem Minister?','Die beamteten Staatssekretäre','Derzeit drei, jeder für bestimmte Abteilungen.',['Die Parlamentarischen Staatssekretäre','Der Generalinspekteur','Der Leitungsstab']],
+ ['Wofür ist der Generalinspekteur im BMVg zuständig?','Die Hauptabteilung Streitkräfte',null,['Die Abteilung Rüstung','Die Abteilung Haushalt','Das ganze Ministerium']],
+ ['Wo hat das BMVg seinen ersten Dienstsitz?','In Bonn auf der Hardthöhe','Der zweite Dienstsitz ist Berlin, im Bendlerblock.',['In Berlin im Bendlerblock','In Koblenz','In Strausberg']],
+ ['Welche Abteilung des BMVg steuert Beschaffung und Nutzung von Wehrmaterial?','Rüstung (Rü)',null,['Aufwuchs (A)','Zentrales (Z)','Politik (Pol)']],
+ ['Welche Hauptabteilung des BMVg ist für Personalgewinnung und den neuen Wehrdienst zuständig?','Aufwuchs (A)','Dazu gehören auch Reserve und Infrastruktur.',['Streitkräfte (SK)','Zentrales (Z)','Politik (Pol)']],
+ ['Was bezeichnet „Pol I 3“?','Referat 3 der Unterabteilung I in der Abteilung Politik','Dieses Referat ist für die NATO zuständig.',['Unterabteilung 3 der Abteilung Politik, Referat I','Die dritte Fassung eines Positionspapiers','Raum 3 im ersten Stock der Abteilung Politik']],
+ ['Was ist die tragende Einheit eines Ministeriums?','Das Referat','Hier wird die Arbeit gemacht und zuerst entschieden (§ 7 GGO).',['Die Abteilung','Die Unterabteilung','Der Leitungsstab']],
+ ['Typisches Amt einer Referatsleiterin oder eines Referatsleiters im Ministerium','Ministerialrat','Militärisch meist Oberst oder Kapitän zur See.',['Ministerialdirektor','Regierungsrat','Staatssekretär']],
+ ['Welchem Dienstgrad entspricht ein Regierungsdirektor nach der Besoldung?','Oberstleutnant','Beide A 15. Ein Regierungsrat entspricht einem Major (A 13).',['Major','Oberst','Brigadegeneral']],
+ ['Welchem Dienstgrad entspricht ein Ministerialdirektor nach der Besoldung?','Generalleutnant','Beide B 9. Ministerialdirektoren leiten meist eine Abteilung.',['Oberst','Brigadegeneral','Hauptmann']],
+ ['Wie führt eine Beamtin die Amtsbezeichnung Ministerialrat?','Ministerialrätin','Amtsbezeichnungen stehen in der weiblichen Form, Dienstgrade nicht: Frau Hauptmann, aber Ministerialrätin.',['Ministerialrat, wie bei Dienstgraden','Ministerialrätin, aber nur auf Antrag','Frau Ministerial']],
+ ['Wer kann einem Soldaten einen Befehl erteilen?','Ein militärischer Vorgesetzter','Die Besoldungsgruppe zeigt nur die Ebene, kein Befehlsverhältnis.',['Jeder Beamte mit höherer Besoldung','Jede Behörde der Bundeswehrverwaltung','Jeder ältere Kollege']],
+ ['Wie heißt die Anordnung eines Ministeriums an seinen nachgeordneten Bereich?','Erlass','Die Führungsstruktur von Ministerium und Bundeswehr regelt seit 2024 der Osnabrücker Erlass.',['Befehl','Mandat','Verordnung']],
+ ['Was übernimmt ein Referat mit seiner Mitzeichnung?','Die fachliche Verantwortung für seinen Teil','§ 15 GGO. Federführend ist das Referat, das überwiegend zuständig ist.',['Die Federführung','Nur die Kenntnisnahme','Die Kosten des Vorhabens']],
+ ['Was ist eine Kommandierung?','Vorübergehender Dienst bei einer anderen Dienststelle','Der dauerhafte Wechsel heißt Versetzung. Bei Beamten heißt der vorübergehende Wechsel Abordnung.',['Dauerhafter Wechsel auf einen anderen Dienstposten','Ein Befehl des Kommandeurs','Die Beförderung zum Kommandeur']]
+].forEach(([q,a,n,x])=>add('min','min',q,a,n,x));
 /* ---------- Symbole ---------- */
 function marker(m){
   const parts=[];let w=0;const sp=4;
@@ -911,9 +949,9 @@ const LESSONS=[
    <li><strong>${tskSym()}Cyber- und Informationsraum (CIR)</strong><span>Die jüngste: IT, Cyberabwehr und elektronischer Kampf</span></li>
   </ol>
   <p>Heer, Luftwaffe und Marine erkennt man an ihren Symbolen, etwa an der Schirmmütze: gekreuzte Schwerter, Schwinge und Anker. Der CIR hat kein eigenes Symbol, weil er keine eigene Uniform hat. Seine Angehörigen tragen die von Heer, Luftwaffe oder Marine, dazu das marineblaue Barett mit dem Abzeichen CIR. Geführt wird der CIR vom Kommando Cyber- und Informationsraum (KdoCIR). Für den Schutz der IT-Systeme und IT-Services der Bundeswehr ist das Zentrum für Cyber-Sicherheit der Bundeswehr (ZCSBw) in Euskirchen zuständig.</p>
-  <p>Jede Teilstreitkraft hat eigene Bezeichnungen für ihre Ebenen. Dazu kommen der Unterstützungsbereich unter dem Unterstützungskommando und das Operative Führungskommando der Bundeswehr (OpFüKdoBw), das seit Oktober 2024 alle Einsätze im In- und Ausland plant und führt. Wie viel Personal und Material eine Einheit planmäßig hat, legt ihre Stärke- und Ausstattungsnachweisung (StAN) fest.</p>
+  <p>Jede Teilstreitkraft hat eigene Bezeichnungen für ihre Ebenen. Dazu kommt der Unterstützungsbereich: Das Unterstützungskommando der Bundeswehr in Bonn bündelt seit 2025 Sanitätsdienst, Logistik, Feldjäger, ABC-Abwehr und zivil-militärische Zusammenarbeit, die früher auf Streitkräftebasis und Zentralen Sanitätsdienst verteilt waren. Alle Einsätze im In- und Ausland plant und führt seit Oktober 2024 das Operative Führungskommando der Bundeswehr (OpFüKdoBw). Wie viel Personal und Material eine Einheit planmäßig hat, legt ihre Stärke- und Ausstattungsnachweisung (StAN) fest.</p>
   <p>Neben den Streitkräften steht die zivile Bundeswehrverwaltung, beide unterstehen dem Bundesministerium der Verteidigung (BMVg). Zur Verwaltung gehören die großen Bundesämter: das Bundesamt für Ausrüstung, Informationstechnik und Nutzung der Bundeswehr (BAAINBw), das Bundesamt für das Personalmanagement der Bundeswehr (BAPersBw) und das Bundesamt für Infrastruktur, Umweltschutz und Dienstleistungen der Bundeswehr (BAIUDBw). Das BAAINBw ist eine zivile Bundesoberbehörde mit rund 10.000 zivilen und 1.800 militärischen Beschäftigten. Zum Geschäftsbereich des BMVg gehört auch der Militärische Abschirmdienst (MAD), der Nachrichtendienst der Bundeswehr zur Abwehr von Spionage, Sabotage und Extremismus.</p>
-  <div class="callout">In der zivilen Bundeswehrverwaltung arbeiten überwiegend Beamtinnen, Beamte und Tarifbeschäftigte. Für sie gelten Amtsbezeichnungen statt Dienstgrade.</div>
+  <div class="callout">In der zivilen Bundeswehrverwaltung arbeiten überwiegend Beamtinnen, Beamte und Tarifbeschäftigte. Beamte haben Amtsbezeichnungen statt Dienstgrade. Mehr dazu und zum Aufbau des Ministeriums in <a href="#/grundlagen/ministerium">Ministerium und Verwaltung</a>.</div>
   <p>Im Inland arbeitet die Bundeswehr in der Amts- und Katastrophenhilfe mit den Behörden und Organisationen mit Sicherheitsaufgaben (BOS) zusammen, etwa Polizei, Feuerwehr und Technisches Hilfswerk (THW). Den gemeinsamen Digitalfunk der BOS betreibt die Bundesanstalt für den Digitalfunk der Behörden und Organisationen mit Sicherheitsaufgaben (BDBOS).</p>`},
  {id:'staat',t:'Bundeswehr im Staat',d:'Parlamentsarmee, Innere Führung, Soldatenpflichten, Führen mit Auftrag und wer dient',b:()=>`
   <p>Die Bundeswehr ist eine Parlamentsarmee. Ihr Auftrag steht im Grundgesetz (GG): Der Bund stellt Streitkräfte zur Verteidigung auf (Art. 87a GG). Für andere Zwecke darf er sie nur einsetzen, soweit das Grundgesetz es ausdrücklich erlaubt, etwa in der Amts- und Katastrophenhilfe oder in einem System kollektiver Sicherheit wie NATO und Vereinten Nationen.</p>
@@ -1071,6 +1109,67 @@ const LESSONS=[
    <li><strong>Lieber entscheiden als zögern</strong><span>Eine Entscheidung trotz Unsicherheit gilt als besser als keine. Schon preußische Vorschriften vom Anfang des 20. Jahrhunderts hielten fest, dass „Unterlassen und Versäumnis eine schwerere Belastung bilden als Fehlgreifen in der Wahl der Mittel“.</span></li>
    <li><strong>Wirkung nach außen</strong><span>Der Ton wirkt auf Außenstehende oft schroff, ist aber selten persönlich gemeint. Umgekehrt gilt langes Drumherumreden in der Truppe schnell als unklar oder unsicher.</span></li>
   </ol>`},
+ {id:'ministerium',t:'Ministerium und Verwaltung',d:'Aufbau des Ministeriums, Amtsbezeichnungen, Erlass und Weisung, Versetzungen',b:()=>`
+  <p>Nicht jeder in der Bundeswehr trägt Uniform. Im Verteidigungsministerium und in den Bundesämtern arbeiten Soldaten, Beamte und Tarifbeschäftigte Tür an Tür, oft im selben Referat. Dort gelten eigene Regeln für Aufbau, Ämter und Arbeitsweise.</p>
+  <h3>Die Leitung des Ministeriums</h3>
+  <p>Das Bundesministerium der Verteidigung (BMVg) hat seinen ersten Dienstsitz in Bonn auf der Hardthöhe, den zweiten in Berlin im Bendlerblock. Zusammen arbeiten dort rund 3.000 Menschen. An der Spitze steht die Ministerin oder der Minister, unterstützt von:</p>
+  <ol class="ladder">
+   <li><strong>Parlamentarische Staats&shy;sekretäre (PSts)</strong><span>Derzeit zwei Bundestagsabgeordnete. Sie unterstützen die Leitung politisch, vor allem gegenüber Bundestag und Öffentlichkeit.</span></li>
+   <li><strong>Staats&shy;sekretäre (Sts)</strong><span>Derzeit drei beamtete Staatssekretäre leiten die Verwaltung, jeder für bestimmte Abteilungen. Einer ist Stellvertreter des Ministers.</span></li>
+   <li><strong>General&shy;inspekteur</strong><span>Der ranghöchste Soldat ist im Ministerium für die Hauptabteilung Streitkräfte zuständig.</span></li>
+  </ol>
+  <p>Seit dem 1. Oktober 2025 gliedert sich das Haus in zwei Hauptabteilungen und sechs Abteilungen, vorher waren es zehn Abteilungen. Ihre Kürzel tauchen in Schreiben und Signaturen immer wieder auf:</p>
+  <ol class="ladder">
+   <li><strong>Streitkräfte (SK)</strong><span>Hauptabteilung für Einsätze, Einsatzbereitschaft, Logistik, Gesundheitsversorgung und militärisches Nachrichtenwesen.</span></li>
+   <li><strong>Aufwuchs (A)</strong><span>Hauptabteilung für Personal, den neuen Wehrdienst, Reserve und Infrastruktur.</span></li>
+   <li><strong>Rüstung (Rü)</strong><span>Plant und steuert Beschaffung und Nutzung von Wehrmaterial.</span></li>
+   <li><strong>Innovation und Cyber (IC)</strong><span>Planung der Fähigkeiten, Forschung, künstliche Intelligenz sowie Cyber und IT.</span></li>
+   <li><strong>Politik (Pol)</strong><span>Sicherheits- und Verteidigungspolitik, NATO und EU, Mandate für Auslandseinsätze.</span></li>
+   <li><strong>Haushalt (H)</strong><span>Der Verteidigungshaushalt, also der Einzelplan 14.</span></li>
+   <li><strong>Recht (R)</strong><span>Rechtsberatung vom Völkerrecht bis zum Beschaffungsrecht.</span></li>
+   <li><strong>Zentrales (Z)</strong><span>Organisation, Personal und Dienstleistungen des Ministeriums selbst.</span></li>
+  </ol>
+  <h3>Abteilung, Referat und „Pol I 3“</h3>
+  <p>Abteilungen gliedern sich in Unterabteilungen, diese in Referate. Das Referat ist die tragende Einheit jedes Ministeriums: Hier wird die Arbeit gemacht und zuerst entschieden. Die Bezeichnung folgt einem festen Muster. „Pol I 3“ ist das Referat 3 der Unterabteilung I in der Abteilung Politik, zuständig für die NATO.</p>
+  <ol class="ladder">
+   <li><strong>Abteilungs&shy;leiter (AL)</strong><span>Meist Ministerialdirektor, in militärisch geprägten Abteilungen auch Generalleutnant oder Vizeadmiral.</span></li>
+   <li><strong>Unter&shy;abteilungs&shy;leiter (UAL)</strong><span>Meist Ministerialdirigent, Brigadegeneral oder Generalmajor.</span></li>
+   <li><strong>Referats&shy;leiter (RL)</strong><span>Meist Ministerialrat, Oberst oder Kapitän zur See.</span></li>
+   <li><strong>Referenten</strong><span>Bearbeiten die Vorgänge, etwa als Regierungsdirektor oder Oberstleutnant.</span></li>
+  </ol>
+  <div class="callout">Viele Stabsoffiziere im Ministerium tragen hinter dem Dienstgrad den Zusatz i. G. für „im Generalstabsdienst“, etwa Oberst i. G. Sie haben die Generalstabsausbildung an der Führungsakademie der Bundeswehr in Hamburg durchlaufen. Am Dienstanzug des Heeres erkennt man sie am karmesinroten Kragenspiegel.</div>
+  <h3>Beamte und ihre Ämter</h3>
+  <p>Beamtinnen und Beamte haben keine Dienstgrade, sondern Amtsbezeichnungen. Sie gehören zum einfachen, mittleren, gehobenen oder höheren Dienst. Anders als Dienstgrade stehen Amtsbezeichnungen in der weiblichen Form: Frau Hauptmann, aber Ministerialrätin. Tarifbeschäftigte haben weder Dienstgrad noch Amtsbezeichnung.</p>
+  <p>Vergleichen lassen sich Ämter und Dienstgrade über die Besoldungsgruppe. Im Ministerium und in den Bundesämtern trifft man vor allem den höheren Dienst:</p>
+  <ol class="ladder">
+   <li><strong>Regierungs&shy;rat (RR)</strong><span>A 13 wie Major. Das Einstiegsamt des höheren Dienstes.</span></li>
+   <li><strong>Ober&shy;regierungs&shy;rat (ORR)</strong><span>A 14 wie Oberstleutnant.</span></li>
+   <li><strong>Regierungs&shy;direktor (RD)</strong><span>A 15 wie ein höher besoldeter Oberstleutnant.</span></li>
+   <li><strong>Leitender Regierungs&shy;direktor (LtdRD)</strong><span>A 16 wie Oberst.</span></li>
+   <li><strong>Ministerial&shy;rat (MinR)</strong><span>A 16 oder B 3 wie Oberst. Im Ministerium oft Referatsleiter.</span></li>
+   <li><strong>Ministerial&shy;dirigent (MinDirig)</strong><span>B 6 wie Brigadegeneral. Im Ministerium oft Unterabteilungsleiter.</span></li>
+   <li><strong>Ministerial&shy;direktor (MinDir)</strong><span>B 9 wie Generalleutnant. Im Ministerium meist Abteilungsleiter.</span></li>
+  </ol>
+  <p>Im gehobenen Dienst reichen die Ämter vom Inspektor (A 9 wie Leutnant) bis zum Oberamtsrat (A 13). Ein Zusatz verrät oft die Fachrichtung, etwa Technischer Regierungsdirektor bei Ingenieuren im BAAINBw.</p>
+  <div class="callout">Die Besoldung zeigt nur die Ebene, kein Befehlsverhältnis. Befehle erteilen nur militärische Vorgesetzte, und sie gelten nur für Soldaten. Im Gespräch werden Beamte in der Regel mit ihrem Namen angesprochen, die Amtsbezeichnung steht eher in Anschrift und Signatur. Die Leitung dagegen wird mit dem Amt angesprochen: „Herr Minister“, „Frau Staatssekretärin“.</div>
+  <h3>Erlass, Weisung, Befehl</h3>
+  <ol class="ladder">
+   <li><strong>Befehl</strong><span>Anweisung eines militärischen Vorgesetzten an Soldaten, mit Anspruch auf Gehorsam. So definiert es das Wehrstrafgesetz.</span></li>
+   <li><strong>Weisung</strong><span>Anordnung einer übergeordneten Stelle, das übliche Wort in der Verwaltung. Auch Beamte sind an dienstliche Weisungen gebunden.</span></li>
+   <li><strong>Erlass</strong><span>Anordnung eines Ministeriums an seinen nachgeordneten Bereich, etwa an Bundesämter und Kommandos.</span></li>
+  </ol>
+  <p>Grundlegende Erlasse tragen oft den Namen des Ortes, an dem sie unterzeichnet wurden. Die Führungsstruktur von Ministerium und Bundeswehr regelt seit 2024 der Osnabrücker Erlass, vorher galt der Dresdner Erlass von 2012.</p>
+  <h3>Wie ein Ministerium arbeitet</h3>
+  <p>Die Abläufe regelt die Gemeinsame Geschäftsordnung der Bundesministerien (GGO). Für jeden Vorgang ist ein Referat federführend. Berührt er andere Referate, werden sie beteiligt und zeichnen mit. Mit der Mitzeichnung übernehmen sie die fachliche Verantwortung für ihren Teil. Das sichert eine Entscheidung ab, kostet aber Zeit: Ein Papier, das viele Bereiche berührt, braucht viele Mitzeichnungen.</p>
+  <p>Unter Schreiben steht meist „Im Auftrag“ (i. A.). So zeichnen alle, die nicht zur Leitung gehören, selbst Abteilungsleiter. „In Vertretung“ (i. V.) zeichnet, wer die Leitung vertritt, etwa ein Staatssekretär für den Minister.</p>
+  <h3>Dienstposten, Versetzung, Kommandierung</h3>
+  <p>Jede Stelle in der Bundeswehr ist ein Dienstposten mit festgelegter Aufgabe und Besoldungsgruppe. Wer wann welchen Dienstposten besetzt, entscheidet die Personalführung, für Soldaten vor allem das Bundesamt für das Personalmanagement der Bundeswehr (BAPersBw).</p>
+  <ol class="ladder">
+   <li><strong>Versetzung</strong><span>Dauerhafter Wechsel auf einen anderen Dienstposten, oft an einen anderen Ort.</span></li>
+   <li><strong>Kommandierung</strong><span>Vorübergehender Dienst bei einer anderen Dienststelle, etwa für einen Lehrgang oder einen Auslandseinsatz.</span></li>
+   <li><strong>Abordnung</strong><span>Das Gegenstück bei Beamten: vorübergehend bei einer anderen Dienststelle tätig.</span></li>
+  </ol>
+  <div class="callout">Berufs- und Zeitsoldaten, vor allem Offiziere, wechseln ihren Dienstposten oft schon nach zwei bis drei Jahren. So lernen sie verschiedene Verwendungen kennen, bevor sie aufsteigen. Ansprechpartner in der Bundeswehr wechseln deshalb häufig, auch mitten in laufenden Vorhaben.</div>`},
  {id:'gliederung',t:'Vom Trupp zur Division',d:'Ebenen, Größen, wer sie führt und ihre Zeichen auf der Lagekarte',b:()=>`
   <p>Die Bundeswehr ist in Ebenen gegliedert, die jeweils mehrere Elemente der Ebene darunter bündeln. Ab der Kompanie wächst die Größe nicht mehr gleichmäßig, weil Fahrzeuge, Waffensysteme und Unterstützungspersonal den Umfang bestimmen.</p>
   <ol class="ladder">${GL.map(r=>`<li><strong>${esc(r.e)}</strong><span>${esc(r.n)}. ${esc(r.f)}.</span></li>`).join('')}</ol>
@@ -1194,6 +1293,7 @@ const LESSONS=[
    <li><strong>InnoZBw</strong><span>Innovationszentrum der Bundeswehr in Erding, seit Dezember 2025 dem BAAINBw unmittelbar nachgeordnet. Koordiniert die Innovationslandschaft der Bundeswehr, erschließt neue Technologien mit eigenen Testkampagnen, etwa zu Drohnen, und bereitet schnell skalierbare Beschaffungen vor. Anlaufstelle für Startups, eng verbunden mit CIHBw, ZDigBw und der Cyberagentur.</span></li>
    <li><strong>BMWE</strong><span>Das Bundesministerium für Wirtschaft und Energie ist nach § 25 Sicherheitsüberprüfungsgesetz (SÜG) für den Geheimschutz in Unternehmen zuständig, also für den Sicherheitsbescheid, den eine Firma für eingestufte Aufträge braucht.</span></li>
   </ol>
+  <p>Mit der Reformagenda Rüstung vom Mai 2026 wird das BAAINBw neu aufgestellt: gegliedert nach den Dimensionen Land, Luft, See, Cyber- und Informationsraum sowie Weltraum, mit flexiblen Projektteams statt starrer Hierarchie und neuen Standorten unter anderem in Bremen, Dresden und Brüssel. Der Hauptsitz bleibt Koblenz. Zum Innovationszentrum in Erding kommt ein zweites in Kiel. Im Ministerium steuert die Abteilung Rüstung die Beschaffung.</p>
   <p>Auf der anderen Seite steht die Sicherheits- und Verteidigungsindustrie (SVI). Große europäische Vorhaben sind etwa das Future Combat Air System (FCAS), das Luftkampfsystem der nächsten Generation, und das Main Ground Combat System (MGCS), das deutsch-französische Landkampfsystem. Die Industrie organisiert sich in Verbänden wie dem Bundesverband der Deutschen Sicherheits- und Verteidigungsindustrie (BDSV) und dem Bundesverband der Deutschen Luft- und Raumfahrtindustrie (BDLI). Gesellschaften wie die Deutsche Gesellschaft für Wehrtechnik (DWT), Förderkreis Deutsches Heer (FKH) oder Deutsches Maritimes Institut (DMI) bringen Streitkräfte, Verwaltung, Politik und Industrie ins Gespräch. In der NATO berät die NATO Industrial Advisory Group (NIAG) aus Sicht der Industrie.</p>
   <h3>Woher das Geld kommt</h3>
   <p>Der Verteidigungshaushalt ist der Einzelplan 14 im Bundeshaushalt, beschlossen vom Bundestag. Vorhaben ab 25 Millionen Euro legt das Bundesministerium der Verteidigung (BMVg) vorher dem Haushaltsausschuss vor, die sogenannten 25-Millionen-Vorlagen. 2022 kam das kreditfinanzierte Sondervermögen Bundeswehr über 100 Milliarden Euro hinzu. Seit einer Grundgesetzänderung im März 2025 sind Verteidigungsausgaben oberhalb von 1 % des Bruttoinlandsprodukts (BIP) von der Schuldenbremse ausgenommen.</p>
@@ -1215,7 +1315,7 @@ const LESSONS=[
 ];
 // Jede Karte gehört zu genau einer Lektion, Lernkarten und Quiz üben je Lektion. Die Zuordnung folgt dem Stapel (deck, Teil der Karten-ID),
 // wo ein Stapel mehrere Lektionen abdeckt der Kartenart, einzelne Karten sind nach ihrer Frage zugeordnet.
-const LESSON_OF_DECK={dg:'dienstgrade',mar:'dienstgrade',abz:'abzeichen',eti:'anrede',gl:'gliederung',sym:'gliederung',stab:'staebe',fb:'gefecht',beh:'aufbau',staat:'staat',nato:'buendnis',abk:'kuerzel',vs:'geheimschutz',dig:'digital'};
+const LESSON_OF_DECK={dg:'dienstgrade',mar:'dienstgrade',abz:'abzeichen',eti:'anrede',gl:'gliederung',sym:'gliederung',stab:'staebe',fb:'gefecht',beh:'aufbau',staat:'staat',min:'ministerium',nato:'buendnis',abk:'kuerzel',vs:'geheimschutz',dig:'digital'};
 const LESSON_OF_KIND={anz:'anzuege',wf:'farben',wfrev:'farben',bar:'farben',farbe:'farben','g-ind':'beschaffung',proj:'beschaffung',haush:'beschaffung'};
 const LESSON_OF_Q={
  'Abkürzung: BAAINBw':'beschaffung','Abkürzung: BWI':'beschaffung','Abkürzung: CIHBw':'beschaffung','Abkürzung: InnoZBw':'beschaffung','Abkürzung: ZDigBw':'beschaffung','Abkürzung: CPM':'beschaffung',
@@ -1424,7 +1524,7 @@ function renderHelp(){
   <p>AGA steht für Allgemeine Grundausbildung. AGAdemie ist die zivile Variante: für alle, die mit der Bundeswehr zusammenarbeiten und ihre Sprache und Strukturen verstehen wollen.</p>
   <div class="callout"><strong>Kein Angebot der Bundeswehr.</strong> AGAdemie ist ein privates Projekt. Es ist kein Angebot, keine Veröffentlichung und keine offizielle Anwendung der Bundeswehr, des Bundesministeriums der Verteidigung oder einer anderen Dienststelle und steht mit ihnen in keiner Verbindung. Alle Inhalte beruhen auf öffentlich zugänglichen Quellen und können Fehler enthalten. Verbindlich sind allein die offiziellen Quellen. Fehler gefunden? Gern als <a href="https://github.com/FlorianWilhelm/agademie/issues">Issue auf GitHub</a> melden.</div>
   <h2>Inhalte der App</h2>
-  <p>Grundwissen über die Bundeswehr: ihre Stellung im Staat, NATO und Heimatschutz, Dienstgrade und Abzeichen, Uniformen, Waffen- und Barettfarben, Gliederung, Stabsabteilungen, Führungsbegriffe, Behörden und Haushalt, Anrede, Abkürzungen, NATO-Alphabet, Geheimschutz und die Begriffe der militärischen Digitalisierung. Insgesamt ${n} Karten zu ${LESSONS.length} Lektionen.</p>
+  <p>Grundwissen über die Bundeswehr: ihre Stellung im Staat, NATO und Heimatschutz, Dienstgrade und Abzeichen, Uniformen, Waffen- und Barettfarben, Gliederung, Stabsabteilungen, Führungsbegriffe, Behörden und Haushalt, das Ministerium und die Amtsbezeichnungen der Beamten, Anrede, Abkürzungen, NATO-Alphabet, Geheimschutz und die Begriffe der militärischen Digitalisierung. Insgesamt ${n} Karten zu ${LESSONS.length} Lektionen.</p>
   <h3>Grundlagen</h3>
   <p>${LESSONS.length} Lektionen vermitteln das Wissen in sinnvoller Reihenfolge, mit Beispielen und Abzeichen. Am Ende jeder Lektion führen „Mit Lernkarten üben“ und „Im Quiz prüfen“ direkt zum passenden Thema. Gelesene Lektionen sind markiert.</p>
   <h3>Thema wählen</h3>

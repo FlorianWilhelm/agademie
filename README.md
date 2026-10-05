@@ -11,7 +11,8 @@ Strukturen verstehen wollen.
 
 ## Inhalte
 
-* Strukturen: BMVg, Teilstreitkräfte, Organisationsbereiche, Karrierecenter
+* Strukturen: Teilstreitkräfte, Unterstützungsbereich, Bundeswehrverwaltung, Karrierecenter
+* Ministerium und Verwaltung: Leitung und Abteilungen des BMVg, Referate, Amtsbezeichnungen, Erlass und Weisung, Versetzung und Kommandierung
 * Bundeswehr im Staat: Parlamentsarmee, Befehlsgewalt, Innere Führung, Soldatenpflichten, Führen mit Auftrag und Befehlsschema, Wehrbeauftragte, Statusgruppen, Wehrdienst
 * Bündnis: NATO, Artikel 5, Brigade Litauen, Drehscheibe Deutschland, Heimatschutz, EU
 * Dienstgrade, Abzeichen und Anreden

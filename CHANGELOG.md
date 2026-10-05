@@ -10,6 +10,9 @@ per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 - Lektionen: „NATO-Größenzeichen“ ist jetzt ein Abschnitt der Lektion „Vom Trupp zur Division“, wie unter Nachschlagen. Lernkarten und Quiz dieser Lektion fragen die Größenzeichen mit ab
 - Lektionsübersicht: Die Beschreibungen von „Anrede und Umgang“ und „Abkürzungen im Dienstalltag“ nennen jetzt alle Abschnitte. Auf großen Bildschirmen passt jede Beschreibung in eine Zeile
 - Lektionen: Die Titel kommen ohne Abkürzungen aus und haben eine einheitliche Form, damit auch Einsteiger sofort sehen, worum es geht. Neu heißen „Dienstgrade und Laufbahnen“ (bisher „Dienstgrade verstehen“), „Dienstgradabzeichen“ („Abzeichen lesen“), „NATO, EU und Heimatschutz“ („Im Bündnis: NATO, EU und Heimatschutz“), „Geheimschutz und Sicherheitsüberprüfung“ („Geheimschutz: VS und SÜ“) und „Digitalisierung der Bundeswehr“ („Führung digital: von C2 bis MDO“)
+- Neue Lektion „Ministerium und Verwaltung“ nach „Anrede und Umgang“: Leitung und Abteilungen des Verteidigungsministeriums nach dem Umbau vom Oktober 2025, Referate und Bezeichnungen wie „Pol I 3“, Amtsbezeichnungen der Beamten im Vergleich zu den Dienstgraden, Erlass, Weisung und Befehl, Mitzeichnung und „i. A.“ sowie Versetzung und Kommandierung. Dazu 16 Quizfragen und ein neuer Abschnitt unter Nachschlagen → Begriffe
+- Lektion „Aufbau der Bundeswehr“: Was der Unterstützungsbereich seit 2025 bündelt, von Sanitätsdienst bis Feldjäger
+- Lektion „Wer braucht, wer beschafft“: die Reformagenda Rüstung vom Mai 2026, die das BAAINBw nach Dimensionen neu gliedert, und das zweite Innovationszentrum in Kiel, dazu eine neue Quizfrage
 
 ## 0.13 (2026-10-05)
 
