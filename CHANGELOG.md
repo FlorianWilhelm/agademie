@@ -4,7 +4,7 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
-## Unveröffentlicht
+## 0.13 (2026-10-05)
 
 - Neue Lektion „Raum, Bewegung, Gefecht“ nach den Stäben: Führungsbegriffe wie Verfügungs- und Bereitstellungsraum, Verlegen und Verbringen, Antreten, Halten und Sperren, dazu Verzögern, Ausweichen, Lösen und Aufnahme statt „Rückzug“. Ein eigener Abschnitt erklärt wirken, ausschalten, rausnehmen, Kollateralschaden und andere Umschreibungen. Dazu 15 Quizfragen
 
