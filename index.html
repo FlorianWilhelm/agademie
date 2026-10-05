@@ -222,10 +222,19 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 
 <script>
 /* ---------- Version: setzt release.sh passend zum Git-Tag, nicht von Hand ändern ---------- */
-const VERSION='0.13', UPDATED='2026-10-05';
+const VERSION='0.14', UPDATED='2026-10-05';
 document.getElementById('ver').textContent=`v${VERSION} · ${UPDATED}`;
 // Was ist neu: die letzten Versionen aus CHANGELOG.md, setzt release.sh zusammen mit der Version
 const CHANGES=[
+{v:"0.14",d:"2026-10-05",items:[
+"Lektion „Anrede und Umgang“: Aufstehen zum Abschied beim Abschnitt „Auftreten“, dazu eine neue Quizfrage",
+"Lektionen: „NATO-Größenzeichen“ ist jetzt ein Abschnitt der Lektion „Vom Trupp zur Division“, wie unter Nachschlagen. Lernkarten und Quiz dieser Lektion fragen die Größenzeichen mit ab",
+"Lektionsübersicht: Die Beschreibungen von „Anrede und Umgang“ und „Abkürzungen im Dienstalltag“ nennen jetzt alle Abschnitte. Auf großen Bildschirmen passt jede Beschreibung in eine Zeile",
+"Lektionen: Die Titel kommen ohne Abkürzungen aus und haben eine einheitliche Form, damit auch Einsteiger sofort sehen, worum es geht. Neu heißen „Dienstgrade und Laufbahnen“ (bisher „Dienstgrade verstehen“), „Dienstgradabzeichen“ („Abzeichen lesen“), „NATO, EU und Heimatschutz“ („Im Bündnis: NATO, EU und Heimatschutz“), „Geheimschutz und Sicherheitsüberprüfung“ („Geheimschutz: VS und SÜ“) und „Digitalisierung der Bundeswehr“ („Führung digital: von C2 bis MDO“)",
+"Neue Lektion „Ministerium und Verwaltung“ nach „Anrede und Umgang“: Leitung und Abteilungen des Verteidigungsministeriums nach dem Umbau vom Oktober 2025, Referate und Bezeichnungen wie „Pol I 3“, Amtsbezeichnungen der Beamten im Vergleich zu den Dienstgraden, Erlass, Weisung und Befehl, Mitzeichnung und „i. A.“ sowie Versetzung und Kommandierung. Dazu 16 Quizfragen und ein neuer Abschnitt unter Nachschlagen → Begriffe",
+"Lektion „Aufbau der Bundeswehr“: Was der Unterstützungsbereich seit 2025 bündelt, von Sanitätsdienst bis Feldjäger",
+"Lektion „Wer braucht, wer beschafft“: die Reformagenda Rüstung vom Mai 2026, die das BAAINBw nach Dimensionen neu gliedert, und das zweite Innovationszentrum in Kiel, dazu eine neue Quizfrage",
+]},
 {v:"0.13",d:"2026-10-05",items:[
 "Neue Lektion „Raum, Bewegung, Gefecht“ nach den Stäben: Führungsbegriffe wie Verfügungs- und Bereitstellungsraum, Verlegen und Verbringen, Antreten, Halten und Sperren, dazu Verzögern, Ausweichen, Lösen und Aufnahme statt „Rückzug“. Ein eigener Abschnitt erklärt wirken, ausschalten, rausnehmen, Kollateralschaden und andere Umschreibungen. Dazu 15 Quizfragen",
 ]},
@@ -233,10 +242,6 @@ const CHANGES=[
 "Die App heißt jetzt AGAdemie statt AGAdemy, passend zum deutschen Wort Akademie. Die neue Adresse ist florianwilhelm.info/agademie, der Lernstand beginnt dabei einmalig von vorn",
 "Lektion „Anrede und Umgang“: neuer Abschnitt „Sprache im Dienst“ mit dem Wichtigsten zuerst, knappen Formeln, direktem Feedback und Entscheidungsfreude, dazu drei neue Quizfragen",
 "Lektion „Anrede und Umgang“: Einleitung zu den ungeschriebenen Regeln und neuer Abschnitt „Auftreten“ mit Händen aus den Taschen, Nicht-Anlehnen, Händedruck und Grußpflicht, dazu drei neue Quizfragen. „Gelöbnis, Eid und Zeremonien“ steht jetzt vor den ungeschriebenen Regeln",
-]},
-{v:"0.11",d:"2026-10-03",items:[
-"Lektion „Bundeswehr im Staat“: Leitsatz „Leben in der Lage“ als Folge aus Moltkes Satz über den Operationsplan, dazu eine neue Quizfrage",
-"Lektion „Anrede und Umgang“: „Schweiß spart Blut“, „Auftrag vor Befindlichkeit“ und „Leben in der Lage“ bei den ungeschriebenen Regeln, dazu zwei neue Quizfragen",
 ]},
 ]; // Ende CHANGES
 /* ---------- Daten ---------- */
