@@ -222,10 +222,14 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 
 <script>
 /* ---------- Version: setzt release.sh passend zum Git-Tag, nicht von Hand ändern ---------- */
-const VERSION='0.15', UPDATED='2026-10-08';
+const VERSION='0.15.1', UPDATED='2026-10-08';
 document.getElementById('ver').textContent=`v${VERSION} · ${UPDATED}`;
 // Was ist neu: die letzten Versionen aus CHANGELOG.md, setzt release.sh zusammen mit der Version
 const CHANGES=[
+{v:"0.15.1",d:"2026-10-08",items:[
+"Lektion „Digitalisierung der Bundeswehr“: die Kette von Informations- über Führungs- zu Wirkungsüberlegenheit beim Abschnitt zur Wirkkette, dazu eine neue Quizfrage",
+"Lektion „Waffenfarbe und Barett“: erklärt jetzt, was eine Truppengattung ist, dazu eine neue Quizfrage",
+]},
 {v:"0.15",d:"2026-10-08",items:[
 "Neue Lektion „Von der Strategie zum Befehl“ nach „Bundeswehr im Staat“: wie Nationale Sicherheitsstrategie, Verteidigungspolitische Richtlinien und die erste Militärstrategie der Bundeswehr vom April 2026 aufeinander aufbauen, die Führungsebenen strategisch, operativ und taktisch, was Doktrin ist und wie sie sich von Strategie, Konzept und Vorschrift unterscheidet. Dazu neun Quizfragen und ein neuer Abschnitt „Strategie & Doktrin“ unter Nachschlagen → Begriffe",
 "„Führen mit Auftrag“, Führungsvorgang und Befehlsschema stehen jetzt in der neuen Lektion statt in „Bundeswehr im Staat“, mitsamt ihren Lernkarten",
@@ -233,9 +237,6 @@ const CHANGES=[
 ]},
 {v:"0.14.2",d:"2026-10-05",items:[
 "Link-Vorschau: Das Vorschaubild zeigt den Namen jetzt in der Mitte, damit er auch in kleinen Vorschauen wie bei Slack ganz zu sehen ist",
-]},
-{v:"0.14.1",d:"2026-10-05",items:[
-"Lektionen: Verweise auf Nachschlagen sind jetzt Links, die direkt zum passenden Abschnitt springen, etwa zum NATO-Alphabet, zu den Waffenfarben und zur Gliederungstabelle",
 ]},
 ]; // Ende CHANGES
 /* ---------- Daten ---------- */
