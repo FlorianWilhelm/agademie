@@ -222,24 +222,20 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 
 <script>
 /* ---------- Version: setzt release.sh passend zum Git-Tag, nicht von Hand ändern ---------- */
-const VERSION='0.14.2', UPDATED='2026-10-05';
+const VERSION='0.15', UPDATED='2026-10-08';
 document.getElementById('ver').textContent=`v${VERSION} · ${UPDATED}`;
 // Was ist neu: die letzten Versionen aus CHANGELOG.md, setzt release.sh zusammen mit der Version
 const CHANGES=[
+{v:"0.15",d:"2026-10-08",items:[
+"Neue Lektion „Von der Strategie zum Befehl“ nach „Bundeswehr im Staat“: wie Nationale Sicherheitsstrategie, Verteidigungspolitische Richtlinien und die erste Militärstrategie der Bundeswehr vom April 2026 aufeinander aufbauen, die Führungsebenen strategisch, operativ und taktisch, was Doktrin ist und wie sie sich von Strategie, Konzept und Vorschrift unterscheidet. Dazu neun Quizfragen und ein neuer Abschnitt „Strategie & Doktrin“ unter Nachschlagen → Begriffe",
+"„Führen mit Auftrag“, Führungsvorgang und Befehlsschema stehen jetzt in der neuen Lektion statt in „Bundeswehr im Staat“, mitsamt ihren Lernkarten",
+"Lektion „Digitalisierung der Bundeswehr“: die Wirkkette vom Sensor zur Wirkung (Sensor-to-Shooter), dazu F2T2EA, OODA-Loop und Kill Web, vier neue Quizfragen und neue Abkürzungen unter Nachschlagen → Begriffe",
+]},
 {v:"0.14.2",d:"2026-10-05",items:[
 "Link-Vorschau: Das Vorschaubild zeigt den Namen jetzt in der Mitte, damit er auch in kleinen Vorschauen wie bei Slack ganz zu sehen ist",
 ]},
 {v:"0.14.1",d:"2026-10-05",items:[
 "Lektionen: Verweise auf Nachschlagen sind jetzt Links, die direkt zum passenden Abschnitt springen, etwa zum NATO-Alphabet, zu den Waffenfarben und zur Gliederungstabelle",
-]},
-{v:"0.14",d:"2026-10-05",items:[
-"Lektion „Anrede und Umgang“: Aufstehen zum Abschied beim Abschnitt „Auftreten“, dazu eine neue Quizfrage",
-"Lektionen: „NATO-Größenzeichen“ ist jetzt ein Abschnitt der Lektion „Vom Trupp zur Division“, wie unter Nachschlagen. Lernkarten und Quiz dieser Lektion fragen die Größenzeichen mit ab",
-"Lektionsübersicht: Die Beschreibungen von „Anrede und Umgang“ und „Abkürzungen im Dienstalltag“ nennen jetzt alle Abschnitte. Auf großen Bildschirmen passt jede Beschreibung in eine Zeile",
-"Lektionen: Die Titel kommen ohne Abkürzungen aus und haben eine einheitliche Form, damit auch Einsteiger sofort sehen, worum es geht. Neu heißen „Dienstgrade und Laufbahnen“ (bisher „Dienstgrade verstehen“), „Dienstgradabzeichen“ („Abzeichen lesen“), „NATO, EU und Heimatschutz“ („Im Bündnis: NATO, EU und Heimatschutz“), „Geheimschutz und Sicherheitsüberprüfung“ („Geheimschutz: VS und SÜ“) und „Digitalisierung der Bundeswehr“ („Führung digital: von C2 bis MDO“)",
-"Neue Lektion „Ministerium und Verwaltung“ nach „Anrede und Umgang“: Leitung und Abteilungen des Verteidigungsministeriums nach dem Umbau vom Oktober 2025, Referate und Bezeichnungen wie „Pol I 3“, Amtsbezeichnungen der Beamten im Vergleich zu den Dienstgraden, Erlass, Weisung und Befehl, Mitzeichnung und „i. A.“ sowie Versetzung und Kommandierung. Dazu 16 Quizfragen und ein neuer Abschnitt unter Nachschlagen → Begriffe",
-"Lektion „Aufbau der Bundeswehr“: Was der Unterstützungsbereich seit 2025 bündelt, von Sanitätsdienst bis Feldjäger",
-"Lektion „Wer braucht, wer beschafft“: die Reformagenda Rüstung vom Mai 2026, die das BAAINBw nach Dimensionen neu gliedert, und das zweite Innovationszentrum in Kiel, dazu eine neue Quizfrage",
 ]},
 ]; // Ende CHANGES
 /* ---------- Daten ---------- */
