@@ -698,6 +698,7 @@ WAFF.slice(0,12).forEach(([f,,t])=>add('abz','wfrev','Welche Truppengattung hat 
 add('abz','wf','Waffenfarbe der Offiziere im Generalstabsdienst','Karmesinrot');
 BARETT.slice(0,6).forEach(([f,,ts])=>ts.slice(0,3).forEach(t=>add('abz','bar','Barettfarbe: '+t,f)));
 [
+ ['abz','farbe','Was ist eine Truppengattung?','Alle Truppenteile mit gleicher Aufgabe und Ausrüstung','Etwa Panzertruppe, Artillerietruppe oder Pioniertruppe. Jede hat ihre eigene Waffenfarbe.',['Eine Teilstreitkraft wie Heer oder Luftwaffe','Ein Verband aus mehreren Bataillonen','Eine Gruppe von Dienstgraden']],
  ['abz','farbe','Wo zeigt das Heer am Feldanzug die Waffenfarbe?','Als Litze an den Schulterklappen','Ein etwa 4 mm schmales Band in Waffenfarbe.',['Am Kragen','Am Ärmelband','Gar nicht']],
  ['abz','farbe','Wo zeigt das Heer am Dienstanzug die Waffenfarbe?','Kragenspiegel und Umrandung der Schulterklappen',null,['Nur am Barett','Ärmelstreifen','Namensschild']],
  ['abz','farbe','Woran erkennt man Generale am Kragen?','Goldene Stickerei auf hochrotem Kragenspiegel',null,['Silberne Doppellitze auf Schwarz','Karmesinroter Kragenspiegel','Goldene Litze an der Schulterklappe']],
@@ -1120,7 +1121,7 @@ const LESSONS=[
   <p>Der Cyber- und Informationsraum (CIR) hat keine eigene Uniform. Seine Angehörigen tragen je nach Dienstposten die Uniform von Heer, Luftwaffe oder Marine, ihren sogenannten Uniformträgerbereich. Gemeinsames Erkennungszeichen ist das marineblaue Barett mit dem Abzeichen CIR. Dasselbe Prinzip gilt im Unterstützungsbereich, etwa im Sanitätsdienst.</p>
   <div class="callout">Weiß trägt nur die Marine: Den Sommeranzug gibt es im Allgemeinen erst südlich des 40. Breitengrads, im Inland ist er nicht erlaubt.</div>`},
  {id:'farben',t:'Waffenfarbe und Barett',d:'Litze, Kragenspiegel und Barett verraten die Truppengattung',b:()=>`
-  <p>Das Dienstgradabzeichen sagt, welchen Rang jemand hat. Wozu jemand gehört, zeigt im Heer die Farbe. Jede Truppengattung hat ihre eigene Waffenfarbe, die Tradition reicht bis 1915 zurück.</p>
+  <p>Das Dienstgradabzeichen sagt, welchen Rang jemand hat. Wozu jemand gehört, zeigt im Heer die Farbe. Eine Truppengattung fasst alle Truppenteile mit gleicher Aufgabe, Ausbildung und Ausrüstung zusammen, etwa die Panzertruppe, die Artillerietruppe oder die Pioniertruppe. Jede Truppengattung hat ihre eigene Waffenfarbe, die Tradition reicht bis 1915 zurück.</p>
   <h3>Am Feldanzug: die Litze</h3>
   <p>An den Schulterklappen des Feldanzugs sitzt eine etwa 4 mm schmale Schlaufe in Waffenfarbe, die Litze. Grün heißt Infanterie, Rosa Panzertruppe, Schwarz Pioniere, Bordeauxrot ABC-Abwehr, also Schutz vor atomaren, biologischen und chemischen Gefahren. Die Dienstgradabzeichen selbst sind bei allen gleich.</p>
   <h3>Am Dienstanzug: der Kragenspiegel</h3>

@@ -7,6 +7,7 @@ per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 ## Unveröffentlicht
 
 - Lektion „Digitalisierung der Bundeswehr“: die Kette von Informations- über Führungs- zu Wirkungsüberlegenheit beim Abschnitt zur Wirkkette, dazu eine neue Quizfrage
+- Lektion „Waffenfarbe und Barett“: erklärt jetzt, was eine Truppengattung ist, dazu eine neue Quizfrage
 
 ## 0.15 (2026-10-08)
 
