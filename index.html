@@ -561,7 +561,11 @@ const GLOSS=[
   ['MDO','Multi-Domain Operations','Koordiniertes Wirken über alle Dimensionen: Land, Luft, See, Weltraum sowie Cyber- und Informationsraum.'],
   ['EMSO','Electromagnetic Spectrum Operations','Militärische Operationen im elektromagnetischen Spektrum, schließen die Elektronische Kampfführung ein.'],
   ['EloKa','Elektronische Kampfführung','Englisch EW (Electronic Warfare): Aufklären, Stören und Schützen im elektromagnetischen Spektrum.'],
-  ['D-LBO','Digitalisierung landbasierter Operationen','Vorhaben der Bundeswehr zur durchgängigen digitalen Führungsfähigkeit der Landstreitkräfte.']
+  ['D-LBO','Digitalisierung landbasierter Operationen','Vorhaben der Bundeswehr zur durchgängigen digitalen Führungsfähigkeit der Landstreitkräfte.'],
+  ['AWV','Aufklärungs- und Wirkverbund','Vernetzt Aufklärung und Wirkmittel, damit aus einem erkannten Ziel schnell Wirkung wird. Englisch Sensor-to-Shooter, die Wirkkette.'],
+  ['F2T2EA','Find, Fix, Track, Target, Engage, Assess','Die sechs Schritte der Kill Chain in der US-Zielbekämpfung: finden, genau orten, verfolgen, Bekämpfung festlegen, bekämpfen, Wirkung prüfen.'],
+  ['OODA','Observe, Orient, Decide, Act','Entscheidungszyklus nach dem US-Luftwaffenoberst John Boyd. Wer ihn schneller durchläuft als der Gegner, ist ihm voraus.'],
+  ['JADC2','Joint All-Domain Command and Control','US-Vorhaben, Sensoren und Wirkmittel aller Teilstreitkräfte zu einem Netz zu verbinden, dem Kill Web.']
  ]},
  {id:'it',t:'IT & Architektur',deck:'dig',items:[
   ['Core','Große Rechenzentren der Bundeswehr','Zentrale, stationäre IT-Ebene.'],
@@ -618,6 +622,10 @@ GLOSS.forEach(g=>g.items.forEach(([k,v,n])=>add(g.deck,'g-'+g.id,(g.id==='dgk'?'
  ['dig','begr','Welche IT-Ebene bilden die großen Rechenzentren?','Core',null,['Fog','Edge','D-LBO']],
  ['dig','begr','Welche Dimensionen verbindet MDO?','Land, Luft, See, Weltraum sowie Cyber- und Informationsraum',null,['Nur Land und Luft','Heer, Luftwaffe und Marine','Aufklärung und Wirkung']],
  ['dig','begr','Was kommt bei C4ISR gegenüber C4I hinzu?','Surveillance und Reconnaissance','Überwachung und Aufklärung. Intelligence steckt schon in C4I.',['Cyber und Space','Consultation','Computers']],
+ ['dig','begr','Was beschreibt die Wirkkette, englisch Sensor-to-Shooter?','Den Weg vom Erkennen eines Ziels bis zur Wirkung','Ziel ist, diesen Weg zu verkürzen, damit ein Ziel getroffen wird, bevor es sich bewegt.',['Die Befehlskette vom Minister bis zur Truppe','Die Lieferkette für Munition','Den Funkweg zwischen zwei Gefechtsständen']],
+ ['dig','begr','Warum heißt es oft Sensor-to-Effector statt Sensor-to-Shooter?','Wirkung kann auch Stören oder ein Cyberangriff sein',null,['Weil keine Menschen beteiligt sind','Weil nur Drohnen gemeint sind','Weil Effector die NATO-Bezeichnung für Artillerie ist']],
+ ['dig','begr','Was unterscheidet ein Kill Web von einer Kill Chain?','Jeder Sensor kann jedes Wirkmittel bedienen','Eine Kill Chain verbindet einen bestimmten Sensor fest mit einem bestimmten Wirkmittel.',['Es kommt ohne Sensoren aus','Es wirkt nur im Cyberraum','Es gilt nur für die Marine']],
+ ['dig','begr','Was ist die Grundidee des OODA-Loops?','Wer schneller beobachtet, beurteilt, entscheidet und handelt, ist dem Gegner voraus',null,['Wer mehr Waffen hat, gewinnt','Jede Entscheidung braucht einen schriftlichen Befehl','Erst handeln, dann beobachten']],
  ['beh','proj','Deutsch-französisches Landkampfsystem der nächsten Generation','MGCS',null,['FCAS','NGVA','D-LBO']],
  ['beh','proj','Europäisches Luftkampfsystem der nächsten Generation','FCAS',null,['MGCS','FACE','SOSA']],
  ['beh','proj','Nach welchen Dimensionen gliedert die Reformagenda Rüstung von 2026 das BAAINBw?','Land, Luft, See, Cyber- und Informationsraum sowie Weltraum','Mit flexiblen Projektteams statt starrer Hierarchie und neuen Standorten unter anderem in Bremen, Dresden und Brüssel.',['Heer, Luftwaffe und Marine','Nach Bundesländern','Nach Herstellern']]
@@ -722,6 +730,13 @@ const GLOSS2=[
   ['VdRBw','Verband der Reservisten der Deutschen Bundeswehr'],
   ['Epl. 14','Einzelplan 14','Der Verteidigungshaushalt im Bundeshaushalt.']
  ]},
+ {id:'strat',t:'Strategie & Doktrin',deck:'fhr',items:[
+  ['NSS','Nationale Sicherheitsstrategie','Die erste ihrer Art, von der Bundesregierung im Juni 2023 beschlossen. Leitgedanke ist die integrierte Sicherheit.'],
+  ['VPR','Verteidigungspolitische Richtlinien','Vom Verteidigungsministerium im November 2023 erlassen. Handlungsmaxime ist die Kriegstüchtigkeit.'],
+  ['AJP','Allied Joint Publication','Doktrin der NATO für streitkräftegemeinsame Operationen. An der Spitze steht AJP-01, Allied Joint Doctrine.'],
+  ['TTP','Tactics, Techniques and Procedures','Taktiken, Techniken und Verfahren, die detaillierteste Stufe unterhalb der Doktrin.'],
+  ['HDv','Heeresdienstvorschrift','Vorschrift für das Heer, etwa die Führungsvorschrift „Truppenführung von Landstreitkräften“.']
+ ]},
  {id:'min',t:'Ministerium & Verwaltung',nav:'Ministerium',deck:'min',items:[
   ['PSts','Parlamentarischer Staatssekretär','Bundestagsabgeordnete, die die Leitung eines Ministeriums politisch unterstützen. Im BMVg derzeit zwei.'],
   ['Sts','Staatssekretär','Beamtete Leitung der Verwaltung eines Ministeriums. Im BMVg derzeit drei, einer ist Stellvertreter des Ministers.'],
@@ -787,7 +802,7 @@ BEH.push(...BEH2);GLOSS.push(...GLOSS2);
  ['staat','staat','Wie heißt die Führungskultur der Bundeswehr?','Innere Führung',null,['Truppendienst','Formaldienst','Traditionspflege']],
  ['staat','staat','Leitbild der Inneren Führung','Staatsbürger in Uniform',null,['Bürger in Waffen','Kämpfer ohne Politik','Soldat des Vaterlands']],
  ['staat','staat','Was gilt für einen Befehl, durch dessen Befolgen eine Straftat begangen würde?','Er darf nicht befolgt werden','§ 11 Soldatengesetz. Befehle, die die Menschenwürde verletzen oder nicht dienstlichen Zwecken dienen, sind unverbindlich.',['Er muss befolgt werden','Er muss erst schriftlich bestätigt werden','Er gilt nur im Einsatz']],
- ['staat','staat','Was bedeutet „Führen mit Auftrag“?','Ziel und Rahmen vorgeben, den Weg selbst wählen lassen','Auch Auftragstaktik genannt.',['Jeden Schritt genau befehlen','Nur schriftlich befehlen','Ohne Befehle führen']],
+ ['fhr','fhr','Was bedeutet „Führen mit Auftrag“?','Ziel und Rahmen vorgeben, den Weg selbst wählen lassen','Auch Auftragstaktik genannt.',['Jeden Schritt genau befehlen','Nur schriftlich befehlen','Ohne Befehle führen']],
  ['staat','staat','Wem ist die oder der Wehrbeauftragte zugeordnet?','Dem Bundestag','Hilfsorgan des Bundestages bei der parlamentarischen Kontrolle (Art. 45b GG), gewählt für fünf Jahre.',['Dem Verteidigungsministerium','Dem Bundespräsidenten','Dem Generalinspekteur']],
  ['staat','staat','Wie können sich Soldatinnen und Soldaten an die oder den Wehrbeauftragten wenden?','Direkt, ohne Dienstweg',null,['Nur über den Disziplinarvorgesetzten','Nur über die Vertrauensperson','Nur nach Freigabe durch den Kompaniechef']],
  ['staat','status','Wie lange darf die Dienstzeit als Soldat auf Zeit höchstens dauern?','25 Jahre','§ 40 Soldatengesetz.',['12 Jahre','20 Jahre','Bis zur Altersgrenze']],
@@ -836,14 +851,14 @@ BEH.push(...BEH2);GLOSS.push(...GLOSS2);
 ].forEach(([d,k,q,a,n,x])=>add(d,k,q,a,n,x));
 /* Führen mit Auftrag, Soldatenpflichten und ungeschriebene Regeln */
 [
- ['staat','staat','Womit beginnt ein militärischer Befehl?','Lage','Schema LADEF: Lage, Auftrag, Durchführung, Einsatzunterstützung, Führungsunterstützung.',['Auftrag','Durchführung','Absicht']],
- ['staat','staat','Wofür steht das Merkwort LADEF?','Lage, Auftrag, Durchführung, Einsatzunterstützung, Führungsunterstützung','Die Gliederung eines Befehls. Die ersten drei Punkte sind immer dabei.',['Lage, Absicht, Dauer, Einsatz, Führung','Leitung, Auftrag, Dienstweg, Einheit, Feldwebel','Lage, Alarm, Durchführung, Erfolg, Folgen']],
- ['staat','staat','Was müssen Vorgesetzte beim Führen mit Auftrag vor allem vermitteln?','Ihre Absicht: was erreicht werden soll und warum','Ändert sich die Lage, handeln die Geführten im Sinne dieser Absicht.',['Jeden einzelnen Arbeitsschritt','Nur die Uhrzeit','Die Namen aller Beteiligten']],
- ['staat','staat','Wie heißt das Führen mit Auftrag in der US Army?','Mission Command','Seit 2012 in der Doktrin der US Army, nach dem Vorbild der Auftragstaktik.',['Command and Control','Rules of Engagement','Chain of Command']],
- ['staat','staat','Was ist der Führungsvorgang?','Ein Kreislauf aus Lagefeststellung, Planung und Befehlsgebung','Die Kontrolle nach dem Befehl fließt in die nächste Lagefeststellung ein.',['Die Reihenfolge der Dienstgrade','Das Schema eines Befehls','Der Weg einer Beschwerde']],
- ['staat','staat','Womit endet die Planung im Führungsvorgang?','Mit dem Entschluss','Vorher wird die Lage beurteilt. Der Entschluss ist der Kern des folgenden Befehls.',['Mit der Lagefeststellung','Mit der Kontrolle','Mit der Meldung']],
- ['staat','staat','Von wem stammt der Gedanke, dass kein Plan die erste Begegnung mit dem Feind übersteht?','Helmuth von Moltke','Generalfeldmarschall, 1871: „Kein Operationsplan reicht mit einiger Sicherheit über das erste Zusammentreffen mit der feindlichen Hauptmacht hinaus.“',['Carl von Clausewitz','Otto von Bismarck','Erwin Rommel']],
- ['staat','staat','Was meint der Leitsatz „Leben in der Lage“?','Die Lage ständig verfolgen und sich laufend an Änderungen anpassen','Weil kein Plan die erste Feindberührung übersteht, muss man Änderungen sofort erkennen, um im Sinne der Absicht zu handeln.',['Sich mit jeder Lage abfinden','Im Gelände übernachten','Nur nach Befehl handeln']],
+ ['fhr','fhr','Womit beginnt ein militärischer Befehl?','Lage','Schema LADEF: Lage, Auftrag, Durchführung, Einsatzunterstützung, Führungsunterstützung.',['Auftrag','Durchführung','Absicht']],
+ ['fhr','fhr','Wofür steht das Merkwort LADEF?','Lage, Auftrag, Durchführung, Einsatzunterstützung, Führungsunterstützung','Die Gliederung eines Befehls. Die ersten drei Punkte sind immer dabei.',['Lage, Absicht, Dauer, Einsatz, Führung','Leitung, Auftrag, Dienstweg, Einheit, Feldwebel','Lage, Alarm, Durchführung, Erfolg, Folgen']],
+ ['fhr','fhr','Was müssen Vorgesetzte beim Führen mit Auftrag vor allem vermitteln?','Ihre Absicht: was erreicht werden soll und warum','Ändert sich die Lage, handeln die Geführten im Sinne dieser Absicht.',['Jeden einzelnen Arbeitsschritt','Nur die Uhrzeit','Die Namen aller Beteiligten']],
+ ['fhr','fhr','Wie heißt das Führen mit Auftrag in der US Army?','Mission Command','Seit 2012 in der Doktrin der US Army, nach dem Vorbild der Auftragstaktik.',['Command and Control','Rules of Engagement','Chain of Command']],
+ ['fhr','fhr','Was ist der Führungsvorgang?','Ein Kreislauf aus Lagefeststellung, Planung und Befehlsgebung','Die Kontrolle nach dem Befehl fließt in die nächste Lagefeststellung ein.',['Die Reihenfolge der Dienstgrade','Das Schema eines Befehls','Der Weg einer Beschwerde']],
+ ['fhr','fhr','Womit endet die Planung im Führungsvorgang?','Mit dem Entschluss','Vorher wird die Lage beurteilt. Der Entschluss ist der Kern des folgenden Befehls.',['Mit der Lagefeststellung','Mit der Kontrolle','Mit der Meldung']],
+ ['fhr','fhr','Von wem stammt der Gedanke, dass kein Plan die erste Begegnung mit dem Feind übersteht?','Helmuth von Moltke','Generalfeldmarschall, 1871: „Kein Operationsplan reicht mit einiger Sicherheit über das erste Zusammentreffen mit der feindlichen Hauptmacht hinaus.“',['Carl von Clausewitz','Otto von Bismarck','Erwin Rommel']],
+ ['fhr','fhr','Was meint der Leitsatz „Leben in der Lage“?','Die Lage ständig verfolgen und sich laufend an Änderungen anpassen','Weil kein Plan die erste Feindberührung übersteht, muss man Änderungen sofort erkennen, um im Sinne der Absicht zu handeln.',['Sich mit jeder Lage abfinden','Im Gelände übernachten','Nur nach Befehl handeln']],
  ['staat','staat','Wie lautet die Grundpflicht des Soldaten?','Der Bundesrepublik treu dienen und Recht und Freiheit des deutschen Volkes tapfer verteidigen','§ 7 Soldatengesetz.',['Jeden Befehl ohne Ausnahme befolgen','Der Bundesregierung persönlich dienen','Das Gebiet der NATO verteidigen']],
  ['staat','staat','Was verlangt das Soldatengesetz von Vorgesetzten?','Beispiel geben, Dienstaufsicht führen und für die Untergebenen sorgen','§ 10 Soldatengesetz.',['Alle Befehle schriftlich erteilen','Jeden Arbeitsschritt selbst erledigen','Nur mündlich befehlen']],
  ['staat','staat','Wo ist die Pflicht zur Kameradschaft geregelt?','§ 12 Soldatengesetz',null,['Art. 1 GG','§ 11 Soldatengesetz','Im Wehrpflichtgesetz']],
@@ -862,6 +877,18 @@ BEH.push(...BEH2);GLOSS.push(...GLOSS2);
  ['eti','eti','Woher stammt das Wort „Manöverkritik“?','Aus der Auswertung nach militärischen Übungen','Dort werden Fehler offen benannt. Heute wird das Wort auch außerhalb des Militärs gebraucht.',['Aus der Theaterkritik','Aus dem Sport','Aus der Politik']],
  ['eti','eti','Warum werden Befehle oft wiederholt?','Damit klar ist, dass sie richtig angekommen sind','Missverständnisse können im Ernstfall Leben kosten.',['Aus Höflichkeit','Weil es das Soldatengesetz verlangt','Um Zeit zu gewinnen']],
 ].forEach(([d,k,q,a,n,x])=>add(d,k,q,a,n,x));
+/* Von der Strategie zum Befehl */
+[
+ ['Was legte die Bundesregierung im Juni 2023 zum ersten Mal vor?','Eine Nationale Sicherheitsstrategie','Sie fasst Sicherheit weiter als Außen- und Verteidigungspolitik, Leitgedanke ist die integrierte Sicherheit.',['Eine Militärstrategie','Ein Weißbuch','Ein Fähigkeitsprofil']],
+ ['Welche Handlungsmaxime geben die Verteidigungspolitischen Richtlinien von 2023 vor?','Kriegstüchtigkeit','Kernauftrag ist die Landes- und Bündnisverteidigung.',['Einsatzorientierung','Abrüstung','Neutralität']],
+ ['Was hat die Bundeswehr im April 2026 zum ersten Mal vorgelegt?','Eine Militärstrategie','Zusammen mit dem Fähigkeitsprofil bildet sie die Gesamtkonzeption militärische Verteidigung.',['Eine Nationale Sicherheitsstrategie','Verteidigungspolitische Richtlinien','Ein Weißbuch']],
+ ['Was beschreibt das Fähigkeitsprofil der Bundeswehr?','Womit sie handelt: die Fähigkeiten, die sie braucht','„Die Militärstrategie beschreibt, wie wir handeln – das Fähigkeitsprofil beschreibt, womit wir handeln.“ Boris Pistorius, 2026.',['Wie sie handelt: Abschreckung und Verteidigung','Ihre Laufbahnen und Dienstgrade','Ihren Haushalt für ein Jahr']],
+ ['Wer steht auf der strategischen Ebene der Führung?','Bundesregierung, Verteidigungsministerium und Bundestag','Sie setzen die politischen Ziele und weisen der Bundeswehr ihre Aufträge zu.',['Das Operative Führungskommando','Heer, Luftwaffe, Marine und Cyber- und Informationsraum','Die Divisionen des Heeres']],
+ ['Was meint „operativ“ im militärischen Sprachgebrauch?','Die mittlere Führungsebene zwischen Strategie und Taktik','Dort werden die politischen Vorgaben in militärische Aufträge übersetzt, in der Bundeswehr vom OpFüKdoBw.',['Das Tagesgeschäft','Die oberste politische Ebene','Das einzelne Gefecht']],
+ ['Was ist militärische Doktrin?','Verbindliche Grundsätze des Handelns, die Urteilsvermögen verlangen','So definiert es die NATO. Doktrin sagt, wie grundsätzlich gedacht und geführt wird, nicht, was im Einzelfall zu tun ist.',['Ein geheimer Plan für einen bestimmten Einsatz','Ein Gesetz über die Aufgaben der Streitkräfte','Eine Liste der verfügbaren Waffensysteme']],
+ ['Was unterscheidet ein Konzept von einer Doktrin?','Es beschreibt, wie künftig gehandelt werden könnte','Doktrin beruht auf Erfahrung und gilt für heute. Bewährt sich ein Konzept, kann daraus Doktrin werden.',['Es ist verbindlicher als eine Doktrin','Es gilt nur für das Heer','Es regelt einzelne Verfahren im Detail']],
+ ['Welche Stellung hat die AJP-01 in der NATO-Doktrin?','Sie steht an der Spitze, alle anderen werden aus ihr abgeleitet','Allied Joint Doctrine, die Capstone-Publikation. Darunter folgen Keystone-Publikationen wie AJP-3 für die Führung von Operationen.',['Sie regelt nur Luftoperationen','Sie ist der Einsatzplan für die Ostflanke','Sie ist eine deutsche Heeresvorschrift']]
+].forEach(([q,a,n,x])=>add('fhr','fhr',q,a,n,x));
 /* Raum, Bewegung, Gefecht */
 [
  ['fb','fb','Welche drei Gefechtsarten unterscheidet das Heer?','Angriff, Verteidigung und Verzögerung',null,['Angriff, Verteidigung und Rückzug','Angriff, Halten und Sperren','Aufklärung, Angriff und Verfolgung']],
@@ -956,7 +983,7 @@ const LESSONS=[
   <p>Neben den Streitkräften steht die zivile Bundeswehrverwaltung, beide unterstehen dem Bundesministerium der Verteidigung (BMVg). Zur Verwaltung gehören die großen Bundesämter: das Bundesamt für Ausrüstung, Informationstechnik und Nutzung der Bundeswehr (BAAINBw), das Bundesamt für das Personalmanagement der Bundeswehr (BAPersBw) und das Bundesamt für Infrastruktur, Umweltschutz und Dienstleistungen der Bundeswehr (BAIUDBw). Das BAAINBw ist eine zivile Bundesoberbehörde mit rund 10.000 zivilen und 1.800 militärischen Beschäftigten. Zum Geschäftsbereich des BMVg gehört auch der Militärische Abschirmdienst (MAD), der Nachrichtendienst der Bundeswehr zur Abwehr von Spionage, Sabotage und Extremismus.</p>
   <div class="callout">In der zivilen Bundeswehrverwaltung arbeiten überwiegend Beamtinnen, Beamte und Tarifbeschäftigte. Beamte haben Amtsbezeichnungen statt Dienstgrade. Mehr dazu und zum Aufbau des Ministeriums in <a href="#/grundlagen/ministerium">Ministerium und Verwaltung</a>.</div>
   <p>Im Inland arbeitet die Bundeswehr in der Amts- und Katastrophenhilfe mit den Behörden und Organisationen mit Sicherheitsaufgaben (BOS) zusammen, etwa Polizei, Feuerwehr und Technisches Hilfswerk (THW). Den gemeinsamen Digitalfunk der BOS betreibt die Bundesanstalt für den Digitalfunk der Behörden und Organisationen mit Sicherheitsaufgaben (BDBOS).</p>`},
- {id:'staat',t:'Bundeswehr im Staat',d:'Parlamentsarmee, Innere Führung, Soldatenpflichten, Führen mit Auftrag und wer dient',b:()=>`
+ {id:'staat',t:'Bundeswehr im Staat',d:'Parlamentsarmee, Befehlsgewalt, Innere Führung, Soldatenpflichten und wer dient',b:()=>`
   <p>Die Bundeswehr ist eine Parlamentsarmee. Ihr Auftrag steht im Grundgesetz (GG): Der Bund stellt Streitkräfte zur Verteidigung auf (Art. 87a GG). Für andere Zwecke darf er sie nur einsetzen, soweit das Grundgesetz es ausdrücklich erlaubt, etwa in der Amts- und Katastrophenhilfe oder in einem System kollektiver Sicherheit wie NATO und Vereinten Nationen.</p>
   <h3>Wer befiehlt</h3>
   <p>Im Frieden hat die Bundesministerin oder der Bundesminister der Verteidigung die Befehls- und Kommandogewalt (Art. 65a GG), kurz IBuK für Inhaber der Befehls- und Kommandogewalt. Im Verteidigungsfall geht sie auf die Bundeskanzlerin oder den Bundeskanzler über (Art. 115b GG). Der Generalinspekteur der Bundeswehr (GenInspBw) ist der ranghöchste Soldat und militärischer Berater der Bundesregierung, aber kein Oberbefehlshaber.</p>
@@ -969,7 +996,7 @@ const LESSONS=[
   </ol>
   <div class="callout">Die oder der Wehrbeauftragte wird vom Bundestag für fünf Jahre gewählt und berichtet jährlich über den Zustand der Truppe. Jede Soldatin und jeder Soldat kann sich direkt dorthin wenden, ohne Dienstweg und ohne Nachteile. Wer sich unrichtig behandelt fühlt, kann sich außerdem nach der Wehrbeschwerdeordnung (WBO) beschweren.</div>
   <h3>Innere Führung</h3>
-  <p>Die Führungskultur der Bundeswehr heißt Innere Führung, ihr Leitbild ist der „Staatsbürger in Uniform“. Soldatinnen und Soldaten behalten ihre Grundrechte, soweit das Soldatengesetz (SG) sie nicht ausdrücklich einschränkt. Gehorsam hat Grenzen: Ein Befehl, der die Menschenwürde verletzt oder keinem dienstlichen Zweck dient, ist unverbindlich. Würde durch das Befolgen eine Straftat begangen, darf er nicht befolgt werden (§ 11 Soldatengesetz). Gelehrt und weiterentwickelt wird die Innere Führung am Zentrum Innere Führung (ZInFü) in Koblenz.</p>
+  <p>Die Führungskultur der Bundeswehr heißt Innere Führung, ihr Leitbild ist der „Staatsbürger in Uniform“. Soldatinnen und Soldaten behalten ihre Grundrechte, soweit das Soldatengesetz (SG) sie nicht ausdrücklich einschränkt. Gehorsam hat Grenzen: Ein Befehl, der die Menschenwürde verletzt oder keinem dienstlichen Zweck dient, ist unverbindlich. Würde durch das Befolgen eine Straftat begangen, darf er nicht befolgt werden (§ 11 Soldatengesetz). Gelehrt und weiterentwickelt wird die Innere Führung am Zentrum Innere Führung (ZInFü) in Koblenz. Zu ihr gehört auch das Leitprinzip „Führen mit Auftrag“, mehr dazu in <a href="#/grundlagen/fuehrung">Von der Strategie zum Befehl</a>.</p>
   <h3>Soldatenpflichten</h3>
   <p>Das Soldatengesetz legt fest, was von Soldatinnen und Soldaten erwartet wird. Diese Pflichten prägen auch den Umgang miteinander:</p>
   <ol class="ladder">
@@ -980,8 +1007,47 @@ const LESSONS=[
    <li><strong>§ 13 Wahrheit</strong><span>In dienstlichen Angelegenheiten die Wahrheit sagen, gerade in Meldungen.</span></li>
   </ol>
   <div class="callout">Kameradschaft ist eine Dienstpflicht, keine Frage der Sympathie. Sie schließt gegenseitige Anerkennung, Rücksicht und die Achtung anderer Anschauungen ein. Wer Kameraden schikaniert oder bloßstellt, verletzt seine Pflichten und muss mit Disziplinarmaßnahmen rechnen. Welche das sind und wer sie verhängen darf, regelt die Wehrdisziplinarordnung (WDO).</div>
+  <h3>Wer dient</h3>
+  <ol class="ladder">
+   <li><strong>Berufssoldaten (BS)</strong><span>Dienen bis zur gesetzlichen Altersgrenze und schwören den Diensteid.</span></li>
+   <li><strong>Soldaten auf Zeit (SaZ)</strong><span>Verpflichten sich für eine feste Zeit, höchstens 25 Jahre. Auch sie schwören den Diensteid.</span></li>
+   <li><strong>Wehrdienstleistende</strong><span>Leisten freiwilligen Wehrdienst (FWDL) und legen das feierliche Gelöbnis ab.</span></li>
+   <li><strong>Reservisten</strong><span>Ehemalige Soldatinnen und Soldaten. Bei einer Übung heißen sie Reservistendienstleistende (RDL). Viele sind im Verband der Reservisten der Deutschen Bundeswehr (VdRBw) organisiert.</span></li>
+   <li><strong>Zivilbeschäftigte</strong><span>Beamtinnen, Beamte und Tarifbeschäftigte, vor allem in der Bundeswehrverwaltung.</span></li>
+  </ol>
+  <p>Die Wehrpflicht nach dem Wehrpflichtgesetz (WPflG) ist seit dem 1. Juli 2011 ausgesetzt, aber nicht abgeschafft. Im Spannungs- und Verteidigungsfall gilt sie wieder. Seit 2026 gilt mit dem Wehrdienst-Modernisierungsgesetz (WDModG) der neue Wehrdienst: Alle 18-Jährigen erhalten einen Fragebogen zu Eignung und Bereitschaft, für Männer ist er verpflichtend, für Frauen freiwillig. Ab Juli 2027 werden junge Männer wieder gemustert. Der Dienst selbst bleibt freiwillig, reichen die Freiwilligen nicht, kann der Bundestag per Gesetz eine Bedarfswehrpflicht beschließen.</p>
+  <p>Wer zur Bundeswehr will, wendet sich an ein Karrierecenter der Bundeswehr. Die Karrierecenter gehören zum Bundesamt für das Personalmanagement der Bundeswehr (BAPersBw), beraten über Karriereberatungsbüros in der Fläche, prüfen die Eignung und übernehmen auch die Musterung. Die früheren Kreiswehrersatzämter gibt es seit 2012 nicht mehr.</p>`},
+ {id:'fuehrung',t:'Von der Strategie zum Befehl',d:'Grundlagendokumente, Führungsebenen, Doktrin, Führen mit Auftrag und Befehlsschema',b:()=>`
+  <p>Zwischen einer Entscheidung der Bundesregierung und dem Befehl an eine Kompanie liegen mehrere Stufen. Jede übersetzt die Vorgaben der Stufe darüber in etwas Konkreteres: Aus politischen Zielen werden militärische Aufträge, aus Aufträgen Befehle.</p>
+  <h3>Die Grundlagendokumente</h3>
+  <p>Wofür die Bundeswehr da ist und wie sie sich aufstellt, legen Dokumente fest, die aufeinander aufbauen:</p>
+  <ol class="ladder">
+   <li><strong>Nationale Sicherheits&shy;strategie (NSS)</strong><span>Die erste ihrer Art, beschlossen von der Bundesregierung im Juni 2023. Sie fasst Sicherheit weiter als Außen- und Verteidigungspolitik, ihr Leitgedanke ist die integrierte Sicherheit.</span></li>
+   <li><strong>Verteidigungs&shy;politische Richtlinien (VPR)</strong><span>Vom Verteidigungsministerium im November 2023 erlassen. Kernauftrag ist die Landes- und Bündnisverteidigung, Handlungsmaxime die Kriegstüchtigkeit.</span></li>
+   <li><strong>Militär&shy;strategie</strong><span>Die erste der Bundeswehr, vom Generalinspekteur gezeichnet und im April 2026 vorgestellt. Sie beschreibt, wie die Bundeswehr im Bündnis abschrecken und notfalls verteidigen soll, und nennt Russland als größte Bedrohung.</span></li>
+   <li><strong>Fähigkeits&shy;profil</strong><span>Der Plan für die Streitkräfte: welche Fähigkeiten die Bundeswehr braucht und wie sie aufwächst. Aus ihm leiten sich die Bedarfe ab, etwa für Beschaffungen.</span></li>
+   <li><strong>Vorschriften</strong><span>Führungs- und Dienstvorschriften setzen die Vorgaben in der Truppe um, bis hin zu konkreten Verfahren.</span></li>
+  </ol>
+  <div class="callout">Militärstrategie und Fähigkeitsprofil bilden zusammen die Gesamtkonzeption militärische Verteidigung. Ihr Ziel: Die Bundeswehr soll bis 2039 die konventionell stärkste Armee Europas werden. Veröffentlicht ist nur ein Auszug, die vollständigen Dokumente sind eingestuft. Verteidigungsminister Boris Pistorius fasste den Unterschied so zusammen: „Die Militärstrategie beschreibt, wie wir handeln – das Fähigkeitsprofil beschreibt, womit wir handeln.“</div>
+  <h3>Strategisch, operativ, taktisch</h3>
+  <p>Auch die Führung ist in drei Ebenen gegliedert:</p>
+  <ol class="ladder">
+   <li><strong>Strategisch</strong><span>Bundesregierung, Verteidigungsministerium und Bundestag. Sie setzen die politischen Ziele und weisen der Bundeswehr ihre Aufträge zu.</span></li>
+   <li><strong>Operativ</strong><span>Das Operative Führungskommando der Bundeswehr (OpFüKdoBw) übersetzt diese Vorgaben in militärische Aufträge und plant und führt Einsätze und Operationen.</span></li>
+   <li><strong>Taktisch</strong><span>Heer, Luftwaffe, Marine und Cyber- und Informationsraum führen die Aufträge mit ihren Kräften aus, bis hinunter zum einzelnen Gefecht.</span></li>
+  </ol>
+  <div class="callout">Im Büroalltag heißt operativ oft so viel wie Tagesgeschäft, im Gegensatz zu strategisch. Militärisch ist die operative Ebene dagegen die mittlere: Sie verbindet die Strategie mit den Gefechten, die auf der taktischen Ebene geführt werden. In der NATO ist es ähnlich. Das militärische Hauptquartier in Mons führt strategisch, die drei Joint Force Commands führen operativ.</div>
+  <h3>Doktrin</h3>
+  <p>Doktrin umfasst die grundlegenden Prinzipien, nach denen Streitkräfte handeln. Die NATO nennt sie verbindlich, aber mit Urteilsvermögen anzuwenden. Doktrin sagt also, wie grundsätzlich gedacht und geführt wird, nicht, was im Einzelfall zu tun ist. Vier Begriffe werden leicht verwechselt:</p>
+  <ol class="ladder">
+   <li><strong>Strategie</strong><span>Ziele und Mittel auf oberster Ebene: wozu, gegen wen, womit.</span></li>
+   <li><strong>Doktrin</strong><span>Grundsätze des Handelns. Sie beruht auf Erfahrung und gilt für heute.</span></li>
+   <li><strong>Konzept, Konzeption</strong><span>Beschreibt, wie künftig gehandelt werden könnte und welche Fähigkeiten dafür nötig sind. Bewährt sich ein Konzept, kann daraus Doktrin werden.</span></li>
+   <li><strong>Vorschrift</strong><span>Konkrete, verbindliche Regeln und Verfahren für die Truppe. Die detaillierten Verfahren heißen im NATO- und US-Sprachgebrauch Tactics, Techniques and Procedures (TTP).</span></li>
+  </ol>
+  <p>Die NATO ordnet ihre Doktrin in Stufen. An der Spitze steht als <em>Capstone</em> die AJP-01, <em>Allied Joint Doctrine</em>, aus der alle anderen abgeleitet sind. AJP steht für Allied Joint Publication. Darunter folgen als <em>Keystone</em> Grundlagenwerke für einzelne Bereiche, etwa AJP-3 für die Führung von Operationen, und darunter Werke für einzelne Aufgaben und Verfahren. Die Doktrin der Bündnispartner soll dazu passen. Im Heer stehen die Grundsätze der Truppenführung in einer Heeresdienstvorschrift (HDv), der Führungsvorschrift „Truppenführung von Landstreitkräften“.</p>
   <h3>Führen mit Auftrag</h3>
-  <p>Zur Inneren Führung gehört das Prinzip „Führen mit Auftrag“, auch Auftragstaktik: Vorgesetzte geben ihre Absicht vor, also was erreicht werden soll und warum, dazu Ziel, Mittel und Zeit. Den Weg wählen die Geführten selbst. Ändert sich die Lage, handeln sie im Sinne dieser Absicht, statt auf einen neuen Befehl zu warten. Das Prinzip stammt aus dem preußischen Heer des 19. Jahrhunderts und ist mit Generalfeldmarschall Helmuth von Moltke verbunden. Das Gegenstück heißt Befehlstaktik: Der Befehl schreibt auch den Weg im Detail vor.</p>
+  <p>Das Leitprinzip der Führung in der Bundeswehr heißt „Führen mit Auftrag“, auch Auftragstaktik, und gehört zur Inneren Führung. Vorgesetzte geben ihre Absicht vor, also was erreicht werden soll und warum, dazu Ziel, Mittel und Zeit. Den Weg wählen die Geführten selbst. Ändert sich die Lage, handeln sie im Sinne dieser Absicht, statt auf einen neuen Befehl zu warten. Das Prinzip stammt aus dem preußischen Heer des 19. Jahrhunderts und ist mit Generalfeldmarschall Helmuth von Moltke verbunden. Das Gegenstück heißt Befehlstaktik: Der Befehl schreibt auch den Weg im Detail vor.</p>
   <div class="callout">„Kein Operationsplan reicht mit einiger Sicherheit über das erste Zusammentreffen mit der feindlichen Hauptmacht hinaus.“ Helmuth von Moltke, 1871. Heute meist verkürzt zu „Kein Plan überlebt die erste Feindberührung“. Genau deshalb zählt die Absicht mehr als der Plan. Daraus folgt der Leitsatz „Leben in der Lage“, den man im Dienst oft hört: Die Lage wird nicht einmal festgestellt und dann abgehakt, sondern ständig verfolgt. Wer weiß, was sich gerade ändert, kann sich und den Plan laufend anpassen und trotzdem im Sinne der Absicht handeln.</div>
   <p>Wie ein Befehl entsteht, beschreibt der Führungsvorgang. Er ist ein Kreislauf aus drei Schritten:</p>
   <ol class="ladder">
@@ -998,17 +1064,7 @@ const LESSONS=[
    <li><strong>5. Führungs&shy;unterstützung</strong><span>Funk, Meldewege, Gefechtsstand. Früher „Führung und Fernmeldewesen“.</span></li>
   </ol>
   <p>Lage, Auftrag und Durchführung sind immer dabei, die Punkte 4 und 5 je nach Umfang. Die Gliederung ist in der NATO gleich. Die US-Streitkräfte nennen sie <em>Situation, Mission, Execution, Sustainment, Command and Signal</em>. Auch die Auftragstaktik haben sie übernommen: Seit 2012 steht sie als <em>Mission Command</em> in der Doktrin der US Army.</p>
-  <div class="callout">Das Schema prägt auch Besprechungen. Ein Lagevortrag beginnt mit der Lage, und auf die Frage „Was ist die Absicht?“ wird die Antwort auf das Warum erwartet, nicht nur das Was.</div>
-  <h3>Wer dient</h3>
-  <ol class="ladder">
-   <li><strong>Berufssoldaten (BS)</strong><span>Dienen bis zur gesetzlichen Altersgrenze und schwören den Diensteid.</span></li>
-   <li><strong>Soldaten auf Zeit (SaZ)</strong><span>Verpflichten sich für eine feste Zeit, höchstens 25 Jahre. Auch sie schwören den Diensteid.</span></li>
-   <li><strong>Wehrdienstleistende</strong><span>Leisten freiwilligen Wehrdienst (FWDL) und legen das feierliche Gelöbnis ab.</span></li>
-   <li><strong>Reservisten</strong><span>Ehemalige Soldatinnen und Soldaten. Bei einer Übung heißen sie Reservistendienstleistende (RDL). Viele sind im Verband der Reservisten der Deutschen Bundeswehr (VdRBw) organisiert.</span></li>
-   <li><strong>Zivilbeschäftigte</strong><span>Beamtinnen, Beamte und Tarifbeschäftigte, vor allem in der Bundeswehrverwaltung.</span></li>
-  </ol>
-  <p>Die Wehrpflicht nach dem Wehrpflichtgesetz (WPflG) ist seit dem 1. Juli 2011 ausgesetzt, aber nicht abgeschafft. Im Spannungs- und Verteidigungsfall gilt sie wieder. Seit 2026 gilt mit dem Wehrdienst-Modernisierungsgesetz (WDModG) der neue Wehrdienst: Alle 18-Jährigen erhalten einen Fragebogen zu Eignung und Bereitschaft, für Männer ist er verpflichtend, für Frauen freiwillig. Ab Juli 2027 werden junge Männer wieder gemustert. Der Dienst selbst bleibt freiwillig, reichen die Freiwilligen nicht, kann der Bundestag per Gesetz eine Bedarfswehrpflicht beschließen.</p>
-  <p>Wer zur Bundeswehr will, wendet sich an ein Karrierecenter der Bundeswehr. Die Karrierecenter gehören zum Bundesamt für das Personalmanagement der Bundeswehr (BAPersBw), beraten über Karriereberatungsbüros in der Fläche, prüfen die Eignung und übernehmen auch die Musterung. Die früheren Kreiswehrersatzämter gibt es seit 2012 nicht mehr.</p>`},
+  <div class="callout">Das Schema prägt auch Besprechungen. Ein Lagevortrag beginnt mit der Lage, und auf die Frage „Was ist die Absicht?“ wird die Antwort auf das Warum erwartet, nicht nur das Was.</div>`},
  {id:'dienstgrade',t:'Dienstgrade und Laufbahnen',d:'Laufbahnen, Dienstgradgruppen und NATO-Rangcodes',b:()=>`
   <p>Es gibt drei Laufbahngruppen: Mannschaften, Unteroffiziere und Offiziere. Sie gliedern sich in sieben Dienstgradgruppen mit zusammen 26 Dienstgraden:</p>
   <ol class="ladder">${Object.values(G).map(g=>`<li><strong>${esc(g)}</strong><span>${RANKS.filter(r=>r.g===g).map(r=>esc(r.k||r.h)).join(', ')}</span></li>`).join('')}</ol>
@@ -1092,7 +1148,7 @@ const LESSONS=[
    <li><strong>Dienstweg</strong><span>Anliegen gehen über die direkten Vorgesetzten.</span></li>
    <li><strong>Schweiß spart Blut</strong><span>Wer im Frieden hart und realistisch übt, verliert im Ernstfall weniger. Mit dem Satz wird begründet, warum Ausbildung fordernd sein darf.</span></li>
    <li><strong>Auftrag vor Befindlichkeit</strong><span>Der Auftrag wird erfüllt, auch wenn er unbequem ist oder man gerade keine Lust hat. Das heißt nicht, dass das Befinden egal ist: Vorgesetzte müssen für ihre Untergebenen sorgen (§ 10 Soldatengesetz).</span></li>
-   <li><strong>Leben in der Lage</strong><span>Pläne ändern sich ständig. Deshalb die Lage laufend verfolgen und sich anpassen, statt am alten Plan festzuhalten. Woher das kommt, steht in <a href="#/grundlagen/staat">Bundeswehr im Staat</a> bei Moltkes Satz.</span></li>
+   <li><strong>Leben in der Lage</strong><span>Pläne ändern sich ständig. Deshalb die Lage laufend verfolgen und sich anpassen, statt am alten Plan festzuhalten. Woher das kommt, steht in <a href="#/grundlagen/fuehrung">Von der Strategie zum Befehl</a> bei Moltkes Satz.</span></li>
   </ol>
   <h3>Auftreten</h3>
   <p>Auch das Auftreten steht größtenteils in keiner Vorschrift. Es wird aber von der ersten Woche der Grundausbildung an eingefordert, meist mit einem passenden Spruch.</p>
@@ -1301,7 +1357,7 @@ const LESSONS=[
   <h3>Woher das Geld kommt</h3>
   <p>Der Verteidigungshaushalt ist der Einzelplan 14 im Bundeshaushalt, beschlossen vom Bundestag. Vorhaben ab 25 Millionen Euro legt das Bundesministerium der Verteidigung (BMVg) vorher dem Haushaltsausschuss vor, die sogenannten 25-Millionen-Vorlagen. 2022 kam das kreditfinanzierte Sondervermögen Bundeswehr über 100 Milliarden Euro hinzu. Seit einer Grundgesetzänderung im März 2025 sind Verteidigungsausgaben oberhalb von 1 % des Bruttoinlandsprodukts (BIP) von der Schuldenbremse ausgenommen.</p>
   <div class="callout">Lange galt in der NATO das Ziel, 2 % des BIP für Verteidigung auszugeben. Auf dem Gipfel in Den Haag 2025 vereinbarten die Verbündeten 5 % bis 2035: 3,5 % für die Kernverteidigung und 1,5 % für verteidigungsrelevante Infrastruktur und Resilienz.</div>`},
- {id:'digital',t:'Digitalisierung der Bundeswehr',d:'C4ISR, Multi-Domain, Core, Fog, Edge und offene Architekturen',b:()=>`
+ {id:'digital',t:'Digitalisierung der Bundeswehr',d:'C4ISR, Multi-Domain, Wirkkette, Core, Fog, Edge und offene Architekturen',b:()=>`
   <p>Viele Begriffe der militärischen Digitalisierung stammen aus NATO und US-Streitkräften und werden auch im Deutschen auf Englisch verwendet. Die C-Kürzel bauen aufeinander auf:</p>
   <ol class="ladder">
    <li><strong>C2</strong><span>Command and Control, also Führung.</span></li>
@@ -1310,6 +1366,13 @@ const LESSONS=[
    <li><strong>C4ISR</strong><span>Dazu Surveillance und Reconnaissance: Führung und Aufklärung als Gesamtsystem.</span></li>
   </ol>
   <p>Multi-Domain Operations (MDO) meint das koordinierte Vorgehen über alle Dimensionen: Land, Luft, See, Weltraum sowie Cyber- und Informationsraum. Dazu gehört das elektromagnetische Spektrum, in dem Electromagnetic Spectrum Operations (EMSO) stattfinden, darunter die Elektronische Kampfführung (EloKa). Im Jargon heißen Waffensysteme oft Wirksysteme, und „wirken“ steht für den Waffeneinsatz.</p>
+  <h3>Vom Sensor zur Wirkung</h3>
+  <p>Wozu Führungs- und Aufklärungssysteme letztlich dienen, zeigt die Wirkkette, englisch <em>Sensor-to-Shooter</em>: Ein Sensor, etwa eine Drohne oder ein Radar, erkennt ein Ziel. Die Meldung läuft zur Führung, die entscheidet, und weiter zu einem Wirkmittel, das das Ziel bekämpft. Je kürzer die Zeit dazwischen, desto eher wird ein Ziel getroffen, bevor es sich bewegt. Das Heer spricht vom Aufklärungs- und Wirkverbund (AWV). Weil Wirkung auch Stören oder ein Cyberangriff sein kann, heißt es oft <em>Sensor-to-Effector</em>.</p>
+  <ol class="ladder">
+   <li><strong>F2T2EA</strong><span>Find, Fix, Track, Target, Engage, Assess: die sechs Schritte der Kill Chain in der US-Zielbekämpfung, vom Finden des Ziels bis zur Prüfung der Wirkung.</span></li>
+   <li><strong>OODA-Loop</strong><span>Observe, Orient, Decide, Act: Entscheidungszyklus nach dem US-Luftwaffenoberst John Boyd. Wer ihn schneller durchläuft als der Gegner, ist ihm voraus.</span></li>
+   <li><strong>Kill Web</strong><span>Ein Netz statt einer festen Kette: Jeder Sensor kann jedes Wirkmittel bedienen. Grundidee von MDO und dem US-Vorhaben Joint All-Domain Command and Control (JADC2).</span></li>
+  </ol>
   <h3>Core, Fog, Edge</h3>
   <p>Die IT der Bundeswehr wird in Ebenen beschrieben. Core sind die großen Rechenzentren, darunter die private Cloud der Bundeswehr (pCloudBw). Fog sind die IT-Systeme der obersten taktischen Ebene, etwa digitale Gefechtsstände. Edge ist die IT einzelner Waffensysteme, etwa an Bord einer Fregatte. Für die Landstreitkräfte steht das Vorhaben D-LBO, Digitalisierung landbasierter Operationen.</p>
   <h3>Offene Architekturen</h3>
@@ -1318,7 +1381,7 @@ const LESSONS=[
 ];
 // Jede Karte gehört zu genau einer Lektion, Lernkarten und Quiz üben je Lektion. Die Zuordnung folgt dem Stapel (deck, Teil der Karten-ID),
 // wo ein Stapel mehrere Lektionen abdeckt der Kartenart, einzelne Karten sind nach ihrer Frage zugeordnet.
-const LESSON_OF_DECK={dg:'dienstgrade',mar:'dienstgrade',abz:'abzeichen',eti:'anrede',gl:'gliederung',sym:'gliederung',stab:'staebe',fb:'gefecht',beh:'aufbau',staat:'staat',min:'ministerium',nato:'buendnis',abk:'kuerzel',vs:'geheimschutz',dig:'digital'};
+const LESSON_OF_DECK={dg:'dienstgrade',mar:'dienstgrade',abz:'abzeichen',eti:'anrede',gl:'gliederung',sym:'gliederung',stab:'staebe',fb:'gefecht',beh:'aufbau',staat:'staat',fhr:'fuehrung',min:'ministerium',nato:'buendnis',abk:'kuerzel',vs:'geheimschutz',dig:'digital'};
 const LESSON_OF_KIND={anz:'anzuege',wf:'farben',wfrev:'farben',bar:'farben',farbe:'farben','g-ind':'beschaffung',proj:'beschaffung',haush:'beschaffung'};
 const LESSON_OF_Q={
  'Abkürzung: BAAINBw':'beschaffung','Abkürzung: BWI':'beschaffung','Abkürzung: CIHBw':'beschaffung','Abkürzung: InnoZBw':'beschaffung','Abkürzung: ZDigBw':'beschaffung','Abkürzung: CPM':'beschaffung',
@@ -1527,7 +1590,7 @@ function renderHelp(){
   <p>AGA steht für Allgemeine Grundausbildung. AGAdemie ist die zivile Variante: für alle, die mit der Bundeswehr zusammenarbeiten und ihre Sprache und Strukturen verstehen wollen.</p>
   <div class="callout"><strong>Kein Angebot der Bundeswehr.</strong> AGAdemie ist ein privates Projekt. Es ist kein Angebot, keine Veröffentlichung und keine offizielle Anwendung der Bundeswehr, des Bundesministeriums der Verteidigung oder einer anderen Dienststelle und steht mit ihnen in keiner Verbindung. Alle Inhalte beruhen auf öffentlich zugänglichen Quellen und können Fehler enthalten. Verbindlich sind allein die offiziellen Quellen. Fehler gefunden? Gern als <a href="https://github.com/FlorianWilhelm/agademie/issues">Issue auf GitHub</a> melden.</div>
   <h2>Inhalte der App</h2>
-  <p>Grundwissen über die Bundeswehr: ihre Stellung im Staat, NATO und Heimatschutz, Dienstgrade und Abzeichen, Uniformen, Waffen- und Barettfarben, Gliederung, Stabsabteilungen, Führungsbegriffe, Behörden und Haushalt, das Ministerium und die Amtsbezeichnungen der Beamten, Anrede, Abkürzungen, NATO-Alphabet, Geheimschutz und die Begriffe der militärischen Digitalisierung. Insgesamt ${n} Karten zu ${LESSONS.length} Lektionen.</p>
+  <p>Grundwissen über die Bundeswehr: ihre Stellung im Staat, Strategie, Doktrin und Führen mit Auftrag, NATO und Heimatschutz, Dienstgrade und Abzeichen, Uniformen, Waffen- und Barettfarben, Gliederung, Stabsabteilungen, Führungsbegriffe, Behörden und Haushalt, das Ministerium und die Amtsbezeichnungen der Beamten, Anrede, Abkürzungen, NATO-Alphabet, Geheimschutz und die Begriffe der militärischen Digitalisierung. Insgesamt ${n} Karten zu ${LESSONS.length} Lektionen.</p>
   <h3>Grundlagen</h3>
   <p>${LESSONS.length} Lektionen vermitteln das Wissen in sinnvoller Reihenfolge, mit Beispielen und Abzeichen. Am Ende jeder Lektion führen „Mit Lernkarten üben“ und „Im Quiz prüfen“ direkt zum passenden Thema. Gelesene Lektionen sind markiert.</p>
   <h3>Thema wählen</h3>
@@ -1540,7 +1603,7 @@ function renderHelp(){
   <h3>Nachschlagen</h3>
   <p>Übersichten zum schnellen Nachsehen: Dienstgradleiter mit Marine-Entsprechung und NATO-Rangcode, alle Abzeichen, Gliederung mit NATO-Größenzeichen, Stabsabteilungen und ein durchsuchbares Verzeichnis aller Abkürzungen samt NATO-Alphabet. Die Leiste „Springe zu“ führt direkt zu jedem Abschnitt.</p>
   <h2>Wie belastbar die Inhalte sind</h2>
-  <p>Dienstgrade, Gliederung und Behördenangaben stammen von bundeswehr.de, Abzeichen und Dienstgradbezeichnungen aus der Anordnung des Bundespräsidenten über die Dienstgradbezeichnungen und die Uniform (2021), Waffen- und Barettfarben aus der BMVg-Broschüre „Bekleidung und Uniformen der Bundeswehr“ (April 2026), Rechtsrahmen aus Grundgesetz, Soldatengesetz, Parlamentsbeteiligungsgesetz und Wehrdienst-Modernisierungsgesetz, NATO-Angaben von nato.int, Disziplinarbefugnis aus der Wehrdisziplinarordnung, Geheimschutz aus dem SÜG und der VSA, Architekturbegriffe u. a. nach Fraunhofer IESE. NATO-Rangcodes folgen STANAG 2116, Größenzeichen NATO APP-6 in deutscher Lesart. Die Abzeichen sind nach der Anordnung des Bundespräsidenten vereinfacht nachgezeichnet. Stärkeangaben sind Größenordnungen, Führungsdienstgrade typische Besetzungen. Stand Oktober 2026.</p>
+  <p>Dienstgrade, Gliederung und Behördenangaben stammen von bundeswehr.de, Abzeichen und Dienstgradbezeichnungen aus der Anordnung des Bundespräsidenten über die Dienstgradbezeichnungen und die Uniform (2021), Waffen- und Barettfarben aus der BMVg-Broschüre „Bekleidung und Uniformen der Bundeswehr“ (April 2026), Rechtsrahmen aus Grundgesetz, Soldatengesetz, Parlamentsbeteiligungsgesetz und Wehrdienst-Modernisierungsgesetz, NATO-Angaben von nato.int, Disziplinarbefugnis aus der Wehrdisziplinarordnung, Geheimschutz aus dem SÜG und der VSA, Strategiedokumente und Führungsebenen von bmvg.de und bundeswehr.de, Doktrinbegriffe nach dem NATO-Glossar AAP-06 und der AJP-01, Architekturbegriffe u. a. nach Fraunhofer IESE. NATO-Rangcodes folgen STANAG 2116, Größenzeichen NATO APP-6 in deutscher Lesart. Die Abzeichen sind nach der Anordnung des Bundespräsidenten vereinfacht nachgezeichnet. Stärkeangaben sind Größenordnungen, Führungsdienstgrade typische Besetzungen. Stand Oktober 2026.</p>
   <h2 id="app">Als App installieren</h2>
   ${standalone()?'<p>AGAdemie läuft gerade als App. Nach dem ersten Öffnen funktioniert sie auch ohne Internet.</p>':`<p>AGAdemie lässt sich wie eine App auf den Startbildschirm legen. Sie öffnet sich dann ohne Browserleiste und funktioniert nach dem ersten Öffnen auch ohne Internet.</p>
   ${installEvt?'<button class="btn" id="install" style="flex:none;padding:10px 14px;font-size:16px;margin-bottom:10px">Jetzt installieren</button>':''}

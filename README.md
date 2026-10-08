@@ -13,7 +13,8 @@ Strukturen verstehen wollen.
 
 * Strukturen: Teilstreitkräfte, Unterstützungsbereich, Bundeswehrverwaltung, Karrierecenter
 * Ministerium und Verwaltung: Leitung und Abteilungen des BMVg, Referate, Amtsbezeichnungen, Erlass und Weisung, Versetzung und Kommandierung
-* Bundeswehr im Staat: Parlamentsarmee, Befehlsgewalt, Innere Führung, Soldatenpflichten, Führen mit Auftrag und Befehlsschema, Wehrbeauftragte, Statusgruppen, Wehrdienst
+* Bundeswehr im Staat: Parlamentsarmee, Befehlsgewalt, Innere Führung, Soldatenpflichten, Wehrbeauftragte, Statusgruppen, Wehrdienst
+* Von der Strategie zum Befehl: Nationale Sicherheitsstrategie bis Militärstrategie, Führungsebenen, Doktrin, Führen mit Auftrag und Befehlsschema
 * Bündnis: NATO, Artikel 5, Brigade Litauen, Drehscheibe Deutschland, Heimatschutz, EU
 * Dienstgrade, Abzeichen und Anreden
 * Waffenfarben (Litze, Kragenspiegel) und Barettfarben
@@ -22,6 +23,7 @@ Strukturen verstehen wollen.
 * Führungsbegriffe: Raum, Bewegung, Verzögern, Ausweichen, Lösen, dazu wirken und andere Umschreibungen
 * Abkürzungen, Buchstabieralphabet und Datum-Zeit-Gruppe
 * Beschaffung und Haushalt: Bedarfsträger, BAAINBw, BWI, Einzelplan 14, Sondervermögen
+* Digitalisierung: C4ISR, Multi-Domain Operations, Wirkkette (Sensor-to-Shooter), Core, Fog, Edge, offene Architekturen
 * Anrede, ungeschriebene Regeln, Gelöbnis, Zeremonien und Auszeichnungen
 
 Lektionen, Lernkarten mit Karteikasten-System, Quiz und Nachschlagetabellen.
