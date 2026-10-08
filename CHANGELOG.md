@@ -4,6 +4,10 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
+## Unveröffentlicht
+
+- Lektion „Digitalisierung der Bundeswehr“: die Kette von Informations- über Führungs- zu Wirkungsüberlegenheit beim Abschnitt zur Wirkkette, dazu eine neue Quizfrage
+
 ## 0.15 (2026-10-08)
 
 - Neue Lektion „Von der Strategie zum Befehl“ nach „Bundeswehr im Staat“: wie Nationale Sicherheitsstrategie, Verteidigungspolitische Richtlinien und die erste Militärstrategie der Bundeswehr vom April 2026 aufeinander aufbauen, die Führungsebenen strategisch, operativ und taktisch, was Doktrin ist und wie sie sich von Strategie, Konzept und Vorschrift unterscheidet. Dazu neun Quizfragen und ein neuer Abschnitt „Strategie & Doktrin“ unter Nachschlagen → Begriffe
