@@ -223,21 +223,19 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 
 <script>
 /* ---------- Version: setzt release.sh passend zum Git-Tag, nicht von Hand ändern ---------- */
-const VERSION='0.15.2', UPDATED='2026-10-12';
+const VERSION='0.15.3', UPDATED='2026-10-17';
 document.getElementById('ver').textContent=`v${VERSION} · ${UPDATED}`;
 // Was ist neu: die letzten Versionen aus CHANGELOG.md, setzt release.sh zusammen mit der Version
 const CHANGES=[
+{v:"0.15.3",d:"2026-10-17",items:[
+"Seitenaufrufe werden jetzt mit GoatCounter gezählt, ohne Cookies und ohne gespeicherte IP-Adresse. Die Hilfe erklärt das im neuen Abschnitt „Datenschutz“",
+]},
 {v:"0.15.2",d:"2026-10-12",items:[
 "Lektion „Geheimschutz und Sicherheitsüberprüfung“: neuer Abschnitt zum Ablauf der Überprüfung mit den Maßnahmen bei Ü1, Ü2 und Ü3, Sicherheitsrisiko, Dauer, Ermächtigung und Gültigkeit. Neuer Abschnitt „Geheimschutz in Unternehmen“: Geheimschutzbetreuung durch das Wirtschaftsministerium, Sicherheitsbevollmächtigter, Anforderungen an Leitung, Eigentümer und Personal, Sicherheitsbescheid, VS-NfD-Merkblatt und Sabotageschutz. Dazu zehn neue Quizfragen und die Abkürzungen BfV, BMWE, SiBe und FSC unter Nachschlagen → Begriffe",
 ]},
 {v:"0.15.1",d:"2026-10-08",items:[
 "Lektion „Digitalisierung der Bundeswehr“: die Kette von Informations- über Führungs- zu Wirkungsüberlegenheit beim Abschnitt zur Wirkkette, dazu eine neue Quizfrage",
 "Lektion „Waffenfarbe und Barett“: erklärt jetzt, was eine Truppengattung ist, dazu eine neue Quizfrage",
-]},
-{v:"0.15",d:"2026-10-08",items:[
-"Neue Lektion „Von der Strategie zum Befehl“ nach „Bundeswehr im Staat“: wie Nationale Sicherheitsstrategie, Verteidigungspolitische Richtlinien und die erste Militärstrategie der Bundeswehr vom April 2026 aufeinander aufbauen, die Führungsebenen strategisch, operativ und taktisch, was Doktrin ist und wie sie sich von Strategie, Konzept und Vorschrift unterscheidet. Dazu neun Quizfragen und ein neuer Abschnitt „Strategie & Doktrin“ unter Nachschlagen → Begriffe",
-"„Führen mit Auftrag“, Führungsvorgang und Befehlsschema stehen jetzt in der neuen Lektion statt in „Bundeswehr im Staat“, mitsamt ihren Lernkarten",
-"Lektion „Digitalisierung der Bundeswehr“: die Wirkkette vom Sensor zur Wirkung (Sensor-to-Shooter), dazu F2T2EA, OODA-Loop und Kill Web, vier neue Quizfragen und neue Abkürzungen unter Nachschlagen → Begriffe",
 ]},
 ]; // Ende CHANGES
 /* ---------- Daten ---------- */

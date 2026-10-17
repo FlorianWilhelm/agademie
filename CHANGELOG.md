@@ -4,7 +4,7 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
-## Unveröffentlicht
+## 0.15.3 (2026-10-17)
 
 - Seitenaufrufe werden jetzt mit GoatCounter gezählt, ohne Cookies und ohne gespeicherte IP-Adresse. Die Hilfe erklärt das im neuen Abschnitt „Datenschutz“
 
