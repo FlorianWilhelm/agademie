@@ -4,6 +4,10 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
+## Unveröffentlicht
+
+- Seitenaufrufe werden jetzt mit GoatCounter gezählt, ohne Cookies und ohne gespeicherte IP-Adresse. Die Hilfe erklärt das im neuen Abschnitt „Datenschutz“
+
 ## 0.15.2 (2026-10-12)
 
 - Lektion „Geheimschutz und Sicherheitsüberprüfung“: neuer Abschnitt zum Ablauf der Überprüfung mit den Maßnahmen bei Ü1, Ü2 und Ü3, Sicherheitsrisiko, Dauer, Ermächtigung und Gültigkeit. Neuer Abschnitt „Geheimschutz in Unternehmen“: Geheimschutzbetreuung durch das Wirtschaftsministerium, Sicherheitsbevollmächtigter, Anforderungen an Leitung, Eigentümer und Personal, Sicherheitsbescheid, VS-NfD-Merkblatt und Sabotageschutz. Dazu zehn neue Quizfragen und die Abkürzungen BfV, BMWE, SiBe und FSC unter Nachschlagen → Begriffe
