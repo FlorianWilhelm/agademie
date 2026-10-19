@@ -142,6 +142,8 @@ th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);verti
 th{font:600 16px/1.2 var(--head);background:var(--bg)}
 tr.grp td{font:600 15px/1.2 var(--head);color:var(--accent-ink);background:var(--bg);padding-top:12px}
 td.sym{color:var(--frame);width:64px}
+tr.oa td{color:var(--muted)}
+.tag{font:600 11px/1 var(--body);letter-spacing:.04em;text-decoration:none;border:1px solid var(--line);border-radius:4px;padding:2px 5px;margin-left:4px;vertical-align:2px;white-space:nowrap}
 .small{font-size:13px;color:var(--muted)}
 .search{width:100%;font:inherit;color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:6px;padding:10px 12px;margin-bottom:4px}
 .gloss[hidden],dl div[hidden]{display:none}
@@ -267,6 +269,13 @@ const RANKS=[
  {h:'Generalmajor',m:'Konteradmiral',n:'OF-7',g:G.Gen,note:'Zwei Sterne.'},
  {h:'Generalleutnant',m:'Vizeadmiral',n:'OF-8',g:G.Gen,note:'Drei Sterne.'},
  {h:'General',m:'Admiral',n:'OF-9',g:G.Gen,note:'Vier Sterne, z. B. der Generalinspekteur der Bundeswehr.'}
+];
+/* Dienstgrade nur für Offizieranwärter, ranggleich mit „nach“. Nicht in RANKS, sonst stimmen
+   die Karten „Nächsthöherer Dienstgrad“ und die 26 Dienstgrade der Lektion nicht mehr. */
+const OA=[
+ {h:'Fahnenjunker',m:'Seekadett',n:'OR-5',nach:'Unteroffizier'},
+ {h:'Fähnrich',m:'Fähnrich zur See',n:'OR-6',nach:'Feldwebel'},
+ {h:'Oberfähnrich',m:'Oberfähnrich zur See',n:'OR-7',nach:'Hauptfeldwebel'}
 ];
 const SANM=['Stabsarzt','Oberstabsarzt','Flottillenarzt','Flottenarzt','Admiralarzt','Admiralstabsarzt','Admiraloberstabsarzt']; // Marine, gleiche Reihenfolge wie SAN
 const SAN=[['Hauptmann','Stabsarzt'],['Major','Oberstabsarzt'],['Oberstleutnant','Oberfeldarzt'],['Oberst','Oberstarzt'],['Brigadegeneral','Generalarzt'],['Generalmajor','Generalstabsarzt'],['Generalleutnant','Generaloberstabsarzt']];
@@ -431,7 +440,8 @@ function insignia(key,W=60){
     const code=sl.slice(3).split('');const hgt={M:7,T:3,B:15};let y=92;
     code.slice().reverse().forEach(c=>{y-=hgt[c];s+=`<rect x="6" y="${y}" width="48" height="${hgt[c]}" fill="${ink}"/>`;y-=2.5});
   } else {
-    s+=`<path d="M9 6 H51 L54 94 H6 Z" fill="${board}"/>`;
+    const cord=wing&&spec.some(e=>e==='silver'||e==='fa'); // Luftwaffe: Kordel unter der Schwinge, dafür etwas längere Schlaufe
+    s+=`<path d="M9 6 H51 L54 ${cord?97.5:94} H6 Z" fill="${board}"/>`;
     const chevTop=wing?64:68;
     const Y0=68; // unterster Schrägstreifen, weitere kommen oben dazu
     const stripe=(y,th)=>{y-=wing?2:0;return `<path d="M17 ${y+8} L43 ${y-4} L43 ${y-4+th} L17 ${y+8+th} Z" fill="${ink}"/>`}; // Luftwaffe: Platz für die Schwinge
@@ -447,9 +457,9 @@ function insignia(key,W=60){
       else if((m=e.match(/^c(\d)$/))){const n=+m[1];for(let i=0;i<n;i++){const y=chevTop-i*7.4;s+=`<path d="M18.5 ${y+9} L30 ${y} L41.5 ${y+9} V${y+13.6} L30 ${y+4.6} L18.5 ${y+13.6} Z" fill="${ink}"/>`}}
       else if(e==='loop'){const n=+((spec.find(x=>/^c\d$/.test(x))||'c1').slice(1));const b=chevTop-(n-1)*7.4+1.4,c=b-9.2;
         s+=`<path d="M30 ${b} L39 ${c} L30 ${c-9.2} L21 ${c} Z M30 ${c+3} L33 ${c} L30 ${c-3} L27 ${c} Z" fill="${ink}" fill-rule="evenodd"/>`}
-      else if(e==='silver'||e==='fa'){const y=wing?80.5:spec.includes('closed')?89:84,[c,d]=e==='fa'?['#d4ac3a','#8a6a1e']:['#e4e7ea','#9aa1a8']; // Kordel quer über der Schulterklappe: silberfarben für OA, altgoldfarben für FA
+      else if(e==='silver'||e==='fa'){const y=wing?93.4:89,[c,d]=e==='fa'?['#d4ac3a','#8a6a1e']:['#e4e7ea','#9aa1a8']; // Kordel quer über das untere Ende der Schlaufe, bei der Luftwaffe unter der Schwinge: silberfarben für OA, altgoldfarben für FA
         s+=`<rect x="7" y="${y}" width="46" height="3.4" fill="${c}"/><path d="M7 ${y+1.7} H53" stroke="${d}" stroke-width="3.4" stroke-dasharray=".5 1.3"/>`}
-      else if(e==='mbl') s+=`<rect x="7" y="${wing?77:83}" width="46" height="5.5" fill="#cdb77c"/>`; // UA mit bestandenem Lehrgang: hellaltgoldene Tresse
+      else if(e==='mbl') s+=`<rect x="7" y="${wing?79.2:83}" width="46" height="5.5" fill="#cdb77c"/>`; // UA mit bestandenem Lehrgang: hellaltgoldene Tresse, bei der Luftwaffe direkt auf der Schwinge
       else if(e==='ua'||e==='ba'){ // Querbalken der Unteroffizier-/Maat- (einer) und Bootsmannanwärter (zwei)
         const sn=spec.find(x=>/^s\d$/.test(x)),n=sn?+sn[1]:0,arc=spec.includes('open')||spec.includes('closed');
         let y=n?Y0-(wing?2:0)-((n-1)*6+(n>3?4.5:0))-4-9:arc?(wing?72:76):(wing?70:74);
@@ -1529,7 +1539,11 @@ function renderQuiz(){
      <div class="opts${isImg?' img':''}">${opts}</div>
      ${done?`<div class="actions"><button class="btn primary" data-act="next">${quiz.i+1<quiz.qs.length?'Nächste Frage':'Ergebnis zeigen'}</button></div>`:''}`;
 }
-const insFig=(t,n)=>`<figure>${insignia(t+':'+n,52)}<figcaption>${esc(n)}</figcaption></figure>`;
+const oaTag=' <abbr class="tag" title="Offizieranwärter">OA</abbr>', OAN=new Set(OA.flatMap(o=>[o.h,o.m]));
+const insFig=(t,n,c=n)=>`<figure>${insignia(t+':'+n,52)}<figcaption>${esc(c)}${OAN.has(n)?oaTag:''}</figcaption></figure>`;
+/* Anwärterkennzeichen als Zusatz zum Dienstgrad, Heer/Luftwaffe und Marine */
+const ANWHL=[['Gefreiter+silver','Gefreiter OA'],['Gefreiter+ua','Gefreiter UA'],['Stabsgefreiter+ua+mbl','Stabsgefreiter UA mbL'],['Gefreiter+fa','Gefreiter FA'],['Unteroffizier+fa','Unteroffizier FA']];
+const ANWM=[['Gefreiter+star','Gefreiter OA'],['Gefreiter+ua','Gefreiter MA'],['Gefreiter+ba','Gefreiter BA'],['Obermaat+ba','Obermaat BA']];
 function insGrid(t){
   let h='';
   for(const [lg,subs] of INSGRP){
@@ -1538,13 +1552,14 @@ function insGrid(t){
   }
   return h;
 }
-const hlGrid=()=>insGrid(hl), sanGrid=()=>INS.san.map(([n])=>insFig(hl==='lw'?'sanlw':'san',n)).join('');
+const hlGrid=()=>insGrid(hl), sanGrid=()=>INS.san.map(([n])=>insFig(hl==='lw'?'sanlw':'san',n)).join(''), anwGrid=()=>ANWHL.map(([k,c])=>insFig(hl,k,c)).join('');
 const hlSeg=`<div class="seg sm" role="group" aria-label="Teilstreitkraft"><button data-hl="heer">Heer</button><button data-hl="lw">Luftwaffe</button></div>`;
 function setHl(t){ // Heer/Luftwaffe umschalten, ohne die Seite neu aufzubauen
   hl=t;
   document.querySelectorAll('[data-hl]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.hl===hl));
   const g=document.getElementById('hlgrid');if(g) g.innerHTML=hlGrid();
   const s=document.getElementById('sangrid');if(s) s.innerHTML=sanGrid();
+  const a=document.getElementById('anwgrid');if(a) a.innerHTML=anwGrid();
 }
 function renderRef(){
   const tabs=[['dg','Dienstgrade'],['abz','Abzeichen'],['gl','Gliederung'],['stab','Stäbe'],['beh','Begriffe']];
@@ -1552,16 +1567,21 @@ function renderRef(){
   const jump=secs=>`<nav class="jump" aria-label="Springe zu">${secs.map(([id,n])=>`<button class="chip" data-jump="${id}">${esc(n)}</button>`).join('')}</nav>`;
   if(refTab==='dg'){
     let rows='',g='';
-    RANKS.forEach(r=>{if(r.g!==g){g=r.g;rows+=`<tr class="grp"><td colspan="3">${esc(g)}</td></tr>`}
-      rows+=`<tr><td>${esc(r.h)}</td><td>${esc(r.m)}</td><td>${r.n}</td></tr>`});
+    RANKS.flatMap(r=>[r,...OA.filter(o=>o.nach===r.h).map(o=>({...o,g:r.g,oa:1}))]).forEach(r=>{if(r.g!==g){g=r.g;rows+=`<tr class="grp"><td colspan="3">${esc(g)}</td></tr>`}
+      rows+=`<tr${r.oa?' class="oa"':''}><td>${esc(r.h)}${r.oa?oaTag:''}</td><td>${esc(r.m)}</td><td>${r.n}</td></tr>`});
     h+=`<div class="scroll"><table><thead><tr><th>Heer, Luftwaffe</th><th>Marine</th><th>NATO</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <p class="small">OA: Dienstgrade nur für Offizieranwärter, jeweils ranggleich mit dem Dienstgrad darüber. Vorher führen Offizieranwärter ihren Mannschaftsdienstgrad mit dem Zusatz OA, etwa Gefreiter OA. Anwärter der anderen Laufbahnen haben keine eigenen Dienstgrade, nur einen Zusatz: UA (Unteroffizieranwärter) und FA (Feldwebelanwärter), in der Marine MA (Maatanwärter) und BA (Bootsmannanwärter), etwa Gefreiter UA. UA mbL heißt „mit bestandenem Lehrgang“. Die Kennzeichen stehen unter <a href="#/nachschlagen/abzeichen/anwaerter">Abzeichen → Anwärter</a>.</p>
     <p class="small">Sanitätsoffiziere: ${SAN.map(([e,s])=>`${s} (wie ${e})`).join(', ')}.</p>`;
   } else if(refTab==='abz'){
-    h+=jump([['heer','Heer & Luftwaffe'],['marine','Marine'],['sanitaet','Sanität'],['waffenfarben','Waffenfarben'],['barett','Barett']]);
+    h+=jump([['heer','Heer & Luftwaffe'],['marine','Marine'],['anwaerter','Anwärter'],['sanitaet','Sanität'],['waffenfarben','Waffenfarben'],['barett','Barett']]);
     for(const [t,lbl,id] of [['hl','Heer und Luftwaffe (Feldanzug)','heer'],['mar','Marine','marine']]){
       h+=`<h2 id="${id}">${lbl}</h2>`;
       if(t==='hl') h+=hlSeg+`<div id="hlgrid">${hlGrid()}</div>`;else h+=insGrid(t);
     }
+    h+=`<h2 id="anwaerter">Anwärter</h2>
+    <p class="small">Anwärter führen ihren Dienstgrad mit einem Zusatz und tragen dazu ein Kennzeichen. Offizieranwärter (OA): silberfarbene Kordel, in der Marine ein goldfarbener Stern. Unteroffizieranwärter (UA) und Maatanwärter (MA): ein Querbalken, mit bestandenem Lehrgang (UA mbL) dazu eine altgoldfarbene Tresse. Feldwebelanwärter (FA): altgoldfarbene Kordel. Bootsmannanwärter (BA): zwei Querbalken. Fahnenjunker, Fähnrich und Oberfähnrich sind eigene Dienstgrade der Offizieranwärter und stehen oben bei den Unteroffizieren.</p>
+    <h3 class="lg">Heer und Luftwaffe</h3>${hlSeg}<div class="insgrid" id="anwgrid">${anwGrid()}</div>
+    <h3 class="lg">Marine</h3><div class="insgrid">${ANWM.map(([k,c])=>insFig('mar',k,c)).join('')}</div>`;
     h+=`<h2 id="sanitaet">Sanitätsoffiziere (Feldanzug)</h2>
     <p class="small">Ärzte und Zahnärzte tragen den Äskulapstab über den Sternen, in der Marine über den Ärmelstreifen.</p>
     ${hlSeg}<div class="insgrid" id="sangrid">${sanGrid()}</div>
