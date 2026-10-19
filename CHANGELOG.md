@@ -7,6 +7,7 @@ per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 ## Unveröffentlicht
 
 - Nachschlagen → Abzeichen: keine OA-Marke mehr unter Fahnenjunker, Fähnrich und Oberfähnrich, der Abschnitt „Anwärter“ erklärt diese Dienstgrade
+- Abzeichen: Lange Dienstgrade werden nur noch zwischen den Wortteilen getrennt, etwa Ober-stabs-gefreiter statt Oberstabsgefrei-ter
 
 ## 0.16.1 (2026-10-19)
 

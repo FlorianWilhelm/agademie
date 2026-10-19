@@ -124,7 +124,7 @@ dialog::backdrop{background:rgba(8,16,30,.55)}
 .opts.img{grid-template-columns:repeat(4,1fr)}
 .opts.img .opt{justify-content:center;padding:10px 4px}
 .insgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:12px 8px;margin-bottom:22px}
-.insgrid figure{margin:0;text-align:center;font-size:13px;line-height:1.25;min-width:0;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:anywhere}
+.insgrid figure{margin:0;text-align:center;font-size:13px;line-height:1.25;min-width:0;hyphens:manual;-webkit-hyphens:manual;overflow-wrap:anywhere} /* Trennstellen setzt trenn() */
 .insgrid svg{display:block;margin:0 auto 4px}
 h3.lg{font:600 18px/1.2 var(--head);margin:18px 0 8px;padding-bottom:4px;border-bottom:1.5px solid var(--line)}
 h4.dgg{font:600 14px/1.2 var(--head);color:var(--accent-ink);margin:0 0 8px}
@@ -970,7 +970,17 @@ function unitSym(m,W=60){
 }
 
 /* ---------- Grundlagen (Lektionen) ---------- */
-const figs=(items,W=46)=>`<div class="figs">${items.map(([k,c])=>`<figure>${insignia(k,W)}<figcaption>${esc(c)}</figcaption></figure>`).join('')}</div>`;
+/* Dienstgrade nur zwischen Wortteilen trennen (Ober|stabs|gefreiter statt Oberstabsgefrei-ter):
+   Zerlegung in möglichst wenige bekannte Teile, dazwischen ein weiches Trennzeichen. Unbekanntes bleibt, wie es ist. */
+const RTEILE=['ober','oberst','stabs','haupt','unter','offizier','gefreiter','korporal','feldwebel','fähnrich','fahnen','junker','leutnant','mann','major','general','brigade','admiral','konter','vize','flottillen','flotten','fregatten','korvetten','kapitän','bootsmann','maat','see','kadett','feld','arzt'];
+const trenn=s=>s.split(' ').map(w=>{
+  const l=w.toLowerCase(),cut=[[]]; // cut[i]: Trennstellen der ersten i Buchstaben
+  for(let i=1;i<=l.length;i++) for(const p of RTEILE){const j=i-p.length;
+    if(j>=0&&cut[j]&&l.endsWith(p,i)&&(!cut[i]||cut[j].length+1<cut[i].length)) cut[i]=[...cut[j],i]}
+  const c=cut[l.length];
+  return c?c.slice(0,-1).reduceRight((v,i)=>v.slice(0,i)+'\u00ad'+v.slice(i),w):w;
+}).join(' ');
+const figs=(items,W=46)=>`<div class="figs">${items.map(([k,c])=>`<figure>${insignia(k,W)}<figcaption>${esc(trenn(c))}</figcaption></figure>`).join('')}</div>`;
 const syms=items=>`<div class="figs">${items.map(([m,c])=>`<figure style="color:var(--frame)">${unitSym(m,52)}<figcaption>${esc(c)}</figcaption></figure>`).join('')}</div>`;
 function tskSym(t){ // Symbole der Teilstreitkräfte, wie an der Schirmmütze: eigene schematische Zeichnungen
   let s='';
@@ -1100,31 +1110,31 @@ const LESSONS=[
   <p>Man muss nicht 26 Bilder auswendig lernen. Die Abzeichen folgen einer Logik, in Heer und Luftwaffe gleich, die Luftwaffe trägt zusätzlich die Schwinge.</p>
   <h3>Mannschaften: Schrägstreifen</h3>
   <p>Je mehr Streifen, desto höher. Korporal und Stabskorporal tragen einen breiten Balken.</p>
-  ${figs([['heer:Gefreiter','Gefreiter'],['heer:Obergefreiter','Ober­gefreiter'],['heer:Hauptgefreiter','Haupt­gefreiter'],['heer:Stabsgefreiter','Stabs­gefreiter'],['heer:Oberstabsgefreiter','Ober­stabs­gefreiter'],['heer:Korporal','Korporal'],['heer:Stabskorporal','Stabs­korporal']])}
+  ${figs([['heer:Gefreiter','Gefreiter'],['heer:Obergefreiter','Obergefreiter'],['heer:Hauptgefreiter','Hauptgefreiter'],['heer:Stabsgefreiter','Stabsgefreiter'],['heer:Oberstabsgefreiter','Oberstabsgefreiter'],['heer:Korporal','Korporal'],['heer:Stabskorporal','Stabskorporal']])}
   <h3>Unteroffiziere: der Bogen (Tresse)</h3>
   <p>Offener Bogen: Unteroffizier. Geschlossener Bogen: ab Stabsunteroffizier. Winkel im Bogen: Feldwebeldienstgrade. Eine kleine Raute über dem Winkel kommt ab Hauptfeldwebel dazu.</p>
-  ${figs([['heer:Unteroffizier','Unter­offizier'],['heer:Stabsunteroffizier','Stabs­unter­offizier'],['heer:Feldwebel','Feldwebel'],['heer:Oberfeldwebel','Ober­feld­webel'],['heer:Hauptfeldwebel','Haupt­feld­webel'],['heer:Stabsfeldwebel','Stabs­feld­webel'],['heer:Oberstabsfeldwebel','Ober­stabs­feld­webel']])}
+  ${figs([['heer:Unteroffizier','Unteroffizier'],['heer:Stabsunteroffizier','Stabsunteroffizier'],['heer:Feldwebel','Feldwebel'],['heer:Oberfeldwebel','Oberfeldwebel'],['heer:Hauptfeldwebel','Hauptfeldwebel'],['heer:Stabsfeldwebel','Stabsfeldwebel'],['heer:Oberstabsfeldwebel','Oberstabsfeldwebel']])}
   <h3>Offiziere: Sterne, dann Eichenlaub, dann Gold</h3>
   <p>Leutnante und Hauptleute zählen Sterne (eins bis drei, Stabshauptmann vier). Stabsoffiziere tragen zusätzlich Eichenlaub und zählen wieder von eins. Generale tragen goldenes Eichenlaub mit ein bis vier goldenen Sternen. Am Kampfanzug werden silberne Abzeichen schwarz oder weiß getragen, goldene bleiben golden.</p>
-  ${figs([['heer:Leutnant','Leutnant'],['heer:Oberleutnant','Ober­leutnant'],['heer:Hauptmann','Haupt­mann'],['heer:Stabshauptmann','Stabs­haupt­mann'],['heer:Major','Major'],['heer:Oberstleutnant','Oberst­leutnant'],['heer:Oberst','Oberst'],['heer:Brigadegeneral','Brigade­general'],['heer:Generalmajor','General­major'],['heer:Generalleutnant','General­leutnant'],['heer:General','General']])}
+  ${figs([['heer:Leutnant','Leutnant'],['heer:Oberleutnant','Oberleutnant'],['heer:Hauptmann','Hauptmann'],['heer:Stabshauptmann','Stabshauptmann'],['heer:Major','Major'],['heer:Oberstleutnant','Oberstleutnant'],['heer:Oberst','Oberst'],['heer:Brigadegeneral','Brigadegeneral'],['heer:Generalmajor','Generalmajor'],['heer:Generalleutnant','Generalleutnant'],['heer:General','General']])}
   <h3>Sanitätsoffiziere: der Äskulapstab</h3>
   <p>Sanitätsoffiziere tragen das Abzeichen der Offiziere auf derselben Ebene, dazu den Äskulapstab.</p>
-  ${figs([['san:Stabsarzt','Stabs­arzt'],['san:Oberstabsarzt','Ober­stabs­arzt'],['san:Oberfeldarzt','Ober­feld­arzt'],['san:Oberstarzt','Oberst­arzt'],['san:Generalarzt','General­arzt'],['san:Generalstabsarzt','General­stabs­arzt'],['san:Generaloberstabsarzt','General­ober­stabs­arzt']])}
+  ${figs([['san:Stabsarzt','Stabsarzt'],['san:Oberstabsarzt','Oberstabsarzt'],['san:Oberfeldarzt','Oberfeldarzt'],['san:Oberstarzt','Oberstarzt'],['san:Generalarzt','Generalarzt'],['san:Generalstabsarzt','Generalstabsarzt'],['san:Generaloberstabsarzt','Generaloberstabsarzt']])}
   <h3>Luftwaffe: die Schwinge</h3>
   <p>Am Feldanzug trägt die Luftwaffe dieselben Abzeichen wie das Heer, unten auf der Schulterklappe kommt die Schwinge dazu. Streifen, Bogen, Sterne und Eichenlaub rücken ein Stück nach oben. Auch die Namen sind gleich, nur der niedrigste Dienstgrad heißt in der Luftwaffe Flieger.</p>
   ${figs([['lw:Flieger','Flieger'],['lw:Major','Major']])}
   <h3>Marine-Offiziere: Ärmelstreifen</h3>
   <p>Gezählt werden die mittelbreiten Streifen: einer beim Leutnant zur See, vier beim Kapitän zur See. Ein dünner Zusatzstreifen markiert die Zwischenstufe. Admirale erkennt man am breiten Streifen unten.</p>
-  ${figs([['mar:Leutnant zur See','Leutnant zur See'],['mar:Oberleutnant zur See','Ober­leutnant zur See'],['mar:Kapitänleutnant','Kapitän­leutnant'],['mar:Stabskapitänleutnant','Stabs­kapitän­leutnant'],['mar:Korvettenkapitän','Korvetten­kapitän'],['mar:Fregattenkapitän','Fregatten­kapitän'],['mar:Kapitän zur See','Kapitän zur See'],['mar:Flottillenadmiral','Flottillen­admiral'],['mar:Konteradmiral','Konter­admiral'],['mar:Vizeadmiral','Vize­admiral'],['mar:Admiral','Admiral']])}
+  ${figs([['mar:Leutnant zur See','Leutnant zur See'],['mar:Oberleutnant zur See','Oberleutnant zur See'],['mar:Kapitänleutnant','Kapitänleutnant'],['mar:Stabskapitänleutnant','Stabskapitänleutnant'],['mar:Korvettenkapitän','Korvettenkapitän'],['mar:Fregattenkapitän','Fregattenkapitän'],['mar:Kapitän zur See','Kapitän zur See'],['mar:Flottillenadmiral','Flottillenadmiral'],['mar:Konteradmiral','Konteradmiral'],['mar:Vizeadmiral','Vizeadmiral'],['mar:Admiral','Admiral']])}
   <h3>Offizieranwärter: Kordel und Stern</h3>
   <p>Offizieranwärter (OA) sind auf dem Weg zum Offizier, stehen aber noch auf der Ebene von Mannschaften oder Unteroffizieren. In Heer und Luftwaffe tragen sie eine silberfarbene Kordel, die über die Schulterklappe gezogen wird. In der Marine tragen sie stattdessen einen goldfarbenen fünfzackigen Stern auf Schulterklappe und Ärmel, das Laufbahnabzeichen der Offiziere, oft Seestern genannt.</p>
-  ${figs([['heer:Fahnenjunker','Fahnen­junker'],['heer:Fähnrich','Fähnrich'],['heer:Oberfähnrich','Ober­fähnrich'],['mar:Seekadett','See­kadett'],['mar:Fähnrich zur See','Fähnrich zur See'],['mar:Oberfähnrich zur See','Ober­fähnrich zur See']])}
+  ${figs([['heer:Fahnenjunker','Fahnenjunker'],['heer:Fähnrich','Fähnrich'],['heer:Oberfähnrich','Oberfähnrich'],['mar:Seekadett','Seekadett'],['mar:Fähnrich zur See','Fähnrich zur See'],['mar:Oberfähnrich zur See','Oberfähnrich zur See']])}
   <p>Auf der Ebene der Unteroffiziere haben Offizieranwärter eigene Dienstgrade: Fahnenjunker, Fähnrich und Oberfähnrich, in der Marine Seekadett, Fähnrich zur See und Oberfähnrich zur See. Davor führen sie ihren Mannschaftsdienstgrad mit dem Zusatz OA, etwa Gefreiter OA. Bei Fahnenjunker, Fähnrich und Co. entfällt der Zusatz, weil der Dienstgrad die Laufbahn schon verrät.</p>
   <h3>Unteroffizier- und Feldwebelanwärter: Balken und Kordel</h3>
   <p>Auch wer Unteroffizier oder Feldwebel werden will, ist gekennzeichnet. Unteroffizieranwärter (UA) tragen einen Querbalken über den Dienstgradabzeichen. Nach bestandenem Lehrgang (UA mbL) kommt unten eine altgoldfarbene Tresse dazu.</p>
-  ${figs([['heer:Schütze+ua','Schütze UA'],['heer:Hauptgefreiter+ua','Haupt­gefreiter UA'],['heer:Stabsgefreiter+ua+mbl','Stabs­gefreiter UA mbL']])}
+  ${figs([['heer:Schütze+ua','Schütze UA'],['heer:Hauptgefreiter+ua','Hauptgefreiter UA'],['heer:Stabsgefreiter+ua+mbl','Stabsgefreiter UA mbL']])}
   <p>Feldwebelanwärter (FA) tragen in Heer und Luftwaffe wie die Offizieranwärter eine Kordel, aber altgoldfarben statt silberfarben.</p>
-  ${figs([['heer:Gefreiter+fa','Gefreiter FA'],['heer:Unteroffizier+fa','Unter­offizier FA'],['heer:Fahnenjunker','Fahnen­junker (OA) zum Vergleich']])}
+  ${figs([['heer:Gefreiter+fa','Gefreiter FA'],['heer:Unteroffizier+fa','Unteroffizier FA'],['heer:Fahnenjunker','Fahnenjunker (OA) zum Vergleich']])}
   <p>In der Marine heißen sie Maatanwärter (MA) und Bootsmannanwärter (BA). Sie tragen einen beziehungsweise zwei Querbalken.</p>
   ${figs([['mar:Gefreiter+ua','Gefreiter MA'],['mar:Gefreiter+ba','Gefreiter BA'],['mar:Obermaat+ba','Obermaat BA']])}
   <p>Alle Abzeichen der Luftwaffe und die der Marine-Unteroffiziere stehen unter <a href="#/nachschlagen/abzeichen">Nachschlagen → Abzeichen</a>.</p>`},
@@ -1541,7 +1551,7 @@ function renderQuiz(){
      ${done?`<div class="actions"><button class="btn primary" data-act="next">${quiz.i+1<quiz.qs.length?'Nächste Frage':'Ergebnis zeigen'}</button></div>`:''}`;
 }
 const oaTag=' <abbr class="tag" title="Offizieranwärter">OA</abbr>';
-const insFig=(t,n,c=n)=>`<figure>${insignia(t+':'+n,52)}<figcaption>${esc(c)}</figcaption></figure>`;
+const insFig=(t,n,c=n)=>`<figure>${insignia(t+':'+n,52)}<figcaption>${esc(trenn(c))}</figcaption></figure>`;
 /* Anwärterkennzeichen als Zusatz zum Dienstgrad, Heer/Luftwaffe und Marine */
 const ANWHL=[['Gefreiter+silver','Gefreiter OA'],['Gefreiter+ua','Gefreiter UA'],['Stabsgefreiter+ua+mbl','Stabsgefreiter UA mbL'],['Gefreiter+fa','Gefreiter FA'],['Unteroffizier+fa','Unteroffizier FA']];
 const ANWM=[['Gefreiter+star','Gefreiter OA'],['Gefreiter+ua','Gefreiter MA'],['Gefreiter+ba','Gefreiter BA'],['Obermaat+ba','Obermaat BA']];
