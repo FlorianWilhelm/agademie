@@ -144,7 +144,6 @@ tr.grp td{font:600 15px/1.2 var(--head);color:var(--accent-ink);background:var(-
 td.sym{color:var(--frame);width:64px}
 tr.oa td{color:var(--muted)}
 .tag{display:inline-block;font:600 11px/1 var(--body);letter-spacing:.04em;text-decoration:none;border:1px solid var(--line);border-radius:4px;padding:2px 5px;margin-left:4px;vertical-align:1px;white-space:nowrap}
-figcaption .tag{display:block;width:max-content;margin:4px auto 0} /* unter dem Namen, damit nichts überlappt */
 .small{font-size:13px;color:var(--muted)}
 .search{width:100%;font:inherit;color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:6px;padding:10px 12px;margin-bottom:4px}
 .gloss[hidden],dl div[hidden]{display:none}
@@ -1541,8 +1540,8 @@ function renderQuiz(){
      <div class="opts${isImg?' img':''}">${opts}</div>
      ${done?`<div class="actions"><button class="btn primary" data-act="next">${quiz.i+1<quiz.qs.length?'Nächste Frage':'Ergebnis zeigen'}</button></div>`:''}`;
 }
-const oaTag=' <abbr class="tag" title="Offizieranwärter">OA</abbr>', OAN=new Set(OA.flatMap(o=>[o.h,o.m]));
-const insFig=(t,n,c=n)=>`<figure>${insignia(t+':'+n,52)}<figcaption>${esc(c)}${OAN.has(n)?oaTag:''}</figcaption></figure>`;
+const oaTag=' <abbr class="tag" title="Offizieranwärter">OA</abbr>';
+const insFig=(t,n,c=n)=>`<figure>${insignia(t+':'+n,52)}<figcaption>${esc(c)}</figcaption></figure>`;
 /* Anwärterkennzeichen als Zusatz zum Dienstgrad, Heer/Luftwaffe und Marine */
 const ANWHL=[['Gefreiter+silver','Gefreiter OA'],['Gefreiter+ua','Gefreiter UA'],['Stabsgefreiter+ua+mbl','Stabsgefreiter UA mbL'],['Gefreiter+fa','Gefreiter FA'],['Unteroffizier+fa','Unteroffizier FA']];
 const ANWM=[['Gefreiter+star','Gefreiter OA'],['Gefreiter+ua','Gefreiter MA'],['Gefreiter+ba','Gefreiter BA'],['Obermaat+ba','Obermaat BA']];
