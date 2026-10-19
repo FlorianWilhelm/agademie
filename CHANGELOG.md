@@ -7,7 +7,7 @@ per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 ## Unveröffentlicht
 
 - Nachschlagen → Dienstgrade: Fahnenjunker, Fähnrich und Oberfähnrich (Marine: Seekadett, Fähnrich zur See, Oberfähnrich zur See) stehen jetzt als OA-Dienstgrade an ihrer Stelle in der Tabelle. Ein Hinweis darunter erklärt die Zusätze OA, UA, FA, MA und BA
-- Nachschlagen → Abzeichen: die OA-Dienstgrade sind markiert, und ein neuer Abschnitt „Anwärter“ zeigt die Kennzeichen von Offizier-, Unteroffizier-, Feldwebel-, Maat- und Bootsmannanwärtern
+- Nachschlagen → Abzeichen: Die OA-Dienstgrade sind markiert, und ein neuer Abschnitt „Anwärter“ zeigt die Kennzeichen von Offizier-, Unteroffizier-, Feldwebel-, Maat- und Bootsmannanwärtern
 - Abzeichen: Die Kordel der Offizier- und Feldwebelanwärter sitzt jetzt am unteren Ende der Schulterklappe, bei der Luftwaffe unter der Schwinge statt darüber. Die Tresse von UA mbL liegt bei der Luftwaffe direkt auf der Schwinge und berührt die Streifen nicht mehr
 
 ## 0.15.3 (2026-10-17)
