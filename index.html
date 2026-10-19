@@ -225,10 +225,14 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 
 <script>
 /* ---------- Version: setzt release.sh passend zum Git-Tag, nicht von Hand ändern ---------- */
-const VERSION='0.16.1', UPDATED='2026-10-19';
+const VERSION='0.16.2', UPDATED='2026-10-19';
 document.getElementById('ver').textContent=`v${VERSION} · ${UPDATED}`;
 // Was ist neu: die letzten Versionen aus CHANGELOG.md, setzt release.sh zusammen mit der Version
 const CHANGES=[
+{v:"0.16.2",d:"2026-10-19",items:[
+"Nachschlagen → Abzeichen: keine OA-Marke mehr unter Fahnenjunker, Fähnrich und Oberfähnrich, der Abschnitt „Anwärter“ erklärt diese Dienstgrade",
+"Abzeichen: Lange Dienstgrade werden nur noch zwischen den Wortteilen getrennt, etwa Ober-stabs-gefreiter statt Oberstabsgefrei-ter",
+]},
 {v:"0.16.1",d:"2026-10-19",items:[
 "Abzeichen: Die Tresse von UA mbL sitzt bei der Luftwaffe jetzt wie die Kordel am unteren Ende der Schulterklappe unter der Schwinge",
 ]},
@@ -236,9 +240,6 @@ const CHANGES=[
 "Nachschlagen → Dienstgrade: Fahnenjunker, Fähnrich und Oberfähnrich (Marine: Seekadett, Fähnrich zur See, Oberfähnrich zur See) stehen jetzt als OA-Dienstgrade an ihrer Stelle in der Tabelle. Ein Hinweis darunter erklärt die Zusätze OA, UA, FA, MA und BA",
 "Nachschlagen → Abzeichen: Die OA-Dienstgrade sind markiert, und ein neuer Abschnitt „Anwärter“ zeigt die Kennzeichen von Offizier-, Unteroffizier-, Feldwebel-, Maat- und Bootsmannanwärtern",
 "Abzeichen: Die Kordel der Offizier- und Feldwebelanwärter sitzt jetzt am unteren Ende der Schulterklappe, bei der Luftwaffe unter der Schwinge statt darüber. Die Tresse von UA mbL liegt bei der Luftwaffe direkt auf der Schwinge und berührt die Streifen nicht mehr",
-]},
-{v:"0.15.3",d:"2026-10-17",items:[
-"Seitenaufrufe werden jetzt mit GoatCounter gezählt, ohne Cookies und ohne gespeicherte IP-Adresse. Die Hilfe erklärt das im neuen Abschnitt „Datenschutz“",
 ]},
 ]; // Ende CHANGES
 /* ---------- Daten ---------- */
