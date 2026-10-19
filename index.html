@@ -226,10 +226,13 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 
 <script>
 /* ---------- Version: setzt release.sh passend zum Git-Tag, nicht von Hand ändern ---------- */
-const VERSION='0.16', UPDATED='2026-10-19';
+const VERSION='0.16.1', UPDATED='2026-10-19';
 document.getElementById('ver').textContent=`v${VERSION} · ${UPDATED}`;
 // Was ist neu: die letzten Versionen aus CHANGELOG.md, setzt release.sh zusammen mit der Version
 const CHANGES=[
+{v:"0.16.1",d:"2026-10-19",items:[
+"Abzeichen: Die Tresse von UA mbL sitzt bei der Luftwaffe jetzt wie die Kordel am unteren Ende der Schulterklappe unter der Schwinge",
+]},
 {v:"0.16",d:"2026-10-19",items:[
 "Nachschlagen → Dienstgrade: Fahnenjunker, Fähnrich und Oberfähnrich (Marine: Seekadett, Fähnrich zur See, Oberfähnrich zur See) stehen jetzt als OA-Dienstgrade an ihrer Stelle in der Tabelle. Ein Hinweis darunter erklärt die Zusätze OA, UA, FA, MA und BA",
 "Nachschlagen → Abzeichen: Die OA-Dienstgrade sind markiert, und ein neuer Abschnitt „Anwärter“ zeigt die Kennzeichen von Offizier-, Unteroffizier-, Feldwebel-, Maat- und Bootsmannanwärtern",
@@ -237,9 +240,6 @@ const CHANGES=[
 ]},
 {v:"0.15.3",d:"2026-10-17",items:[
 "Seitenaufrufe werden jetzt mit GoatCounter gezählt, ohne Cookies und ohne gespeicherte IP-Adresse. Die Hilfe erklärt das im neuen Abschnitt „Datenschutz“",
-]},
-{v:"0.15.2",d:"2026-10-12",items:[
-"Lektion „Geheimschutz und Sicherheitsüberprüfung“: neuer Abschnitt zum Ablauf der Überprüfung mit den Maßnahmen bei Ü1, Ü2 und Ü3, Sicherheitsrisiko, Dauer, Ermächtigung und Gültigkeit. Neuer Abschnitt „Geheimschutz in Unternehmen“: Geheimschutzbetreuung durch das Wirtschaftsministerium, Sicherheitsbevollmächtigter, Anforderungen an Leitung, Eigentümer und Personal, Sicherheitsbescheid, VS-NfD-Merkblatt und Sabotageschutz. Dazu zehn neue Quizfragen und die Abkürzungen BfV, BMWE, SiBe und FSC unter Nachschlagen → Begriffe",
 ]},
 ]; // Ende CHANGES
 /* ---------- Daten ---------- */

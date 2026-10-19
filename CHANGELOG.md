@@ -4,7 +4,7 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
-## Unveröffentlicht
+## 0.16.1 (2026-10-19)
 
 - Abzeichen: Die Tresse von UA mbL sitzt bei der Luftwaffe jetzt wie die Kordel am unteren Ende der Schulterklappe unter der Schwinge
 
