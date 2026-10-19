@@ -226,19 +226,20 @@ nav.tabbar button[aria-current="page"]{color:var(--ink);box-shadow:inset 0 3px 0
 
 <script>
 /* ---------- Version: setzt release.sh passend zum Git-Tag, nicht von Hand ändern ---------- */
-const VERSION='0.15.3', UPDATED='2026-10-17';
+const VERSION='0.16', UPDATED='2026-10-19';
 document.getElementById('ver').textContent=`v${VERSION} · ${UPDATED}`;
 // Was ist neu: die letzten Versionen aus CHANGELOG.md, setzt release.sh zusammen mit der Version
 const CHANGES=[
+{v:"0.16",d:"2026-10-19",items:[
+"Nachschlagen → Dienstgrade: Fahnenjunker, Fähnrich und Oberfähnrich (Marine: Seekadett, Fähnrich zur See, Oberfähnrich zur See) stehen jetzt als OA-Dienstgrade an ihrer Stelle in der Tabelle. Ein Hinweis darunter erklärt die Zusätze OA, UA, FA, MA und BA",
+"Nachschlagen → Abzeichen: Die OA-Dienstgrade sind markiert, und ein neuer Abschnitt „Anwärter“ zeigt die Kennzeichen von Offizier-, Unteroffizier-, Feldwebel-, Maat- und Bootsmannanwärtern",
+"Abzeichen: Die Kordel der Offizier- und Feldwebelanwärter sitzt jetzt am unteren Ende der Schulterklappe, bei der Luftwaffe unter der Schwinge statt darüber. Die Tresse von UA mbL liegt bei der Luftwaffe direkt auf der Schwinge und berührt die Streifen nicht mehr",
+]},
 {v:"0.15.3",d:"2026-10-17",items:[
 "Seitenaufrufe werden jetzt mit GoatCounter gezählt, ohne Cookies und ohne gespeicherte IP-Adresse. Die Hilfe erklärt das im neuen Abschnitt „Datenschutz“",
 ]},
 {v:"0.15.2",d:"2026-10-12",items:[
 "Lektion „Geheimschutz und Sicherheitsüberprüfung“: neuer Abschnitt zum Ablauf der Überprüfung mit den Maßnahmen bei Ü1, Ü2 und Ü3, Sicherheitsrisiko, Dauer, Ermächtigung und Gültigkeit. Neuer Abschnitt „Geheimschutz in Unternehmen“: Geheimschutzbetreuung durch das Wirtschaftsministerium, Sicherheitsbevollmächtigter, Anforderungen an Leitung, Eigentümer und Personal, Sicherheitsbescheid, VS-NfD-Merkblatt und Sabotageschutz. Dazu zehn neue Quizfragen und die Abkürzungen BfV, BMWE, SiBe und FSC unter Nachschlagen → Begriffe",
-]},
-{v:"0.15.1",d:"2026-10-08",items:[
-"Lektion „Digitalisierung der Bundeswehr“: die Kette von Informations- über Führungs- zu Wirkungsüberlegenheit beim Abschnitt zur Wirkkette, dazu eine neue Quizfrage",
-"Lektion „Waffenfarbe und Barett“: erklärt jetzt, was eine Truppengattung ist, dazu eine neue Quizfrage",
 ]},
 ]; // Ende CHANGES
 /* ---------- Daten ---------- */

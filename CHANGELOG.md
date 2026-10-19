@@ -4,7 +4,7 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
-## Unveröffentlicht
+## 0.16 (2026-10-19)
 
 - Nachschlagen → Dienstgrade: Fahnenjunker, Fähnrich und Oberfähnrich (Marine: Seekadett, Fähnrich zur See, Oberfähnrich zur See) stehen jetzt als OA-Dienstgrade an ihrer Stelle in der Tabelle. Ein Hinweis darunter erklärt die Zusätze OA, UA, FA, MA und BA
 - Nachschlagen → Abzeichen: Die OA-Dienstgrade sind markiert, und ein neuer Abschnitt „Anwärter“ zeigt die Kennzeichen von Offizier-, Unteroffizier-, Feldwebel-, Maat- und Bootsmannanwärtern
