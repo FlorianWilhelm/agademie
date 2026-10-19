@@ -143,7 +143,8 @@ th{font:600 16px/1.2 var(--head);background:var(--bg)}
 tr.grp td{font:600 15px/1.2 var(--head);color:var(--accent-ink);background:var(--bg);padding-top:12px}
 td.sym{color:var(--frame);width:64px}
 tr.oa td{color:var(--muted)}
-.tag{font:600 11px/1 var(--body);letter-spacing:.04em;text-decoration:none;border:1px solid var(--line);border-radius:4px;padding:2px 5px;margin-left:4px;vertical-align:2px;white-space:nowrap}
+.tag{display:inline-block;font:600 11px/1 var(--body);letter-spacing:.04em;text-decoration:none;border:1px solid var(--line);border-radius:4px;padding:2px 5px;margin-left:4px;vertical-align:1px;white-space:nowrap}
+figcaption .tag{display:block;width:max-content;margin:4px auto 0} /* unter dem Namen, damit nichts überlappt */
 .small{font-size:13px;color:var(--muted)}
 .search{width:100%;font:inherit;color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:6px;padding:10px 12px;margin-bottom:4px}
 .gloss[hidden],dl div[hidden]{display:none}
