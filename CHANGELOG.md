@@ -4,6 +4,10 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
+## Unveröffentlicht
+
+- Der Kopf der App erklärt jetzt, wofür AGA steht: Unter „AGAdemie“ steht „Allgemeine Grundausbildung“, die Buchstaben A, G und A sind wie im Titel farbig hervorgehoben
+
 ## 0.16.2 (2026-10-19)
 
 - Nachschlagen → Abzeichen: keine OA-Marke mehr unter Fahnenjunker, Fähnrich und Oberfähnrich, der Abschnitt „Anwärter“ erklärt diese Dienstgrade
