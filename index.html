@@ -404,7 +404,7 @@ BEH.forEach(([k,v,n])=>add('beh','abk','Abkürzung: '+k,v,n));
 add('beh','rolle','Wie viele Teilstreitkräfte hat die Bundeswehr?','Vier','Heer, Luftwaffe, Marine und Cyber- und Informationsraum.',['Drei','Fünf','Sechs']);
 add('beh','rolle','Welches Symbol hat das Heer, etwa an der Schirmmütze?','Gekreuzte Schwerter','Die Luftwaffe hat die Schwinge, die Marine den Anker.',['Schwinge','Anker','Eichenlaub']);
 add('beh','rolle','Welches Symbol hat die Marine, etwa an der Schirmmütze?','Anker','Das Heer hat gekreuzte Schwerter, die Luftwaffe die Schwinge.',['Gekreuzte Schwerter','Schwinge','Stern']);
-add('beh','rolle','Warum hat der CIR kein eigenes Symbol wie Heer, Luftwaffe und Marine?','Er hat keine eigene Uniform','Seine Angehörigen tragen die Uniform von Heer, Luftwaffe oder Marine, dazu das marineblaue Barett mit dem Abzeichen CIR.',['Er ist keine Teilstreitkraft','Er ist geheim','Er nutzt das Eiserne Kreuz']);
+add('beh','rolle','Warum hat der CIR kein eigenes Symbol an der Schirmmütze wie Heer, Luftwaffe und Marine?','Er hat keine eigene Uniform','Seine Angehörigen tragen die Uniform von Heer, Luftwaffe oder Marine, dazu das marineblaue Barett mit dem Abzeichen CIR.',['Er ist keine Teilstreitkraft','Er ist geheim','Er nutzt das Eiserne Kreuz']);
 
 [
  ['Anrede einer Soldatin im Dienstgrad Hauptmann','Frau Hauptmann','Dienstgrade bleiben grammatisch maskulin, „Frau“ wird vorangestellt.',['Frau Hauptfrau','Frau Kameradin','Hauptmännin']],
@@ -1003,6 +1003,10 @@ function tskSym(t){ // Symbole der Teilstreitkräfte, wie an der Schirmmütze: e
     s=`<circle cx="20" cy="5.4" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="12.5" y="10" width="15" height="2.6" rx="1.2"/><rect x="18.8" y="8" width="2.4" height="26"/>
      <path d="M8.6 25.2 Q20 38.5 31.4 25.2" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M5.6 22 L11.6 24.2 L8 28.2 Z M34.4 22 L28.4 24.2 L32 28.2 Z"/>
      <path d="M22.4 6.8 C28.5 8.5 28 13.5 20 15.5 C12 17.5 12 22.5 20 24.5 C25.5 25.8 26 28.5 22.8 30.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>`;
+  } else if(t==='cir'){ // Scheibe mit Leiterbahnen und Lötaugen, nach dem Bildzeichen auf bundeswehr.de
+    const cut='fill="none" stroke="var(--surface)" stroke-width="1.6"';
+    s=`<circle cx="20" cy="20" r="15"/><path d="M15.5 35.8 V22.5 H11.9 M20 35.8 V11.9 M24.5 35.8 V17.5 H28.1" ${cut} stroke-linejoin="round"/>
+     <circle cx="10" cy="22.5" r="1.9" ${cut}/><circle cx="20" cy="10" r="1.9" ${cut}/><circle cx="30" cy="17.5" r="1.9" ${cut}/>`;
   }
   return `<svg class="tsym" viewBox="0 0 40 40" width="34" height="34" fill="currentColor" aria-hidden="true">${s}</svg>`;
 }
@@ -1013,9 +1017,9 @@ const LESSONS=[
    <li><strong>${tskSym('heer')}Heer</strong><span>Kampf an Land</span></li>
    <li><strong>${tskSym('lw')}Luftwaffe</strong><span>Luftraum und Luftverteidigung</span></li>
    <li><strong>${tskSym('mar')}Marine</strong><span>Einsatz auf und unter See</span></li>
-   <li><strong>${tskSym()}Cyber- und Informations&shy;raum (CIR)</strong><span>Die jüngste: IT, Cyberabwehr und elektronischer Kampf</span></li>
+   <li><strong>${tskSym('cir')}Cyber- und Informations&shy;raum (CIR)</strong><span>Die jüngste: IT, Cyberabwehr und elektronischer Kampf</span></li>
   </ol>
-  <p>Heer, Luftwaffe und Marine erkennt man an ihren Symbolen, etwa an der Schirmmütze: gekreuzte Schwerter, Schwinge und Anker. Der CIR hat kein eigenes Symbol, weil er keine eigene Uniform hat. Seine Angehörigen tragen die von Heer, Luftwaffe oder Marine, dazu das marineblaue Barett mit dem Abzeichen CIR. Geführt wird der CIR vom Kommando Cyber- und Informationsraum (KdoCIR). Für den Schutz der IT-Systeme und IT-Services der Bundeswehr ist das Zentrum für Cyber-Sicherheit der Bundeswehr (ZCSBw) in Euskirchen zuständig.</p>
+  <p>Heer, Luftwaffe und Marine erkennt man an ihren Symbolen, etwa an der Schirmmütze: gekreuzte Schwerter, Schwinge und Anker. Der CIR hat kein solches Symbol an der Mütze, weil er keine eigene Uniform hat. Seine Angehörigen tragen die von Heer, Luftwaffe oder Marine, dazu das marineblaue Barett mit dem Abzeichen CIR. Das Zeichen mit den Leiterbahnen in der Tabelle ist dem Zeichen nachempfunden, mit dem die Bundeswehr den CIR auf ihrer Website kennzeichnet. Geführt wird der CIR vom Kommando Cyber- und Informationsraum (KdoCIR). Für den Schutz der IT-Systeme und IT-Services der Bundeswehr ist das Zentrum für Cyber-Sicherheit der Bundeswehr (ZCSBw) in Euskirchen zuständig.</p>
   <p>Jede Teilstreitkraft hat eigene Bezeichnungen für ihre Ebenen. Dazu kommt der Unterstützungsbereich: Das Unterstützungskommando der Bundeswehr in Bonn bündelt seit 2025 Sanitätsdienst, Logistik, Feldjäger, ABC-Abwehr und zivil-militärische Zusammenarbeit, die früher auf Streitkräftebasis und Zentralen Sanitätsdienst verteilt waren. Alle Einsätze im In- und Ausland plant und führt seit Oktober 2024 das Operative Führungskommando der Bundeswehr (OpFüKdoBw). Wie viel Personal und Material eine Einheit planmäßig hat, legt ihre Stärke- und Ausstattungsnachweisung (StAN) fest.</p>
   <p>Neben den Streitkräften steht die zivile Bundeswehrverwaltung, beide unterstehen dem Bundesministerium der Verteidigung (BMVg). Zur Verwaltung gehören die großen Bundesämter: das Bundesamt für Ausrüstung, Informationstechnik und Nutzung der Bundeswehr (BAAINBw), das Bundesamt für das Personalmanagement der Bundeswehr (BAPersBw) und das Bundesamt für Infrastruktur, Umweltschutz und Dienstleistungen der Bundeswehr (BAIUDBw). Das BAAINBw ist eine zivile Bundesoberbehörde mit rund 10.000 zivilen und 1.800 militärischen Beschäftigten. Zum Geschäftsbereich des BMVg gehört auch der Militärische Abschirmdienst (MAD), der Nachrichtendienst der Bundeswehr zur Abwehr von Spionage, Sabotage und Extremismus.</p>
   <div class="callout">In der zivilen Bundeswehrverwaltung arbeiten überwiegend Beamtinnen, Beamte und Tarifbeschäftigte. Beamte haben Amtsbezeichnungen statt Dienstgrade. Mehr dazu und zum Aufbau des Ministeriums in <a href="#/grundlagen/ministerium">Ministerium und Verwaltung</a>.</div>

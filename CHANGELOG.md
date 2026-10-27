@@ -4,6 +4,10 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
+## Unveröffentlicht
+
+- Lektion „Aufbau der Bundeswehr“: Der Cyber- und Informationsraum hat in der Tabelle jetzt auch ein Symbol, eine Scheibe mit Leiterbahnen nach dem Zeichen auf bundeswehr.de. Text und Lernkarte erklären, dass es an der Uniform kein solches Symbol gibt
+
 ## 0.16.4 (2026-10-27)
 
 - Lektionen: Lange Begriffe wie Cyber- und Informationsraum, Wehrdienstleistende, Bereitstellungsraum und Sicherheitsbevollmächtigter werden auf schmalen Handys zwischen den Wortteilen getrennt, statt die Tabellenspalte zu verbreitern
