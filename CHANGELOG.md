@@ -4,7 +4,7 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
-## Unveröffentlicht
+## 0.17.1 (2026-10-27)
 
 - Lektion „Aufbau der Bundeswehr“: In der Tabelle steht beim Cyber- und Informationsraum nur noch, wofür er zuständig ist, ohne den Zusatz „Die jüngste“
 
