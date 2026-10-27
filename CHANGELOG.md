@@ -4,7 +4,7 @@ Neue Einträge kommen unter „Unveröffentlicht“. `release.sh` ersetzt die Ü
 beim Veröffentlichen durch Version und Datum und schreibt die letzten drei Versionen
 per `changes.sh` in `index.html`, die Hilfe-Seite der App zeigt sie an.
 
-## Unveröffentlicht
+## 0.16.4 (2026-10-27)
 
 - Lektionen: Lange Begriffe wie Cyber- und Informationsraum, Wehrdienstleistende, Bereitstellungsraum und Sicherheitsbevollmächtigter werden auf schmalen Handys zwischen den Wortteilen getrennt, statt die Tabellenspalte zu verbreitern
 
