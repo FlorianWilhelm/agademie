@@ -181,7 +181,7 @@ h1,h2,h3{text-wrap:balance}
 .ladder li:last-child{border-bottom:0}
 .ladder strong{flex:0 0 38%;font:600 17px/1.25 var(--head)}
 .ladder span{color:var(--muted)}
-.ladder strong:has(.tsym){display:flex;align-items:center;gap:10px}
+.ladder strong:has(.tsym){display:flex;align-items:center;gap:10px;flex-basis:44%} /* breiter fürs Symbol, damit „Informations-“ auch auf 360 px passt */
 .tsym{flex:0 0 auto}
 .figs{display:flex;flex-wrap:wrap;gap:12px 10px;margin:10px 0 6px}
 .figs figure{margin:0;width:62px;text-align:center;font-size:12px;line-height:1.2;color:var(--muted);hyphens:manual;-webkit-hyphens:manual}
@@ -1013,7 +1013,7 @@ const LESSONS=[
    <li><strong>${tskSym('heer')}Heer</strong><span>Kampf an Land</span></li>
    <li><strong>${tskSym('lw')}Luftwaffe</strong><span>Luftraum und Luftverteidigung</span></li>
    <li><strong>${tskSym('mar')}Marine</strong><span>Einsatz auf und unter See</span></li>
-   <li><strong>${tskSym()}Cyber- und Informationsraum (CIR)</strong><span>Die jüngste: IT, Cyberabwehr und elektronischer Kampf</span></li>
+   <li><strong>${tskSym()}Cyber- und Informations&shy;raum (CIR)</strong><span>Die jüngste: IT, Cyberabwehr und elektronischer Kampf</span></li>
   </ol>
   <p>Heer, Luftwaffe und Marine erkennt man an ihren Symbolen, etwa an der Schirmmütze: gekreuzte Schwerter, Schwinge und Anker. Der CIR hat kein eigenes Symbol, weil er keine eigene Uniform hat. Seine Angehörigen tragen die von Heer, Luftwaffe oder Marine, dazu das marineblaue Barett mit dem Abzeichen CIR. Geführt wird der CIR vom Kommando Cyber- und Informationsraum (KdoCIR). Für den Schutz der IT-Systeme und IT-Services der Bundeswehr ist das Zentrum für Cyber-Sicherheit der Bundeswehr (ZCSBw) in Euskirchen zuständig.</p>
   <p>Jede Teilstreitkraft hat eigene Bezeichnungen für ihre Ebenen. Dazu kommt der Unterstützungsbereich: Das Unterstützungskommando der Bundeswehr in Bonn bündelt seit 2025 Sanitätsdienst, Logistik, Feldjäger, ABC-Abwehr und zivil-militärische Zusammenarbeit, die früher auf Streitkräftebasis und Zentralen Sanitätsdienst verteilt waren. Alle Einsätze im In- und Ausland plant und führt seit Oktober 2024 das Operative Führungskommando der Bundeswehr (OpFüKdoBw). Wie viel Personal und Material eine Einheit planmäßig hat, legt ihre Stärke- und Ausstattungsnachweisung (StAN) fest.</p>
@@ -1048,7 +1048,7 @@ const LESSONS=[
   <ol class="ladder">
    <li><strong>Berufssoldaten (BS)</strong><span>Dienen bis zur gesetzlichen Altersgrenze und schwören den Diensteid.</span></li>
    <li><strong>Soldaten auf Zeit (SaZ)</strong><span>Verpflichten sich für eine feste Zeit, höchstens 25 Jahre. Auch sie schwören den Diensteid.</span></li>
-   <li><strong>Wehrdienstleistende</strong><span>Leisten freiwilligen Wehrdienst (FWDL) und legen das feierliche Gelöbnis ab.</span></li>
+   <li><strong>Wehrdienst&shy;leistende</strong><span>Leisten freiwilligen Wehrdienst (FWDL) und legen das feierliche Gelöbnis ab.</span></li>
    <li><strong>Reservisten</strong><span>Ehemalige Soldatinnen und Soldaten. Bei einer Übung heißen sie Reservistendienstleistende (RDL). Viele sind im Verband der Reservisten der Deutschen Bundeswehr (VdRBw) organisiert.</span></li>
    <li><strong>Zivilbeschäftigte</strong><span>Beamtinnen, Beamte und Tarifbeschäftigte, vor allem in der Bundeswehrverwaltung.</span></li>
   </ol>
@@ -1289,7 +1289,7 @@ const LESSONS=[
   <p>Kräfte, Raum und Zeit sind die Größen, mit denen jede Planung rechnet. Raum meint Gelände als militärische Größe: Man kann ihn gewinnen, halten oder aufgeben und Raum gegen Zeit tauschen. „Im Raum Münster“ bezeichnet bewusst kein genaues Ziel, sondern ein Gebiet.</p>
   <ol class="ladder">
    <li><strong>Verfügungsraum</strong><span>Hier hält sich eine Truppe für weitere Aufträge bereit, außerhalb unmittelbarer Kampfhandlungen.</span></li>
-   <li><strong>Bereitstellungsraum</strong><span>Hier ordnet sich eine Truppe unmittelbar vor dem Angriff, möglichst gedeckt, und tritt von dort an.</span></li>
+   <li><strong>Bereitstellungs&shy;raum</strong><span>Hier ordnet sich eine Truppe unmittelbar vor dem Angriff, möglichst gedeckt, und tritt von dort an.</span></li>
    <li><strong>Einsatzraum</strong><span>Das Gebiet, in dem eine Truppe ihren Auftrag erfüllt.</span></li>
    <li><strong>Gefechtsstreifen</strong><span>Der Raum, den eine Truppe für das Gefecht zugewiesen bekommt. Trennungslinien grenzen ihn gegen die Nachbarn ab.</span></li>
    <li><strong>Rückwärtiger Raum</strong><span>Hinter den kämpfenden Truppen, mit Versorgung, Verkehrswegen und Reserven.</span></li>
@@ -1390,7 +1390,7 @@ const LESSONS=[
   <h3>Geheimschutz in Unternehmen</h3>
   <p>Unternehmen, die selbst VS ab VS-VERTRAULICH erhalten sollen, betreut das Bundesministerium für Wirtschaft und Energie (BMWE). Grundlage ist das Geheimschutzhandbuch (GHB). Die Aufnahme in die Geheimschutzbetreuung kann ein Unternehmen nicht selbst beantragen. Vorschlagen muss sie ein VS-Auftraggeber für einen konkreten Auftrag, etwa eine Dienststelle der Bundeswehr oder ein schon betreutes Unternehmen, das einen Unterauftrag vergibt. Das Unternehmen schließt mit dem BMWE einen Vertrag und erkennt das GHB als verbindlich an. Die Betreuung ist kostenlos, die Schutzmaßnahmen zahlt das Unternehmen. Die Aufnahme dauert nach Angaben der Bundeswehr etwa sechs bis zwölf Monate. Verlangt werden:</p>
   <ol class="ladder">
-   <li><strong>Sicherheitsbevollmächtigter (SiBe)</strong><span>Beschäftigter in leitender Funktion, in Geheimschutzfragen direkt der Geschäftsleitung unterstellt, selbst ermächtigt und mit mindestens einem Vertreter. Verantwortet alle Maßnahmen zum Schutz der VS und beantragt die SÜ der Beschäftigten. Nicht vereinbar etwa mit Betriebsrat, Datenschutzbeauftragtem oder Personalverwaltung.</span></li>
+   <li><strong>Sicherheits&shy;bevollmächtigter (SiBe)</strong><span>Beschäftigter in leitender Funktion, in Geheimschutzfragen direkt der Geschäftsleitung unterstellt, selbst ermächtigt und mit mindestens einem Vertreter. Verantwortet alle Maßnahmen zum Schutz der VS und beantragt die SÜ der Beschäftigten. Nicht vereinbar etwa mit Betriebsrat, Datenschutzbeauftragtem oder Personalverwaltung.</span></li>
    <li><strong>Ermächtigte Leitung</strong><span>Eigentümer und Mitglieder der Geschäftsleitung brauchen eine Ermächtigung für den höchsten Geheimhaltungsgrad der Aufträge, für STRENG GEHEIM also eine Ü3. Wer schriftlich auf den Zugang zu VS verzichtet, kann ausgenommen werden.</span></li>
    <li><strong>Offengelegte Eigentümer</strong><span>Gesellschafter und Beteiligungen werden dem BMWE gemeldet. Ob eine ausländische Beteiligung oder Einflussnahme die Betreuung zulässt, entscheidet es im Einzelfall.</span></li>
    <li><strong>Überprüftes Personal</strong><span>Überprüft wird nur, wer für den Auftrag VS kennen muss. Zuständige Stelle ist das BMWE, ermittelt wird vom BfV, auch bei Aufträgen der Bundeswehr. Das Unternehmen erfährt nur, ob jemand ermächtigt wird, nicht die Gründe. Die Ermächtigungsurkunde stellt das BMWE aus, belehrt wird vom SiBe.</span></li>
